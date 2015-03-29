@@ -24,7 +24,7 @@ $dl->setWorkingDirectory('/path/to/youtube-dl');
 // $dl->setDebug(true);
 $video = $dl->download('https://www.youtube.com/watch?v=oDAw7vW7H0c');
 echo $video->getTitle(); // Will return Phonebloks
-// $dl->getWorkingDirectory() . '/' . $video->getFilename(); // access downloaded file
+// $dl->getFile(); // \SplFileInfo instance of downloaded file
 ```
 
 **Disabled options which would break download:**
