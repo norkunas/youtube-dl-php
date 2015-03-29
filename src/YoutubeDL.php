@@ -361,6 +361,10 @@ class YoutubeDl
 
             return $value;
         });
+
+        $resolver->setNormalizer('output', function ($options, $value) {
+            return sprintf('"%s"', $value);
+        });
     }
     /**
      * Decode json to an associative array
