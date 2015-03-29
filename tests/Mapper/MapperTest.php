@@ -123,7 +123,7 @@ http://www.freedom.tm/NetCastTV',
             'ext' => 'm4a',
         ];
 
-        $mapper = new Mapper();
+        $mapper = new Mapper(getcwd());
         $object = $mapper->map($data);
 
         $this->assertInstanceOf('YoutubeDl\Entity\Video', $object);
