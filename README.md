@@ -24,8 +24,9 @@ $dl->setWorkingDirectory('/path/to/youtube-dl');
 // $dl->setDebug(true);
 $video = $dl->download('https://www.youtube.com/watch?v=oDAw7vW7H0c');
 echo $video->getTitle(); // Will return Phonebloks
+// $dl->getWorkingDirectory() . '/' . $video->getFilename(); // access downloaded file
 ```
 
 **Disabled options which would break download:**
 
-list-formats, list-subs, list-thumbnails, get-url, get-title', get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json, newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic.
+list-formats, list-subs, list-thumbnails, get-url, get-title, get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json, newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic.
