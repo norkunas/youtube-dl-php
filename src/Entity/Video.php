@@ -191,6 +191,10 @@ class Video
      * @var int
      */
     protected $preference;
+    /**
+     * @var \SplFileInfo
+     */
+    protected $file;
 
     /**
      * @return \DateTime
@@ -566,5 +570,13 @@ class Video
     public function getPreference()
     {
         return $this->preference;
+    }
+
+    /**
+     * @return \SplFileInfo
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 }

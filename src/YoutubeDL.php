@@ -159,7 +159,7 @@ class YoutubeDl
         }
 
         if ($parts = explode("\n", trim($process->getOutput()))) {
-            $mapper = new Mapper();
+            $mapper = new Mapper($this->workingDirectory ?: getcwd());
 
             if (count($parts) > 1) {
                 $videos = [];

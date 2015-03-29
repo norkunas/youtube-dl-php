@@ -11,6 +11,19 @@ use YoutubeDl\Entity\Video;
 class Mapper
 {
     /**
+     * @var string
+     */
+    protected $workingDirectory;
+    /**
+     * Constructor
+     *
+     * @param string $workingDirectory
+     */
+    public function __construct($workingDirectory)
+    {
+        $this->workingDirectory = $workingDirectory;
+    }
+    /**
      * Map data to Video object and return it
      *
      * @param array $data
@@ -59,6 +72,9 @@ class Mapper
                     $prop->setValue($video, $value);
             }
         }
+
+        $prop = $this->getProperty($reflection, 'file');
+        $prop->setValue($video, new \SplFileInfo(rtrim($this->workingDirectory, '/') . '/' . $video->getFilename()));
 
         return $video;
     }
