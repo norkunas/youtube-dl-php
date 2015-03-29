@@ -1,5 +1,5 @@
 <?php
-namespace YoutubeDL\Mapper;
+namespace YoutubeDl\Mapper;
 
 use YoutubeDl\Entity\Thumbnail;
 

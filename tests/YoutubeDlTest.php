@@ -1,11 +1,11 @@
 <?php
-namespace YoutubeDL\Tests;
+namespace YoutubeDl\Tests;
 
 use YoutubeDl\YoutubeDl;
 /**
  * @covers YoutubeDl\YoutubeDl
  */
-class YoutubeDLTest extends \PHPUnit_Framework_TestCase
+class YoutubeDlTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Test setters and getters
@@ -45,6 +45,6 @@ class YoutubeDLTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new YoutubeDl(['skip-download' => true]);
 
-        $this->assertInstanceOf('YoutubeDL\Entity\Video', $obj->download('https://www.youtube.com/watch?v=BaW_jenozKc'));
+        $this->assertInstanceOf('YoutubeDl\Entity\Video', $obj->download('https://www.youtube.com/watch?v=BaW_jenozKc'));
     }
 }
