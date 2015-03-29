@@ -1,9 +1,9 @@
 <?php
-namespace YoutubeDL\Tests\Mapper;
+namespace YoutubeDl\Tests\Mapper;
 
-use YoutubeDL\Mapper\Mapper;
+use YoutubeDl\Mapper\Mapper;
 /**
- * @covers YoutubeDL\Mapper\Mapper
+ * @covers YoutubeDl\Mapper\Mapper
  */
 class MapperTest extends \PHPUnit_Framework_TestCase
 {
@@ -126,7 +126,7 @@ http://www.freedom.tm/NetCastTV',
         $mapper = new Mapper();
         $object = $mapper->map($data);
 
-        $this->assertInstanceOf('YoutubeDL\Entity\Video', $object);
+        $this->assertInstanceOf('YoutubeDl\Entity\Video', $object);
         $this->assertInstanceOf('DateTime', $object->getUploadDate());
 
         $this->assertEquals($data['upload_date'], $object->getUploadDate()->format('Ymd'));
@@ -169,22 +169,22 @@ http://www.freedom.tm/NetCastTV',
 
         $this->assertInstanceOf('SimpleXMLElement', $object->getAnnotations());
 
-        $this->assertInstanceOf('YoutubeDL\Entity\Subtitles', $object->getSubtitles()[0]);
+        $this->assertInstanceOf('YoutubeDl\Entity\Subtitles', $object->getSubtitles()[0]);
         $this->assertEquals('en', $object->getSubtitles()[0]->getLocale());
-        $this->assertInstanceOf('YoutubeDL\Entity\Caption', $object->getSubtitles()[0]->getCaptions()[1]);
+        $this->assertInstanceOf('YoutubeDl\Entity\Caption', $object->getSubtitles()[0]->getCaptions()[1]);
         $this->assertEquals(2, $object->getSubtitles()[0]->getCaptions()[1]->getIndex());
         $this->assertEquals('00:00:07.300000', $object->getSubtitles()[0]->getCaptions()[1]->getStart()->format('H:i:s.u'));
         $this->assertEquals('00:00:09.000000', $object->getSubtitles()[0]->getCaptions()[1]->getEnd()->format('H:i:s.u'));
         $this->assertEquals('But usually it is only one of the components that causes the problem.', $object->getSubtitles()[0]->getCaptions()[1]->getCaption());
 
-        $this->assertInstanceOf('YoutubeDL\Entity\Category', $object->getCategories()[0]);
+        $this->assertInstanceOf('YoutubeDl\Entity\Category', $object->getCategories()[0]);
         $this->assertEquals($data['categories'][0], $object->getCategories()[0]->getTitle());
 
-        $this->assertInstanceOf('YoutubeDL\Entity\Thumbnail', $object->getThumbnails()[0]);
+        $this->assertInstanceOf('YoutubeDl\Entity\Thumbnail', $object->getThumbnails()[0]);
         $this->assertEquals($data['thumbnails'][0]['id'], $object->getThumbnails()[0]->getId());
         $this->assertEquals($data['thumbnails'][0]['url'], $object->getThumbnails()[0]->getUrl());
 
-        $this->assertInstanceOf('YoutubeDL\Entity\Format', $object->getFormats()[0]);
+        $this->assertInstanceOf('YoutubeDl\Entity\Format', $object->getFormats()[0]);
         $this->assertEquals($data['formats'][0]['format'], $object->getFormats()[0]->getFormat());
         $this->assertEquals($data['formats'][0]['url'], $object->getFormats()[0]->getUrl());
         $this->assertEquals($data['formats'][0]['vcodec'], $object->getFormats()[0]->getVcodec());

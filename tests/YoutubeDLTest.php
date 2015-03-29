@@ -1,9 +1,9 @@
 <?php
 namespace YoutubeDL\Tests;
 
-use YoutubeDL\YoutubeDL;
+use YoutubeDl\YoutubeDl;
 /**
- * @covers YoutubeDL\YoutubeDL
+ * @covers YoutubeDl\YoutubeDl
  */
 class YoutubeDLTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class YoutubeDLTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetGet()
     {
-        $obj = new YoutubeDL();
+        $obj = new YoutubeDl();
 
         $obj->setWorkingDirectory('/home/user/');
         $obj->setTimeout(10);
@@ -27,7 +27,7 @@ class YoutubeDLTest extends \PHPUnit_Framework_TestCase
 
     public function testGetCommandLine()
     {
-        $obj = new YoutubeDL([
+        $obj = new YoutubeDl([
             'skip-download' => true,
             'write-sub' => true,
             'write-annotations' => true,
@@ -43,7 +43,7 @@ class YoutubeDLTest extends \PHPUnit_Framework_TestCase
 
     public function testDownload()
     {
-        $obj = new YoutubeDL(['skip-download' => true]);
+        $obj = new YoutubeDl(['skip-download' => true]);
 
         $this->assertInstanceOf('YoutubeDL\Entity\Video', $obj->download('https://www.youtube.com/watch?v=BaW_jenozKc'));
     }
