@@ -1,0 +1,13 @@
+language: php
+
+php:
+    - 5.4
+    - 5.5
+    - 5.6
+
+before_install:
+    - sudo wdget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+    - sudo chmod a+x /usr/local/bin/youtube-dl
+
+before_script:
+    - composer install --no-interaction
