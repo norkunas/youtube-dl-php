@@ -14,7 +14,7 @@ class Format
     /**
      * @var array
      */
-    protected $headers;
+    protected $httpHeaders;
     /**
      * @var string
      */
@@ -95,9 +95,9 @@ class Format
     /**
      * @return array
      */
-    public function getHeaders()
+    public function getHttpHeaders()
     {
-        return $this->headers;
+        return $this->httpHeaders;
     }
 
     /**

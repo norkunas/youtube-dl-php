@@ -46,7 +46,7 @@ class Video
     /**
      * @var array
      */
-    protected $headers;
+    protected $httpHeaders;
     /**
      * @var string
      */
@@ -275,9 +275,9 @@ class Video
     /**
      * @return array
      */
-    public function getHeaders()
+    public function getHttpHeaders()
     {
-        return $this->headers;
+        return $this->httpHeaders;
     }
 
     /**

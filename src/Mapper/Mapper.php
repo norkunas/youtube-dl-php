@@ -10,7 +10,6 @@ use YoutubeDl\Entity\Video;
 
 class Mapper
 {
-    protected $skipKeys = ['http_headers'];
     /**
      * Map data to Video object and return it
      *
@@ -25,10 +24,6 @@ class Mapper
         $reflection = new \ReflectionObject($video);
 
         foreach ($data as $key => $value) {
-            if (in_array($key, $this->skipKeys)) {
-                continue;
-            }
-
             $prop = $this->getProperty($reflection, $key);
 
             if (false === $prop) {
