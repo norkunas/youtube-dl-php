@@ -6,8 +6,10 @@ php:
     - 5.6
 
 before_install:
-    - sudo curl https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
-    - sudo chmod a+x /usr/local/bin/youtube-dl
+    - sudo apt-get update -qq
+    - sudo apt-get install -y youtube-dl
+#    - sudo curl https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+#    - sudo chmod a+x /usr/local/bin/youtube-dl
 
 before_script:
     - composer self-update
