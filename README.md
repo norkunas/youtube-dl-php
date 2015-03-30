@@ -7,7 +7,7 @@ A PHP wrapper for [youtube-dl](https://github.com/rg3/youtube-dl) tool.
 
 ## Install
 First step is to download the [youtube-dl](http://rg3.github.io/youtube-dl/download.html).
-Now install the wrapper using Composer:
+Now install the wrapper using [Composer](http://getcomposer.org/):
 ```
 composer require norkunas/youtube-dl-php:dev-master
 ```
