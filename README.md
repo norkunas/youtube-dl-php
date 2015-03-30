@@ -1,6 +1,10 @@
 # Youtube-dl PHP
 A PHP wrapper for [youtube-dl](https://github.com/rg3/youtube-dl) tool.
 
+[![Latest Stable Version](https://poser.pugx.org/norkunas/youtube-dl-php/v/stable.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
+[![Latest Unstable Version](https://poser.pugx.org/norkunas/youtube-dl-php/v/unstable.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
+[![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
+
 ## Install
 First step is to download the [youtube-dl](http://rg3.github.io/youtube-dl/download.html).
 Now install the wrapper using Composer:
