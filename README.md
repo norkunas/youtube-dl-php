@@ -16,6 +16,9 @@ composer require norkunas/youtube-dl-php
 
 ## Example
 ```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
 use YoutubeDl\YoutubeDl;
 
 $dl = new YoutubeDl([
