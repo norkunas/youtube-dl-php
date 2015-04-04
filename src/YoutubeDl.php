@@ -109,23 +109,21 @@ class YoutubeDl
     }
 
     /**
-     * Set debug
+     * Enable debugging
      *
-     * @param string $debug
+     * $obj->debug(function ($type, $buffer) {
+     *     if (\Symfony\Component\Process\Process::ERR === $type) {
+     *         echo 'ERR > ' . $buffer;
+     *     } else {
+     *         echo 'OUT > ' . $buffer;
+     *     }
+     * });
+     *
+     * @param callable|null $debug
      */
-    public function setDebug($debug)
+    public function debug(callable $debug)
     {
         $this->debug = $debug;
-    }
-
-    /**
-     * Get debug
-     *
-     * @return bool
-     */
-    public function getDebug()
-    {
-        return $this->debug;
     }
 
     /**
@@ -158,23 +156,18 @@ class YoutubeDl
      * @param $url
      *
      * @return Entity\Video[]|Entity\Video
+     * @throws PrivateVideoException
+     * @throws CopyrightException
+     * @throws NotFoundException
+     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
+     * @throws \Exception
      */
     public function download($url)
     {
         $process = new Process(sprintf('%s %s', $this->getCommandLine(), $url), $this->downloadPath, null, null, $this->timeout, $this->processOptions);
 
         try {
-            if ($this->debug) {
-                $process->mustRun(function ($type, $buffer) {
-                    if (Process::ERR === $type) {
-                        echo 'ERR > ' . $buffer;
-                    } else {
-                        echo 'OUT > ' . $buffer;
-                    }
-                });
-            } else {
-                $process->mustRun();
-            }
+            $process->mustRun(is_callable($this->debug) ? $this->debug : null);
         } catch (\Exception $e) {
             $message = $e->getMessage();
 
@@ -286,7 +279,7 @@ class YoutubeDl
             'prefer-insecure' => 'bool',
             'user-agent' => 'string',
             'referer' => 'string',
-            'add-header' => 'array', // this is multiple so let to provide an array and use normalizer
+            'add-header' => 'array',
             'bidi-workaround' => 'bool',
             'sleep-interval' => 'int',
             // Video Format Options
@@ -326,28 +319,6 @@ class YoutubeDl
             'ffmpeg-location' => 'string',
             'exec' => 'string',
             'convert-subtitles' => 'string',
-            // !THESE OPTIONS WOULD BREAK MAPPING
-            //'list-formats' => 'bool',
-            //'list-subs' => 'bool',
-            //'list-thumbnails' => 'bool',
-            //'get-url' => 'bool',
-            //'get-title' => 'bool',
-            //'get-id' => 'bool',
-            //'get-thumbnail' => 'bool',
-            //'get-description' => 'bool',
-            //'get-duration' => 'bool',
-            //'get-filename' => 'bool',
-            //'get-format' => 'bool',
-            //'dump-json' => 'bool',
-            //'dump-single-json' => 'bool',
-            //'print-json' => 'bool',
-            //'newline' => 'bool',
-            //'no-progress' => 'bool',
-            //'console-title' => 'bool',
-            //'verbose' => 'bool',
-            //'dump-pages' => 'bool',
-            //'write-pages' => 'bool',
-            //'print-traffic' => 'bool',
         ];
 
         $resolver->setDefined(array_keys($options));
