@@ -7,24 +7,6 @@ use YoutubeDl\YoutubeDl;
  */
 class YoutubeDlTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * Test setters and getters
-     */
-    public function testSetGet()
-    {
-        $obj = new YoutubeDl();
-
-        $obj->setDownloadPath('/home/user/');
-        $obj->setTimeout(10);
-        $obj->setProcessOptions(['suppress_errors' => false, 'binary_pipes' => false]);
-        $obj->setDebug(true);
-
-        $this->assertEquals('/home/user/', $obj->getDownloadPath());
-        $this->assertEquals(10, $obj->getTimeout());
-        $this->assertEquals(['suppress_errors' => false, 'binary_pipes' => false], $obj->getProcessOptions());
-        $this->assertTrue($obj->getDebug());
-    }
-
     public function testGetCommandLine()
     {
         $obj = new YoutubeDl([
@@ -66,7 +48,7 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \YoutubeDl\Exception\CopyrightException
      */
-    public function test()
+    public function testYoutubeRemovedVideoDownload()
     {
         $obj = new YoutubeDl(['skip-download' => true]);
         $obj->download('https://www.youtube.com/watch?v=AYeiLa_F8fk');
