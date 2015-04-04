@@ -195,6 +195,10 @@ class Video
      * @var \SplFileInfo
      */
     protected $file;
+    /**
+     * @var int
+     */
+    protected $commentCount;
 
     /**
      * @return \DateTime
@@ -578,5 +582,13 @@ class Video
     public function getFile()
     {
         return $this->file;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentCount()
+    {
+        return $this->commentCount;
     }
 }
