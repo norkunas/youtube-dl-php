@@ -38,7 +38,7 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
             ]
         ]);
 
-        $this->assertEquals('youtube-dl --skip-download --write-sub --write-annotations --audio-format mp3 --add-header X-Requested-With:youtube-dl --add-header X-ATT-DeviceId:GT-P7320/P7320XXLPG --print-json', $obj->getCommandLine());
+        $this->assertEquals('youtube-dl --skip-download --write-sub --write-annotations --audio-format mp3 --add-header X-Requested-With:youtube-dl --add-header X-ATT-DeviceId:GT-P7320/P7320XXLPG --print-json --ignore-config', $obj->getCommandLine());
     }
 
     public function testYoutubeDownload()
