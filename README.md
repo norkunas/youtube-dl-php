@@ -6,10 +6,12 @@ A PHP wrapper for [youtube-dl](https://github.com/rg3/youtube-dl) tool.
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
 ## Install
-First step is to download the [youtube-dl](http://rg3.github.io/youtube-dl/download.html).
-Now install the wrapper using [Composer](http://getcomposer.org/):
+First step is to download the [youtube-dl](http://rg3.github.io/youtube-dl/download.html) and add it's path to
+environment variables.
+
+Second step is to install the wrapper using [Composer](http://getcomposer.org/):
 ```
-composer require norkunas/youtube-dl-php:dev-master
+composer require norkunas/youtube-dl-php
 ```
 
 ## Example
@@ -22,9 +24,7 @@ $dl = new YoutubeDl([
 ]);
 // For more options go to https://github.com/rg3/youtube-dl#user-content-options
 
-// Working directory is where your youtube-dl is stored or where the downloads will be stored.
-// You can remove this line if your youtube-dl is globally accessible
-$dl->setWorkingDirectory('/path/to/youtube-dl');
+$dl->setDownloadPath('/home/user/downloads');
 // $dl->setDebug(true);
 $video = $dl->download('https://www.youtube.com/watch?v=oDAw7vW7H0c');
 echo $video->getTitle(); // Will return Phonebloks

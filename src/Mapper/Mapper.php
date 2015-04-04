@@ -20,16 +20,16 @@ class Mapper
     /**
      * @var string
      */
-    protected $workingDirectory;
+    protected $downloadPath;
 
     /**
      * Constructor
      *
-     * @param string $workingDirectory
+     * @param string $downloadPath
      */
-    public function __construct($workingDirectory)
+    public function __construct($downloadPath)
     {
-        $this->workingDirectory = $workingDirectory;
+        $this->downloadPath = $downloadPath;
     }
 
     /**
@@ -75,7 +75,7 @@ class Mapper
 
         $file = $reflection->getProperty('file');
         $file->setAccessible(true);
-        $file->setValue($video, new \SplFileInfo(rtrim($this->workingDirectory, '/') . '/' . $video->getFilename()));
+        $file->setValue($video, new \SplFileInfo(rtrim($this->downloadPath, '/') . '/' . $video->getFilename()));
 
         return $video;
     }

@@ -18,7 +18,7 @@ class YoutubeDl
     /**
      * @var string
      */
-    protected $workingDirectory;
+    protected $downloadPath;
 
     /**
      * @var int
@@ -49,23 +49,23 @@ class YoutubeDl
     }
 
     /**
-     * Set working directory
+     * Set download path
      *
-     * @param string $workingDirectory
+     * @param string $downloadPath
      */
-    public function setWorkingDirectory($workingDirectory)
+    public function setDownloadPath($downloadPath)
     {
-        $this->workingDirectory = $workingDirectory;
+        $this->downloadPath = $downloadPath;
     }
 
     /**
-     * Get working directory
+     * Get download path
      *
      * @return string
      */
-    public function getWorkingDirectory()
+    public function getDownloadPath()
     {
-        return $this->workingDirectory;
+        return $this->downloadPath;
     }
 
     /**
@@ -161,7 +161,7 @@ class YoutubeDl
      */
     public function download($url)
     {
-        $process = new Process(sprintf('%s %s', $this->getCommandLine(), $url), $this->workingDirectory, null, null, $this->timeout, $this->processOptions);
+        $process = new Process(sprintf('%s %s', $this->getCommandLine(), $url), $this->downloadPath, null, null, $this->timeout, $this->processOptions);
 
         try {
             if ($this->debug) {
@@ -191,7 +191,7 @@ class YoutubeDl
         }
 
         if ($parts = explode("\n", trim($process->getOutput()))) {
-            $mapper = new Mapper($this->workingDirectory ?: getcwd());
+            $mapper = new Mapper($this->downloadPath ?: getcwd());
 
             if (count($parts) > 1) {
                 $videos = [];

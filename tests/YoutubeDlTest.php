@@ -14,12 +14,12 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
     {
         $obj = new YoutubeDl();
 
-        $obj->setWorkingDirectory('/home/user/');
+        $obj->setDownloadPath('/home/user/');
         $obj->setTimeout(10);
         $obj->setProcessOptions(['suppress_errors' => false, 'binary_pipes' => false]);
         $obj->setDebug(true);
 
-        $this->assertEquals('/home/user/', $obj->getWorkingDirectory());
+        $this->assertEquals('/home/user/', $obj->getDownloadPath());
         $this->assertEquals(10, $obj->getTimeout());
         $this->assertEquals(['suppress_errors' => false, 'binary_pipes' => false], $obj->getProcessOptions());
         $this->assertTrue($obj->getDebug());
