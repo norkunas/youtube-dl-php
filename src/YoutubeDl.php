@@ -175,7 +175,6 @@ class YoutubeDl
                 throw new PrivateVideoException();
             } elseif (preg_match('/copyright infringement/i', $message)) {
                 throw new CopyrightException();
-                //The YouTube account associated with this video has been terminated due to multiple third-party notifications of copyright infringement
             } elseif (preg_match('/this video does not exist|404/i', $message)) {
                 throw new NotFoundException();
             } else {
