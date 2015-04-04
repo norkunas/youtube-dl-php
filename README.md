@@ -33,4 +33,4 @@ echo $video->getTitle(); // Will return Phonebloks
 
 **Disabled options which would break download:**
 
-list-formats, list-subs, list-thumbnails, get-url, get-title, get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json, newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic.
+list-formats, list-subs, list-thumbnails, get-url, get-title, get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json (used internally), newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic, ignore-config (used internally).
