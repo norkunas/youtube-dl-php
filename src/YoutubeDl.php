@@ -2,7 +2,6 @@
 namespace YoutubeDl;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Exception\CopyrightException;
 use YoutubeDl\Exception\NotFoundException;
@@ -15,22 +14,27 @@ class YoutubeDl
      * @var array
      */
     protected $options;
+
     /**
      * @var string
      */
     protected $workingDirectory;
+
     /**
      * @var int
      */
     protected $timeout;
+
     /**
      * @var array
      */
     protected $processOptions = [];
+
     /**
      * @var bool
      */
     protected $debug = false;
+
     /**
      * Constructor
      *
@@ -43,6 +47,7 @@ class YoutubeDl
 
         $this->options = $resolver->resolve($options);
     }
+
     /**
      * Set working directory
      *
@@ -52,6 +57,7 @@ class YoutubeDl
     {
         $this->workingDirectory = $workingDirectory;
     }
+
     /**
      * Get working directory
      *
@@ -61,6 +67,7 @@ class YoutubeDl
     {
         return $this->workingDirectory;
     }
+
     /**
      * Set timeout
      *
@@ -70,6 +77,7 @@ class YoutubeDl
     {
         $this->timeout = $timeout;
     }
+
     /**
      * Get timeout
      *
@@ -79,6 +87,7 @@ class YoutubeDl
     {
         return $this->timeout;
     }
+
     /**
      * Set process options
      *
@@ -88,6 +97,7 @@ class YoutubeDl
     {
         $this->processOptions = $options;
     }
+
     /**
      * Get process options
      *
@@ -97,6 +107,7 @@ class YoutubeDl
     {
         return $this->processOptions;
     }
+
     /**
      * Set debug
      *
@@ -106,6 +117,7 @@ class YoutubeDl
     {
         $this->debug = $debug;
     }
+
     /**
      * Get debug
      *
@@ -115,6 +127,7 @@ class YoutubeDl
     {
         return $this->debug;
     }
+
     /**
      * Get command line
      *
@@ -138,6 +151,7 @@ class YoutubeDl
 
         return $c;
     }
+
     /**
      * Download
      *
@@ -384,6 +398,7 @@ class YoutubeDl
             return sprintf('"%s"', $value);
         });
     }
+
     /**
      * Decode json to an associative array
      *

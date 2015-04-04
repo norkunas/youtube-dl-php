@@ -7,70 +7,87 @@ class Format
      * @var string
      */
     protected $format;
+
     /**
      * @var string
      */
     protected $url;
+
     /**
      * @var array
      */
     protected $httpHeaders;
+
     /**
      * @var string
      */
     protected $acodec;
+
     /**
      * @var string
      */
     protected $vcodec;
+
     /**
      * @var string
      */
     protected $formatNote;
+
     /**
      * @var int
      */
     protected $abr;
+
     /**
      * @var string
      */
     protected $playerUrl;
+
     /**
      * @var string
      */
     protected $ext;
+
     /**
      * @var int
      */
     protected $preference;
+
     /**
      * @var string
      */
     protected $formatId;
+
     /**
      * @var string
      */
     protected $container;
+
     /**
      * @var int
      */
     protected $width;
+
     /**
      * @var int
      */
     protected $height;
+
     /**
      * @var int
      */
     protected $asr;
+
     /**
      * @var int
      */
     protected $tbr;
+
     /**
      * @var int
      */
     protected $fps;
+
     /**
      * @var int
      */

@@ -7,6 +7,7 @@ class Thumbnail
      * @var int
      */
     protected $id;
+
     /**
      * @var string
      */

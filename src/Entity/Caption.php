@@ -7,14 +7,17 @@ class Caption
      * @var int
      */
     protected $index;
+
     /**
      * @var string
      */
     protected $caption;
+
     /**
      * @var \DateTime
      */
     protected $start;
+
     /**
      * @var \DateTime
      */

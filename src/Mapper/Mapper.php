@@ -5,6 +5,9 @@ use YoutubeDl\Entity\Video;
 
 class Mapper
 {
+    /**
+     * @var array
+     */
     protected $mappers = [
         'upload_date' => 'UploadDateMapper',
         'annotations' => 'AnnotationsMapper',
@@ -13,10 +16,12 @@ class Mapper
         'categories' => 'CategoriesMapper',
         'subtitles' => 'SubtitlesMapper',
     ];
+
     /**
      * @var string
      */
     protected $workingDirectory;
+
     /**
      * Constructor
      *
@@ -26,6 +31,7 @@ class Mapper
     {
         $this->workingDirectory = $workingDirectory;
     }
+
     /**
      * Map data to Video object and return it
      *

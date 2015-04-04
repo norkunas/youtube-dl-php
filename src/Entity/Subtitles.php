@@ -7,6 +7,7 @@ class Subtitles
      * @var string
      */
     protected $locale;
+
     /**
      * @var Caption[]
      */

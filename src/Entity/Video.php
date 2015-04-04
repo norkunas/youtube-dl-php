@@ -7,194 +7,242 @@ class Video
      * @var \DateTime
      */
     protected $uploadDate;
+
     /**
      * @var string
      */
     protected $extractor;
+
     /**
      * @var string
      */
     protected $formatNote;
+
     /**
      * @var int
      */
     protected $height;
+
     /**
      * @var int
      */
     protected $likeCount;
+
     /**
      * @var int
      */
     protected $duration;
+
     /**
      * @var string
      */
     protected $fulltitle;
+
     /**
      * @var string
      */
     protected $id;
+
     /**
      * @var int
      */
     protected $viewCount;
+
     /**
      * @var string
      */
     protected $playlist;
+
     /**
      * @var array
      */
     protected $httpHeaders;
+
     /**
      * @var string
      */
     protected $container;
+
     /**
      * @var string
      */
     protected $title;
+
     /**
      * @var string
      */
     protected $filename;
+
     /**
      * @var int
      */
     protected $playlistIndex;
+
     /**
      * @var int
      */
     protected $dislikeCount;
+
     /**
      * @var float
      */
     protected $averageRating;
+
     /**
      * @var int
      */
     protected $abr;
+
     /**
      * @var Subtitles[]
      */
     protected $subtitles;
+
     /**
      * @var int
      */
     protected $fps;
+
     /**
      * @var int
      */
     protected $ageLimit;
+
     /**
      * @var string
      */
     protected $webpageUrlBasename;
+
     /**
      * @var int
      */
     protected $filesize;
+
     /**
      * @var string
      */
     protected $displayId;
+
     /**
      * @var int
      */
     protected $asr;
+
     /**
      * @var string
      */
     protected $description;
+
     /**
      * @var string
      */
     protected $format;
+
     /**
      * @var int
      */
     protected $tbr;
+
     /**
      * @var string
      */
     protected $playlistId;
+
     /**
      * @var string
      */
     protected $uploader;
+
     /**
      * @var string
      */
     protected $formatId;
+
     /**
      * @var string
      */
     protected $uploaderId;
+
     /**
      * @var Category[]
      */
     protected $categories;
+
     /**
      * @var string
      */
     protected $playlistTitle;
+
     /**
      * @var string
      */
     protected $stitle;
+
     /**
      * @var Thumbnail[]
      */
     protected $thumbnails;
+
     /**
      * @var string
      */
     protected $url;
+
     /**
      * @var string
      */
     protected $extractorKey;
+
     /**
      * @var string
      */
     protected $vcodec;
+
     /**
      * @var \SimpleXMLElement
      */
     protected $annotations;
+
     /**
      * @var string
      */
     protected $ext;
+
     /**
      * @var string
      */
     protected $webpageUrl;
+
     /**
      * @var Format[]
      */
     protected $formats;
+
     /**
      * @var string
      */
     protected $acodec;
+
     /**
      * @var int
      */
     protected $width;
+
     /**
      * @var int
      */
     protected $nEntries;
+
     /**
      * @var int
      */
     protected $preference;
+
     /**
      * @var \SplFileInfo
      */
     protected $file;
+
     /**
      * @var int
      */
