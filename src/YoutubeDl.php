@@ -2,7 +2,11 @@
 namespace YoutubeDl;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use YoutubeDl\Exception\CopyrightException;
+use YoutubeDl\Exception\NotFoundException;
+use YoutubeDl\Exception\PrivateVideoException;
 use YoutubeDl\Mapper\Mapper;
 
 class YoutubeDl
@@ -140,22 +144,36 @@ class YoutubeDl
      * @param $url
      *
      * @return Entity\Video[]|Entity\Video
-     * @throws \Exception
      */
     public function download($url)
     {
         $process = new Process(sprintf('%s %s', $this->getCommandLine(), $url), $this->workingDirectory, null, null, $this->timeout, $this->processOptions);
 
-        if ($this->debug) {
-            $process->mustRun(function ($type, $buffer) {
-                if (Process::ERR === $type) {
-                    echo 'ERR > ' . $buffer;
-                } else {
-                    echo 'OUT > ' . $buffer;
-                }
-            });
-        } else {
-            $process->mustRun();
+        try {
+            if ($this->debug) {
+                $process->mustRun(function ($type, $buffer) {
+                    if (Process::ERR === $type) {
+                        echo 'ERR > ' . $buffer;
+                    } else {
+                        echo 'OUT > ' . $buffer;
+                    }
+                });
+            } else {
+                $process->mustRun();
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+
+            if (preg_match('/please sign in to view this video/i', $message)) {
+                throw new PrivateVideoException();
+            } elseif (preg_match('/copyright infringement/i', $message)) {
+                throw new CopyrightException();
+                //The YouTube account associated with this video has been terminated due to multiple third-party notifications of copyright infringement
+            } elseif (preg_match('/this video does not exist|404/i', $message)) {
+                throw new NotFoundException();
+            } else {
+                throw $e;
+            }
         }
 
         if ($parts = explode("\n", trim($process->getOutput()))) {
