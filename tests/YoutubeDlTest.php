@@ -29,6 +29,7 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('YoutubeDl\Entity\Video', $obj->download('https://www.youtube.com/watch?v=BaW_jenozKc'));
     }
+
     /**
      * @expectedException \YoutubeDl\Exception\NotFoundException
      */
@@ -37,6 +38,7 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
         $obj = new YoutubeDl(['skip-download' => true]);
         $obj->download('https://www.youtube.com/watch?v=togdRwApGvs');
     }
+
     /**
      * @expectedException \YoutubeDl\Exception\PrivateVideoException
      */
@@ -45,6 +47,7 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
         $obj = new YoutubeDl(['skip-download' => true]);
         $obj->download('https://www.youtube.com/watch?v=6pbDgvC31E4');
     }
+
     /**
      * @expectedException \YoutubeDl\Exception\CopyrightException
      */
