@@ -134,7 +134,7 @@ class YoutubeDl
             }
         }
 
-        $c .= '--print-json';
+        $c .= '--print-json --ignore-config';
 
         return $c;
     }
@@ -202,7 +202,7 @@ class YoutubeDl
             'ignore-errors' => 'bool',
             'abort-on-error' => 'bool',
             'default-search' => 'string',
-            'ignore-config' => 'bool',
+            //'ignore-config' => 'bool',
             // Network options
             'proxy' => 'string',
             'socket-timeout' => 'int',
