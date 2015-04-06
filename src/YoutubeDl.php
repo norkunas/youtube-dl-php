@@ -201,6 +201,21 @@ class YoutubeDl
         return false;
     }
 
+    /**
+     * Get supported extractors list
+     *
+     * @return array
+     */
+    public function getExtractorsList()
+    {
+        $process = new Process('youtube-dl --list-extractors');
+        $process->mustRun(is_callable($this->debug) ? $this->debug : null);
+
+        $list = array_filter(explode("\n", $process->getOutput()));
+
+        return $list;
+    }
+
     protected function configureOptions(OptionsResolver $resolver)
     {
         $options = [
