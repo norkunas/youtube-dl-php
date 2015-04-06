@@ -36,6 +36,10 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
         $obj = new YoutubeDl(['skip-download' => true]);
 
         $this->assertInstanceOf('YoutubeDl\Entity\Video', $obj->download('https://www.youtube.com/watch?v=BaW_jenozKc'));
+        $this->assertContainsOnlyInstancesOf('YoutubeDl\Entity\Video', $obj->download([
+            'https://www.youtube.com/watch?v=BaW_jenozKc',
+            'https://www.youtube.com/watch?v=9IOt2v5aJZA',
+        ]));
     }
 
     /**
