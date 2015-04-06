@@ -153,7 +153,7 @@ class YoutubeDl
     /**
      * Download
      *
-     * @param $url
+     * @param mixed $url Url or array of urls to download
      *
      * @return Entity\Video[]|Entity\Video
      * @throws PrivateVideoException
@@ -164,6 +164,10 @@ class YoutubeDl
      */
     public function download($url)
     {
+        if (is_array($url)) {
+            $url = implode(' ', $url);
+        }
+
         $process = new Process(sprintf('%s %s', $this->getCommandLine(), $url), $this->downloadPath, null, null, $this->timeout, $this->processOptions);
 
         try {
