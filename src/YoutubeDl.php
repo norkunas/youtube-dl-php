@@ -31,9 +31,9 @@ class YoutubeDl
     protected $processOptions = [];
 
     /**
-     * @var bool
+     * @var callable
      */
-    protected $debug = false;
+    protected $debug;
 
     /**
      * Constructor
