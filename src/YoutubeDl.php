@@ -168,7 +168,7 @@ class YoutubeDl
             $url = implode(' ', $url);
         }
 
-        $process = new Process(sprintf('%s %s', $this->getCommandLine(), $url), $this->downloadPath, null, null, $this->timeout, $this->processOptions);
+        $process = new Process(sprintf('%s %s', $this->getCommandLine(), escapeshellarg($url)), $this->downloadPath, null, null, $this->timeout, $this->processOptions);
 
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
