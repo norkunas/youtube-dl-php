@@ -397,6 +397,12 @@ class YoutubeDl
      */
     protected function jsonDecode($data)
     {
-        return json_decode($data, true);
+        $decode = json_decode($data, true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \RuntimeException('Response can\'t be decoded: ' . $data);
+        }
+
+        return $decode;
     }
 }
