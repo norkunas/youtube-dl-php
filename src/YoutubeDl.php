@@ -216,9 +216,7 @@ class YoutubeDl
         $process = new Process('youtube-dl --list-extractors');
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
 
-        $list = array_filter(explode("\n", $process->getOutput()));
-
-        return $list;
+        return array_filter(explode("\n", $process->getOutput()));
     }
 
     protected function configureOptions(OptionsResolver $resolver)
