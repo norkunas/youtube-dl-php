@@ -1,6 +1,7 @@
 <?php
 namespace YoutubeDl;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Exception\CopyrightException;
@@ -373,7 +374,7 @@ class YoutubeDl
             return true;
         });
 
-        $resolver->setNormalizer('add-header', function ($options, $value) {
+        $resolver->setNormalizer('add-header', function (Options $options, $value) {
             foreach ($value as $k => $v) {
                 if (false === strpos($v, ':')) {
                     unset($value[$k]);
@@ -383,7 +384,7 @@ class YoutubeDl
             return $value;
         });
 
-        $resolver->setNormalizer('output', function ($options, $value) {
+        $resolver->setNormalizer('output', function (Options $options, $value) {
             return sprintf('"%s"', $value);
         });
     }
