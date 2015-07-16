@@ -193,13 +193,21 @@ class YoutubeDl
                 $videos = [];
 
                 foreach ($parts as $part) {
-                    $videos[] = $mapper->map($this->jsonDecode($part));
+                    $videoData = $this->jsonDecode($part);
+                    if (is_array($videoData)) {
+                        $videos[] = $mapper->map($videoData);
+                    }
                 }
 
                 return $videos;
             }
 
-            return $mapper->map($this->jsonDecode($parts[0]));
+            $videoData = $this->jsonDecode(reset($parts));
+            if (is_array($videoData)) {
+                return $mapper->map($videoData);
+            }
+            
+            return false;
         }
 
         return false;
