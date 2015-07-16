@@ -1,6 +1,7 @@
 <?php
 namespace YoutubeDl;
 
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Exception\CopyrightException;
@@ -223,9 +224,7 @@ class YoutubeDl
         $process = new Process('youtube-dl --list-extractors');
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
 
-        $list = array_filter(explode("\n", $process->getOutput()));
-
-        return $list;
+        return array_filter(explode("\n", $process->getOutput()));
     }
 
     protected function configureOptions(OptionsResolver $resolver)
@@ -381,7 +380,7 @@ class YoutubeDl
             return true;
         });
 
-        $resolver->setNormalizer('add-header', function ($options, $value) {
+        $resolver->setNormalizer('add-header', function (Options $options, $value) {
             foreach ($value as $k => $v) {
                 if (false === strpos($v, ':')) {
                     unset($value[$k]);
@@ -391,7 +390,7 @@ class YoutubeDl
             return $value;
         });
 
-        $resolver->setNormalizer('output', function ($options, $value) {
+        $resolver->setNormalizer('output', function (Options $options, $value) {
             return sprintf('"%s"', $value);
         });
     }
@@ -405,6 +404,12 @@ class YoutubeDl
      */
     protected function jsonDecode($data)
     {
-        return json_decode($data, true);
+        $decode = json_decode($data, true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \RuntimeException('Response can\'t be decoded: ' . $data);
+        }
+
+        return $decode;
     }
 }
