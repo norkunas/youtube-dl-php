@@ -8,3 +8,4 @@ enabled:
 disabled:
     - concat_without_spaces
     - align_double_arrow
+    - empty_return
