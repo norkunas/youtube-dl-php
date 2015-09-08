@@ -1,7 +1,9 @@
 <?php
-namespace YoutubeDl\Tests\Mapper;
+
+namespace YoutubeDl\tests\Mapper;
 
 use YoutubeDl\Mapper\Mapper;
+
 /**
  * @covers YoutubeDl\Mapper\Mapper
  */
@@ -71,7 +73,7 @@ The rest of the device works fine, but is needesly thrown away.',
             'uploader' => 'crazyEMINEMfan',
             'uploader_id' => 'crazyEMINEMfan',
             'categories' => [
-                'Music'
+                'Music',
             ],
             'stitle' => 'Eminem - MockingBird',
             'thumbnails' => [
@@ -102,7 +104,7 @@ The rest of the device works fine, but is needesly thrown away.',
                     'tbr' => 90,
                     'fps' => 15,
                     'filesize' => 2201477,
-                ]
+                ],
             ],
             'format_note' => 'DASH audio',
             'like_count' => '299628',

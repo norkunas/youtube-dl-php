@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Entity;
 
 class Subtitles

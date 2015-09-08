@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Mapper;
 
 interface MapperInterface
