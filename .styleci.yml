@@ -9,3 +9,4 @@ disabled:
     - concat_without_spaces
     - align_double_arrow
     - empty_return
+    - phpdoc_var_without_name
