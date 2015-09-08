@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Entity;
 
 class Thumbnail
@@ -14,7 +15,7 @@ class Thumbnail
     protected $url;
 
     /**
-     * Get thumbnail ID
+     * Get thumbnail ID.
      *
      * @return int
      */
@@ -24,7 +25,7 @@ class Thumbnail
     }
 
     /**
-     * Get thumbnail URL
+     * Get thumbnail URL.
      *
      * @return string
      */

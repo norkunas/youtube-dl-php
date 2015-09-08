@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Mapper;
 
 use YoutubeDl\Entity\Format;

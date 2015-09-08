@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl;
 
 use Symfony\Component\OptionsResolver\Options;
@@ -37,7 +38,7 @@ class YoutubeDl
     protected $debug;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
@@ -50,7 +51,7 @@ class YoutubeDl
     }
 
     /**
-     * Set download path
+     * Set download path.
      *
      * @param string $downloadPath
      */
@@ -60,7 +61,7 @@ class YoutubeDl
     }
 
     /**
-     * Get download path
+     * Get download path.
      *
      * @return string
      */
@@ -70,7 +71,7 @@ class YoutubeDl
     }
 
     /**
-     * Set timeout
+     * Set timeout.
      *
      * @param int $timeout
      */
@@ -80,7 +81,7 @@ class YoutubeDl
     }
 
     /**
-     * Get timeout
+     * Get timeout.
      *
      * @return int
      */
@@ -90,7 +91,7 @@ class YoutubeDl
     }
 
     /**
-     * Set process options
+     * Set process options.
      *
      * @param array $options
      */
@@ -100,7 +101,7 @@ class YoutubeDl
     }
 
     /**
-     * Get process options
+     * Get process options.
      *
      * @return array
      */
@@ -110,7 +111,7 @@ class YoutubeDl
     }
 
     /**
-     * Enable debugging
+     * Enable debugging.
      *
      * $obj->debug(function ($type, $buffer) {
      *     if (\Symfony\Component\Process\Process::ERR === $type) {
@@ -128,7 +129,7 @@ class YoutubeDl
     }
 
     /**
-     * Get command line
+     * Get command line.
      *
      * @return string
      */
@@ -152,16 +153,17 @@ class YoutubeDl
     }
 
     /**
-     * Download
+     * Download.
      *
      * @param mixed $url Url or array of urls to download
      *
-     * @return Entity\Video[]|Entity\Video
      * @throws PrivateVideoException
      * @throws CopyrightException
      * @throws NotFoundException
      * @throws \Symfony\Component\Process\Exception\ProcessFailedException
      * @throws \Exception
+     *
+     * @return Entity\Video[]|Entity\Video
      */
     public function download($url)
     {
@@ -207,7 +209,7 @@ class YoutubeDl
             if (is_array($videoData)) {
                 return $mapper->map($videoData);
             }
-            
+
             return false;
         }
 
@@ -215,7 +217,7 @@ class YoutubeDl
     }
 
     /**
-     * Get supported extractors list
+     * Get supported extractors list.
      *
      * @return array
      */
@@ -396,7 +398,7 @@ class YoutubeDl
     }
 
     /**
-     * Decode json to an associative array
+     * Decode json to an associative array.
      *
      * @param string $data
      *

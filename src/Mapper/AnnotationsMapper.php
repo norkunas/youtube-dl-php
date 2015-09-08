@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Mapper;
 
 class AnnotationsMapper implements MapperInterface
@@ -14,7 +15,8 @@ class AnnotationsMapper implements MapperInterface
             if ($obj) {
                 return $obj;
             }
-        } catch (\Exception $e) { }
+        } catch (\Exception $e) {
+        }
 
         return null;
     }

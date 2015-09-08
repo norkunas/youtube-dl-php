@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Entity;
 
 class Category
@@ -9,7 +10,7 @@ class Category
     protected $title;
 
     /**
-     * Get category title
+     * Get category title.
      *
      * @return string
      */

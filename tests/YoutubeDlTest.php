@@ -1,7 +1,9 @@
 <?php
-namespace YoutubeDl\Tests;
+
+namespace YoutubeDl\tests;
 
 use YoutubeDl\YoutubeDl;
+
 /**
  * @covers YoutubeDl\YoutubeDl
  */
@@ -16,8 +18,8 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
             'audio-format' => 'mp3',
             'add-header' => [
                 'X-Requested-With:youtube-dl',
-                'X-ATT-DeviceId:GT-P7320/P7320XXLPG'
-            ]
+                'X-ATT-DeviceId:GT-P7320/P7320XXLPG',
+            ],
         ]);
 
         $this->assertEquals('youtube-dl --skip-download --write-sub --write-annotations --audio-format mp3 --add-header X-Requested-With:youtube-dl --add-header X-ATT-DeviceId:GT-P7320/P7320XXLPG --print-json --ignore-config', $obj->getCommandLine());

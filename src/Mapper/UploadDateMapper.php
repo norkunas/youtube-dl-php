@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Mapper;
 
 class UploadDateMapper implements MapperInterface

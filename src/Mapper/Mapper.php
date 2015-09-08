@@ -1,4 +1,5 @@
 <?php
+
 namespace YoutubeDl\Mapper;
 
 use YoutubeDl\Entity\Video;
@@ -23,7 +24,7 @@ class Mapper
     protected $downloadPath;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $downloadPath
      */
@@ -33,12 +34,13 @@ class Mapper
     }
 
     /**
-     * Map data to Video object and return it
+     * Map data to Video object and return it.
      *
      * @param array $data
      *
-     * @return Video
      * @throws \Exception
+     *
+     * @return Video
      */
     public function map(array $data)
     {
