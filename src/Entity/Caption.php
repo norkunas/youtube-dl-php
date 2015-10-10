@@ -25,11 +25,27 @@ class Caption
     protected $end;
 
     /**
+     * @param int $index
+     */
+    public function setIndex($index)
+    {
+        $this->index = $index;
+    }
+
+    /**
      * @return int
      */
     public function getIndex()
     {
         return $this->index;
+    }
+
+    /**
+     * @param string $caption
+     */
+    public function setCaption($caption)
+    {
+        $this->caption = $caption;
     }
 
     /**
@@ -41,11 +57,27 @@ class Caption
     }
 
     /**
+     * @param \DateTime $start
+     */
+    public function setStart(\DateTime $start)
+    {
+        $this->start = $start;
+    }
+
+    /**
      * @return \DateTime
      */
     public function getStart()
     {
         return $this->start;
+    }
+
+    /**
+     * @param \DateTime $end
+     */
+    public function setEnd(\DateTime $end)
+    {
+        $this->end = $end;
     }
 
     /**

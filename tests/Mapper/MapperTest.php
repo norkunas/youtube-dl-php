@@ -2,6 +2,7 @@
 
 namespace YoutubeDl\tests\Mapper;
 
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use YoutubeDl\Mapper\Mapper;
 
 /**
@@ -125,7 +126,7 @@ http://www.freedom.tm/NetCastTV',
             'ext' => 'm4a',
         ];
 
-        $mapper = new Mapper(getcwd());
+        $mapper = new Mapper(getcwd(), new PropertyAccessor());
         $object = $mapper->map($data);
 
         $this->assertInstanceOf('YoutubeDl\Entity\Video', $object);

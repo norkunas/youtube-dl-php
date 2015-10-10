@@ -12,15 +12,9 @@ class ThumbnailsMapper implements MapperInterface
 
         foreach ((array) $values as $value) {
             $entity = new Thumbnail();
-            $reflection = new \ReflectionObject($entity);
 
-            $id = $reflection->getProperty('id');
-            $id->setAccessible(true);
-            $id->setValue($entity, (int) $value['id']);
-
-            $url = $reflection->getProperty('url');
-            $url->setAccessible(true);
-            $url->setValue($entity, $value['url']);
+            $entity->setId((int) $value['id']);
+            $entity->setUrl($value['url']);
 
             $thumbnails[] = $entity;
         }

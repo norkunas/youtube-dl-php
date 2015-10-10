@@ -12,11 +12,7 @@ class CategoriesMapper implements MapperInterface
 
         foreach ((array) $values as $value) {
             $entity = new Category();
-            $reflection = new \ReflectionObject($entity);
-
-            $title = $reflection->getProperty('title');
-            $title->setAccessible(true);
-            $title->setValue($entity, $value);
+            $entity->setTitle($value);
 
             $categories[] = $entity;
         }

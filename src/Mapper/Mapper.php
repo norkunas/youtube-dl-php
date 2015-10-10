@@ -2,20 +2,26 @@
 
 namespace YoutubeDl\Mapper;
 
+use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use YoutubeDl\Entity\Video;
 
 class Mapper
 {
-    /**
-     * @var array
-     */
     protected $mappers = [
         'upload_date' => 'UploadDateMapper',
         'annotations' => 'AnnotationsMapper',
         'formats' => 'FormatsMapper',
+        'requested_formats' => 'FormatsMapper',
         'thumbnails' => 'ThumbnailsMapper',
         'categories' => 'CategoriesMapper',
         'subtitles' => 'SubtitlesMapper',
+    ];
+
+    protected $ignore = [
+        //'automatic_captions',
+        'requested_subtitles',
+        'thumbnail',
     ];
 
     /**
@@ -24,13 +30,20 @@ class Mapper
     protected $downloadPath;
 
     /**
+     * @var PropertyAccessor
+     */
+    protected $propertyAccessor;
+
+    /**
      * Constructor.
      *
-     * @param string $downloadPath
+     * @param string                    $downloadPath
+     * @param PropertyAccessorInterface $propertyAccessor
      */
-    public function __construct($downloadPath)
+    public function __construct($downloadPath, PropertyAccessorInterface $propertyAccessor)
     {
         $this->downloadPath = $downloadPath;
+        $this->propertyAccessor = $propertyAccessor;
     }
 
     /**
@@ -43,47 +56,58 @@ class Mapper
      * @return Video
      */
     public function map(array $data)
-    {
+    {//var_dump($data);exit;
         $video = new Video();
 
-        $reflection = new \ReflectionObject($video);
-
-        $mappers = array_keys($this->mappers);
-
-        foreach ($data as $key => $value) {
-            try {
-                $prop = $reflection->getProperty($this->snakeToCamel($key));
-                $prop->setAccessible(true);
-            } catch (\ReflectionException $e) {
+        foreach ($data as $field => $value) {
+            if (in_array($field, $this->ignore)) {
                 continue;
             }
 
-            if (in_array($key, $mappers)) {
-                $mapper = __NAMESPACE__ . '\\' . $this->mappers[$key];
+            if ($mapper = $this->findInnerMapper($field)) {
+                $value = $mapper->map($value);
+            }
 
-                if (!in_array(__NAMESPACE__ . '\MapperInterface', class_implements($mapper))) {
-                    throw new \Exception($mapper . ' must implement mapper interface.');
-                }
-                /**
-                 * @var MapperInterface $mapperObj
-                 */
-                $mapperObj = new $mapper();
-
-                $prop->setValue($video, $mapperObj->map($value));
-            } else {
-                $prop->setValue($video, $value);
+            try {
+                $this->propertyAccessor->setValue($video, $field, $value);
+            } catch (\Exception $e) {
+                // Ignore if property does not exist
             }
         }
 
-        $file = $reflection->getProperty('file');
-        $file->setAccessible(true);
-        $file->setValue($video, new \SplFileInfo(rtrim($this->downloadPath, '/') . '/' . $video->getFilename()));
+        $file = new \SplFileInfo(rtrim($this->downloadPath, '/') . '/' . $video->getFilename());
+        $this->propertyAccessor->setValue($video, 'file', $file);
 
         return $video;
     }
 
-    protected function snakeToCamel($value)
+    /**
+     * @param string $key
+     *
+     * @return MapperInterface|bool
+     * @throws \Exception
+     */
+    protected function findInnerMapper($key)
     {
-        return lcfirst(str_replace(' ', '', ucwords(str_replace(['-', '_'], ' ', $value))));
+        if (!isset($this->mappers[$key])) {
+            return false;
+        }
+
+        $mapper = __NAMESPACE__ . '\\' . $this->mappers[$key];
+
+        if (!in_array(__NAMESPACE__ . '\\MapperInterface', class_implements($mapper))) {
+            throw new \Exception($mapper . ' must implement mapper interface.');
+        }
+
+        $mapperObj = new $mapper();
+
+        if (in_array('YoutubeDl\\Mapper\\PropertyAccessorAwareTrait', class_uses($mapperObj))) {
+            /**
+             * @var PropertyAccessorAwareTrait $mapperObj
+             */
+            $mapperObj->setPropertyAccessor($this->propertyAccessor);
+        }
+
+        return $mapperObj;
     }
 }

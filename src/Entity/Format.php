@@ -94,12 +94,22 @@ class Format
      */
     protected $filesize;
 
+    public function setFormat($format)
+    {
+        $this->format = $format;
+    }
+
     /**
      * @return string
      */
     public function getFormat()
     {
         return $this->format;
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 
     /**
@@ -110,12 +120,22 @@ class Format
         return $this->url;
     }
 
+    public function setHttpHeaders($httpHeaders)
+    {
+        $this->httpHeaders = $httpHeaders;
+    }
+
     /**
      * @return array
      */
     public function getHttpHeaders()
     {
         return $this->httpHeaders;
+    }
+
+    public function setAcodec($acodec)
+    {
+        $this->acodec = $acodec;
     }
 
     /**
@@ -126,12 +146,22 @@ class Format
         return $this->acodec;
     }
 
+    public function setVcodec($vcodec)
+    {
+        $this->vcodec = $vcodec;
+    }
+
     /**
      * @return string
      */
     public function getVcodec()
     {
         return $this->vcodec;
+    }
+
+    public function setFormatNote($formatNote)
+    {
+        $this->formatNote = $formatNote;
     }
 
     /**
@@ -142,12 +172,22 @@ class Format
         return $this->formatNote;
     }
 
+    public function setAbr($abr)
+    {
+        $this->abr = $abr;
+    }
+
     /**
      * @return int
      */
     public function getAbr()
     {
         return $this->abr;
+    }
+
+    public function setPlayerUrl($playerUrl)
+    {
+        $this->playerUrl = $playerUrl;
     }
 
     /**
@@ -158,12 +198,22 @@ class Format
         return $this->playerUrl;
     }
 
+    public function setExt($ext)
+    {
+        $this->ext = $ext;
+    }
+
     /**
      * @return string
      */
     public function getExt()
     {
         return $this->ext;
+    }
+
+    public function setPreference($preference)
+    {
+        $this->preference = $preference;
     }
 
     /**
@@ -174,12 +224,22 @@ class Format
         return $this->preference;
     }
 
+    public function setFormatId($formatId)
+    {
+        $this->formatId = $formatId;
+    }
+
     /**
      * @return string
      */
     public function getFormatId()
     {
         return $this->formatId;
+    }
+
+    public function setContainer($container)
+    {
+        $this->container = $container;
     }
 
     /**
@@ -190,12 +250,22 @@ class Format
         return $this->container;
     }
 
+    public function setWidth($width)
+    {
+        $this->width = $width;
+    }
+
     /**
      * @return int
      */
     public function getWidth()
     {
         return $this->width;
+    }
+
+    public function setHeight($height)
+    {
+        $this->height = $height;
     }
 
     /**
@@ -206,12 +276,22 @@ class Format
         return $this->height;
     }
 
+    public function setAsr($asr)
+    {
+        $this->asr = $asr;
+    }
+
     /**
      * @return int
      */
     public function getAsr()
     {
         return $this->asr;
+    }
+
+    public function setTbr($tbr)
+    {
+        $this->tbr = $tbr;
     }
 
     /**
@@ -222,12 +302,22 @@ class Format
         return $this->tbr;
     }
 
+    public function setFps($fps)
+    {
+        $this->fps = $fps;
+    }
+
     /**
      * @return int
      */
     public function getFps()
     {
         return $this->fps;
+    }
+
+    public function setFilesize($filesize)
+    {
+        $this->filesize = $filesize;
     }
 
     /**

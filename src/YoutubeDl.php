@@ -4,7 +4,10 @@ namespace YoutubeDl;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use YoutubeDl\Exception\CopyrightException;
 use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
@@ -28,6 +31,11 @@ class YoutubeDl
     protected $timeout;
 
     /**
+     * @var PropertyAccessor
+     */
+    protected $propertyAccessor;
+
+    /**
      * @var array
      */
     protected $processOptions = [];
@@ -40,14 +48,17 @@ class YoutubeDl
     /**
      * Constructor.
      *
-     * @param array $options
+     * @param array                     $options
+     * @param PropertyAccessorInterface $propertyAccessor
      */
-    public function __construct(array $options = [])
+    public function __construct(array $options = [], PropertyAccessorInterface $propertyAccessor = null)
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
+
+        $this->propertyAccessor = $propertyAccessor ?: new PropertyAccessor();
     }
 
     /**
@@ -88,6 +99,26 @@ class YoutubeDl
     public function getTimeout()
     {
         return $this->timeout;
+    }
+
+    /**
+     * Set property accessor.
+     *
+     * @param PropertyAccessorInterface $propertyAccessor
+     */
+    public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor)
+    {
+        $this->propertyAccessor = $propertyAccessor;
+    }
+
+    /**
+     * Get property accessor.
+     *
+     * @return PropertyAccessorInterface
+     */
+    public function getPropertyAccessor()
+    {
+        return $this->propertyAccessor;
     }
 
     /**
@@ -155,12 +186,15 @@ class YoutubeDl
     /**
      * Download.
      *
-     * @param mixed $url Url or array of urls to download
+     * @param string $url Video URL to download
+     *
+     * @deprecated Providing multiple urls to download is deprecated and will be removed in version 1.0. Please call
+     *             this method for each video alone.
      *
      * @throws PrivateVideoException
      * @throws CopyrightException
      * @throws NotFoundException
-     * @throws \Symfony\Component\Process\Exception\ProcessFailedException
+     * @throws ProcessFailedException
      * @throws \Exception
      *
      * @return Entity\Video[]|Entity\Video
@@ -168,7 +202,13 @@ class YoutubeDl
     public function download($url)
     {
         if (is_array($url)) {
-            $url = implode(' ', $url);
+            $videos = [];
+
+            foreach ($url as $link) {
+                $videos[] = $this->download($link);
+            }
+
+            return $videos;
         }
 
         $process = new Process(sprintf('%s %s', $this->getCommandLine(), escapeshellarg($url)), $this->downloadPath, null, null, $this->timeout, $this->processOptions);
@@ -189,31 +229,7 @@ class YoutubeDl
             }
         }
 
-        if ($parts = explode("\n", trim($process->getOutput()))) {
-            $mapper = new Mapper($this->downloadPath ?: getcwd());
-
-            if (count($parts) > 1) {
-                $videos = [];
-
-                foreach ($parts as $part) {
-                    $videoData = $this->jsonDecode($part);
-                    if (is_array($videoData)) {
-                        $videos[] = $mapper->map($videoData);
-                    }
-                }
-
-                return $videos;
-            }
-
-            $videoData = $this->jsonDecode(reset($parts));
-            if (is_array($videoData)) {
-                return $mapper->map($videoData);
-            }
-
-            return false;
-        }
-
-        return false;
+        return $this->processDownloadOutput($process->getOutput());
     }
 
     /**
@@ -236,7 +252,6 @@ class YoutubeDl
             'ignore-errors' => 'bool',
             'abort-on-error' => 'bool',
             'default-search' => 'string',
-            //'ignore-config' => 'bool',
             // Network options
             'proxy' => 'string',
             'socket-timeout' => 'int',
@@ -413,5 +428,18 @@ class YoutubeDl
         }
 
         return $decode;
+    }
+
+    protected function processDownloadOutput($output)
+    {
+        $mapper = new Mapper($this->downloadPath ?: getcwd(), $this->propertyAccessor);
+
+        $videoData = $this->jsonDecode(trim($output));
+
+        if (is_array($videoData)) {
+            return $mapper->map($videoData);
+        }
+
+        return false;
     }
 }

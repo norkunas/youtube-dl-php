@@ -16,6 +16,7 @@ class AnnotationsMapper implements MapperInterface
                 return $obj;
             }
         } catch (\Exception $e) {
+            // If for some reason annotations can't be mapped then just ignore this
         }
 
         return null;

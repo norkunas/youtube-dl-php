@@ -12,7 +12,15 @@ class Subtitles
     /**
      * @var Caption[]
      */
-    protected $captions;
+    protected $captions = [];
+
+    /**
+     * @param string $locale
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+    }
 
     /**
      * @return string
@@ -20,6 +28,14 @@ class Subtitles
     public function getLocale()
     {
         return $this->locale;
+    }
+
+    /**
+     * @param Caption[] $captions
+     */
+    public function setCaptions(array $captions)
+    {
+        $this->captions = $captions;
     }
 
     /**

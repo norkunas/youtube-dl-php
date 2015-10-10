@@ -15,8 +15,14 @@ class Thumbnail
     protected $url;
 
     /**
-     * Get thumbnail ID.
-     *
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -25,8 +31,14 @@ class Thumbnail
     }
 
     /**
-     * Get thumbnail URL.
-     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
      * @return string
      */
     public function getUrl()
