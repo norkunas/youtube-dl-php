@@ -188,9 +188,6 @@ class YoutubeDl
      *
      * @param string $url Video URL to download
      *
-     * @deprecated Providing multiple urls to download is deprecated and will be removed in version 1.0. Please call
-     *             this method for each video alone.
-     *
      * @throws PrivateVideoException
      * @throws CopyrightException
      * @throws NotFoundException
@@ -202,6 +199,8 @@ class YoutubeDl
     public function download($url)
     {
         if (is_array($url)) {
+            trigger_error('Providing multiple urls to download is deprecated and will be removed in version 1.0. Please call this method for each video alone.', E_USER_NOTICE);
+
             $videos = [];
 
             foreach ($url as $link) {
