@@ -80,8 +80,9 @@ class Mapper
     /**
      * @param string $key
      *
-     * @return MapperInterface|bool
      * @throws \Exception
+     *
+     * @return MapperInterface|bool
      */
     protected function findInnerMapper($key)
     {
