@@ -4,6 +4,7 @@ A PHP wrapper for [youtube-dl](https://github.com/rg3/youtube-dl) tool.
 [![Latest Stable Version](https://poser.pugx.org/norkunas/youtube-dl-php/v/stable.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 [![Latest Unstable Version](https://poser.pugx.org/norkunas/youtube-dl-php/v/unstable.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 [![StyleCI](https://styleci.io/repos/33054763/shield)](https://styleci.io/repos/33054763)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/norkunas/youtube-dl-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/norkunas/youtube-dl-php/?branch=master)
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
 ## Install
