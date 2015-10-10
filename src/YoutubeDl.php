@@ -31,7 +31,7 @@ class YoutubeDl
     protected $timeout;
 
     /**
-     * @var PropertyAccessor
+     * @var PropertyAccessorInterface
      */
     protected $propertyAccessor;
 
