@@ -38,8 +38,12 @@ class SubtitlesMapper implements MapperInterface
             $times = explode(' --> ', $parts[1]);
 
             $entity->setIndex((int) $parts[0]);
-            $entity->setStart(\DateTime::createFromFormat('H:i:s,u', $times[0]));
-            $entity->setEnd(\DateTime::createFromFormat('H:i:s,u', $times[1]));
+            if ($start = \DateTime::createFromFormat('H:i:s,u', $times[0])) {
+                $entity->setStart($start);
+            }
+            if ($end = \DateTime::createFromFormat('H:i:s,u', $times[1])) {
+                $entity->setEnd($end);
+            }
             $entity->setCaption($parts[2]);
 
             $captions[] = $entity;
