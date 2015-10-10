@@ -82,6 +82,11 @@ class Video
     /**
      * @var string
      */
+    protected $altTitle;
+
+    /**
+     * @var string
+     */
     protected $filename;
 
     /**
@@ -273,6 +278,41 @@ class Video
      * @var int
      */
     protected $commentCount;
+
+    /**
+     * @var array
+     */
+    protected $comments;
+
+    /**
+     * @var array
+     */
+    protected $tags = [];
+
+    /**
+     * @var bool
+     */
+    protected $isLive;
+
+    /**
+     * @var int
+     */
+    protected $startTime;
+
+    /**
+     * @var int
+     */
+    protected $endTime;
+
+    /**
+     * @var string
+     */
+    protected $location;
+
+    /**
+     * @var string
+     */
+    protected $creator;
 
     /**
      * @param \DateTime $uploadDate
@@ -512,6 +552,22 @@ class Video
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * @param string $altTitle
+     */
+    public function setAltTitle($altTitle)
+    {
+        $this->altTitle = $altTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAltTitle()
+    {
+        return $this->altTitle;
     }
 
     /**
@@ -1136,5 +1192,117 @@ class Video
     public function getCommentCount()
     {
         return $this->commentCount;
+    }
+
+    /**
+     * @param array $comments
+     */
+    public function setComments(array $comments)
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return array
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param array $tags
+     */
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param bool $isLive
+     */
+    public function setIsLive($isLive)
+    {
+        $this->isLive = $isLive;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsLive()
+    {
+        return $this->isLive;
+    }
+
+    /**
+     * @param int $startTime
+     */
+    public function setStartTime($startTime)
+    {
+        $this->startTime = $startTime;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
+    }
+
+    /**
+     * @param int $endTime
+     */
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
+    }
+
+    /**
+     * @return int
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    /**
+     * @param string $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param string $creator
+     */
+    public function setCreator($creator)
+    {
+        $this->creator = $creator;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreator()
+    {
+        return $this->creator;
     }
 }

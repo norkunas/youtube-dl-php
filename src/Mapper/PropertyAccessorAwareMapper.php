@@ -12,6 +12,11 @@ abstract class PropertyAccessorAwareMapper implements MapperInterface
     protected $propertyAccessor;
 
     /**
+     * @var string
+     */
+    protected $entity;
+
+    /**
      * @param PropertyAccessorInterface $propertyAccessor
      */
     public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor)
