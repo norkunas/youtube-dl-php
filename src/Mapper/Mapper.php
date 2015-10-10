@@ -17,8 +17,6 @@ class Mapper
     ];
 
     protected $ignore = [
-        //'automatic_captions',
-        //'requested_subtitles',
         'thumbnail',
     ];
 
