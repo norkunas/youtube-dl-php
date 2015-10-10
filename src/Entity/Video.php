@@ -180,7 +180,7 @@ class Video
     protected $formatId;
 
     /**
-     * @var string
+     * @var float
      */
     protected $stretchedRatio;
 
@@ -875,7 +875,7 @@ class Video
     }
 
     /**
-     * @param string $stretchedRatio
+     * @param float $stretchedRatio
      */
     public function setStretchedRatio($stretchedRatio)
     {
@@ -883,7 +883,7 @@ class Video
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getStretchedRatio()
     {
