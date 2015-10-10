@@ -4,10 +4,8 @@ namespace YoutubeDl\Mapper;
 
 use YoutubeDl\Entity\Format;
 
-class FormatsMapper implements MapperInterface
+class FormatsMapper extends PropertyAccessorAwareMapper
 {
-    use PropertyAccessorAwareTrait;
-
     public function map($data)
     {
         $formats = [];

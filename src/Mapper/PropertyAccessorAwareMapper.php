@@ -4,7 +4,7 @@ namespace YoutubeDl\Mapper;
 
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
-trait PropertyAccessorAwareTrait
+abstract class PropertyAccessorAwareMapper implements MapperInterface
 {
     /**
      * @var PropertyAccessorInterface

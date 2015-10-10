@@ -9,18 +9,17 @@ use YoutubeDl\Entity\Video;
 class Mapper
 {
     protected $mappers = [
-        'upload_date' => 'UploadDateMapper',
-        'annotations' => 'AnnotationsMapper',
-        'formats' => 'FormatsMapper',
-        'requested_formats' => 'FormatsMapper',
-        'thumbnails' => 'ThumbnailsMapper',
-        'categories' => 'CategoriesMapper',
-        'subtitles' => 'SubtitlesMapper',
+        'UploadDateMapper' => ['upload_date'],
+        'AnnotationsMapper' => ['annotations'],
+        'FormatsMapper' => ['formats', 'requested_formats'],
+        'ThumbnailsMapper' => ['thumbnails'],
+        'CategoriesMapper' => ['categories'],
+        'SubtitlesMapper' => ['subtitles'],
     ];
 
     protected $ignore = [
         //'automatic_captions',
-        'requested_subtitles',
+        //'requested_subtitles',
         'thumbnail',
     ];
 
@@ -56,7 +55,7 @@ class Mapper
      * @return Video
      */
     public function map(array $data)
-    {//var_dump($data);exit;
+    {
         $video = new Video();
 
         foreach ($data as $field => $value) {
@@ -89,22 +88,25 @@ class Mapper
      */
     protected function findInnerMapper($key)
     {
-        if (!isset($this->mappers[$key])) {
+        foreach ($this->mappers as $class => $mapperProps) {
+            if (in_array($key, $mapperProps)) {
+                $mapperClass = __NAMESPACE__ . '\\' . $class;
+
+                break;
+            }
+        }
+
+        if (!isset($mapperClass)) {
             return false;
         }
 
-        $mapper = __NAMESPACE__ . '\\' . $this->mappers[$key];
-
-        if (!in_array(__NAMESPACE__ . '\\MapperInterface', class_implements($mapper))) {
-            throw new \Exception($mapper . ' must implement mapper interface.');
+        if (!in_array(__NAMESPACE__ . '\\MapperInterface', class_implements($mapperClass))) {
+            throw new \Exception($mapperClass . ' must implement mapper interface.');
         }
 
-        $mapperObj = new $mapper();
+        $mapperObj = new $mapperClass();
 
-        if (in_array('YoutubeDl\\Mapper\\PropertyAccessorAwareTrait', class_uses($mapperObj))) {
-            /**
-             * @var PropertyAccessorAwareTrait $mapperObj
-             */
+        if ($mapperObj instanceof PropertyAccessorAwareMapper) {
             $mapperObj->setPropertyAccessor($this->propertyAccessor);
         }
 
