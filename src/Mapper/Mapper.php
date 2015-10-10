@@ -2,7 +2,6 @@
 
 namespace YoutubeDl\Mapper;
 
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use YoutubeDl\Entity\Video;
 
