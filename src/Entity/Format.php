@@ -94,6 +94,49 @@ class Format
      */
     protected $filesize;
 
+    /**
+     * @var string
+     */
+    protected $resolution;
+
+    /**
+     * @var int
+     */
+    protected $vbr;
+
+    /**
+     * @var string
+     */
+    protected $protocol;
+
+    /**
+     * @var int
+     */
+    protected $languagePreference;
+
+    /**
+     * @var int
+     */
+    protected $quality;
+
+    /**
+     * @var int
+     */
+    protected $sourcePreference;
+
+    /**
+     * @var float
+     */
+    protected $stretchedRatio;
+
+    /**
+     * @var bool
+     */
+    protected $noResume;
+
+    /**
+     * @param string $format
+     */
     public function setFormat($format)
     {
         $this->format = $format;
@@ -107,6 +150,9 @@ class Format
         return $this->format;
     }
 
+    /**
+     * @param string $url
+     */
     public function setUrl($url)
     {
         $this->url = $url;
@@ -120,7 +166,10 @@ class Format
         return $this->url;
     }
 
-    public function setHttpHeaders($httpHeaders)
+    /**
+     * @param array $httpHeaders
+     */
+    public function setHttpHeaders(array $httpHeaders)
     {
         $this->httpHeaders = $httpHeaders;
     }
@@ -133,6 +182,9 @@ class Format
         return $this->httpHeaders;
     }
 
+    /**
+     * @param string $acodec
+     */
     public function setAcodec($acodec)
     {
         $this->acodec = $acodec;
@@ -146,6 +198,9 @@ class Format
         return $this->acodec;
     }
 
+    /**
+     * @param string $vcodec
+     */
     public function setVcodec($vcodec)
     {
         $this->vcodec = $vcodec;
@@ -159,6 +214,9 @@ class Format
         return $this->vcodec;
     }
 
+    /**
+     * @param string $formatNote
+     */
     public function setFormatNote($formatNote)
     {
         $this->formatNote = $formatNote;
@@ -172,6 +230,9 @@ class Format
         return $this->formatNote;
     }
 
+    /**
+     * @param int $abr
+     */
     public function setAbr($abr)
     {
         $this->abr = $abr;
@@ -185,6 +246,9 @@ class Format
         return $this->abr;
     }
 
+    /**
+     * @param string $playerUrl
+     */
     public function setPlayerUrl($playerUrl)
     {
         $this->playerUrl = $playerUrl;
@@ -198,6 +262,9 @@ class Format
         return $this->playerUrl;
     }
 
+    /**
+     * @param string $ext
+     */
     public function setExt($ext)
     {
         $this->ext = $ext;
@@ -211,6 +278,9 @@ class Format
         return $this->ext;
     }
 
+    /**
+     * @param int $preference
+     */
     public function setPreference($preference)
     {
         $this->preference = $preference;
@@ -224,6 +294,9 @@ class Format
         return $this->preference;
     }
 
+    /**
+     * @param string $formatId
+     */
     public function setFormatId($formatId)
     {
         $this->formatId = $formatId;
@@ -237,6 +310,9 @@ class Format
         return $this->formatId;
     }
 
+    /**
+     * @param string $container
+     */
     public function setContainer($container)
     {
         $this->container = $container;
@@ -250,6 +326,9 @@ class Format
         return $this->container;
     }
 
+    /**
+     * @param int $width
+     */
     public function setWidth($width)
     {
         $this->width = $width;
@@ -263,6 +342,9 @@ class Format
         return $this->width;
     }
 
+    /**
+     * @param int $height
+     */
     public function setHeight($height)
     {
         $this->height = $height;
@@ -276,6 +358,9 @@ class Format
         return $this->height;
     }
 
+    /**
+     * @param int $asr
+     */
     public function setAsr($asr)
     {
         $this->asr = $asr;
@@ -289,6 +374,9 @@ class Format
         return $this->asr;
     }
 
+    /**
+     * @param int $tbr
+     */
     public function setTbr($tbr)
     {
         $this->tbr = $tbr;
@@ -302,6 +390,9 @@ class Format
         return $this->tbr;
     }
 
+    /**
+     * @param int $fps
+     */
     public function setFps($fps)
     {
         $this->fps = $fps;
@@ -315,6 +406,9 @@ class Format
         return $this->fps;
     }
 
+    /**
+     * @param int $filesize
+     */
     public function setFilesize($filesize)
     {
         $this->filesize = $filesize;
@@ -326,5 +420,133 @@ class Format
     public function getFilesize()
     {
         return $this->filesize;
+    }
+
+    /**
+     * @param string $resolution
+     */
+    public function setResolution($resolution)
+    {
+        $this->resolution = $resolution;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResolution()
+    {
+        return $this->resolution;
+    }
+
+    /**
+     * @param int $vbr
+     */
+    public function setVbr($vbr)
+    {
+        $this->vbr = $vbr;
+    }
+
+    /**
+     * @return int
+     */
+    public function getVbr()
+    {
+        return $this->vbr;
+    }
+
+    /**
+     * @param string $protocol
+     */
+    public function setProtocol($protocol)
+    {
+        $this->protocol = $protocol;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProtocol()
+    {
+        return $this->protocol;
+    }
+
+    /**
+     * @param int $languagePreference
+     */
+    public function setLanguagePreference($languagePreference)
+    {
+        $this->languagePreference = $languagePreference;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLanguagePreference()
+    {
+        return $this->languagePreference;
+    }
+
+    /**
+     * @param int $quality
+     */
+    public function setQuality($quality)
+    {
+        $this->quality = $quality;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuality()
+    {
+        return $this->quality;
+    }
+
+    /**
+     * @param int $sourcePreference
+     */
+    public function setSourcePreference($sourcePreference)
+    {
+        $this->sourcePreference = $sourcePreference;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSourcePreference()
+    {
+        return $this->sourcePreference;
+    }
+
+    /**
+     * @param float $stretchedratio
+     */
+    public function setStretchedRatio($stretchedratio)
+    {
+        $this->stretchedRatio = $stretchedratio;
+    }
+
+    /**
+     * @return float
+     */
+    public function getStretchedRatio()
+    {
+        return $this->stretchedRatio;
+    }
+
+    /**
+     * @param bool $noResume
+     */
+    public function setNoResume($noResume)
+    {
+        $this->noResume = $noResume;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getNoResume()
+    {
+        return $this->noResume;
     }
 }
