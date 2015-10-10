@@ -14,6 +14,7 @@ class Mapper
         'ThumbnailsMapper' => ['thumbnails'],
         'CategoriesMapper' => ['categories'],
         'SubtitlesMapper' => ['subtitles'],
+        'CommentsMapper' => ['comments'],
     ];
 
     protected $ignore = [
@@ -55,6 +56,8 @@ class Mapper
     {
         $video = new Video();
 
+        $data['file'] = new \SplFileInfo(rtrim($this->downloadPath, '/') . '/' . $data['_filename']);
+
         foreach ($data as $field => $value) {
             if (in_array($field, $this->ignore)) {
                 continue;
@@ -70,9 +73,6 @@ class Mapper
                 // Ignore if property does not exist
             }
         }
-
-        $file = new \SplFileInfo(rtrim($this->downloadPath, '/') . '/' . $video->getFilename());
-        $this->propertyAccessor->setValue($video, 'file', $file);
 
         return $video;
     }
