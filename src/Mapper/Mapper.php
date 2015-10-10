@@ -29,7 +29,7 @@ class Mapper
     protected $downloadPath;
 
     /**
-     * @var PropertyAccessor
+     * @var PropertyAccessorInterface
      */
     protected $propertyAccessor;
 
