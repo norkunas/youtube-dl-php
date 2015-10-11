@@ -2,65 +2,14 @@
 
 namespace YoutubeDl\Entity;
 
-class Comment
+class Comment extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $author;
-
-    /**
-     * @var string
-     */
-    protected $authorId;
-
-    /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    protected $html;
-
-    /**
-     * @var string
-     */
-    protected $text;
-
-    /**
-     * @var int
-     */
-    protected $timestamp;
-
-    /**
-     * @var string
-     */
-    protected $parent;
-
-    /**
-     * @param string $author
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-    }
-
     /**
      * @return string
      */
     public function getAuthor()
     {
-        return $this->author;
-    }
-
-    /**
-     * @param string $authorId
-     */
-    public function setAuthorId($authorId)
-    {
-        $this->authorId = $authorId;
+        return $this->get('author');
     }
 
     /**
@@ -68,15 +17,7 @@ class Comment
      */
     public function getAuthorId()
     {
-        return $this->authorId;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
+        return $this->get('author_id');
     }
 
     /**
@@ -84,15 +25,7 @@ class Comment
      */
     public function getId()
     {
-        return $this->id;
-    }
-
-    /**
-     * @param string $html
-     */
-    public function setHtml($html)
-    {
-        $this->html = $html;
+        return $this->get('id');
     }
 
     /**
@@ -100,15 +33,7 @@ class Comment
      */
     public function getHtml()
     {
-        return $this->html;
-    }
-
-    /**
-     * @param string $text
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
+        return $this->get('html');
     }
 
     /**
@@ -116,15 +41,7 @@ class Comment
      */
     public function getText()
     {
-        return $this->text;
-    }
-
-    /**
-     * @param int $timestamp
-     */
-    public function setTimestamp($timestamp)
-    {
-        $this->timestamp = $timestamp;
+        return $this->get('text');
     }
 
     /**
@@ -132,15 +49,7 @@ class Comment
      */
     public function getTimestamp()
     {
-        return $this->timestamp;
-    }
-
-    /**
-     * @param string $parent
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
+        return $this->get('timestamp');
     }
 
     /**
@@ -148,6 +57,6 @@ class Comment
      */
     public function getParent()
     {
-        return $this->parent;
+        return $this->get('parent');
     }
 }

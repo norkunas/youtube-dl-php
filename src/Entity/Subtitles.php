@@ -2,47 +2,21 @@
 
 namespace YoutubeDl\Entity;
 
-class Subtitles
+class Subtitles extends AbstractEntity
 {
     /**
-     * @var string
+     * @return string
      */
-    protected $locale;
-
-    /**
-     * @var Caption[]
-     */
-    protected $captions = [];
-
-    /**
-     * @param string $locale
-     */
-    public function setLocale($locale)
+    public function getUrl()
     {
-        $this->locale = $locale;
+        return $this->get('url');
     }
 
     /**
      * @return string
      */
-    public function getLocale()
+    public function getExt()
     {
-        return $this->locale;
-    }
-
-    /**
-     * @param Caption[] $captions
-     */
-    public function setCaptions(array $captions)
-    {
-        $this->captions = $captions;
-    }
-
-    /**
-     * @return Caption[]
-     */
-    public function getCaptions()
-    {
-        return $this->captions;
+        return $this->get('ext');
     }
 }

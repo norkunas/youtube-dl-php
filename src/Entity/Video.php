@@ -2,340 +2,23 @@
 
 namespace YoutubeDl\Entity;
 
-class Video
+class Video extends AbstractEntity
 {
-    /**
-     * @var \DateTime
-     */
-    protected $uploadDate;
-
-    /**
-     * @var string
-     */
-    protected $extractor;
-
-    /**
-     * @var string
-     */
-    protected $formatNote;
-
-    /**
-     * @var string
-     */
-    protected $vbr;
-
-    /**
-     * @var string
-     */
-    protected $resolution;
-
-    /**
-     * @var int
-     */
-    protected $height;
-
-    /**
-     * @var int
-     */
-    protected $likeCount;
-
-    /**
-     * @var int
-     */
-    protected $duration;
-
-    /**
-     * @var string
-     */
-    protected $fulltitle;
-
-    /**
-     * @var string
-     */
-    protected $id;
-
-    /**
-     * @var int
-     */
-    protected $viewCount;
-
-    /**
-     * @var string
-     */
-    protected $playlist;
-
-    /**
-     * @var array
-     */
-    protected $httpHeaders;
-
-    /**
-     * @var string
-     */
-    protected $container;
-
-    /**
-     * @var string
-     */
-    protected $title;
-
-    /**
-     * @var string
-     */
-    protected $altTitle;
-
-    /**
-     * @var string
-     */
-    protected $filename;
-
-    /**
-     * @var int
-     */
-    protected $playlistIndex;
-
-    /**
-     * @var int
-     */
-    protected $dislikeCount;
-
-    /**
-     * @var float
-     */
-    protected $averageRating;
-
-    /**
-     * @var int
-     */
-    protected $abr;
-
-    /**
-     * @var Subtitles[]
-     */
-    protected $subtitles = [];
-
-    /**
-     * @var Subtitles[]
-     */
-    protected $automaticCaptions;
-
-    /**
-     * @var int
-     */
-    protected $fps;
-
-    /**
-     * @var int
-     */
-    protected $ageLimit;
-
-    /**
-     * @var string
-     */
-    protected $webpageUrlBasename;
-
-    /**
-     * @var int
-     */
-    protected $filesize;
-
-    /**
-     * @var string
-     */
-    protected $displayId;
-
-    /**
-     * @var int
-     */
-    protected $asr;
-
-    /**
-     * @var string
-     */
-    protected $description;
-
-    /**
-     * @var string
-     */
-    protected $format;
-
-    /**
-     * @var int
-     */
-    protected $tbr;
-
-    /**
-     * @var string
-     */
-    protected $playlistId;
-
-    /**
-     * @var string
-     */
-    protected $uploader;
-
-    /**
-     * @var string
-     */
-    protected $formatId;
-
-    /**
-     * @var float
-     */
-    protected $stretchedRatio;
-
-    /**
-     * @var string
-     */
-    protected $uploaderId;
-
-    /**
-     * @var Category[]
-     */
-    protected $categories = [];
-
-    /**
-     * @var string
-     */
-    protected $playlistTitle;
-
-    /**
-     * @var string
-     */
-    protected $stitle;
-
-    /**
-     * @var Thumbnail[]
-     */
-    protected $thumbnails = [];
-
-    /**
-     * @var string
-     */
-    protected $url;
-
-    /**
-     * @var string
-     */
-    protected $extractorKey;
-
-    /**
-     * @var string
-     */
-    protected $vcodec;
-
-    /**
-     * @var \SimpleXMLElement
-     */
-    protected $annotations;
-
-    /**
-     * @var string
-     */
-    protected $ext;
-
-    /**
-     * @var string
-     */
-    protected $webpageUrl;
-
-    /**
-     * @var Format[]
-     */
-    protected $formats = [];
-
-    /**
-     * @var Format[]
-     */
-    protected $requestedFormats = [];
-
-    /**
-     * @var string
-     */
-    protected $acodec;
-
-    /**
-     * @var int
-     */
-    protected $width;
-
-    /**
-     * @var int
-     */
-    protected $nEntries;
-
-    /**
-     * @var int
-     */
-    protected $preference;
-
-    /**
-     * @var \SplFileInfo
-     */
-    protected $file;
-
-    /**
-     * @var int
-     */
-    protected $commentCount;
-
-    /**
-     * @var array
-     */
-    protected $comments;
-
-    /**
-     * @var array
-     */
-    protected $tags = [];
-
-    /**
-     * @var bool
-     */
-    protected $isLive;
-
-    /**
-     * @var int
-     */
-    protected $startTime;
-
-    /**
-     * @var int
-     */
-    protected $endTime;
-
-    /**
-     * @var string
-     */
-    protected $location;
-
-    /**
-     * @var string
-     */
-    protected $creator;
-
-    /**
-     * @param \DateTime $uploadDate
-     */
-    public function setUploadDate(\DateTime $uploadDate)
-    {
-        $this->uploadDate = $uploadDate;
-    }
+    protected static $objectMap = [
+        'comments' => 'YoutubeDl\\Entity\\Comment',
+        'formats' => 'YoutubeDl\\Entity\\Format',
+        'requested_formats' => 'YoutubeDl\\Entity\\Format',
+        'requested_subtitles' => 'YoutubeDl\\Entity\Subtitles',
+        'subtitles' => 'YoutubeDl\\Entity\\Subtitles',
+        'thumbnails' => 'YoutubeDl\\Entity\Thumbnail',
+    ];
 
     /**
      * @return \DateTime
      */
     public function getUploadDate()
     {
-        return $this->uploadDate;
-    }
-
-    /**
-     * @param string $extractor
-     */
-    public function setExtractor($extractor)
-    {
-        $this->extractor = $extractor;
+        return $this->get('upload_date');
     }
 
     /**
@@ -343,15 +26,7 @@ class Video
      */
     public function getExtractor()
     {
-        return $this->extractor;
-    }
-
-    /**
-     * @param string $formatNote
-     */
-    public function setFormatNote($formatNote)
-    {
-        $this->formatNote = $formatNote;
+        return $this->get('extractor');
     }
 
     /**
@@ -359,15 +34,7 @@ class Video
      */
     public function getFormatNote()
     {
-        return $this->formatNote;
-    }
-
-    /**
-     * @param string $vbr
-     */
-    public function setVbr($vbr)
-    {
-        $this->vbr = $vbr;
+        return $this->get('format_note');
     }
 
     /**
@@ -375,15 +42,7 @@ class Video
      */
     public function getVbr()
     {
-        return $this->vbr;
-    }
-
-    /**
-     * @param string $resolution
-     */
-    public function setResolution($resolution)
-    {
-        $this->resolution = $resolution;
+        return $this->get('vbr');
     }
 
     /**
@@ -391,15 +50,7 @@ class Video
      */
     public function getResolution()
     {
-        return $this->resolution;
-    }
-
-    /**
-     * @param int $height
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
+        return $this->get('resolution');
     }
 
     /**
@@ -407,15 +58,7 @@ class Video
      */
     public function getHeight()
     {
-        return $this->height;
-    }
-
-    /**
-     * @param int $likeCount
-     */
-    public function setLikeCount($likeCount)
-    {
-        $this->likeCount = $likeCount;
+        return $this->get('height');
     }
 
     /**
@@ -423,15 +66,7 @@ class Video
      */
     public function getLikeCount()
     {
-        return $this->likeCount;
-    }
-
-    /**
-     * @param int $duration
-     */
-    public function setDuration($duration)
-    {
-        $this->duration = $duration;
+        return $this->get('like_count');
     }
 
     /**
@@ -439,15 +74,7 @@ class Video
      */
     public function getDuration()
     {
-        return $this->duration;
-    }
-
-    /**
-     * @param string $fulltitle
-     */
-    public function setFulltitle($fulltitle)
-    {
-        $this->fulltitle = $fulltitle;
+        return $this->get('duration');
     }
 
     /**
@@ -455,15 +82,7 @@ class Video
      */
     public function getFulltitle()
     {
-        return $this->fulltitle;
-    }
-
-    /**
-     * @param string $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
+        return $this->get('fulltitle');
     }
 
     /**
@@ -471,15 +90,7 @@ class Video
      */
     public function getId()
     {
-        return $this->id;
-    }
-
-    /**
-     * @param int $viewCount
-     */
-    public function setViewCount($viewCount)
-    {
-        $this->viewCount = $viewCount;
+        return $this->get('id');
     }
 
     /**
@@ -487,15 +98,7 @@ class Video
      */
     public function getViewCount()
     {
-        return $this->viewCount;
-    }
-
-    /**
-     * @param string $playlist
-     */
-    public function setPlaylist($playlist)
-    {
-        $this->playlist = $playlist;
+        return $this->get('view_count');
     }
 
     /**
@@ -503,15 +106,7 @@ class Video
      */
     public function getPlaylist()
     {
-        return $this->playlist;
-    }
-
-    /**
-     * @param array $httpHeaders
-     */
-    public function setHttpHeaders($httpHeaders)
-    {
-        $this->httpHeaders = $httpHeaders;
+        return $this->get('playlist');
     }
 
     /**
@@ -519,15 +114,7 @@ class Video
      */
     public function getHttpHeaders()
     {
-        return $this->httpHeaders;
-    }
-
-    /**
-     * @param string $container
-     */
-    public function setContainer($container)
-    {
-        $this->container = $container;
+        return $this->get('http_headers');
     }
 
     /**
@@ -535,15 +122,7 @@ class Video
      */
     public function getContainer()
     {
-        return $this->container;
-    }
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
+        return $this->get('container');
     }
 
     /**
@@ -551,15 +130,7 @@ class Video
      */
     public function getTitle()
     {
-        return $this->title;
-    }
-
-    /**
-     * @param string $altTitle
-     */
-    public function setAltTitle($altTitle)
-    {
-        $this->altTitle = $altTitle;
+        return $this->get('title');
     }
 
     /**
@@ -567,15 +138,7 @@ class Video
      */
     public function getAltTitle()
     {
-        return $this->altTitle;
-    }
-
-    /**
-     * @param string $filename
-     */
-    public function setFilename($filename)
-    {
-        $this->filename = $filename;
+        return $this->get('alt_title');
     }
 
     /**
@@ -583,15 +146,7 @@ class Video
      */
     public function getFilename()
     {
-        return $this->filename;
-    }
-
-    /**
-     * @param int $playlistIndex
-     */
-    public function setPlaylistIndex($playlistIndex)
-    {
-        $this->playlistIndex = $playlistIndex;
+        return $this->get('_filename');
     }
 
     /**
@@ -599,15 +154,7 @@ class Video
      */
     public function getPlaylistIndex()
     {
-        return $this->playlistIndex;
-    }
-
-    /**
-     * @param int $dislikeCount
-     */
-    public function setDislikeCount($dislikeCount)
-    {
-        $this->dislikeCount = $dislikeCount;
+        return $this->get('playlist_index');
     }
 
     /**
@@ -615,15 +162,7 @@ class Video
      */
     public function getDislikeCount()
     {
-        return $this->dislikeCount;
-    }
-
-    /**
-     * @param float $averageRating
-     */
-    public function setAverageRating($averageRating)
-    {
-        $this->averageRating = $averageRating;
+        return $this->get('dislike_count');
     }
 
     /**
@@ -631,15 +170,7 @@ class Video
      */
     public function getAverageRating()
     {
-        return $this->averageRating;
-    }
-
-    /**
-     * @param int $abr
-     */
-    public function setAbr($abr)
-    {
-        $this->abr = $abr;
+        return $this->get('average_rating');
     }
 
     /**
@@ -647,15 +178,7 @@ class Video
      */
     public function getAbr()
     {
-        return $this->abr;
-    }
-
-    /**
-     * @param Subtitles[] $subtitles
-     */
-    public function setSubtitles(array $subtitles)
-    {
-        $this->subtitles = $subtitles;
+        return $this->get('abr');
     }
 
     /**
@@ -663,15 +186,15 @@ class Video
      */
     public function getSubtitles()
     {
-        return $this->subtitles;
+        return $this->get('subtitles');
     }
 
     /**
-     * @param array $automaticCaptions
+     * @return Subtitles[]
      */
-    public function setAutomaticCaptions(array $automaticCaptions)
+    public function getRequestedSubtitles()
     {
-        $this->automaticCaptions = $automaticCaptions;
+        return $this->get('requested_subtitles');
     }
 
     /**
@@ -679,15 +202,7 @@ class Video
      */
     public function getAutomaticCaptions()
     {
-        return $this->automaticCaptions;
-    }
-
-    /**
-     * @param int $fps
-     */
-    public function setFps($fps)
-    {
-        $this->fps = $fps;
+        return $this->get('automatic_captions');
     }
 
     /**
@@ -695,15 +210,7 @@ class Video
      */
     public function getFps()
     {
-        return $this->fps;
-    }
-
-    /**
-     * @param int $ageLimit
-     */
-    public function setAgeLimit($ageLimit)
-    {
-        $this->ageLimit = $ageLimit;
+        return $this->get('fps');
     }
 
     /**
@@ -711,15 +218,7 @@ class Video
      */
     public function getAgeLimit()
     {
-        return $this->ageLimit;
-    }
-
-    /**
-     * @param string $webpageUrlBasename
-     */
-    public function setWebpageUrlBasename($webpageUrlBasename)
-    {
-        $this->webpageUrlBasename = $webpageUrlBasename;
+        return $this->get('age_limit');
     }
 
     /**
@@ -727,15 +226,7 @@ class Video
      */
     public function getWebpageUrlBasename()
     {
-        return $this->webpageUrlBasename;
-    }
-
-    /**
-     * @param int $filesize
-     */
-    public function setFilesize($filesize)
-    {
-        $this->filesize = $filesize;
+        return $this->get('webpage_url_basename');
     }
 
     /**
@@ -743,15 +234,7 @@ class Video
      */
     public function getFilesize()
     {
-        return $this->filesize;
-    }
-
-    /**
-     * @param string $displayId
-     */
-    public function setDisplayId($displayId)
-    {
-        $this->displayId = $displayId;
+        return $this->get('filesize');
     }
 
     /**
@@ -759,15 +242,7 @@ class Video
      */
     public function getDisplayId()
     {
-        return $this->displayId;
-    }
-
-    /**
-     * @param int $asr
-     */
-    public function setAsr($asr)
-    {
-        $this->asr = $asr;
+        return $this->get('display_id');
     }
 
     /**
@@ -775,15 +250,7 @@ class Video
      */
     public function getAsr()
     {
-        return $this->asr;
-    }
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
+        return $this->get('asr');
     }
 
     /**
@@ -791,15 +258,7 @@ class Video
      */
     public function getDescription()
     {
-        return $this->description;
-    }
-
-    /**
-     * @param string $format
-     */
-    public function setFormat($format)
-    {
-        $this->format = $format;
+        return $this->get('description');
     }
 
     /**
@@ -807,15 +266,7 @@ class Video
      */
     public function getFormat()
     {
-        return $this->format;
-    }
-
-    /**
-     * @param int $tbr
-     */
-    public function setTbr($tbr)
-    {
-        $this->tbr = $tbr;
+        return $this->get('format');
     }
 
     /**
@@ -823,15 +274,7 @@ class Video
      */
     public function getTbr()
     {
-        return $this->tbr;
-    }
-
-    /**
-     * @param string $playlistId
-     */
-    public function setPlaylistId($playlistId)
-    {
-        $this->playlistId = $playlistId;
+        return $this->get('tbr');
     }
 
     /**
@@ -839,15 +282,7 @@ class Video
      */
     public function getPlaylistId()
     {
-        return $this->playlistId;
-    }
-
-    /**
-     * @param string $uploader
-     */
-    public function setUploader($uploader)
-    {
-        $this->uploader = $uploader;
+        return $this->get('playlist_id');
     }
 
     /**
@@ -855,15 +290,7 @@ class Video
      */
     public function getUploader()
     {
-        return $this->uploader;
-    }
-
-    /**
-     * @param string $formatId
-     */
-    public function setFormatId($formatId)
-    {
-        $this->formatId = $formatId;
+        return $this->get('uploader');
     }
 
     /**
@@ -871,15 +298,7 @@ class Video
      */
     public function getFormatId()
     {
-        return $this->formatId;
-    }
-
-    /**
-     * @param float $stretchedRatio
-     */
-    public function setStretchedRatio($stretchedRatio)
-    {
-        $this->stretchedRatio = $stretchedRatio;
+        return $this->get('format_id');
     }
 
     /**
@@ -887,15 +306,7 @@ class Video
      */
     public function getStretchedRatio()
     {
-        return $this->stretchedRatio;
-    }
-
-    /**
-     * @param string $uploaderId
-     */
-    public function setUploaderId($uploaderId)
-    {
-        $this->uploaderId = $uploaderId;
+        return $this->get('stretched_ratio');
     }
 
     /**
@@ -903,31 +314,21 @@ class Video
      */
     public function getUploaderId()
     {
-        return $this->uploaderId;
+        return $this->get('uploader_id');
     }
 
     /**
-     * @param Category[] $categories
-     */
-    public function setCategories(array $categories)
-    {
-        $this->categories = $categories;
-    }
-
-    /**
-     * @return Category[]
+     * @return Category[]|string
      */
     public function getCategories()
     {
-        return $this->categories;
-    }
+        $categories = [];
 
-    /**
-     * @param string $playlistTitle
-     */
-    public function setPlaylistTitle($playlistTitle)
-    {
-        $this->playlistTitle = $playlistTitle;
+        foreach ($this->get('categories') as $title) {
+            $categories[] = new Category(['title' => $title]); // BC
+        }
+
+        return $categories;
     }
 
     /**
@@ -935,15 +336,7 @@ class Video
      */
     public function getPlaylistTitle()
     {
-        return $this->playlistTitle;
-    }
-
-    /**
-     * @param string $stitle
-     */
-    public function setStitle($stitle)
-    {
-        $this->stitle = $stitle;
+        return $this->get('playlist_title');
     }
 
     /**
@@ -951,15 +344,7 @@ class Video
      */
     public function getStitle()
     {
-        return $this->stitle;
-    }
-
-    /**
-     * @param Thumbnail[] $thumbnails
-     */
-    public function setThumbnails(array $thumbnails)
-    {
-        $this->thumbnails = $thumbnails;
+        return $this->get('stitle');
     }
 
     /**
@@ -967,15 +352,7 @@ class Video
      */
     public function getThumbnails()
     {
-        return $this->thumbnails;
-    }
-
-    /**
-     * @param string $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
+        return $this->get('thumbnails');
     }
 
     /**
@@ -983,15 +360,7 @@ class Video
      */
     public function getUrl()
     {
-        return $this->url;
-    }
-
-    /**
-     * @param string $extractorKey
-     */
-    public function setExtractorKey($extractorKey)
-    {
-        $this->extractorKey = $extractorKey;
+        return $this->get('url');
     }
 
     /**
@@ -999,15 +368,7 @@ class Video
      */
     public function getExtractorKey()
     {
-        return $this->extractorKey;
-    }
-
-    /**
-     * @param string $vcodec
-     */
-    public function setVcodec($vcodec)
-    {
-        $this->vcodec = $vcodec;
+        return $this->get('extractor_key');
     }
 
     /**
@@ -1015,15 +376,7 @@ class Video
      */
     public function getVcodec()
     {
-        return $this->vcodec;
-    }
-
-    /**
-     * @param \SimpleXMLElement $annotations
-     */
-    public function setAnnotations($annotations)
-    {
-        $this->annotations = $annotations;
+        return $this->get('vcodec');
     }
 
     /**
@@ -1031,15 +384,7 @@ class Video
      */
     public function getAnnotations()
     {
-        return $this->annotations;
-    }
-
-    /**
-     * @param string $ext
-     */
-    public function setExt($ext)
-    {
-        $this->ext = $ext;
+        return $this->get('annotations');
     }
 
     /**
@@ -1047,15 +392,7 @@ class Video
      */
     public function getExt()
     {
-        return $this->ext;
-    }
-
-    /**
-     * @param string $webpageUrl
-     */
-    public function setWebpageUrl($webpageUrl)
-    {
-        $this->webpageUrl = $webpageUrl;
+        return $this->get('ext');
     }
 
     /**
@@ -1063,15 +400,7 @@ class Video
      */
     public function getWebpageUrl()
     {
-        return $this->webpageUrl;
-    }
-
-    /**
-     * @param Format[] $formats
-     */
-    public function setFormats(array $formats)
-    {
-        $this->formats = $formats;
+        return $this->get('webpage_url');
     }
 
     /**
@@ -1079,15 +408,7 @@ class Video
      */
     public function getFormats()
     {
-        return $this->formats;
-    }
-
-    /**
-     * @param array $requestedFormats
-     */
-    public function setRequestedFormats(array $requestedFormats)
-    {
-        $this->requestedFormats = $requestedFormats;
+        return $this->get('formats');
     }
 
     /**
@@ -1095,15 +416,7 @@ class Video
      */
     public function getRequestedFormats()
     {
-        return $this->requestedFormats;
-    }
-
-    /**
-     * @param string $acodec
-     */
-    public function setAcodec($acodec)
-    {
-        $this->acodec = $acodec;
+        return $this->get('requested_formats');
     }
 
     /**
@@ -1111,15 +424,7 @@ class Video
      */
     public function getAcodec()
     {
-        return $this->acodec;
-    }
-
-    /**
-     * @param int $width
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
+        return $this->get('acodec');
     }
 
     /**
@@ -1127,15 +432,7 @@ class Video
      */
     public function getWidth()
     {
-        return $this->width;
-    }
-
-    /**
-     * @param int $nEntries
-     */
-    public function setNEntries($nEntries)
-    {
-        $this->nEntries = $nEntries;
+        return $this->get('width');
     }
 
     /**
@@ -1143,15 +440,7 @@ class Video
      */
     public function getNEntries()
     {
-        return $this->nEntries;
-    }
-
-    /**
-     * @param int $preference
-     */
-    public function setPreference($preference)
-    {
-        $this->preference = $preference;
+        return $this->get('n_entries');
     }
 
     /**
@@ -1159,15 +448,7 @@ class Video
      */
     public function getPreference()
     {
-        return $this->preference;
-    }
-
-    /**
-     * @param \SplFileInfo $file
-     */
-    public function setFile($file)
-    {
-        $this->file = $file;
+        return $this->get('preference');
     }
 
     /**
@@ -1175,15 +456,7 @@ class Video
      */
     public function getFile()
     {
-        return $this->file;
-    }
-
-    /**
-     * @param int $commentCount
-     */
-    public function setCommentCount($commentCount)
-    {
-        $this->commentCount = $commentCount;
+        return $this->get('file');
     }
 
     /**
@@ -1191,15 +464,7 @@ class Video
      */
     public function getCommentCount()
     {
-        return $this->commentCount;
-    }
-
-    /**
-     * @param array $comments
-     */
-    public function setComments(array $comments)
-    {
-        $this->comments = $comments;
+        return $this->get('comment_count');
     }
 
     /**
@@ -1207,15 +472,7 @@ class Video
      */
     public function getComments()
     {
-        return $this->comments;
-    }
-
-    /**
-     * @param array $tags
-     */
-    public function setTags(array $tags)
-    {
-        $this->tags = $tags;
+        return $this->get('comments');
     }
 
     /**
@@ -1223,15 +480,7 @@ class Video
      */
     public function getTags()
     {
-        return $this->tags;
-    }
-
-    /**
-     * @param bool $isLive
-     */
-    public function setIsLive($isLive)
-    {
-        $this->isLive = $isLive;
+        return $this->get('tags');
     }
 
     /**
@@ -1239,15 +488,7 @@ class Video
      */
     public function getIsLive()
     {
-        return $this->isLive;
-    }
-
-    /**
-     * @param int $startTime
-     */
-    public function setStartTime($startTime)
-    {
-        $this->startTime = $startTime;
+        return $this->get('is_live');
     }
 
     /**
@@ -1255,15 +496,7 @@ class Video
      */
     public function getStartTime()
     {
-        return $this->startTime;
-    }
-
-    /**
-     * @param int $endTime
-     */
-    public function setEndTime($endTime)
-    {
-        $this->endTime = $endTime;
+        return $this->get('start_time');
     }
 
     /**
@@ -1271,15 +504,7 @@ class Video
      */
     public function getEndTime()
     {
-        return $this->endTime;
-    }
-
-    /**
-     * @param string $location
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
+        return $this->get('end_time');
     }
 
     /**
@@ -1287,15 +512,7 @@ class Video
      */
     public function getLocation()
     {
-        return $this->location;
-    }
-
-    /**
-     * @param string $creator
-     */
-    public function setCreator($creator)
-    {
-        $this->creator = $creator;
+        return $this->get('location');
     }
 
     /**
@@ -1303,6 +520,39 @@ class Video
      */
     public function getCreator()
     {
-        return $this->creator;
+        return $this->get('creator');
+    }
+
+    protected function convert(array $data)
+    {
+        $data = parent::convert($data);
+
+        if (!empty($data['annotations'])) {
+            $data['annotations'] = $this->convertAnnotations($data['annotations']);
+        }
+
+        if (!empty($data['upload_date']) && $date = \DateTime::createFromFormat('Ymd', $data['upload_date'])) {
+            $data['upload_date'] = $date;
+        }
+
+        return $data;
+    }
+
+    private function convertAnnotations($data)
+    {
+        try {
+            libxml_use_internal_errors(true);
+
+            $obj = new \SimpleXMLElement($data);
+            libxml_clear_errors();
+
+            if ($obj) {
+                return $obj;
+            }
+        } catch (\Exception $e) {
+            // If for some reason annotations can't be mapped then just ignore this
+        }
+
+        return null;
     }
 }

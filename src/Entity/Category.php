@@ -2,26 +2,13 @@
 
 namespace YoutubeDl\Entity;
 
-class Category
+class Category extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $title;
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
     /**
      * @return string
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->get('title');
     }
 }

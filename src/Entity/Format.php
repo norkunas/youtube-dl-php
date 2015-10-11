@@ -2,160 +2,14 @@
 
 namespace YoutubeDl\Entity;
 
-class Format
+class Format extends AbstractEntity
 {
-    /**
-     * @var string
-     */
-    protected $format;
-
-    /**
-     * @var string
-     */
-    protected $url;
-
-    /**
-     * @var array
-     */
-    protected $httpHeaders;
-
-    /**
-     * @var string
-     */
-    protected $acodec;
-
-    /**
-     * @var string
-     */
-    protected $vcodec;
-
-    /**
-     * @var string
-     */
-    protected $formatNote;
-
-    /**
-     * @var int
-     */
-    protected $abr;
-
-    /**
-     * @var string
-     */
-    protected $playerUrl;
-
-    /**
-     * @var string
-     */
-    protected $ext;
-
-    /**
-     * @var int
-     */
-    protected $preference;
-
-    /**
-     * @var string
-     */
-    protected $formatId;
-
-    /**
-     * @var string
-     */
-    protected $container;
-
-    /**
-     * @var int
-     */
-    protected $width;
-
-    /**
-     * @var int
-     */
-    protected $height;
-
-    /**
-     * @var int
-     */
-    protected $asr;
-
-    /**
-     * @var int
-     */
-    protected $tbr;
-
-    /**
-     * @var int
-     */
-    protected $fps;
-
-    /**
-     * @var int
-     */
-    protected $filesize;
-
-    /**
-     * @var string
-     */
-    protected $resolution;
-
-    /**
-     * @var int
-     */
-    protected $vbr;
-
-    /**
-     * @var string
-     */
-    protected $protocol;
-
-    /**
-     * @var int
-     */
-    protected $languagePreference;
-
-    /**
-     * @var int
-     */
-    protected $quality;
-
-    /**
-     * @var int
-     */
-    protected $sourcePreference;
-
-    /**
-     * @var float
-     */
-    protected $stretchedRatio;
-
-    /**
-     * @var bool
-     */
-    protected $noResume;
-
-    /**
-     * @param string $format
-     */
-    public function setFormat($format)
-    {
-        $this->format = $format;
-    }
-
     /**
      * @return string
      */
     public function getFormat()
     {
-        return $this->format;
-    }
-
-    /**
-     * @param string $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
+        return $this->get('format');
     }
 
     /**
@@ -163,15 +17,7 @@ class Format
      */
     public function getUrl()
     {
-        return $this->url;
-    }
-
-    /**
-     * @param array $httpHeaders
-     */
-    public function setHttpHeaders(array $httpHeaders)
-    {
-        $this->httpHeaders = $httpHeaders;
+        return $this->get('url');
     }
 
     /**
@@ -179,15 +25,7 @@ class Format
      */
     public function getHttpHeaders()
     {
-        return $this->httpHeaders;
-    }
-
-    /**
-     * @param string $acodec
-     */
-    public function setAcodec($acodec)
-    {
-        $this->acodec = $acodec;
+        return $this->get('http_headers');
     }
 
     /**
@@ -195,15 +33,7 @@ class Format
      */
     public function getAcodec()
     {
-        return $this->acodec;
-    }
-
-    /**
-     * @param string $vcodec
-     */
-    public function setVcodec($vcodec)
-    {
-        $this->vcodec = $vcodec;
+        return $this->get('acodec');
     }
 
     /**
@@ -211,15 +41,7 @@ class Format
      */
     public function getVcodec()
     {
-        return $this->vcodec;
-    }
-
-    /**
-     * @param string $formatNote
-     */
-    public function setFormatNote($formatNote)
-    {
-        $this->formatNote = $formatNote;
+        return $this->get('vcodec');
     }
 
     /**
@@ -227,15 +49,7 @@ class Format
      */
     public function getFormatNote()
     {
-        return $this->formatNote;
-    }
-
-    /**
-     * @param int $abr
-     */
-    public function setAbr($abr)
-    {
-        $this->abr = $abr;
+        return $this->get('format_note');
     }
 
     /**
@@ -243,15 +57,7 @@ class Format
      */
     public function getAbr()
     {
-        return $this->abr;
-    }
-
-    /**
-     * @param string $playerUrl
-     */
-    public function setPlayerUrl($playerUrl)
-    {
-        $this->playerUrl = $playerUrl;
+        return $this->get('abr');
     }
 
     /**
@@ -259,15 +65,7 @@ class Format
      */
     public function getPlayerUrl()
     {
-        return $this->playerUrl;
-    }
-
-    /**
-     * @param string $ext
-     */
-    public function setExt($ext)
-    {
-        $this->ext = $ext;
+        return $this->get('player_url');
     }
 
     /**
@@ -275,15 +73,7 @@ class Format
      */
     public function getExt()
     {
-        return $this->ext;
-    }
-
-    /**
-     * @param int $preference
-     */
-    public function setPreference($preference)
-    {
-        $this->preference = $preference;
+        return $this->get('ext');
     }
 
     /**
@@ -291,15 +81,7 @@ class Format
      */
     public function getPreference()
     {
-        return $this->preference;
-    }
-
-    /**
-     * @param string $formatId
-     */
-    public function setFormatId($formatId)
-    {
-        $this->formatId = $formatId;
+        return $this->get('preference');
     }
 
     /**
@@ -307,15 +89,7 @@ class Format
      */
     public function getFormatId()
     {
-        return $this->formatId;
-    }
-
-    /**
-     * @param string $container
-     */
-    public function setContainer($container)
-    {
-        $this->container = $container;
+        return $this->get('format');
     }
 
     /**
@@ -323,15 +97,7 @@ class Format
      */
     public function getContainer()
     {
-        return $this->container;
-    }
-
-    /**
-     * @param int $width
-     */
-    public function setWidth($width)
-    {
-        $this->width = $width;
+        return $this->get('container');
     }
 
     /**
@@ -339,15 +105,7 @@ class Format
      */
     public function getWidth()
     {
-        return $this->width;
-    }
-
-    /**
-     * @param int $height
-     */
-    public function setHeight($height)
-    {
-        $this->height = $height;
+        return $this->get('width');
     }
 
     /**
@@ -355,15 +113,7 @@ class Format
      */
     public function getHeight()
     {
-        return $this->height;
-    }
-
-    /**
-     * @param int $asr
-     */
-    public function setAsr($asr)
-    {
-        $this->asr = $asr;
+        return $this->get('height');
     }
 
     /**
@@ -371,15 +121,7 @@ class Format
      */
     public function getAsr()
     {
-        return $this->asr;
-    }
-
-    /**
-     * @param int $tbr
-     */
-    public function setTbr($tbr)
-    {
-        $this->tbr = $tbr;
+        return $this->get('asr');
     }
 
     /**
@@ -387,15 +129,7 @@ class Format
      */
     public function getTbr()
     {
-        return $this->tbr;
-    }
-
-    /**
-     * @param int $fps
-     */
-    public function setFps($fps)
-    {
-        $this->fps = $fps;
+        return $this->get('tbr');
     }
 
     /**
@@ -403,15 +137,7 @@ class Format
      */
     public function getFps()
     {
-        return $this->fps;
-    }
-
-    /**
-     * @param int $filesize
-     */
-    public function setFilesize($filesize)
-    {
-        $this->filesize = $filesize;
+        return $this->get('fps');
     }
 
     /**
@@ -419,15 +145,7 @@ class Format
      */
     public function getFilesize()
     {
-        return $this->filesize;
-    }
-
-    /**
-     * @param string $resolution
-     */
-    public function setResolution($resolution)
-    {
-        $this->resolution = $resolution;
+        return $this->get('filesize');
     }
 
     /**
@@ -435,15 +153,7 @@ class Format
      */
     public function getResolution()
     {
-        return $this->resolution;
-    }
-
-    /**
-     * @param int $vbr
-     */
-    public function setVbr($vbr)
-    {
-        $this->vbr = $vbr;
+        return $this->get('resolution');
     }
 
     /**
@@ -451,15 +161,7 @@ class Format
      */
     public function getVbr()
     {
-        return $this->vbr;
-    }
-
-    /**
-     * @param string $protocol
-     */
-    public function setProtocol($protocol)
-    {
-        $this->protocol = $protocol;
+        return $this->get('vbr');
     }
 
     /**
@@ -467,15 +169,7 @@ class Format
      */
     public function getProtocol()
     {
-        return $this->protocol;
-    }
-
-    /**
-     * @param int $languagePreference
-     */
-    public function setLanguagePreference($languagePreference)
-    {
-        $this->languagePreference = $languagePreference;
+        return $this->get('protocol');
     }
 
     /**
@@ -483,15 +177,7 @@ class Format
      */
     public function getLanguagePreference()
     {
-        return $this->languagePreference;
-    }
-
-    /**
-     * @param int $quality
-     */
-    public function setQuality($quality)
-    {
-        $this->quality = $quality;
+        return $this->get('language_preference');
     }
 
     /**
@@ -499,15 +185,7 @@ class Format
      */
     public function getQuality()
     {
-        return $this->quality;
-    }
-
-    /**
-     * @param int $sourcePreference
-     */
-    public function setSourcePreference($sourcePreference)
-    {
-        $this->sourcePreference = $sourcePreference;
+        return $this->get('quality');
     }
 
     /**
@@ -515,15 +193,7 @@ class Format
      */
     public function getSourcePreference()
     {
-        return $this->sourcePreference;
-    }
-
-    /**
-     * @param float $stretchedratio
-     */
-    public function setStretchedRatio($stretchedratio)
-    {
-        $this->stretchedRatio = $stretchedratio;
+        return $this->get('source_preference');
     }
 
     /**
@@ -531,15 +201,7 @@ class Format
      */
     public function getStretchedRatio()
     {
-        return $this->stretchedRatio;
-    }
-
-    /**
-     * @param bool $noResume
-     */
-    public function setNoResume($noResume)
-    {
-        $this->noResume = $noResume;
+        return $this->get('stretched_ratio');
     }
 
     /**
@@ -547,6 +209,6 @@ class Format
      */
     public function getNoResume()
     {
-        return $this->noResume;
+        return $this->get('no_resume');
     }
 }

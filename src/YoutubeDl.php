@@ -6,12 +6,10 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
+use YoutubeDl\Entity\Video;
 use YoutubeDl\Exception\CopyrightException;
 use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
-use YoutubeDl\Mapper\Mapper;
 
 class YoutubeDl
 {
@@ -31,11 +29,6 @@ class YoutubeDl
     protected $timeout;
 
     /**
-     * @var PropertyAccessorInterface
-     */
-    protected $propertyAccessor;
-
-    /**
      * @var array
      */
     protected $processOptions = [];
@@ -49,16 +42,13 @@ class YoutubeDl
      * Constructor.
      *
      * @param array                     $options
-     * @param PropertyAccessorInterface $propertyAccessor
      */
-    public function __construct(array $options = [], PropertyAccessorInterface $propertyAccessor = null)
+    public function __construct(array $options = [])
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
-
-        $this->propertyAccessor = $propertyAccessor ?: new PropertyAccessor();
     }
 
     /**
@@ -99,26 +89,6 @@ class YoutubeDl
     public function getTimeout()
     {
         return $this->timeout;
-    }
-
-    /**
-     * Set property accessor.
-     *
-     * @param PropertyAccessorInterface $propertyAccessor
-     */
-    public function setPropertyAccessor(PropertyAccessorInterface $propertyAccessor)
-    {
-        $this->propertyAccessor = $propertyAccessor;
-    }
-
-    /**
-     * Get property accessor.
-     *
-     * @return PropertyAccessorInterface
-     */
-    public function getPropertyAccessor()
-    {
-        return $this->propertyAccessor;
     }
 
     /**
@@ -431,12 +401,12 @@ class YoutubeDl
 
     protected function processDownloadOutput($output)
     {
-        $mapper = new Mapper($this->downloadPath ?: getcwd(), $this->propertyAccessor);
-
         $videoData = $this->jsonDecode(trim($output));
 
         if (is_array($videoData)) {
-            return $mapper->map($videoData);
+            $videoData['file'] = new \SplFileInfo(rtrim($this->downloadPath, '/') . '/' . $videoData['_filename']);
+
+            return new Video($videoData);
         }
 
         return false;
