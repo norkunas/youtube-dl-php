@@ -41,7 +41,7 @@ class YoutubeDl
     /**
      * Constructor.
      *
-     * @param array                     $options
+     * @param array $options
      */
     public function __construct(array $options = [])
     {
