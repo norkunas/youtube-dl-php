@@ -39,6 +39,11 @@ class YoutubeDl
     protected $debug;
 
     /**
+     * @var array
+     */
+    protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
+
+    /**
      * Constructor.
      *
      * @param array $options
@@ -214,6 +219,9 @@ class YoutubeDl
         return array_filter(explode("\n", $process->getOutput()));
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     protected function configureOptions(OptionsResolver $resolver)
     {
         $options = [
@@ -356,7 +364,7 @@ class YoutubeDl
             return true;
         });
 
-        $resolver->setAllowedValues('audio-format', ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav']);
+        $resolver->setAllowedValues('audio-format', $this->allowedAudioFormats);
 
         $resolver->setAllowedValues('ffmpeg-location', function ($value) {
             if (!is_file($value) && !is_dir($value)) {
@@ -399,12 +407,42 @@ class YoutubeDl
         return $decode;
     }
 
+    /**
+     * @param $output
+     *
+     * @return bool|Video
+     */
     protected function processDownloadOutput($output)
     {
         $videoData = $this->jsonDecode(trim($output));
 
         if (is_array($videoData)) {
-            $videoData['file'] = new \SplFileInfo(rtrim($this->downloadPath, '/').'/'.$videoData['_filename']);
+            $downloadedFilePath = rtrim($this->downloadPath, '/').'/';
+
+            $originalFile = $videoData['_filename'];
+
+            $filename = pathinfo($originalFile, PATHINFO_FILENAME);
+
+            $searchExtension = '*';
+            $globFlags = null;
+
+            if (isset($this->options['extract-audio']) && $this->options['extract-audio'] == true) {
+                $searchExtension = '{'.implode(',', $this->allowedAudioFormats).'}';
+                $globFlags = GLOB_BRACE;
+            }
+
+            $searchPattern = $filename.'.'.$searchExtension;
+
+            if ($downloadedFilePath !== '/') {
+                $searchPattern = $downloadedFilePath.$searchPattern;
+            }
+
+            $foundFiles = glob($searchPattern, $globFlags);
+            $audioFile = reset($foundFiles);
+
+            $videoData['_filename'] = pathinfo($audioFile, PATHINFO_BASENAME);
+
+            $videoData['file'] = new \SplFileInfo($downloadedFilePath.$videoData['_filename']);
 
             return new Video($videoData);
         }
