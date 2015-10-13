@@ -190,17 +190,7 @@ class YoutubeDl
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
         } catch (\Exception $e) {
-            $message = $e->getMessage();
-
-            if (preg_match('/please sign in to view this video/i', $message)) {
-                throw new PrivateVideoException();
-            } elseif (preg_match('/copyright infringement/i', $message)) {
-                throw new CopyrightException();
-            } elseif (preg_match('/this video does not exist|404/i', $message)) {
-                throw new NotFoundException();
-            } else {
-                throw $e;
-            }
+            throw $this->handleException($e);
         }
 
         return $this->processDownloadOutput($process->getOutput());
@@ -448,5 +438,20 @@ class YoutubeDl
         }
 
         return false;
+    }
+
+    protected function handleException(\Exception $e)
+    {
+        $message = $e->getMessage();
+
+        if (preg_match('/please sign in to view this video/i', $message)) {
+            return new PrivateVideoException();
+        } elseif (preg_match('/copyright infringement/i', $message)) {
+            return new CopyrightException();
+        } elseif (preg_match('/this video does not exist|404/i', $message)) {
+            return new NotFoundException();
+        }
+
+        return $e;
     }
 }
