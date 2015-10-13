@@ -553,6 +553,6 @@ class Video extends AbstractEntity
             // If for some reason annotations can't be mapped then just ignore this
         }
 
-        return null;
+        return;
     }
 }
