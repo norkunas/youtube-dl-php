@@ -141,10 +141,10 @@ class YoutubeDl
         foreach ($this->options as $option => $value) {
             if ($option == 'add-header') {
                 foreach ($value as $header) {
-                    $c .= '--' . $option . ' ' . $header . ' ';
+                    $c .= '--'.$option.' '.$header.' ';
                 }
             } else {
-                $c .= '--' . $option . (!is_bool($value) ? ' ' . $value : '') . ' ';
+                $c .= '--'.$option.(!is_bool($value) ? ' '.$value : '').' ';
             }
         }
 
@@ -393,7 +393,7 @@ class YoutubeDl
         $decode = json_decode($data, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \RuntimeException('Response can\'t be decoded: ' . $data);
+            throw new \RuntimeException('Response can\'t be decoded: '.$data);
         }
 
         return $decode;
@@ -404,7 +404,7 @@ class YoutubeDl
         $videoData = $this->jsonDecode(trim($output));
 
         if (is_array($videoData)) {
-            $videoData['file'] = new \SplFileInfo(rtrim($this->downloadPath, '/') . '/' . $videoData['_filename']);
+            $videoData['file'] = new \SplFileInfo(rtrim($this->downloadPath, '/').'/'.$videoData['_filename']);
 
             return new Video($videoData);
         }
