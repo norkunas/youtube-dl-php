@@ -10,7 +10,7 @@ php:
     #- nightly
 
 before_install:
-    - wget -no-check-certificate https://yt-dl.org/downloads/2015.10.16/youtube-dl -O /tmp/youtube-dl.tar.gz
+    - wget --no-check-certificate https://yt-dl.org/downloads/2015.10.16/youtube-dl -O /tmp/youtube-dl.tar.gz
     - tar -xvf /tmp/youtube-dl.tar.gz
     - export PATH=$PATH:$PWD/youtube-dl-2015.10.16/bin/
 #    - sudo apt-get update -qq
