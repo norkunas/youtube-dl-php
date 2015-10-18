@@ -1,6 +1,6 @@
 <?php
 
-namespace YoutubeDl\tests;
+namespace YoutubeDl\Tests;
 
 use YoutubeDl\YoutubeDl;
 
