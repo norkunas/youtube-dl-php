@@ -272,6 +272,7 @@ class YoutubeDl
             'cache-dir' => 'string',
             'no-cache-dir' => 'bool',
             'rm-cache-dir' => 'bool',
+            'id' => 'bool',
             // Thumbnail images
             'write-thumbnail' => 'bool',
             'write-all-thumbnails' => 'bool',
