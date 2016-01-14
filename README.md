@@ -18,7 +18,7 @@ Second step is to install the wrapper using [Composer](http://getcomposer.org/):
 composer require norkunas/youtube-dl-php
 ```
 
-## Example
+## Download video
 ```php
 <?php
 require __DIR__ . '/vendor/autoload.php';
@@ -56,6 +56,24 @@ try {
 } catch (\Exception $e) {
     // Failed to download
 }
+```
+
+## Download only audio (requires ffmpeg or avconv and ffprobe or avprobe)
+```php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use YoutubeDl\YoutubeDl;
+
+$dl = new YoutubeDl([
+    'extract-audio' => true,
+    'audio-format' => 'mp3',
+    'audio-quality' => 0, // best
+    'output' => '%(title)s.%(ext)s',
+]);
+$dl->setDownloadPath('/home/user/downloads');
+
+$video = $dl->download('https://www.youtube.com/watch?v=oDAw7vW7H0c');
 ```
 
 **Disabled options which would break download:**
