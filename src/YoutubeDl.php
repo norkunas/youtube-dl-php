@@ -21,6 +21,11 @@ class YoutubeDl
     /**
      * @var string
      */
+    protected $binPath;
+
+    /**
+     * @var string
+     */
     protected $downloadPath;
 
     /**
@@ -54,6 +59,26 @@ class YoutubeDl
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
+    }
+
+    /**
+     * Set bin path.
+     *
+     * @param string $binPath
+     */
+    public function setBinPath($binPath)
+    {
+        $this->binPath = $binPath;
+    }
+
+    /**
+     * Get bin path.
+     *
+     * @return string
+     */
+    public function getBinPath()
+    {
+        return $this->binPath;
     }
 
     /**
@@ -141,7 +166,11 @@ class YoutubeDl
      */
     public function getCommandLine()
     {
-        $c = 'youtube-dl ';
+        if ($this->binPath) {
+            $c = $this->binPath.' ';
+        } else {
+            $c = 'youtube-dl ';
+        }
 
         foreach ($this->options as $option => $value) {
             if ($option == 'add-header') {
