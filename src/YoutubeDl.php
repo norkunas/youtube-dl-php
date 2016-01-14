@@ -456,6 +456,8 @@ class YoutubeDl
             if ($downloadedFilePath !== '/') {
                 $searchPattern = $downloadedFilePath.$searchPattern;
             }
+            // http://php.net/manual/en/function.glob.php#75752
+            $searchPattern = str_replace('[', '[[]', $searchPattern);
 
             $foundFiles = glob($searchPattern, $globFlags);
             $audioFile = reset($foundFiles);
