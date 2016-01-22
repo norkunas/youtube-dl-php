@@ -39,6 +39,11 @@ class YoutubeDl
     protected $processOptions = [];
 
     /**
+     * @var bool
+     */
+    protected $moveWithPhp = false;
+
+    /**
      * @var callable
      */
     protected $debug;
@@ -141,6 +146,16 @@ class YoutubeDl
         return $this->processOptions;
     }
 
+    public function setMoveWithPhp($moveWithPhp)
+    {
+        $this->moveWithPhp = $moveWithPhp;
+    }
+
+    public function getMoveWithPhp()
+    {
+        return $this->moveWithPhp;
+    }
+
     /**
      * Enable debugging.
      *
@@ -214,7 +229,13 @@ class YoutubeDl
             return $videos;
         }
 
-        $process = new Process(sprintf('%s %s', $this->getCommandLine(), escapeshellarg($url)), $this->downloadPath, null, null, $this->timeout, $this->processOptions);
+        if ($this->moveWithPhp) {
+            $cwd = sys_get_temp_dir();
+        } else {
+            $cwd = $this->downloadPath ?: sys_get_temp_dir();
+        }
+
+        $process = new Process(sprintf('%s %s', $this->getCommandLine(), escapeshellarg($url)), $cwd, null, null, $this->timeout, $this->processOptions);
 
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
@@ -437,7 +458,8 @@ class YoutubeDl
         $videoData = $this->jsonDecode(trim($output));
 
         if (is_array($videoData)) {
-            $downloadedFilePath = rtrim($this->downloadPath, '/').'/';
+            $downloadPath = $this->downloadPath ?: sys_get_temp_dir();
+            $downloadedFilePath = rtrim($downloadPath, '/').'/';
 
             $originalFile = $videoData['_filename'];
 
@@ -454,7 +476,11 @@ class YoutubeDl
             $searchPattern = $filename.'.'.$searchExtension;
 
             if ($downloadedFilePath !== '/') {
-                $searchPattern = $downloadedFilePath.$searchPattern;
+                if ($this->moveWithPhp) {
+                    $searchPattern = sys_get_temp_dir() . '/' . $searchPattern;
+                } else {
+                    $searchPattern = $downloadedFilePath . $searchPattern;
+                }
             }
             // http://php.net/manual/en/function.glob.php#75752
             $searchPattern = str_replace('[', '[[]', $searchPattern);
@@ -463,6 +489,10 @@ class YoutubeDl
             $audioFile = reset($foundFiles);
 
             $videoData['_filename'] = pathinfo($audioFile, PATHINFO_BASENAME);
+
+            if ($this->moveWithPhp) {
+                rename(sys_get_temp_dir() . '/' . $videoData['_filename'], $downloadedFilePath . $videoData['_filename']);
+            }
 
             $videoData['file'] = new \SplFileInfo($downloadedFilePath.$videoData['_filename']);
 
