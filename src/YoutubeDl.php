@@ -6,6 +6,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Process\ProcessUtils;
 use YoutubeDl\Entity\Video;
 use YoutubeDl\Exception\CopyrightException;
 use YoutubeDl\Exception\NotFoundException;
@@ -235,7 +236,9 @@ class YoutubeDl
             $cwd = $this->downloadPath ?: sys_get_temp_dir();
         }
 
-        $process = new Process(sprintf('%s %s', $this->getCommandLine(), escapeshellarg($url)), $cwd, null, null, $this->timeout, $this->processOptions);
+        $escapedUrl = ProcessUtils::escapeArgument($url);
+
+        $process = new Process(sprintf('%s %s', $this->getCommandLine(), $escapedUrl), $cwd, null, null, $this->timeout, $this->processOptions);
 
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
