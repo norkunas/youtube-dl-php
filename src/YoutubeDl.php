@@ -347,7 +347,6 @@ class YoutubeDl
             'sleep-interval' => 'int',
             // Video Format Options
             'format' => 'string',
-            'all-formats' => 'bool',
             'prefer-free-formats' => 'bool',
             'max-quality' => 'string',
             'youtube-skip-dash-manifest' => 'bool',
