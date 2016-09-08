@@ -8,6 +8,7 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessUtils;
 use YoutubeDl\Entity\Video;
+use YoutubeDl\Exception\AccountTerminatedException;
 use YoutubeDl\Exception\CopyrightException;
 use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
@@ -198,7 +199,7 @@ class YoutubeDl
             }
         }
 
-        $c .= '--print-json --ignore-config';
+        $c .= '--no-playlist --print-json --ignore-config';
 
         return $c;
     }
@@ -279,9 +280,6 @@ class YoutubeDl
             'force-ipv4' => 'bool',
             'force-ipv6' => 'bool',
             // Video selection options
-            'playlist-start' => 'int',
-            'playlist-end' => 'int|string',
-            'playlist-items' => 'string',
             'match-title' => 'string',
             'reject-title' => 'string',
             'max-downloads' => 'int',
@@ -293,8 +291,6 @@ class YoutubeDl
             'min-views' => 'int',
             'max-views' => 'int',
             'match-filter' => 'string',
-            'no-playlist' => 'bool',
-            'yes-playlist' => 'bool',
             'download-archive' => 'string',
             'include-ads' => 'bool',
             // Download Options
@@ -302,7 +298,6 @@ class YoutubeDl
             'retries' => 'int|string',
             'buffer-size' => 'string',
             'no-resize-buffer' => 'bool',
-            'playlist-reverse' => 'bool',
             'xattr-set-filesize' => 'bool',
             'hls-prefer-native' => 'bool',
             'external-downloader' => 'string',
@@ -399,14 +394,6 @@ class YoutubeDl
 
         $resolver->setAllowedValues('external-downloader', ['aria2c', 'curl', 'wget']);
 
-        $resolver->setAllowedValues('playlist-end', function ($value) {
-            if (is_string($value) && 'last' != $value) {
-                return false;
-            }
-
-            return true;
-        });
-
         $resolver->setAllowedValues('audio-format', $this->allowedAudioFormats);
 
         $resolver->setAllowedValues('ffmpeg-location', function ($value) {
@@ -479,9 +466,9 @@ class YoutubeDl
 
             if ($downloadedFilePath !== '/') {
                 if ($this->moveWithPhp) {
-                    $searchPattern = sys_get_temp_dir() . '/' . $searchPattern;
+                    $searchPattern = sys_get_temp_dir().'/'.$searchPattern;
                 } else {
-                    $searchPattern = $downloadedFilePath . $searchPattern;
+                    $searchPattern = $downloadedFilePath.$searchPattern;
                 }
             }
             // http://php.net/manual/en/function.glob.php#75752
@@ -493,7 +480,7 @@ class YoutubeDl
             $videoData['_filename'] = pathinfo($audioFile, PATHINFO_BASENAME);
 
             if ($this->moveWithPhp) {
-                rename(sys_get_temp_dir() . '/' . $videoData['_filename'], $downloadedFilePath . $videoData['_filename']);
+                rename(sys_get_temp_dir().'/'.$videoData['_filename'], $downloadedFilePath.$videoData['_filename']);
             }
 
             $videoData['file'] = new \SplFileInfo($downloadedFilePath.$videoData['_filename']);
@@ -508,12 +495,14 @@ class YoutubeDl
     {
         $message = $e->getMessage();
 
-        if (preg_match('/please sign in to view this video/i', $message)) {
+        if (preg_match('/please sign in to view this video|video is protected by a password/i', $message)) {
             return new PrivateVideoException();
         } elseif (preg_match('/copyright infringement/i', $message)) {
             return new CopyrightException();
         } elseif (preg_match('/this video does not exist|404/i', $message)) {
             return new NotFoundException();
+        } elseif (preg_match('/account associated with this video has been terminated/', $message)) {
+            return new AccountTerminatedException();
         }
 
         return $e;

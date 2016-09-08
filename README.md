@@ -46,7 +46,7 @@ $dl->setDownloadPath('/home/user/downloads');
 try {
     $video = $dl->download('https://www.youtube.com/watch?v=oDAw7vW7H0c');
     echo $video->getTitle(); // Will return Phonebloks
-    // $dl->getFile(); // \SplFileInfo instance of downloaded file
+    // $video->getFile(); // \SplFileInfo instance of downloaded file
 } catch (NotFoundException $e) {
     // Video not found
 } catch (PrivateVideoException $e) {
@@ -78,4 +78,4 @@ $video = $dl->download('https://www.youtube.com/watch?v=oDAw7vW7H0c');
 
 **Disabled options which would break download:**
 
-list-formats, list-subs, list-thumbnails, get-url, get-title, get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json (used internally), newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic, ignore-config (used internally), all-formats.
+list-formats, list-subs, list-thumbnails, get-url, get-title, get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json (used internally), newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic, ignore-config (used internally), all-formats, playlist-start, playlist-end, playlist-items, playlist-reverse, yes-playlist, no-playlist (used internally).
