@@ -23,7 +23,7 @@ class YoutubeDl
     /**
      * @var string
      */
-    protected $binPath;
+    protected $binPath = 'youtube-dl';
 
     /**
      * @var string
@@ -183,11 +183,7 @@ class YoutubeDl
      */
     public function getCommandLine()
     {
-        if ($this->binPath) {
-            $c = $this->binPath.' ';
-        } else {
-            $c = 'youtube-dl ';
-        }
+        $c = $this->binPath.' ';
 
         foreach ($this->options as $option => $value) {
             if ($option == 'add-header') {
@@ -257,7 +253,7 @@ class YoutubeDl
      */
     public function getExtractorsList()
     {
-        $process = new Process('youtube-dl --list-extractors');
+        $process = new Process($this->binPath.' --list-extractors');
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
 
         return array_filter(explode("\n", $process->getOutput()));
