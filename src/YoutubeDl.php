@@ -129,7 +129,7 @@ class YoutubeDl
         if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
             $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
             $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
-        } else if (preg_match('/merged into mkv/', $process->getErrorOutput())) {
+        } elseif (preg_match('/merged into mkv/', $process->getErrorOutput())) {
             $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
         }
 
