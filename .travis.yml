@@ -9,8 +9,8 @@ php:
     - nightly
 
 before_install:
-  - wget https://yt-dl.org/downloads/latest/youtube-dl -O /tmp/youtube-dl --no-check-certificate
-  - export PATH=$PATH:/tmp/
+  - wget https://yt-dl.org/downloads/latest/youtube-dl -O $PWD/youtube-dl --no-check-certificate
+  - export PATH=$PATH:$PWD/
 
 before_script:
     - composer install --no-interaction --prefer-source --dev
