@@ -9,9 +9,7 @@ php:
     - nightly
 
 before_install:
-    - sudo add-apt-repository ppa:nilarimogard/webupd8 -y
-    - sudo apt-get update -q
-    - sudo apt-get install youtube-dl
+  - wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 
 before_script:
     - composer install --no-interaction --prefer-source --dev
