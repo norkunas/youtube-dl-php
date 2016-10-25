@@ -10,6 +10,7 @@ php:
 
 before_install:
   - wget https://yt-dl.org/downloads/latest/youtube-dl -O /tmp/youtube-dl --no-check-certificate
+  - export PATH=$PATH:/tmp/
 
 before_script:
     - composer install --no-interaction --prefer-source --dev
