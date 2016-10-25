@@ -5,6 +5,7 @@ namespace YoutubeDl;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessUtils;
 use YoutubeDl\Entity\Video;
@@ -23,7 +24,7 @@ class YoutubeDl
     /**
      * @var string
      */
-    protected $binPath = 'youtube-dl';
+    protected $binPath;
 
     /**
      * @var string
@@ -85,6 +86,11 @@ class YoutubeDl
      */
     public function getBinPath()
     {
+        if (!$this->binPath) {
+            $executeableFinder = new ExecutableFinder();
+            $this->binPath = $executeableFinder->find('youtube-dl', 'youtube-dl');
+        }
+
         return $this->binPath;
     }
 
@@ -183,7 +189,7 @@ class YoutubeDl
      */
     public function getCommandLine()
     {
-        $c = $this->binPath.' ';
+        $c = $this->getBinPath().' ';
 
         foreach ($this->options as $option => $value) {
             if ($option == 'add-header') {
@@ -253,7 +259,7 @@ class YoutubeDl
      */
     public function getExtractorsList()
     {
-        $process = new Process($this->binPath.' --list-extractors');
+        $process = new Process($this->getBinPath().' --list-extractors');
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
 
         return array_filter(explode("\n", $process->getOutput()));
