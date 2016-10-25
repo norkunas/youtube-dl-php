@@ -11,9 +11,14 @@
          syntaxCheck="false"
          bootstrap="tests/bootstrap.php"
         >
-<testsuites>
-    <testsuite name="YoutubeDl Tests">
-        <directory>./tests/YoutubeDl/</directory>
-    </testsuite>
-</testsuites>
+    <testsuites>
+        <testsuite name="YoutubeDl Tests">
+            <directory>./tests/YoutubeDl/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
 </phpunit>

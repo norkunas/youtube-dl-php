@@ -2,75 +2,118 @@
 
 namespace YoutubeDl\Tests;
 
-//use YoutubeDl\YoutubeDl;
+use Symfony\Component\Process\ExecutableFinder;
+use YoutubeDl\YoutubeDl;
 
-/**
- * @covers YoutubeDl\YoutubeDl
- */
 class YoutubeDlTest extends \PHPUnit_Framework_TestCase
 {
-    public function test()
+    /**
+     * @expectedException \RuntimeException
+     */
+    public function testDownloadPathNotSet()
     {
-        $a = true;
-
-        $this->assertSame($a, true);
+        (new YoutubeDl())->download('');
     }
 
-    /*public function testGetCommandLine()
+    public function testGetExtractorsList()
     {
-        $obj = new YoutubeDl([
-            'skip-download' => true,
-            'write-sub' => true,
-            'write-annotations' => true,
+        $yt = new YoutubeDl();
+        $extractors = $yt->getExtractorsList();
+
+        $this->assertInternalType('array', $extractors);
+        $this->assertGreaterThanOrEqual(1, count($extractors));
+    }
+
+    public function testVideoDownload()
+    {
+        $yt = new YoutubeDl();
+        $yt->setDownloadPath(dirname(__DIR__));
+
+        $video = $yt->download('https://www.youtube.com/watch?v=voYxuPHs_kg');
+
+        $this->assertTrue($video->getFile()->isFile());
+        $this->assertSame('webm', $video->getFile()->getExtension());
+
+        @unlink($video->getFile()->getPathname());
+    }
+
+    public function testAudioDownload()
+    {
+        $this->skipIfNoPostProcessor();
+
+        $yt = new YoutubeDl([
+            'extract-audio' => true,
             'audio-format' => 'mp3',
-            'add-header' => [
-                'X-Requested-With:youtube-dl',
-                'X-ATT-DeviceId:GT-P7320/P7320XXLPG',
-            ],
         ]);
+        $yt->setDownloadPath(dirname(__DIR__));
 
-        $this->assertEquals('youtube-dl --skip-download --write-sub --write-annotations --audio-format mp3 --add-header X-Requested-With:youtube-dl --add-header X-ATT-DeviceId:GT-P7320/P7320XXLPG --print-json --ignore-config', $obj->getCommandLine());
+        $audio = $yt->download('https://www.youtube.com/watch?v=TDaodHP-NI4');
+
+        $this->assertTrue($audio->getFile()->isFile());
+        $this->assertSame('mp3', $audio->getFile()->getExtension());
+
+        @unlink($audio->getFile()->getPathname());
     }
-
-    public function getExtractorsList()
-    {
-        $obj = new YoutubeDl();
-
-        $this->assertInternalType('array', $obj->getExtractorsList());
-        $this->assertGreaterThanOrEqual(1, count($obj->getExtractorsList()));
-    }
-
-    public function testYoutubeDownload()
-    {
-        $obj = new YoutubeDl(['skip-download' => true]);
-
-        $this->assertInstanceOf('YoutubeDl\Entity\Video', $obj->download('https://www.youtube.com/watch?v=BaW_jenozKc'));
-    }*/
 
     /**
      * @expectedException \YoutubeDl\Exception\NotFoundException
      */
-    /*public function testYoutubeBadDownload()
+    public function testYoutubeBadDownload()
     {
-        $obj = new YoutubeDl(['skip-download' => true]);
-        $obj->download('https://www.youtube.com/watch?v=togdRwApGvs');
-    }*/
+        $yt = new YoutubeDl(['skip-download' => true]);
+        $yt->setDownloadPath('/');
+        $yt->download('https://www.youtube.com/watch?v=togdRwApGvs');
+    }
 
     /**
      * @expectedException \YoutubeDl\Exception\PrivateVideoException
      */
-    /*public function testYoutubePrivateVideoDownload()
+    public function testYoutubePrivateVideoDownload()
     {
-        $obj = new YoutubeDl(['skip-download' => true]);
-        $obj->download('https://www.youtube.com/watch?v=6pbDgvC31E4');
-    }*/
+        $yt = new YoutubeDl(['skip-download' => true]);
+        $yt->setDownloadPath('/');
+        $yt->download('https://www.youtube.com/watch?v=6pbDgvC31E4');
+    }
 
     /**
      * @expectedException \YoutubeDl\Exception\CopyrightException
      */
-    /*public function testYoutubeRemovedVideoDownload()
+    public function testYoutubeRemovedVideoDownload()
     {
-        $obj = new YoutubeDl(['skip-download' => true]);
-        $obj->download('https://www.youtube.com/watch?v=AYeiLa_F8fk');
-    }*/
+        $yt = new YoutubeDl(['skip-download' => true]);
+        $yt->setDownloadPath('/');
+        $yt->download('https://www.youtube.com/watch?v=AYeiLa_F8fk');
+    }
+
+    /**
+     * @expectedException \YoutubeDl\Exception\AccountTerminatedException
+     */
+    public function testYoutubeAccountTerminatedVideoDownload()
+    {
+        $yt = new YoutubeDl(['skip-download' => true]);
+        $yt->setDownloadPath('/');
+        $yt->download('https://www.youtube.com/watch?v=oIdgb-vwAQI');
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Process\Exception\ProcessFailedException
+     */
+    public function testBadUrlVideoDownload()
+    {
+        $yt = new YoutubeDl(['skip-download' => true]);
+        $yt->setDownloadPath('/');
+        $yt->download('https://www.example.com');
+    }
+
+    private function skipIfNoPostProcessor()
+    {
+        $ffmpeg = (new ExecutableFinder())->find('ffmpeg');
+        $ffprobe = (new ExecutableFinder())->find('ffprobe');
+        $avconv = (new ExecutableFinder())->find('avconv');
+        $avprobe = (new ExecutableFinder())->find('avprobe');
+
+        if (null === $ffmpeg && null === $ffprobe && null === $avconv && null === $avprobe) {
+            $this->markTestSkipped();
+        }
+    }
 }

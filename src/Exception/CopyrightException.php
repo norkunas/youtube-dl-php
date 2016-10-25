@@ -2,6 +2,6 @@
 
 namespace YoutubeDl\Exception;
 
-class CopyrightException extends \RuntimeException
+class CopyrightException extends YoutubeDlException
 {
 }

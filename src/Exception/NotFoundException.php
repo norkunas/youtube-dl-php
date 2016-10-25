@@ -2,6 +2,6 @@
 
 namespace YoutubeDl\Exception;
 
-class NotFoundException extends \RuntimeException
+class NotFoundException extends YoutubeDlException
 {
 }

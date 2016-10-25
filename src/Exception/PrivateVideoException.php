@@ -2,6 +2,6 @@
 
 namespace YoutubeDl\Exception;
 
-class PrivateVideoException extends \RuntimeException
+class PrivateVideoException extends YoutubeDlException
 {
 }

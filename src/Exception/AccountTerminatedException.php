@@ -2,6 +2,6 @@
 
 namespace YoutubeDl\Exception;
 
-class AccountTerminatedException extends \RuntimeException
+class AccountTerminatedException extends YoutubeDlException
 {
 }

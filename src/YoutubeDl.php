@@ -1,15 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace YoutubeDl;
 
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessUtils;
+use Symfony\Component\Process\ProcessBuilder;
 use YoutubeDl\Entity\Video;
 use YoutubeDl\Exception\AccountTerminatedException;
 use YoutubeDl\Exception\CopyrightException;
+use YoutubeDl\Exception\ExecutableNotFoundException;
 use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
 
@@ -31,21 +34,6 @@ class YoutubeDl
     protected $downloadPath;
 
     /**
-     * @var int
-     */
-    protected $timeout;
-
-    /**
-     * @var array
-     */
-    protected $processOptions = [];
-
-    /**
-     * @var bool
-     */
-    protected $moveWithPhp = false;
-
-    /**
      * @var callable
      */
     protected $debug;
@@ -55,11 +43,6 @@ class YoutubeDl
      */
     protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
 
-    /**
-     * Constructor.
-     *
-     * @param array $options
-     */
     public function __construct(array $options = [])
     {
         $resolver = new OptionsResolver();
@@ -68,178 +51,47 @@ class YoutubeDl
         $this->options = $resolver->resolve($options);
     }
 
-    /**
-     * Set bin path.
-     *
-     * @param string $binPath
-     */
-    public function setBinPath($binPath)
+    public function setBinPath(string $binPath)
     {
         $this->binPath = $binPath;
     }
 
-    /**
-     * Get bin path.
-     *
-     * @return string
-     */
-    public function getBinPath()
-    {
-        return $this->binPath;
-    }
-
-    /**
-     * Set download path.
-     *
-     * @param string $downloadPath
-     */
-    public function setDownloadPath($downloadPath)
+    public function setDownloadPath(string $downloadPath)
     {
         $this->downloadPath = $downloadPath;
     }
 
-    /**
-     * Get download path.
-     *
-     * @return string
-     */
-    public function getDownloadPath()
-    {
-        return $this->downloadPath;
-    }
-
-    /**
-     * Set timeout.
-     *
-     * @param int $timeout
-     */
-    public function setTimeout($timeout)
-    {
-        $this->timeout = $timeout;
-    }
-
-    /**
-     * Get timeout.
-     *
-     * @return int
-     */
-    public function getTimeout()
-    {
-        return $this->timeout;
-    }
-
-    /**
-     * Set process options.
-     *
-     * @param array $options
-     */
-    public function setProcessOptions(array $options)
-    {
-        $this->processOptions = $options;
-    }
-
-    /**
-     * Get process options.
-     *
-     * @return array
-     */
-    public function getProcessOptions()
-    {
-        return $this->processOptions;
-    }
-
-    public function setMoveWithPhp($moveWithPhp)
-    {
-        $this->moveWithPhp = $moveWithPhp;
-    }
-
-    public function getMoveWithPhp()
-    {
-        return $this->moveWithPhp;
-    }
-
-    /**
-     * Enable debugging.
-     *
-     * $obj->debug(function ($type, $buffer) {
-     *     if (\Symfony\Component\Process\Process::ERR === $type) {
-     *         echo 'ERR > ' . $buffer;
-     *     } else {
-     *         echo 'OUT > ' . $buffer;
-     *     }
-     * });
-     *
-     * @param callable|null $debug
-     */
     public function debug(callable $debug)
     {
         $this->debug = $debug;
     }
 
-    /**
-     * Get command line.
-     *
-     * @return string
-     */
-    public function getCommandLine()
+    public function download(string $url): Video
     {
-        if ($this->binPath) {
-            $c = $this->binPath.' ';
-        } else {
-            $c = 'youtube-dl ';
+        if (!$this->downloadPath) {
+            throw new \RuntimeException('No download path was set.');
         }
+
+        $processBuilder = $this->createProcessBuilder([
+            $url,
+            '--no-playlist',
+            '--print-json',
+            '--ignore-config',
+        ]);
 
         foreach ($this->options as $option => $value) {
-            if ($option == 'add-header') {
+            if ('add-header' === $option) {
                 foreach ($value as $header) {
-                    $c .= '--'.$option.' '.$header.' ';
+                    $processBuilder->add(sprintf('--%s=%s', $option, $header));
                 }
+            } elseif (is_bool($value)) {
+                $processBuilder->add(sprintf('--%s', $option));
             } else {
-                $c .= '--'.$option.(!is_bool($value) ? ' '.$value : '').' ';
+                $processBuilder->add(sprintf('--%s=%s', $option, $value));
             }
         }
 
-        $c .= '--no-playlist --print-json --ignore-config';
-
-        return $c;
-    }
-
-    /**
-     * Download.
-     *
-     * @param string $url Video URL to download
-     *
-     * @throws PrivateVideoException
-     * @throws CopyrightException
-     * @throws NotFoundException
-     * @throws ProcessFailedException
-     * @throws \Exception
-     *
-     * @return Entity\Video[]|Entity\Video
-     */
-    public function download($url)
-    {
-        if (is_array($url)) {
-            trigger_error('Providing multiple urls to download is deprecated and will be removed in version 1.0. Please call this method for each video alone.', E_USER_NOTICE);
-
-            $videos = [];
-
-            foreach ($url as $link) {
-                $videos[] = $this->download($link);
-            }
-
-            return $videos;
-        }
-
-        if ($this->moveWithPhp) {
-            $cwd = sys_get_temp_dir();
-        } else {
-            $cwd = $this->downloadPath ?: sys_get_temp_dir();
-        }
-
-        $escapedUrl = ProcessUtils::escapeArgument($url);
-
-        $process = new Process(sprintf('%s %s', $this->getCommandLine(), $escapedUrl), $cwd, null, null, $this->timeout, $this->processOptions);
+        $process = $processBuilder->getProcess();
 
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
@@ -247,26 +99,88 @@ class YoutubeDl
             throw $this->handleException($e);
         }
 
-        return $this->processDownloadOutput($process->getOutput());
+        return $this->processDownload($process);
     }
 
-    /**
-     * Get supported extractors list.
-     *
-     * @return array
-     */
-    public function getExtractorsList()
+    public function getExtractorsList(): array
     {
-        $process = new Process('youtube-dl --list-extractors');
+        $processBuilder = $this->createProcessBuilder(['--list-extractors']);
+        $process = $processBuilder->getProcess();
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
 
         return array_filter(explode("\n", $process->getOutput()));
     }
 
-    /**
-     * @param OptionsResolver $resolver
-     */
-    protected function configureOptions(OptionsResolver $resolver)
+    private function jsonDecode($data): array
+    {
+        $decoded = json_decode($data, true);
+
+        if (JSON_ERROR_NONE !== json_last_error()) {
+            throw new \RuntimeException(sprintf('Response can\'t be decoded: %s.', $data));
+        }
+
+        return $decoded;
+    }
+
+    private function processDownload(Process $process): Video
+    {
+        $videoData = $this->jsonDecode(trim($process->getOutput()));
+
+        if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
+            $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
+            $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
+        } else if (preg_match('/merged into mkv/', $process->getErrorOutput())) {
+            $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
+        }
+
+        $videoData['file'] = new \SplFileInfo(rtrim($this->downloadPath, '/').'/'.$videoData['_filename']);
+
+        return new Video($videoData);
+    }
+
+    private function handleException(\Exception $e): \Exception
+    {
+        $message = $e->getMessage();
+
+        if (preg_match('/please sign in to view this video|video is protected by a password/i', $message)) {
+            return new PrivateVideoException();
+        } elseif (preg_match('/copyright infringement/i', $message)) {
+            return new CopyrightException();
+        } elseif (preg_match('/this video does not exist|404/i', $message)) {
+            return new NotFoundException();
+        } elseif (preg_match('/account associated with this video has been terminated/', $message)) {
+            return new AccountTerminatedException();
+        }
+
+        return $e;
+    }
+
+    private function createProcessBuilder(array $arguments = [])
+    {
+        $binPath = $this->binPath ?: (new ExecutableFinder())->find('youtube-dl');
+
+        if (null === $binPath) {
+            throw new ExecutableNotFoundException('"youtube-dl" executable was not found. Did you forgot to add it to environment variables? Or set it via $yt->setBinPath(\'/usr/bin/youtube-dl\').');
+        }
+
+        $builder = new ProcessBuilder($arguments);
+        $builder->setPrefix($binPath);
+        if ($this->downloadPath) {
+            $builder->setWorkingDirectory($this->downloadPath);
+        }
+
+        return $builder;
+    }
+
+    private function findFile(string $fileName, string $extension)
+    {
+        $iterator = new \RegexIterator(new \DirectoryIterator($this->downloadPath), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), '/'), '('.$extension.')'), \RegexIterator::GET_MATCH);
+        $iterator->rewind();
+
+        return $iterator->current()[0];
+    }
+
+    private function configureOptions(OptionsResolver $resolver)
     {
         $options = [
             // General options
@@ -392,7 +306,7 @@ class YoutubeDl
             return true;
         });
 
-        $resolver->setAllowedValues('external-downloader', ['aria2c', 'curl', 'wget']);
+        $resolver->setAllowedValues('external-downloader', ['aria2c', 'avconv', 'axel', 'curl', 'ffmpeg', 'httpie', 'wget']);
 
         $resolver->setAllowedValues('audio-format', $this->allowedAudioFormats);
 
@@ -413,98 +327,5 @@ class YoutubeDl
 
             return $value;
         });
-
-        $resolver->setNormalizer('output', function (Options $options, $value) {
-            return sprintf('"%s"', $value);
-        });
-    }
-
-    /**
-     * Decode json to an associative array.
-     *
-     * @param string $data
-     *
-     * @return array
-     */
-    protected function jsonDecode($data)
-    {
-        $decode = json_decode($data, true);
-
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \RuntimeException('Response can\'t be decoded: '.$data);
-        }
-
-        return $decode;
-    }
-
-    /**
-     * @param $output
-     *
-     * @return bool|Video
-     */
-    protected function processDownloadOutput($output)
-    {
-        $videoData = $this->jsonDecode(trim($output));
-
-        if (is_array($videoData)) {
-            $downloadPath = $this->downloadPath ?: sys_get_temp_dir();
-            $downloadedFilePath = rtrim($downloadPath, '/').'/';
-
-            $originalFile = $videoData['_filename'];
-
-            $filename = pathinfo($originalFile, PATHINFO_FILENAME);
-
-            $searchExtension = '*';
-            $globFlags = null;
-
-            if (isset($this->options['extract-audio']) && $this->options['extract-audio'] == true) {
-                $searchExtension = '{'.implode(',', $this->allowedAudioFormats).'}';
-                $globFlags = GLOB_BRACE;
-            }
-
-            $searchPattern = $filename.'.'.$searchExtension;
-
-            if ($downloadedFilePath !== '/') {
-                if ($this->moveWithPhp) {
-                    $searchPattern = sys_get_temp_dir().'/'.$searchPattern;
-                } else {
-                    $searchPattern = $downloadedFilePath.$searchPattern;
-                }
-            }
-            // http://php.net/manual/en/function.glob.php#75752
-            $searchPattern = str_replace('[', '[[]', $searchPattern);
-
-            $foundFiles = glob($searchPattern, $globFlags);
-            $audioFile = reset($foundFiles);
-
-            $videoData['_filename'] = pathinfo($audioFile, PATHINFO_BASENAME);
-
-            if ($this->moveWithPhp) {
-                rename(sys_get_temp_dir().'/'.$videoData['_filename'], $downloadedFilePath.$videoData['_filename']);
-            }
-
-            $videoData['file'] = new \SplFileInfo($downloadedFilePath.$videoData['_filename']);
-
-            return new Video($videoData);
-        }
-
-        return false;
-    }
-
-    protected function handleException(\Exception $e)
-    {
-        $message = $e->getMessage();
-
-        if (preg_match('/please sign in to view this video|video is protected by a password/i', $message)) {
-            return new PrivateVideoException();
-        } elseif (preg_match('/copyright infringement/i', $message)) {
-            return new CopyrightException();
-        } elseif (preg_match('/this video does not exist|404/i', $message)) {
-            return new NotFoundException();
-        } elseif (preg_match('/account associated with this video has been terminated/', $message)) {
-            return new AccountTerminatedException();
-        }
-
-        return $e;
     }
 }
