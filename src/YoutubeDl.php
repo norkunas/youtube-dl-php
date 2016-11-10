@@ -40,6 +40,11 @@ class YoutubeDl
     protected $debug;
 
     /**
+     * @var int
+     */
+    protected $timeout = 0;
+
+    /**
      * @var array
      */
     protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
@@ -65,6 +70,11 @@ class YoutubeDl
     public function debug(callable $debug)
     {
         $this->debug = $debug;
+    }
+
+    public function setTimeout(int $timeout)
+    {
+        $this->timeout = $timeout;
     }
 
     public function download(string $url): Video
@@ -170,6 +180,7 @@ class YoutubeDl
 
         $builder = new ProcessBuilder($arguments);
         $builder->setPrefix($binPath);
+        $builder->setTimeout($this->timeout);
         if ($this->downloadPath) {
             $builder->setWorkingDirectory($this->downloadPath);
         }
