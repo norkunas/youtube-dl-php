@@ -12,6 +12,7 @@ use YoutubeDl\Exception\AccountTerminatedException;
 use YoutubeDl\Exception\CopyrightException;
 use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
+use YoutubeDl\Exception\UrlNotSupportedException;
 
 class YoutubeDl
 {
@@ -229,6 +230,10 @@ class YoutubeDl
             }
 
             return $videos;
+        }
+
+        if (!$this->isUrlSupported($url)) {
+            throw new UrlNotSupportedException(sprintf('Provided url "%s" is not supported.', $url));
         }
 
         if ($this->moveWithPhp) {
@@ -506,5 +511,14 @@ class YoutubeDl
         }
 
         return $e;
+    }
+
+    private function isUrlSupported(string $url): bool
+    {
+        if (preg_match('#soundcloud.com/.+/sets.+#', $url)) {
+            return false;
+        }
+
+        return true;
     }
 }
