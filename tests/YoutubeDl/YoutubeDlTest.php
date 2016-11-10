@@ -96,6 +96,17 @@ class YoutubeDlTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException \YoutubeDl\Exception\UrlNotSupportedException
+     * @expectedExceptionMessageRegExp /Provided url ".+" is not supported\./
+     */
+    public function testUrlNotSupported()
+    {
+        $yt = new YoutubeDl();
+        $yt->setDownloadPath('/');
+        $yt->download('https://soundcloud.com/csimpi/sets/go4it-demo');
+    }
+
+    /**
      * @expectedException \Symfony\Component\Process\Exception\ProcessFailedException
      */
     public function testBadUrlVideoDownload()

@@ -15,6 +15,7 @@ use YoutubeDl\Exception\CopyrightException;
 use YoutubeDl\Exception\ExecutableNotFoundException;
 use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
+use YoutubeDl\Exception\UrlNotSupportedException;
 
 class YoutubeDl
 {
@@ -70,6 +71,10 @@ class YoutubeDl
     {
         if (!$this->downloadPath) {
             throw new \RuntimeException('No download path was set.');
+        }
+
+        if (!$this->isUrlSupported($url)) {
+            throw new UrlNotSupportedException(sprintf('Provided url "%s" is not supported.', $url));
         }
 
         $processBuilder = $this->createProcessBuilder([
@@ -327,5 +332,14 @@ class YoutubeDl
 
             return $value;
         });
+    }
+
+    private function isUrlSupported(string $url): bool
+    {
+        if (preg_match('#soundcloud.com/.+/sets.+#', $url)) {
+            return false;
+        }
+
+        return true;
     }
 }
