@@ -170,7 +170,7 @@ class YoutubeDl
         return $e;
     }
 
-    private function createProcessBuilder(array $arguments = [])
+    private function createProcessBuilder(array $arguments = []): ProcessBuilder
     {
         $binPath = $this->binPath ?: (new ExecutableFinder())->find('youtube-dl');
 

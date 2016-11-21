@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace YoutubeDl\Entity;
 
 class Video extends AbstractEntity
@@ -523,7 +525,7 @@ class Video extends AbstractEntity
         return $this->get('creator');
     }
 
-    protected function convert(array $data)
+    protected function convert(array $data): array
     {
         $data = parent::convert($data);
 

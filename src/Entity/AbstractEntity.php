@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace YoutubeDl\Entity;
 
 abstract class AbstractEntity implements \ArrayAccess, \Countable, \IteratorAggregate
@@ -25,31 +27,22 @@ abstract class AbstractEntity implements \ArrayAccess, \Countable, \IteratorAggr
      *
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get(string $key, $default = null)
     {
         return isset($this->elements[$key]) ? $this->elements[$key] : $default;
     }
 
-    /**
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->elements;
     }
 
-    /**
-     * @return int
-     */
-    public function count()
+    public function count(): int
     {
         return count($this->elements);
     }
 
-    /**
-     * @return \ArrayIterator
-     */
-    public function getIterator()
+    public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->elements);
     }
@@ -59,7 +52,7 @@ abstract class AbstractEntity implements \ArrayAccess, \Countable, \IteratorAggr
      *
      * @return bool
      */
-    public function offsetExists($key)
+    public function offsetExists($key): bool
     {
         return array_key_exists($key, $this->elements);
     }
@@ -75,8 +68,8 @@ abstract class AbstractEntity implements \ArrayAccess, \Countable, \IteratorAggr
     }
 
     /**
-     * @param mixed $key
-     * @param mixed $value
+     * @param string $key
+     * @param mixed  $value
      */
     public function offsetSet($key, $value)
     {
@@ -95,25 +88,17 @@ abstract class AbstractEntity implements \ArrayAccess, \Countable, \IteratorAggr
         unset($this->elements[$key]);
     }
 
-    /**
-     * @param int $options
-     *
-     * @return string
-     */
-    public function toJson($options = 0)
+    public function toJson(int $options = 0): string
     {
         return json_encode($this->toArray(), $options);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toJson();
     }
 
-    protected function convert(array $data)
+    protected function convert(array $data): array
     {
         foreach ($data as $key => $item) {
             if (!isset(static::$objectMap[$key])) {
