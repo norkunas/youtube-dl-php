@@ -245,6 +245,7 @@ class YoutubeDl
         $escapedUrl = ProcessUtils::escapeArgument($url);
 
         $process = new Process(sprintf('%s %s', $this->getCommandLine(), $escapedUrl), $cwd, null, null, $this->timeout, $this->processOptions);
+        $process->setEnv(['LANG' => 'en_US.UTF-8']);
 
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
