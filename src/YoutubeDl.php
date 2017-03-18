@@ -514,7 +514,7 @@ class YoutubeDl
         return $e;
     }
 
-    private function isUrlSupported(string $url): bool
+    private function isUrlSupported($url)
     {
         if (preg_match('#soundcloud.com/.+/sets.+#', $url)) {
             return false;
