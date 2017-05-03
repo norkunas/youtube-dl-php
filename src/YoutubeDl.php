@@ -90,7 +90,7 @@ class YoutubeDl
         $processBuilder = $this->createProcessBuilder([
             $url,
             '--no-playlist',
-            '--print-json',
+            '--write-info-json',
             '--ignore-config',
         ]);
 
@@ -139,7 +139,10 @@ class YoutubeDl
 
     private function processDownload(Process $process): Video
     {
-        $videoData = $this->jsonDecode(trim($process->getOutput()));
+        $jsonOutput = str_replace(['"','%(ext)s'],['','info.json'],$this->options['output']);
+        $jsonOutput = file_get_contents($this->getDownloadPath().'/'.$jsonOutput);
+
+        $videoData = $this->jsonDecode(trim($jsonOutput));
 
         if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
             $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
