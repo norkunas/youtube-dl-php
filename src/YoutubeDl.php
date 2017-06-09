@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessBuilder;
 use YoutubeDl\Entity\Video;
 use YoutubeDl\Exception\AccountTerminatedException;
 use YoutubeDl\Exception\CopyrightException;
@@ -22,7 +21,7 @@ class YoutubeDl
     /**
      * @var array
      */
-    protected $options;
+    protected $options = [];
 
     /**
      * @var string
@@ -87,26 +86,26 @@ class YoutubeDl
             throw new UrlNotSupportedException(sprintf('Provided url "%s" is not supported.', $url));
         }
 
-        $processBuilder = $this->createProcessBuilder([
+        $arguments = [
             $url,
             '--no-playlist',
             '--print-json',
             '--ignore-config',
-        ]);
+        ];
 
         foreach ($this->options as $option => $value) {
             if ('add-header' === $option) {
                 foreach ($value as $header) {
-                    $processBuilder->add(sprintf('--%s=%s', $option, $header));
+                    $arguments[] = sprintf('--%s=%s', $option, $header);
                 }
             } elseif (is_bool($value)) {
-                $processBuilder->add(sprintf('--%s', $option));
+                $arguments[] = sprintf('--%s', $option);
             } else {
-                $processBuilder->add(sprintf('--%s=%s', $option, $value));
+                $arguments[] = sprintf('--%s=%s', $option, $value);
             }
         }
 
-        $process = $processBuilder->getProcess();
+        $process = $this->createProcess($arguments);
 
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
@@ -119,8 +118,7 @@ class YoutubeDl
 
     public function getExtractorsList(): array
     {
-        $processBuilder = $this->createProcessBuilder(['--list-extractors']);
-        $process = $processBuilder->getProcess();
+        $process = $this->createProcess(['--list-extractors']);
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
 
         return array_filter(explode("\n", $process->getOutput()));
@@ -170,7 +168,7 @@ class YoutubeDl
         return $e;
     }
 
-    private function createProcessBuilder(array $arguments = []): ProcessBuilder
+    private function createProcess(array $arguments = []): Process
     {
         $binPath = $this->binPath ?: (new ExecutableFinder())->find('youtube-dl');
 
@@ -178,14 +176,16 @@ class YoutubeDl
             throw new ExecutableNotFoundException('"youtube-dl" executable was not found. Did you forgot to add it to environment variables? Or set it via $yt->setBinPath(\'/usr/bin/youtube-dl\').');
         }
 
-        $builder = new ProcessBuilder($arguments);
-        $builder->setPrefix($binPath);
-        $builder->setTimeout($this->timeout);
+        array_unshift($arguments, $binPath);
+
+        $process = new Process($arguments);
+        $process->setTimeout($this->timeout);
+
         if ($this->downloadPath) {
-            $builder->setWorkingDirectory($this->downloadPath);
+            $process->setWorkingDirectory($this->downloadPath);
         }
 
-        return $builder;
+        return $process;
     }
 
     private function findFile(string $fileName, string $extension)
