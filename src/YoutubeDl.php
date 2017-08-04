@@ -171,14 +171,14 @@ class YoutubeDl
                         $timer->cancel();
                         $deferred->resolve($this->processDownload($process));
                     }
-                }
-                catch (\Exception $e) {
+                } catch (\Exception $e) {
                     $timer->cancel();
                     $deferred->reject($this->handleException($e));
                 }
             });
         } catch (\Exception $e) {
             $deferred->reject($this->handleException($e));
+            
             return $promise;
         }
 
