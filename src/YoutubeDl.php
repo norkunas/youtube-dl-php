@@ -4,8 +4,14 @@ declare(strict_types=1);
 
 namespace YoutubeDl;
 
+use React\EventLoop\LoopInterface;
+use React\EventLoop\Timer\TimerInterface;
+use React\Promise\Deferred;
+use React\Promise\PromiseInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Exception\RuntimeException;
 use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Entity\Video;
@@ -114,6 +120,69 @@ class YoutubeDl
         }
 
         return $this->processDownload($process);
+    }
+
+    public function downloadAsync(string $url, LoopInterface $loop): PromiseInterface
+    {
+        $deferred = new Deferred();
+        $promise = $deferred->promise();
+
+        try {
+            if (!$this->downloadPath) {
+                throw new \RuntimeException('No download path was set.');
+            }
+
+            if (!$this->isUrlSupported($url)) {
+                throw new UrlNotSupportedException(sprintf('Provided url "%s" is not supported.', $url));
+            }
+
+            $arguments = [
+              $url,
+              '--no-playlist',
+              '--print-json',
+              '--ignore-config',
+            ];
+
+            foreach ($this->options as $option => $value) {
+                if ('add-header' === $option) {
+                    foreach ($value as $header) {
+                        $arguments[] = sprintf('--%s=%s', $option, $header);
+                    }
+                } elseif (is_bool($value)) {
+                    $arguments[] = sprintf('--%s', $option);
+                } else {
+                    $arguments[] = sprintf('--%s=%s', $option, $value);
+                }
+            }
+
+            $process = $this->createProcess($arguments);
+            $process->start(is_callable($this->debug) ? $this->debug : null);
+
+            $loop->addPeriodicTimer(0.001, function (TimerInterface $timer) use ($deferred, $process) {
+                try {
+                    $process->checkTimeout();
+                    if (!$process->isRunning()) {
+                        if ($process->hasBeenSignaled()) {
+                            throw new RuntimeException(sprintf('The process has been signaled with signal "%s".', $process->getTermSignal()));
+                        }
+                        if ($process->getExitCode() !== 0) {
+                            throw new ProcessFailedException($process);
+                        }
+                        $timer->cancel();
+                        $deferred->resolve($this->processDownload($process));
+                    }
+                }
+                catch (\Exception $e) {
+                    $timer->cancel();
+                    $deferred->reject($this->handleException($e));
+                }
+            });
+        } catch (\Exception $e) {
+            $deferred->reject($this->handleException($e));
+            return $promise;
+        }
+
+        return $promise;
     }
 
     public function getExtractorsList(): array
