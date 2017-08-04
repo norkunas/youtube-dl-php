@@ -178,7 +178,7 @@ class YoutubeDl
             });
         } catch (\Exception $e) {
             $deferred->reject($this->handleException($e));
-            
+
             return $promise;
         }
 
