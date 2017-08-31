@@ -31,6 +31,11 @@ class YoutubeDl
     /**
      * @var string
      */
+    protected $pythonPath;
+
+    /**
+     * @var string
+     */
     protected $downloadPath;
 
     /**
@@ -59,6 +64,11 @@ class YoutubeDl
     public function setBinPath(string $binPath)
     {
         $this->binPath = $binPath;
+    }
+
+    public function setPythonPath(string $pythonPath)
+    {
+        $this->pythonPath = $pythonPath;
     }
 
     public function setDownloadPath(string $downloadPath)
@@ -177,6 +187,10 @@ class YoutubeDl
         }
 
         array_unshift($arguments, $binPath);
+
+        if ($this->pythonPath) {
+            array_unshift($arguments, $this->pythonPath);
+        }
 
         $process = new Process($arguments);
         $process->setTimeout($this->timeout);
