@@ -217,6 +217,7 @@ class YoutubeDl
             'ignore-errors' => 'bool',
             'abort-on-error' => 'bool',
             'default-search' => 'string',
+            'force-generic-extractor' => 'bool',
             // Network options
             'proxy' => 'string',
             'socket-timeout' => 'int',
