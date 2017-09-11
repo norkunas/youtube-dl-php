@@ -88,7 +88,7 @@ class YoutubeDl
 
     public function download(string $url): Video
     {
-        if (!$this->downloadPath) {
+        if (!isset($this->options['raw-name']) && !$this->downloadPath) {
             throw new \RuntimeException('No download path was set.');
         }
 
@@ -108,6 +108,8 @@ class YoutubeDl
                 foreach ($value as $header) {
                     $arguments[] = sprintf('--%s=%s', $option, $header);
                 }
+            } elseif ('raw-name' === $option) {
+                $arguments[] = sprintf('-o %s', $value);
             } elseif (is_bool($value)) {
                 $arguments[] = sprintf('--%s', $option);
             } else {
@@ -218,6 +220,7 @@ class YoutubeDl
             'abort-on-error' => 'bool',
             'default-search' => 'string',
             'force-generic-extractor' => 'bool',
+            'raw-name' => 'string',
             // Network options
             'proxy' => 'string',
             'socket-timeout' => 'int',
