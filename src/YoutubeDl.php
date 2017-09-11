@@ -108,6 +108,8 @@ class YoutubeDl
                 foreach ($value as $header) {
                     $arguments[] = sprintf('--%s=%s', $option, $header);
                 }
+            } elseif ('use-raw-path' === $option) {
+                $arguments[] = sprintf('-o', $value);
             } elseif (is_bool($value)) {
                 $arguments[] = sprintf('--%s', $option);
             } else {
@@ -218,6 +220,7 @@ class YoutubeDl
             'abort-on-error' => 'bool',
             'default-search' => 'string',
             'force-generic-extractor' => 'bool',
+            'use-raw-path' => 'bool',
             // Network options
             'proxy' => 'string',
             'socket-timeout' => 'int',
