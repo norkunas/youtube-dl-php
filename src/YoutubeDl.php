@@ -109,7 +109,6 @@ class YoutubeDl
                     $arguments[] = sprintf('--%s=%s', $option, $header);
                 }
             } elseif ('raw-name' === $option) {
-                $isRaw = true;
                 $arguments[] = sprintf('-o %s', $value);
             } elseif (is_bool($value)) {
                 $arguments[] = sprintf('--%s', $option);
