@@ -31,6 +31,7 @@ use YoutubeDl\Exception\PrivateVideoException;
 $dl = new YoutubeDl([
     'continue' => true, // force resume of partially downloaded files. By default, youtube-dl will resume downloads if possible.
     'format' => 'bestvideo',
+    'raw-name' => '%(%(title)s.%(ext)s', // use custom formatting options for file output. see below for documentation
 ]);
 // For more options go to https://github.com/rg3/youtube-dl#user-content-options
 
