@@ -124,6 +124,14 @@ class YoutubeDl
 
     public function downloadAsync(string $url, LoopInterface $loop): PromiseInterface
     {
+        if (!class_exists('LoopInterface')) {
+            throw new \RuntimeException('React event loop package not installed.');
+        }
+
+        if (!class_exists('Deferred')) {
+            throw new \RuntimeException('React promise package not installed.');
+        }
+
         $deferred = new Deferred();
         $promise = $deferred->promise();
 
