@@ -6,7 +6,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessUtils;
 use YoutubeDl\Entity\Video;
 use YoutubeDl\Exception\AccountTerminatedException;
 use YoutubeDl\Exception\CopyrightException;
@@ -236,16 +235,7 @@ class YoutubeDl
             throw new UrlNotSupportedException(sprintf('Provided url "%s" is not supported.', $url));
         }
 
-        if ($this->moveWithPhp) {
-            $cwd = sys_get_temp_dir();
-        } else {
-            $cwd = $this->downloadPath ?: sys_get_temp_dir();
-        }
-
-        $escapedUrl = ProcessUtils::escapeArgument($url);
-
-        $process = new Process(sprintf('%s %s', $this->getCommandLine(), $escapedUrl), $cwd, null, null, $this->timeout, $this->processOptions);
-        $process->setEnv(['LANG' => 'en_US.UTF-8']);
+        $process = $this->createProcess($this->buildCmdArgs($url));
 
         try {
             $process->mustRun(is_callable($this->debug) ? $this->debug : null);
@@ -263,7 +253,7 @@ class YoutubeDl
      */
     public function getExtractorsList()
     {
-        $process = new Process('youtube-dl --list-extractors');
+        $process = $this->createProcess(['--list-extractors']);
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
 
         return array_filter(explode("\n", $process->getOutput()));
@@ -521,5 +511,49 @@ class YoutubeDl
         }
 
         return true;
+    }
+
+    private function createProcess(array $arguments = [])
+    {
+        array_unshift($arguments, $this->binPath ?: 'youtube-dl');
+
+        $process = new Process($arguments);
+        $process->setEnv(['LANG' => 'en_US.UTF-8']);
+        $process->setTimeout($this->timeout);
+        $process->setOptions($this->processOptions);
+
+        if ($this->moveWithPhp) {
+            $cwd = sys_get_temp_dir();
+        } else {
+            $cwd = $this->downloadPath ?: sys_get_temp_dir();
+        }
+
+        $process->setWorkingDirectory($cwd);
+
+        return $process;
+    }
+
+    private function buildCmdArgs($url)
+    {
+        $arguments = [
+            $url,
+            '--no-playlist',
+            '--print-json',
+            '--ignore-config',
+        ];
+
+        foreach ($this->options as $option => $value) {
+            if ('add-header' === $option) {
+                foreach ($value as $header) {
+                    $arguments[] = sprintf('--%s=%s', $option, $header);
+                }
+            } elseif (is_bool($value)) {
+                $arguments[] = sprintf('--%s', $option);
+            } else {
+                $arguments[] = sprintf('--%s=%s', $option, $value);
+            }
+        }
+
+        return $arguments;
     }
 }
