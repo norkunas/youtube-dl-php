@@ -411,7 +411,7 @@ class YoutubeDl
         });
 
         $resolver->setNormalizer('output', function (Options $options, $value) {
-            return sprintf('"%s"', $value);
+            return sprintf("%s", $value);
         });
     }
 
