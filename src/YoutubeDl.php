@@ -15,9 +15,12 @@ use YoutubeDl\Exception\ExecutableNotFoundException;
 use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
 use YoutubeDl\Exception\UrlNotSupportedException;
+use YoutubeDl\Exception\YoutubeDlException;
 
 class YoutubeDl
 {
+    const PROGRESS_PATTERN = '#\[download\]\s+(?<percentage>\d+(?:\.\d+)?%)\s+of\s+(?<size>\d+(?:\.\d+)?(?:K|M|G)iB)(?:\s+at\s+(?<speed>\d+(?:\.\d+)?(?:K|M|G)iB/s))?(?:\s+ETA\s+(?<eta>[\d]{2}:[\d]{2}))?#i';
+
     /**
      * @var array
      */
@@ -53,6 +56,11 @@ class YoutubeDl
      */
     protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
 
+    /**
+     * @var callable
+     */
+    private $progress;
+
     public function __construct(array $options = [])
     {
         $resolver = new OptionsResolver();
@@ -73,7 +81,7 @@ class YoutubeDl
 
     public function setDownloadPath(string $downloadPath)
     {
-        $this->downloadPath = $downloadPath;
+        $this->downloadPath = rtrim($downloadPath, '/');
     }
 
     public function debug(callable $debug)
@@ -84,6 +92,11 @@ class YoutubeDl
     public function setTimeout(int $timeout)
     {
         $this->timeout = $timeout;
+    }
+
+    public function onProgress(callable $onProgress)
+    {
+        $this->progress = $onProgress;
     }
 
     public function download(string $url): Video
@@ -99,8 +112,8 @@ class YoutubeDl
         $arguments = [
             $url,
             '--no-playlist',
-            '--print-json',
             '--ignore-config',
+            '--write-info-json',
         ];
 
         foreach ($this->options as $option => $value) {
@@ -118,7 +131,20 @@ class YoutubeDl
         $process = $this->createProcess($arguments);
 
         try {
-            $process->mustRun(is_callable($this->debug) ? $this->debug : null);
+            $process->mustRun(function ($type, $buffer) {
+                $debug = $this->debug;
+                $progress = $this->progress;
+
+                if (is_callable($debug)) {
+                    $debug($type, $buffer);
+                }
+
+                if (is_callable($progress) && Process::OUT === $type && preg_match(self::PROGRESS_PATTERN, $buffer, $matches)) {
+                    unset($matches[0], $matches[1], $matches[2], $matches[3], $matches[4]);
+
+                    $progress($matches);
+                }
+            });
         } catch (\Exception $e) {
             throw $this->handleException($e);
         }
@@ -139,7 +165,7 @@ class YoutubeDl
         $decoded = json_decode($data, true);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new \RuntimeException(sprintf('Response can\'t be decoded: %s.', $data));
+            throw new YoutubeDlException(sprintf('Response can\'t be decoded: %s.', $data));
         }
 
         return $decoded;
@@ -147,7 +173,15 @@ class YoutubeDl
 
     private function processDownload(Process $process): Video
     {
-        $videoData = $this->jsonDecode(trim($process->getOutput()));
+        if (!preg_match('/Writing video description metadata as JSON to:\s(.+)/', $process->getOutput(), $m)) {
+            throw new YoutubeDlException('Failed to detect metadata file.');
+        }
+
+        $metadataFile = $this->downloadPath.'/'.$m[1];
+
+        $videoData = $this->jsonDecode(trim(file_get_contents($metadataFile)));
+
+        @unlink($metadataFile);
 
         if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
             $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
@@ -156,7 +190,7 @@ class YoutubeDl
             $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
         }
 
-        $videoData['file'] = new \SplFileInfo(rtrim($this->downloadPath, '/').'/'.$videoData['_filename']);
+        $videoData['file'] = new \SplFileInfo($this->downloadPath.'/'.$videoData['_filename']);
 
         return new Video($videoData);
     }
@@ -258,7 +292,7 @@ class YoutubeDl
             'no-part' => 'bool',
             'no-mtime' => 'bool',
             'write-description' => 'bool',
-            'write-info-json' => 'bool',
+            //'write-info-json' => 'bool',
             'write-annotations' => 'bool',
             'load-info' => 'string',
             'cookies' => 'string',

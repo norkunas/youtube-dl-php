@@ -76,6 +76,26 @@ $dl->setDownloadPath('/home/user/downloads');
 $video = $dl->download('https://www.youtube.com/watch?v=oDAw7vW7H0c');
 ```
 
+## Download progress
+```php
+<?php
+$dl->onProgress(function ($progress) {
+    $percentage = $progress['percentage'];
+    $size = $progress['size'];
+    $speed = $progress['speed'] ?? null;
+    $eta = $progress['eta'] ?? null;
+    
+    echo "Percentage: $percentage; Size: $size";
+    if ($speed) {
+        echo "; Speed: $speed";
+    }
+    if ($eta) {
+        echo "; ETA: $eta";
+    }
+    // Will print: Percentage: 21.3%; Size: 4.69MiB; Speed: 4.47MiB/s; ETA: 00:01
+});
+```
+
 **Disabled options which would break download:**
 
-list-formats, list-subs, list-thumbnails, get-url, get-title, get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json (used internally), newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic, ignore-config (used internally), all-formats, playlist-start, playlist-end, playlist-items, playlist-reverse, yes-playlist, no-playlist (used internally).
+list-formats, list-subs, list-thumbnails, get-url, get-title, get-id, get-thumbnail, get-description, get-duration, get-filename, get-format, dump-json, dump-single-json, print-json, write-info-json (used internally), newline, no-progress, console-title, verbose, dump-pages, write-pages, print-traffic, ignore-config (used internally), all-formats, playlist-start, playlist-end, playlist-items, playlist-reverse, yes-playlist, no-playlist (used internally).
