@@ -4,7 +4,7 @@
     "description": "youtube-dl wrapper for php",
     "keywords": ["youtube", "youtube-dl"],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.0.8",
         "symfony/options-resolver": "^3.3",
         "symfony/process": "^3.3"
     },
