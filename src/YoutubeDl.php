@@ -330,7 +330,7 @@ class YoutubeDl
         }
 
         $resolver->setAllowedValues('retries', function ($value) {
-            if (is_string($value) && $value != 'infinite') {
+            if (is_string($value) && 'infinite' != $value) {
                 return false;
             }
 
