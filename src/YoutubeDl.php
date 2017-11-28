@@ -61,6 +61,10 @@ class YoutubeDl
      */
     private $progress;
 
+    private static $blacklist = [
+        '#soundcloud.com/.+/sets.+#',
+    ];
+
     public function __construct(array $options = [])
     {
         $resolver = new OptionsResolver();
@@ -79,9 +83,12 @@ class YoutubeDl
         $this->pythonPath = $pythonPath;
     }
 
+    /**
+     * @param string $downloadPath Download path without trailing slash
+     */
     public function setDownloadPath(string $downloadPath)
     {
-        $this->downloadPath = rtrim($downloadPath, '/');
+        $this->downloadPath = $downloadPath;
     }
 
     public function debug(callable $debug)
@@ -396,8 +403,10 @@ class YoutubeDl
 
     private function isUrlSupported(string $url): bool
     {
-        if (preg_match('#soundcloud.com/.+/sets.+#', $url)) {
-            return false;
+        foreach (self::$blacklist as $pattern) {
+            if (preg_match($pattern, $url)) {
+                return false;
+            }
         }
 
         return true;
