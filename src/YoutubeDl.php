@@ -190,14 +190,18 @@ class YoutubeDl
 
         @unlink($metadataFile);
 
-        if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
-            $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
-            $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
-        } elseif (preg_match('/merged into mkv/', $process->getErrorOutput())) {
-            $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
-        }
+        if (!$this->options['skip-download']) {
+            if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
+                $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
+                $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
+            } elseif (preg_match('/merged into mkv/', $process->getErrorOutput())) {
+                $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
+            }
 
-        $videoData['file'] = new \SplFileInfo($this->downloadPath.'/'.$videoData['_filename']);
+            $videoData['file'] = new \SplFileInfo($this->downloadPath.'/'.$videoData['_filename']);
+        } else {
+            $videoData['file'] = null;
+        }
 
         return new Video($videoData);
     }
