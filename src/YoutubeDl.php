@@ -190,7 +190,7 @@ class YoutubeDl
 
         @unlink($metadataFile);
 
-        if (!$this->options['skip-download']) {
+        if (!isset($this->options['skip-download']) || false === $this->options['skip-download']) {
             if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
                 $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
                 $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
