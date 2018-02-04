@@ -192,10 +192,9 @@ class YoutubeDl
 
         if (!isset($this->options['skip-download']) || false === $this->options['skip-download']) {
             if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
-                $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
-                $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
+                $videoData['_filename'] = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
             } elseif (preg_match('/merged into mkv/', $process->getErrorOutput())) {
-                $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
+                $videoData['_filename'] = $this->findFile($videoData['_filename'], 'mkv');
             }
 
             $videoData['file'] = new \SplFileInfo($this->downloadPath.'/'.$videoData['_filename']);
@@ -249,10 +248,14 @@ class YoutubeDl
 
     private function findFile(string $fileName, string $extension)
     {
-        $iterator = new \RegexIterator(new \DirectoryIterator($this->downloadPath), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), '/'), '('.$extension.')'), \RegexIterator::GET_MATCH);
+        $dirName = pathinfo($fileName, PATHINFO_DIRNAME);
+        $path = $this->downloadPath.(('.' === $dirName) ? '' : DIRECTORY_SEPARATOR.$dirName);
+
+        $iterator = new \RegexIterator(new \DirectoryIterator($path), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), '/'), '('.$extension.')'), \RegexIterator::GET_MATCH);
+
         $iterator->rewind();
 
-        return $iterator->current()[0];
+        return (('.' === $dirName) ? '' : $dirName.DIRECTORY_SEPARATOR).$iterator->current()[0];
     }
 
     private function configureOptions(OptionsResolver $resolver)
