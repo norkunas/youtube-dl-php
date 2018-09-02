@@ -1,6 +1,4 @@
 preset: symfony
 
-linting: true
-
 disabled:
     - phpdoc_to_comment

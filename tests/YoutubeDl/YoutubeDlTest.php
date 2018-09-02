@@ -11,6 +11,7 @@ class YoutubeDlTest extends TestCase
 {
     /**
      * @expectedException \RuntimeException
+     * @expectedExceptionMessage No download path was set.
      */
     public function testDownloadPathNotSet()
     {
