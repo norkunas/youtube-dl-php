@@ -364,6 +364,8 @@ class YoutubeDl
             'ffmpeg-location' => 'string',
             'exec' => 'string',
             'convert-subtitles' => 'string',
+            // Ffmpeg postprocessor
+            'postprocessor-args' => 'string',
         ];
 
         $resolver->setDefined(array_keys($options));
