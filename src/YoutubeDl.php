@@ -21,6 +21,8 @@ class YoutubeDl
 {
     const PROGRESS_PATTERN = '#\[download\]\s+(?<percentage>\d+(?:\.\d+)?%)\s+of\s+(?<size>\d+(?:\.\d+)?(?:K|M|G)iB)(?:\s+at\s+(?<speed>\d+(?:\.\d+)?(?:K|M|G)iB/s))?(?:\s+ETA\s+(?<eta>[\d:]{2,8}))#i';
 
+    const RECODE_VIDEO_FORMATS = ['mp4', 'flv', 'ogg', 'webm', 'mkv', 'avi'];
+
     /**
      * @var array
      */
@@ -193,6 +195,9 @@ class YoutubeDl
         if (!isset($this->options['skip-download']) || false === $this->options['skip-download']) {
             if (isset($this->options['extract-audio']) && true === $this->options['extract-audio']) {
                 $file = $this->findFile($videoData['_filename'], implode('|', $this->allowedAudioFormats));
+                $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
+            } elseif (isset($this->options['recode-video'])) {
+                $file = $this->findFile($videoData['_filename'], implode('|', self::RECODE_VIDEO_FORMATS));
                 $videoData['_filename'] = pathinfo($file, PATHINFO_BASENAME);
             } elseif (preg_match('/merged into mkv/', $process->getErrorOutput())) {
                 $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
@@ -403,6 +408,8 @@ class YoutubeDl
 
             return $value;
         });
+
+        $resolver->setAllowedValues('recode-video', ['mp4', 'flv', 'ogg', 'webm', 'mkv', 'avi']);
     }
 
     private function isUrlSupported(string $url): bool
