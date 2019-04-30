@@ -5,6 +5,7 @@
     "keywords": ["youtube", "youtube-dl"],
     "require": {
         "php": ">=7.0.8",
+        "ext-json": "*",
         "symfony/options-resolver": "^3.3|^4.0",
         "symfony/process": "^3.3|^4.0"
     },

@@ -115,7 +115,7 @@ class YoutubeDl
         }
 
         if (!$this->isUrlSupported($url)) {
-            throw new UrlNotSupportedException(sprintf('Provided url "%s" is not supported.', $url));
+            throw new UrlNotSupportedException("Provided url '$url' is not supported.");
         }
 
         $arguments = [
@@ -380,7 +380,7 @@ class YoutubeDl
         }
 
         $resolver->setAllowedValues('retries', function ($value) {
-            if (is_string($value) && 'infinite' != $value) {
+            if (is_string($value) && 'infinite' !== $value) {
                 return false;
             }
 
@@ -409,7 +409,7 @@ class YoutubeDl
             return $value;
         });
 
-        $resolver->setAllowedValues('recode-video', ['mp4', 'flv', 'ogg', 'webm', 'mkv', 'avi']);
+        $resolver->setAllowedValues('recode-video', self::RECODE_VIDEO_FORMATS);
     }
 
     private function isUrlSupported(string $url): bool
