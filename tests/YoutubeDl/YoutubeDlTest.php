@@ -33,7 +33,7 @@ class YoutubeDlTest extends TestCase
 
     /**
      * @expectedException \YoutubeDl\Exception\UrlNotSupportedException
-     * @expectedExceptionMessageRegExp /Provided url ".+" is not supported\./
+     * @expectedExceptionMessageRegExp /Provided url '.+' is not supported\./
      */
     public function testUrlNotSupported()
     {
