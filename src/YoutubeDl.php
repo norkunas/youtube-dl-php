@@ -169,7 +169,7 @@ class YoutubeDl
         return array_filter(explode("\n", $process->getOutput()));
     }
 
-    private function jsonDecode($data): array
+    protected function jsonDecode($data): array
     {
         $decoded = json_decode($data, true);
 
@@ -180,7 +180,7 @@ class YoutubeDl
         return $decoded;
     }
 
-    private function processDownload(Process $process): Video
+    protected function processDownload(Process $process): Video
     {
         if (!preg_match('/Writing video description metadata as JSON to:\s(.+)/', $process->getOutput(), $m)) {
             throw new YoutubeDlException('Failed to detect metadata file.');
@@ -211,7 +211,7 @@ class YoutubeDl
         return new Video($videoData);
     }
 
-    private function handleException(\Exception $e): \Exception
+    protected function handleException(\Exception $e): \Exception
     {
         $message = $e->getMessage();
 
@@ -228,7 +228,7 @@ class YoutubeDl
         return $e;
     }
 
-    private function createProcess(array $arguments = []): Process
+    protected function createProcess(array $arguments = []): Process
     {
         $binPath = $this->binPath ?: (new ExecutableFinder())->find('youtube-dl');
 
@@ -252,7 +252,7 @@ class YoutubeDl
         return $process;
     }
 
-    private function findFile(string $fileName, string $extension)
+    protected function findFile(string $fileName, string $extension)
     {
         $iterator = new \RegexIterator(new \DirectoryIterator($this->downloadPath), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), '/'), '('.$extension.')'), \RegexIterator::GET_MATCH);
         $iterator->rewind();
@@ -412,7 +412,7 @@ class YoutubeDl
         $resolver->setAllowedValues('recode-video', self::RECODE_VIDEO_FORMATS);
     }
 
-    private function isUrlSupported(string $url): bool
+    protected function isUrlSupported(string $url): bool
     {
         foreach (self::$blacklist as $pattern) {
             if (preg_match($pattern, $url)) {
