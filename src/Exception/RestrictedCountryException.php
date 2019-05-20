@@ -3,6 +3,6 @@ declare(strict_types=1);
 
 namespace YoutubeDl\Exception;
 
-class CopyrightException extends YoutubeDlException
+class RestrictedCountryException extends YoutubeDlException
 {
 }
