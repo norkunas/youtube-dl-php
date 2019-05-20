@@ -16,6 +16,7 @@ use YoutubeDl\Exception\NotFoundException;
 use YoutubeDl\Exception\PrivateVideoException;
 use YoutubeDl\Exception\UrlNotSupportedException;
 use YoutubeDl\Exception\YoutubeDlException;
+use YoutubeDl\Exception\GeoBlockedException;
 
 class YoutubeDl
 {
@@ -219,7 +220,7 @@ class YoutubeDl
         } elseif (preg_match('/account associated with this video has been terminated/', $message)) {
             return new AccountTerminatedException();
         } elseif (preg_match('/The uploader has not made this video available in your country./', $message)){
-            return new RestrictedCountryException()   
+            return new GeoBlockedException()   
         }
 
         return $e;
