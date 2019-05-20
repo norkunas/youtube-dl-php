@@ -218,6 +218,8 @@ class YoutubeDl
             return new NotFoundException();
         } elseif (preg_match('/account associated with this video has been terminated/', $message)) {
             return new AccountTerminatedException();
+        } elseif (preg_match('/The uploader has not made this video available in your country./', $message)){
+            return new RestrictedCountryException()   
         }
 
         return $e;
