@@ -18,6 +18,7 @@ use YoutubeDl\Exception\UrlNotSupportedException;
 use YoutubeDl\Exception\YoutubeDlException;
 use YoutubeDl\Exception\GeoBlockedException;
 
+
 class YoutubeDl
 {
     const PROGRESS_PATTERN = '#\[download\]\s+(?<percentage>\d+(?:\.\d+)?%)\s+of\s+(?<size>\d+(?:\.\d+)?(?:K|M|G)iB)(?:\s+at\s+(?<speed>\d+(?:\.\d+)?(?:K|M|G)iB/s))?(?:\s+ETA\s+(?<eta>[\d:]{2,8}))#i';
