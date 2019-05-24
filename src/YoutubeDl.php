@@ -59,6 +59,11 @@ class YoutubeDl
     protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
 
     /**
+     * @var
+     */
+    protected $useDownloadPathAsCwd;
+
+    /**
      * @var callable
      */
     private $progress;
@@ -67,12 +72,13 @@ class YoutubeDl
         '#soundcloud.com/.+/sets.+#',
     ];
 
-    public function __construct(array $options = [])
+    public function __construct(array $options = [], bool $useDownloadPathAsCwd = true)
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
+        $this->useDownloadPathAsCwd = $useDownloadPathAsCwd;
     }
 
     public function setBinPath(string $binPath)
@@ -110,7 +116,12 @@ class YoutubeDl
 
     public function download(string $url): Video
     {
-        if (!$this->downloadPath) {
+
+        //Output directory priority (if it has been provided)
+        if(isset($this->options['output']))
+            $this->downloadPath = dirname($this->options['output']);
+
+        if (empty($this->downloadPath) || $this->downloadPath == '.' || !is_dir($this->downloadPath)) {
             throw new \RuntimeException('No download path was set.');
         }
 
@@ -186,7 +197,7 @@ class YoutubeDl
             throw new YoutubeDlException('Failed to detect metadata file.');
         }
 
-        $metadataFile = $this->downloadPath . DIRECTORY_SEPARATOR . $m[1];
+        $metadataFile = $this->downloadPath . DIRECTORY_SEPARATOR . basename($m[1]);
 
         $videoData = $this->jsonDecode(trim(file_get_contents($metadataFile)));
 
@@ -245,7 +256,7 @@ class YoutubeDl
         $process = new Process($arguments);
         $process->setTimeout($this->timeout);
 
-        if ($this->downloadPath) {
+        if ($this->downloadPath && $this->useDownloadPathAsCwd) {
             $process->setWorkingDirectory($this->downloadPath);
         }
 
