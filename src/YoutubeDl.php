@@ -118,7 +118,6 @@ class YoutubeDl
     public function download(string $url): Video
     {
 
-        //Output directory priority (if it has been provided)
         if(isset($this->options['output']))
             $this->downloadPath = dirname($this->options['output']);
 
@@ -198,7 +197,7 @@ class YoutubeDl
             throw new YoutubeDlException('Failed to detect metadata file.');
         }
 
-        $metadataFile = $this->downloadPath . DIRECTORY_SEPARATOR . basename($m[1]);
+        $metadataFile = $this->downloadPath.DIRECTORY_SEPARATOR.basename($m[1]);
 
         $videoData = $this->jsonDecode(trim(file_get_contents($metadataFile)));
 
@@ -215,7 +214,7 @@ class YoutubeDl
                 $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
             }
 
-            $videoData['file'] = new \SplFileInfo($this->downloadPath . DIRECTORY_SEPARATOR . $videoData['_filename']);
+            $videoData['file'] = new \SplFileInfo($this->downloadPath.DIRECTORY_SEPARATOR.$videoData['_filename']);
         } else {
             $videoData['file'] = null;
         }
@@ -268,7 +267,7 @@ class YoutubeDl
 
     protected function findFile(string $fileName, string $extension)
     {
-        $iterator = new \RegexIterator(new \DirectoryIterator($this->downloadPath), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), DIRECTORY_SEPARATOR), '(' . $extension . ')'), \RegexIterator::GET_MATCH);
+        $iterator = new \RegexIterator(new \DirectoryIterator($this->downloadPath), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), DIRECTORY_SEPARATOR), '('.$extension.')'), \RegexIterator::GET_MATCH);
         $iterator->rewind();
 
         return $iterator->current()[0];
@@ -278,113 +277,113 @@ class YoutubeDl
     {
         $options = [
             // General options
-            'ignore-errors'              => 'bool',
-            'abort-on-error'             => 'bool',
-            'default-search'             => 'string',
-            'force-generic-extractor'    => 'bool',
+            'ignore-errors' => 'bool',
+            'abort-on-error' => 'bool',
+            'default-search' => 'string',
+            'force-generic-extractor' => 'bool',
             // Network options
-            'proxy'                      => 'string',
-            'socket-timeout'             => 'int',
-            'source-address'             => 'string',
-            'force-ipv4'                 => 'bool',
-            'force-ipv6'                 => 'bool',
+            'proxy' => 'string',
+            'socket-timeout' => 'int',
+            'source-address' => 'string',
+            'force-ipv4' => 'bool',
+            'force-ipv6' => 'bool',
             // Video selection options
-            'match-title'                => 'string',
-            'reject-title'               => 'string',
-            'max-downloads'              => 'int',
-            'min-filesize'               => 'string',
-            'max-filesize'               => 'string',
-            'date'                       => 'string',
-            'datebefore'                 => 'string',
-            'dateafter'                  => 'string',
-            'min-views'                  => 'int',
-            'max-views'                  => 'int',
-            'match-filter'               => 'string',
-            'download-archive'           => 'string',
-            'include-ads'                => 'bool',
+            'match-title' => 'string',
+            'reject-title' => 'string',
+            'max-downloads' => 'int',
+            'min-filesize' => 'string',
+            'max-filesize' => 'string',
+            'date' => 'string',
+            'datebefore' => 'string',
+            'dateafter' => 'string',
+            'min-views' => 'int',
+            'max-views' => 'int',
+            'match-filter' => 'string',
+            'download-archive' => 'string',
+            'include-ads' => 'bool',
             // Download Options
-            'rate-limit'                 => 'string',
-            'retries'                    => 'int|string',
-            'buffer-size'                => 'string',
-            'no-resize-buffer'           => 'bool',
-            'xattr-set-filesize'         => 'bool',
-            'hls-prefer-native'          => 'bool',
-            'external-downloader'        => 'string',
-            'external-downloader-args'   => 'string',
+            'rate-limit' => 'string',
+            'retries' => 'int|string',
+            'buffer-size' => 'string',
+            'no-resize-buffer' => 'bool',
+            'xattr-set-filesize' => 'bool',
+            'hls-prefer-native' => 'bool',
+            'external-downloader' => 'string',
+            'external-downloader-args' => 'string',
             // Filesystem Options
-            'batch-file'                 => 'string',
-            'output'                     => 'string',
-            'autonumber-size'            => 'int',
-            'restrict-filenames'         => 'bool',
-            'no-overwrites'              => 'bool',
-            'continue'                   => 'bool',
-            'no-continue'                => 'bool',
-            'no-part'                    => 'bool',
-            'no-mtime'                   => 'bool',
-            'write-description'          => 'bool',
-            'write-annotations'          => 'bool',
-            'cookies'                    => 'string',
-            'cache-dir'                  => 'string',
-            'no-cache-dir'               => 'bool',
-            'rm-cache-dir'               => 'bool',
-            'id'                         => 'bool',
+            'batch-file' => 'string',
+            'output' => 'string',
+            'autonumber-size' => 'int',
+            'restrict-filenames' => 'bool',
+            'no-overwrites' => 'bool',
+            'continue' => 'bool',
+            'no-continue' => 'bool',
+            'no-part' => 'bool',
+            'no-mtime' => 'bool',
+            'write-description' => 'bool',
+            'write-annotations' => 'bool',
+            'cookies' => 'string',
+            'cache-dir' => 'string',
+            'no-cache-dir' => 'bool',
+            'rm-cache-dir' => 'bool',
+            'id' => 'bool',
             // Thumbnail images
-            'write-thumbnail'            => 'bool',
-            'write-all-thumbnails'       => 'bool',
+            'write-thumbnail' => 'bool',
+            'write-all-thumbnails' => 'bool',
             // Verbosity / Simulation Options
-            'quiet'                      => 'bool',
-            'no-warnings'                => 'bool',
-            'simulate'                   => 'bool',
-            'skip-download'              => 'bool',
-            'call-home'                  => 'bool',
-            'no-call-home'               => 'bool',
+            'quiet' => 'bool',
+            'no-warnings' => 'bool',
+            'simulate' => 'bool',
+            'skip-download' => 'bool',
+            'call-home' => 'bool',
+            'no-call-home' => 'bool',
             // Workarounds
-            'encoding'                   => 'string',
-            'no-check-certificate'       => 'bool',
-            'prefer-insecure'            => 'bool',
-            'user-agent'                 => 'string',
-            'referer'                    => 'string',
-            'add-header'                 => 'array',
-            'bidi-workaround'            => 'bool',
-            'sleep-interval'             => 'int',
+            'encoding' => 'string',
+            'no-check-certificate' => 'bool',
+            'prefer-insecure' => 'bool',
+            'user-agent' => 'string',
+            'referer' => 'string',
+            'add-header' => 'array',
+            'bidi-workaround' => 'bool',
+            'sleep-interval' => 'int',
             // Video Format Options
-            'format'                     => 'string',
-            'prefer-free-formats'        => 'bool',
-            'max-quality'                => 'string',
+            'format' => 'string',
+            'prefer-free-formats' => 'bool',
+            'max-quality' => 'string',
             'youtube-skip-dash-manifest' => 'bool',
-            'merge-output-format'        => 'string',
+            'merge-output-format' => 'string',
             // Subtitle Options
-            'write-sub'                  => 'bool',
-            'write-auto-sub'             => 'bool',
-            'all-subs'                   => 'bool',
-            'sub-format'                 => 'string',
-            'sub-lang'                   => 'string',
+            'write-sub' => 'bool',
+            'write-auto-sub' => 'bool',
+            'all-subs' => 'bool',
+            'sub-format' => 'string',
+            'sub-lang' => 'string',
             // Authentication Options
-            'username'                   => 'string',
-            'password'                   => 'string',
-            'twofactor'                  => 'string',
-            'netrc'                      => 'bool',
-            'video-password'             => 'string',
+            'username' => 'string',
+            'password' => 'string',
+            'twofactor' => 'string',
+            'netrc' => 'bool',
+            'video-password' => 'string',
             // Post-processing Options
-            'extract-audio'              => 'bool',
-            'audio-format'               => 'string',
-            'audio-quality'              => 'int',
-            'recode-video'               => 'string',
-            'keep-video'                 => 'bool',
-            'no-post-overwrites'         => 'bool',
-            'embed-subs'                 => 'bool',
-            'embed-thumbnail'            => 'bool',
-            'add-metadata'               => 'bool',
-            'metadata-from-title'        => 'string',
-            'xattrs'                     => 'bool',
-            'fixup'                      => 'string',
-            'prefer-avconv'              => 'bool',
-            'prefer-ffmpeg'              => 'bool',
-            'ffmpeg-location'            => 'string',
-            'exec'                       => 'string',
-            'convert-subtitles'          => 'string',
+            'extract-audio' => 'bool',
+            'audio-format' => 'string',
+            'audio-quality' => 'int',
+            'recode-video' => 'string',
+            'keep-video' => 'bool',
+            'no-post-overwrites' => 'bool',
+            'embed-subs' => 'bool',
+            'embed-thumbnail' => 'bool',
+            'add-metadata' => 'bool',
+            'metadata-from-title' => 'string',
+            'xattrs' => 'bool',
+            'fixup' => 'string',
+            'prefer-avconv' => 'bool',
+            'prefer-ffmpeg' => 'bool',
+            'ffmpeg-location' => 'string',
+            'exec' => 'string',
+            'convert-subtitles' => 'string',
             // Ffmpeg postprocessor
-            'postprocessor-args'         => 'string',
+            'postprocessor-args' => 'string',
         ];
 
         $resolver->setDefined(array_keys($options));
