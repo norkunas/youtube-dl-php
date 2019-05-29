@@ -277,6 +277,12 @@ class YoutubeDl
             'source-address' => 'string',
             'force-ipv4' => 'bool',
             'force-ipv6' => 'bool',
+            // Geo Restriction options
+            'geo-verification-proxy' => 'string',
+            'geo-bypass' => 'bool',
+            'no-geo-bypass' => 'bool',
+            'geo-bypass-country' => 'string',
+            'geo-bypass-ip-block' => 'string',
             // Video selection options
             'match-title' => 'string',
             'reject-title' => 'string',
