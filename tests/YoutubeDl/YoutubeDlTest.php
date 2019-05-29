@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace YoutubeDl\Tests;
 
 use PHPUnit\Framework\TestCase;
+use YoutubeDl\Exception\UrlNotSupportedException;
 use YoutubeDl\YoutubeDl;
 
 class YoutubeDlTest extends TestCase
 {
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage No download path was set.
-     */
     public function testDownloadPathNotSet()
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('No download path was set.');
+
         (new YoutubeDl())->download('');
     }
 
@@ -31,12 +31,11 @@ class YoutubeDlTest extends TestCase
         $this->assertGreaterThanOrEqual(1, $yt->getExtractorsList());
     }
 
-    /**
-     * @expectedException \YoutubeDl\Exception\UrlNotSupportedException
-     * @expectedExceptionMessageRegExp /Provided url '.+' is not supported\./
-     */
     public function testUrlNotSupported()
     {
+        $this->expectException(UrlNotSupportedException::class);
+        $this->expectExceptionMessageRegExp('/Provided url \'.+\' is not supported\./');
+
         $yt = new YoutubeDl();
         $yt->setDownloadPath('/');
         $yt->download('https://soundcloud.com/csimpi/sets/go4it-demo');
