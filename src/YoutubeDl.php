@@ -60,11 +60,6 @@ class YoutubeDl
     protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
 
     /**
-     * @var
-     */
-    protected $useDownloadPathAsCwd;
-
-    /**
      * @var callable
      */
     private $progress;
@@ -73,13 +68,12 @@ class YoutubeDl
         '#soundcloud.com/.+/sets.+#',
     ];
 
-    public function __construct(array $options = [], bool $useDownloadPathAsCwd = true)
+    public function __construct(array $options = [])
     {
         $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
 
         $this->options = $resolver->resolve($options);
-        $this->useDownloadPathAsCwd = $useDownloadPathAsCwd;
     }
 
     public function setBinPath(string $binPath)
@@ -117,11 +111,11 @@ class YoutubeDl
 
     public function download(string $url): Video
     {
-        if(isset($this->options['output'])) {
+        if(isset($this->options['output']) && is_dir(dirname($this->options['output'])) && '.' != dirname($this->options['output'])) {
             $this->downloadPath = dirname($this->options['output']);
         }
 
-        if (empty($this->downloadPath) || '.' == $this->downloadPath  || !is_dir($this->downloadPath)) {
+        if (empty($this->downloadPath) || !is_dir($this->downloadPath)) {
             throw new \RuntimeException('No download path was set.');
         }
 
@@ -258,7 +252,7 @@ class YoutubeDl
         $process = new Process($arguments);
         $process->setTimeout($this->timeout);
 
-        if ($this->downloadPath && $this->useDownloadPathAsCwd) {
+        if ($this->downloadPath) {
             $process->setWorkingDirectory($this->downloadPath);
         }
 
