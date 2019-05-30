@@ -111,11 +111,7 @@ class YoutubeDl
 
     public function download(string $url): Video
     {
-        if (isset($this->options['output']) && is_dir(dirname($this->options['output'])) && '.' != dirname($this->options['output'])) {
-            $this->downloadPath = dirname($this->options['output']);
-        }
-
-        if (empty($this->downloadPath) || !is_dir($this->downloadPath)) {
+        if (!$this->downloadPath) {
             throw new \RuntimeException('No download path was set.');
         }
 
