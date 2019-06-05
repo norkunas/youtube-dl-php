@@ -187,7 +187,7 @@ class YoutubeDl
             throw new YoutubeDlException('Failed to detect metadata file.');
         }
 
-        $metadataFile = $this->downloadPath.'/'.$m[1];
+        $metadataFile = $this->downloadPath.DIRECTORY_SEPARATOR.basename($m[1]);
 
         $videoData = $this->jsonDecode(trim(file_get_contents($metadataFile)));
 
@@ -204,7 +204,7 @@ class YoutubeDl
                 $videoData['_filename'] = pathinfo($this->findFile($videoData['_filename'], 'mkv'), PATHINFO_BASENAME);
             }
 
-            $videoData['file'] = new \SplFileInfo($this->downloadPath.'/'.$videoData['_filename']);
+            $videoData['file'] = new \SplFileInfo($this->downloadPath.DIRECTORY_SEPARATOR.$videoData['_filename']);
         } else {
             $videoData['file'] = null;
         }
@@ -257,7 +257,7 @@ class YoutubeDl
 
     protected function findFile(string $fileName, string $extension)
     {
-        $iterator = new \RegexIterator(new \DirectoryIterator($this->downloadPath), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), '/'), '('.$extension.')'), \RegexIterator::GET_MATCH);
+        $iterator = new \RegexIterator(new \DirectoryIterator($this->downloadPath), sprintf('/%s\.%s$/ui', preg_quote(pathinfo($fileName, PATHINFO_FILENAME), DIRECTORY_SEPARATOR), '('.$extension.')'), \RegexIterator::GET_MATCH);
         $iterator->rewind();
 
         return $iterator->current()[0];
