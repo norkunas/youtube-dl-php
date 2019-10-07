@@ -57,7 +57,7 @@ class YoutubeDl
     /**
      * @var array
      */
-    protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav','flac'];
+    protected $allowedAudioFormats = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav', 'flac'];
 
     /**
      * @var callable
