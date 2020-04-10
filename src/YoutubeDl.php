@@ -109,6 +109,24 @@ class YoutubeDl
         $this->progress = $onProgress;
     }
 
+    public function getInfo(string $url): Video
+    {
+        if (!$this->isUrlSupported($url)) {
+            throw new UrlNotSupportedException("Provided url '$url' is not supported.");
+        }
+
+        $process = $this->createProcess([
+            $url,
+            '-j',
+            '--no-playlist',
+            '--ignore-config',
+        ]);
+
+        $process->mustRun(is_callable($this->debug) ? $this->debug : null);
+        $videoData = $this->jsonDecode($process->getOutput());
+        return new Video($videoData);
+    }
+
     public function download(string $url): Video
     {
         if (!$this->downloadPath) {
