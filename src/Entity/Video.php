@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace YoutubeDl\Entity;
 
@@ -14,6 +14,30 @@ class Video extends AbstractEntity
         'subtitles' => 'YoutubeDl\\Entity\\Subtitles',
         'thumbnails' => 'YoutubeDl\\Entity\Thumbnail',
     ];
+
+    /**
+     * @return string
+     */
+    public function getAlbum()
+    {
+        return $this->get('album');
+    }
+
+    /**
+     * @return string
+     */
+    public function getArtist()
+    {
+        return $this->get('artist');
+    }
+
+    /**
+     * @return string
+     */
+    public function getTrack()
+    {
+        return $this->get('track');
+    }
 
     /**
      * @return \DateTime
