@@ -91,7 +91,7 @@ class Format extends AbstractEntity
      */
     public function getFormatId()
     {
-        return $this->get('format');
+        return $this->get('format_id');
     }
 
     /**
