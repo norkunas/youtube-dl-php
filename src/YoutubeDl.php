@@ -124,6 +124,7 @@ class YoutubeDl
 
         $process->mustRun(is_callable($this->debug) ? $this->debug : null);
         $videoData = $this->jsonDecode($process->getOutput());
+
         return new Video($videoData);
     }
 

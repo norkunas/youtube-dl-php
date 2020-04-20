@@ -26,7 +26,7 @@ class YoutubeDlTest extends TestCase
             ->setMethods(['getInfo'])
             ->getMock();
 
-        $this->assertInstanceOf(Video::class, $yt->getInfo("https://www.youtube.com/watch?v=aqz-KE-bpKQ"));
+        $this->assertInstanceOf(Video::class, $yt->getInfo('https://www.youtube.com/watch?v=aqz-KE-bpKQ'));
     }
 
     public function testGetExtractorsList()
