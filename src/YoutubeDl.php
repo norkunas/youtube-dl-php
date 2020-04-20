@@ -124,6 +124,7 @@ class YoutubeDl
             '--no-playlist',
             '--ignore-config',
             '--write-info-json',
+            '--rm-cache-dir',
         ];
 
         foreach ($this->options as $option => $value) {
