@@ -7,6 +7,7 @@ namespace YoutubeDl\Tests;
 use PHPUnit\Framework\TestCase;
 use YoutubeDl\Exception\UrlNotSupportedException;
 use YoutubeDl\YoutubeDl;
+use YoutubeDl\Entity\Video;
 
 class YoutubeDlTest extends TestCase
 {
@@ -16,6 +17,16 @@ class YoutubeDlTest extends TestCase
         $this->expectExceptionMessage('No download path was set.');
 
         (new YoutubeDl())->download('');
+    }
+
+    public function testGetInfo()
+    {
+        $yt = $this->getMockBuilder(YoutubeDl::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getInfo'])
+            ->getMock();
+
+        $this->assertInstanceOf(Video::class, $yt->getInfo('https://www.youtube.com/watch?v=aqz-KE-bpKQ'));
     }
 
     public function testGetExtractorsList()
@@ -34,7 +45,7 @@ class YoutubeDlTest extends TestCase
     public function testUrlNotSupported()
     {
         $this->expectException(UrlNotSupportedException::class);
-        $this->expectExceptionMessageRegExp('/Provided url \'.+\' is not supported\./');
+        $this->expectExceptionMessageMatches('/Provided url \'.+\' is not supported\./');
 
         $yt = new YoutubeDl();
         $yt->setDownloadPath('/');
