@@ -16,7 +16,7 @@ class Video extends AbstractEntity
     ];
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getAlbum()
     {
@@ -24,7 +24,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getArtist()
     {
@@ -32,7 +32,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getTrack()
     {
