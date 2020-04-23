@@ -16,6 +16,30 @@ class Video extends AbstractEntity
     ];
 
     /**
+     * @return string|null
+     */
+    public function getAlbum()
+    {
+        return $this->get('album');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getArtist()
+    {
+        return $this->get('artist');
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTrack()
+    {
+        return $this->get('track');
+    }
+
+    /**
      * @return \DateTime
      */
     public function getUploadDate()
