@@ -10,8 +10,7 @@ A PHP wrapper for [youtube-dl](https://github.com/rg3/youtube-dl) tool.
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
 ## Install
-First step is to download the [youtube-dl](http://rg3.github.io/youtube-dl/download.html) and add it's path to
-environment variables.
+First step is to download the [youtube-dl](http://rg3.github.io/youtube-dl/download.html).
 
 Second step is to install the wrapper using [Composer](http://getcomposer.org/):
 ```
@@ -34,7 +33,18 @@ $dl = new YoutubeDl([
 ]);
 // For more options go to https://github.com/rg3/youtube-dl#user-content-options
 
+// You can set the youtube-dl binary path directly, so the library will know
+// how to execute it without trying to locate it automatically. Also you can
+// add it to PATH environment variable.
+$dl->setBinPath('/path/to/youtube-dl');
+
+// If you are getting some Python related errors on windows (ex.: https://github.com/norkunas/youtube-dl-php/pull/40),
+// you can try to set the python path, it may help.
+$dl->setPythonPath('C:\Python\python.exe');
+
+// Set the download path where you want to store downloaded data
 $dl->setDownloadPath('/home/user/downloads');
+
 // Enable debugging
 /*$dl->debug(function ($type, $buffer) {
     if (\Symfony\Component\Process\Process::ERR === $type) {
