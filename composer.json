@@ -12,6 +12,10 @@
     "require-dev": {
         "phpunit/phpunit": "^6.5"
     },
+    "suggest": {
+        "react/promise": "Needed for async downloads",
+        "react/event-loop": "Needed for async downloads"
+    },
     "license": "MIT",
     "authors": [
         {
