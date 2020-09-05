@@ -6,6 +6,6 @@ namespace YoutubeDl\Exception;
 
 use LogicException;
 
-class ExecutableNotFoundException extends LogicException
+final class NoUrlProvidedException extends LogicException
 {
 }

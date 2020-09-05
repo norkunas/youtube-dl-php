@@ -1,0 +1,5 @@
+[youtube] rqSwX_-PHNU: Downloading webpage
+[youtube] rqSwX_-PHNU: Downloading video info webpage
+WARNING: Unable to extract video title
+[youtube] rqSwX_-PHNU: Extracting video information
+[err] ERROR: Unable to extract uploader name; please report this issue on https://yt-dl.org/bug . Make sure you are using the latest version; type  youtube-dl -U  to update. Be sure to call youtube-dl with the --verbose flag and include its complete output.

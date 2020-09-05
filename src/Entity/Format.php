@@ -6,210 +6,132 @@ namespace YoutubeDl\Entity;
 
 class Format extends AbstractEntity
 {
-    /**
-     * @return string
-     */
-    public function getFormat()
+    public function getFormat(): ?string
     {
         return $this->get('format');
     }
 
-    /**
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->get('url');
     }
 
-    /**
-     * @return array
-     */
-    public function getHttpHeaders()
+    public function getHttpHeaders(): array
     {
-        return $this->get('http_headers');
+        return $this->get('http_headers', []);
     }
 
-    /**
-     * @return string
-     */
-    public function getAcodec()
+    public function getAcodec(): ?string
     {
         return $this->get('acodec');
     }
 
-    /**
-     * @return string
-     */
-    public function getVcodec()
+    public function getVcodec(): ?string
     {
         return $this->get('vcodec');
     }
 
-    /**
-     * @return string
-     */
-    public function getFormatNote()
+    public function getFormatNote(): ?string
     {
         return $this->get('format_note');
     }
 
-    /**
-     * @return int
-     */
-    public function getAbr()
+    public function getAbr(): ?int
     {
         return $this->get('abr');
     }
 
-    /**
-     * @return string
-     */
-    public function getPlayerUrl()
+    public function getPlayerUrl(): ?string
     {
         return $this->get('player_url');
     }
 
-    /**
-     * @return string
-     */
-    public function getExt()
+    public function getExt(): ?string
     {
         return $this->get('ext');
     }
 
-    /**
-     * @return int
-     */
-    public function getPreference()
+    public function getPreference(): ?int
     {
         return $this->get('preference');
     }
 
-    /**
-     * @return string
-     */
-    public function getFormatId()
+    public function getFormatId(): ?string
     {
         return $this->get('format');
     }
 
-    /**
-     * @return string
-     */
-    public function getContainer()
+    public function getContainer(): ?string
     {
         return $this->get('container');
     }
 
-    /**
-     * @return int
-     */
-    public function getWidth()
+    public function getWidth(): ?int
     {
         return $this->get('width');
     }
 
-    /**
-     * @return int
-     */
-    public function getHeight()
+    public function getHeight(): ?int
     {
         return $this->get('height');
     }
 
-    /**
-     * @return int
-     */
-    public function getAsr()
+    public function getAsr(): ?int
     {
         return $this->get('asr');
     }
 
-    /**
-     * @return int
-     */
-    public function getTbr()
+    public function getTbr(): ?float
     {
         return $this->get('tbr');
     }
 
-    /**
-     * @return int
-     */
-    public function getFps()
+    public function getFps(): ?float
     {
         return $this->get('fps');
     }
 
-    /**
-     * @return int
-     */
-    public function getFilesize()
+    public function getFilesize(): ?int
     {
         return $this->get('filesize');
     }
 
-    /**
-     * @return string
-     */
-    public function getResolution()
+    public function getResolution(): ?string
     {
         return $this->get('resolution');
     }
 
-    /**
-     * @return int
-     */
-    public function getVbr()
+    public function getVbr(): ?int
     {
         return $this->get('vbr');
     }
 
-    /**
-     * @return string
-     */
-    public function getProtocol()
+    public function getProtocol(): ?string
     {
         return $this->get('protocol');
     }
 
-    /**
-     * @return int
-     */
-    public function getLanguagePreference()
+    public function getLanguagePreference(): ?int
     {
         return $this->get('language_preference');
     }
 
-    /**
-     * @return int
-     */
-    public function getQuality()
+    public function getQuality(): ?int
     {
         return $this->get('quality');
     }
 
-    /**
-     * @return int
-     */
-    public function getSourcePreference()
+    public function getSourcePreference(): ?int
     {
         return $this->get('source_preference');
     }
 
-    /**
-     * @return float
-     */
-    public function getStretchedRatio()
+    public function getStretchedRatio(): ?float
     {
         return $this->get('stretched_ratio');
     }
 
-    /**
-     * @return bool
-     */
-    public function getNoResume()
+    public function getNoResume(): bool
     {
         return $this->get('no_resume');
     }

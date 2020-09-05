@@ -15,7 +15,11 @@ indent_size = 4
 [composer.json]
 indent_size = 4
 
-[*.yml]
+[*.{yml,yaml}]
+indent_size = 4
+
+[*.{neon,neon.dist}]
+indent_style = tab
 indent_size = 4
 
 [*.md]

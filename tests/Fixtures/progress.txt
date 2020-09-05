@@ -1,0 +1,63 @@
+[youtube] 2Hy4bT0ESfc: Downloading webpage
+[info] Writing video description metadata as JSON to: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json
+WARNING: Requested formats are incompatible for merge and will be merged into mkv.
+[download] Destination: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4
+
+[download]   0.0% of 21.01MiB at 474.63KiB/s ETA 00:45
+[download]   0.0% of 21.01MiB at  1.24MiB/s ETA 00:17
+[download]   0.0% of 21.01MiB at  2.70MiB/s ETA 00:07
+[download]   0.1% of 21.01MiB at  5.46MiB/s ETA 00:03
+[download]   0.1% of 21.01MiB at  3.83MiB/s ETA 00:05
+[download]   0.3% of 21.01MiB at  4.25MiB/s ETA 00:04
+[download]   0.6% of 21.01MiB at  4.43MiB/s ETA 00:04
+[download]   1.2% of 21.01MiB at  4.35MiB/s ETA 00:04
+[download]   2.4% of 21.01MiB at  4.67MiB/s ETA 00:04
+[download]   4.8% of 21.01MiB at  5.00MiB/s ETA 00:04
+[download]   9.5% of 21.01MiB at  5.14MiB/s ETA 00:03
+[download]  19.0% of 21.01MiB at  5.34MiB/s ETA 00:03
+[download]  38.1% of 21.01MiB at  5.33MiB/s ETA 00:02
+[download]  45.3% of 21.01MiB at  5.39MiB/s ETA 00:02
+[download]  45.4% of 21.01MiB at Unknown speed ETA Unknown ETA
+[download]  45.4% of 21.01MiB at Unknown speed ETA Unknown ETA
+[download]  45.4% of 21.01MiB at Unknown speed ETA Unknown ETA
+[download]  45.4% of 21.01MiB at Unknown speed ETA Unknown ETA
+[download]  45.5% of 21.01MiB at  3.29MiB/s ETA 00:03
+[download]  45.6% of 21.01MiB at  3.80MiB/s ETA 00:03
+[download]  45.9% of 21.01MiB at  4.20MiB/s ETA 00:02
+[download]  46.5% of 21.01MiB at  4.97MiB/s ETA 00:02
+[download]  47.7% of 21.01MiB at  5.06MiB/s ETA 00:02
+[download]  50.1% of 21.01MiB at  5.10MiB/s ETA 00:02
+[download]  54.9% of 21.01MiB at  5.12MiB/s ETA 00:01
+[download]  64.4% of 21.01MiB at  4.98MiB/s ETA 00:01
+[download]  83.4% of 21.01MiB at  5.05MiB/s ETA 00:00
+[download]  92.2% of 21.01MiB at  5.07MiB/s ETA 00:00
+[download]  92.2% of 21.01MiB at 412.38KiB/s ETA 00:04
+[download]  92.2% of 21.01MiB at  1.14MiB/s ETA 00:01
+[download]  92.3% of 21.01MiB at  2.59MiB/s ETA 00:00
+[download]  92.3% of 21.01MiB at  5.41MiB/s ETA 00:00
+[download]  92.4% of 21.01MiB at  3.14MiB/s ETA 00:00
+[download]  92.5% of 21.01MiB at  3.82MiB/s ETA 00:00
+[download]  92.8% of 21.01MiB at  4.49MiB/s ETA 00:00
+[download]  93.4% of 21.01MiB at  4.29MiB/s ETA 00:00
+[download]  94.6% of 21.01MiB at  4.57MiB/s ETA 00:00
+[download]  97.0% of 21.01MiB at  4.68MiB/s ETA 00:00
+[download] 100.0% of 21.01MiB at  4.99MiB/s ETA 00:00
+[download] 100% of 21.01MiB in 00:04
+[download] Destination: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm
+
+[download]   0.0% of 3.52MiB at 231.69KiB/s ETA 00:15
+[download]   0.1% of 3.52MiB at 643.50KiB/s ETA 00:05
+[download]   0.2% of 3.52MiB at  1.38MiB/s ETA 00:02
+[download]   0.4% of 3.52MiB at  2.82MiB/s ETA 00:01
+[download]   0.9% of 3.52MiB at  5.17MiB/s ETA 00:00
+[download]   1.8% of 3.52MiB at  4.86MiB/s ETA 00:00
+[download]   3.5% of 3.52MiB at  4.53MiB/s ETA 00:00
+[download]   7.1% of 3.52MiB at  4.50MiB/s ETA 00:00
+[download]  14.2% of 3.52MiB at  4.78MiB/s ETA 00:00
+[download]  28.4% of 3.52MiB at  4.96MiB/s ETA 00:00
+[download]  56.9% of 3.52MiB at  5.22MiB/s ETA 00:00
+[download] 100.0% of 3.52MiB at  5.08MiB/s ETA 00:00
+[download] 100% of 3.52MiB in 00:00
+[ffmpeg] Merging formats into "Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.mkv"
+Deleting original file Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4 (pass -k to keep)
+Deleting original file Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm (pass -k to keep)

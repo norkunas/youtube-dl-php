@@ -1,0 +1,6 @@
+[youtube] t3Ww9Z0Kt78: Downloading webpage
+WARNING: video doesn't have subtitles
+[youtube] t3Ww9Z0Kt78: Looking for automatic captions
+WARNING: Couldn't find automatic captions for t3Ww9Z0Kt78
+t3Ww9Z0Kt78 has no automatic captions
+t3Ww9Z0Kt78 has no subtitles

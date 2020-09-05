@@ -1,0 +1,17 @@
+[youtube] N26PICDnOAM: Downloading webpage
+[youtube] N26PICDnOAM: Downloading js player bcf2977e
+[youtube] N26PICDnOAM: Downloading js player bcf2977e
+WARNING: video doesn't have subtitles
+[youtube] N26PICDnOAM: Looking for automatic captions
+Available automatic captions for N26PICDnOAM:
+Language formats
+gu       vtt, ttml, srv3, srv2, srv1
+zh-Hans  vtt, ttml, srv3, srv2, srv1
+zh-Hant  vtt, ttml, srv3, srv2, srv1
+lt       vtt, ttml, srv3, srv2, srv1
+fil      vtt, ttml, srv3, srv2, srv1
+haw      vtt, ttml, srv3, srv2, srv1
+ceb      vtt, ttml, srv3, srv2, srv1
+hmn      vtt, ttml, srv3, srv2, srv1
+sd       vtt, ttml, srv3, srv2, srv1
+N26PICDnOAM has no subtitles

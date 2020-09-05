@@ -6,56 +6,41 @@ namespace YoutubeDl\Entity;
 
 class Comment extends AbstractEntity
 {
-    /**
-     * @return string
-     */
-    public function getAuthor()
+    public function getAuthor(): ?string
     {
         return $this->get('author');
     }
 
-    /**
-     * @return string
-     */
-    public function getAuthorId()
+    public function getAuthorId(): ?string
     {
         return $this->get('author_id');
     }
 
     /**
-     * @return int
+     * @return mixed
      */
     public function getId()
     {
         return $this->get('id');
     }
 
-    /**
-     * @return string
-     */
-    public function getHtml()
+    public function getHtml(): ?string
     {
         return $this->get('html');
     }
 
-    /**
-     * @return string
-     */
-    public function getText()
+    public function getText(): ?string
     {
         return $this->get('text');
     }
 
-    /**
-     * @return int
-     */
-    public function getTimestamp()
+    public function getTimestamp(): ?int
     {
         return $this->get('timestamp');
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getParent()
     {

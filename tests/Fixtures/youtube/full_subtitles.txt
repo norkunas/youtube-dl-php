@@ -1,0 +1,17 @@
+[youtube] X0lRjbrH-L8: Downloading webpage
+[youtube] X0lRjbrH-L8: Looking for automatic captions
+Available automatic captions for X0lRjbrH-L8:
+Language formats
+gu       vtt, ttml, srv3, srv2, srv1
+zh-Hans  vtt, ttml, srv3, srv2, srv1
+zh-Hant  vtt, ttml, srv3, srv2, srv1
+lt       vtt, ttml, srv3, srv2, srv1
+fil      vtt, ttml, srv3, srv2, srv1
+haw      vtt, ttml, srv3, srv2, srv1
+ceb      vtt, ttml, srv3, srv2, srv1
+hmn      vtt, ttml, srv3, srv2, srv1
+sd       vtt, ttml, srv3, srv2, srv1
+Available subtitles for X0lRjbrH-L8:
+Language formats
+nl       vtt, ttml, srv3, srv2, srv1
+hi-Latn  vtt, ttml, srv3, srv2, srv1

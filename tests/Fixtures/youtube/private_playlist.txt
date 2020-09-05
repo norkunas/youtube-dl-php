@@ -1,0 +1,2 @@
+[youtube:playlist] PLtPgu7CB4gbY9oDN3drwC3cMbJggS7dKl: Downloading webpage
+ERROR: This playlist is private, use --username or --netrc to access it.

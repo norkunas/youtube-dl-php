@@ -1,19 +1,32 @@
 language: php
-
 sudo: false
+cache:
+    directories:
+        - $HOME/.composer/cache/files
+        - $HOME/symfony-bridge/.phpunit
+
+matrix:
+    fast_finish: true
+    include:
+        - php: 7.2
+          env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest"
+        - php: 7.4
+          env: SYMFONY_VERSION=4.4.*
+        - php: 7.4
+          env: SYMFONY_VERSION=5.1.* COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
 
 php:
-    - 7.0
-    - 7.1
-    - 7.2
-    - 7.3
+    - 7.4
 
 before_install:
-  - wget https://yt-dl.org/downloads/latest/youtube-dl -O $PWD/youtube-dl --no-check-certificate
-  - export PATH=$PATH:$PWD/
+    - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
+    - if ! [ -z "$STABILITY" ]; then composer config minimum-stability ${STABILITY}; fi;
+    - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
 
-before_script:
-    - composer install --no-interaction --prefer-source
+install:
+    - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
+    - ./vendor/bin/simple-phpunit install
 
 script:
-    - phpunit
+    - composer validate --strict --no-check-lock
+    - ./vendor/bin/simple-phpunit $PHPUNIT_FLAGS

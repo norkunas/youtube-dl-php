@@ -1,0 +1,51 @@
+[youtube] -FZ-pPFAjYY: Downloading webpage
+[info] Writing video description metadata as JSON to: THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json
+WARNING: Requested formats are incompatible for merge and will be merged into mkv.
+[download] Destination: THE BATMAN Trailer (2021)--FZ-pPFAjYY.f399.mp4
+
+[download]   0.0% of 16.57MiB at 331.46KiB/s ETA 00:51
+[download]   0.0% of 16.57MiB at 933.45KiB/s ETA 00:18
+[download]   0.0% of 16.57MiB at  2.04MiB/s ETA 00:08
+[download]   0.1% of 16.57MiB at  4.19MiB/s ETA 00:03
+[download]   0.2% of 16.57MiB at  3.00MiB/s ETA 00:05
+[download]   0.4% of 16.57MiB at  3.61MiB/s ETA 00:04
+[download]   0.7% of 16.57MiB at  4.65MiB/s ETA 00:03
+[download]   1.5% of 16.57MiB at  4.43MiB/s ETA 00:03
+[download]   3.0% of 16.57MiB at  4.85MiB/s ETA 00:03
+[download]   6.0% of 16.57MiB at  4.86MiB/s ETA 00:03
+[download]  12.1% of 16.57MiB at  4.39MiB/s ETA 00:03
+[download]  24.1% of 16.57MiB at  4.77MiB/s ETA 00:02
+[download]  48.3% of 16.57MiB at  4.82MiB/s ETA 00:01
+[download]  60.1% of 16.57MiB at  4.88MiB/s ETA 00:01
+[download]  60.1% of 16.57MiB at 399.84KiB/s ETA 00:17
+[download]  60.1% of 16.57MiB at  1.01MiB/s ETA 00:06
+[download]  60.1% of 16.57MiB at  2.19MiB/s ETA 00:03
+[download]  60.2% of 16.57MiB at  4.42MiB/s ETA 00:01
+[download]  60.3% of 16.57MiB at  2.55MiB/s ETA 00:02
+[download]  60.5% of 16.57MiB at  2.68MiB/s ETA 00:02
+[download]  60.9% of 16.57MiB at  3.38MiB/s ETA 00:01
+[download]  61.6% of 16.57MiB at  4.00MiB/s ETA 00:01
+[download]  63.1% of 16.57MiB at  4.49MiB/s ETA 00:01
+[download]  66.1% of 16.57MiB at  4.57MiB/s ETA 00:01
+[download]  72.2% of 16.57MiB at  4.63MiB/s ETA 00:00
+[download]  84.2% of 16.57MiB at  4.82MiB/s ETA 00:00
+[download] 100.0% of 16.57MiB at  4.91MiB/s ETA 00:00
+[download] 100% of 16.57MiB in 00:03
+[download] Destination: THE BATMAN Trailer (2021)--FZ-pPFAjYY.f251.webm
+
+[download]   0.0% of 2.15MiB at 309.50KiB/s ETA 00:07
+[download]   0.1% of 2.15MiB at 874.60KiB/s ETA 00:02
+[download]   0.3% of 2.15MiB at  1.89MiB/s ETA 00:01
+[download]   0.7% of 2.15MiB at  3.82MiB/s ETA 00:00
+[download]   1.4% of 2.15MiB at  2.53MiB/s ETA 00:00
+[download]   2.9% of 2.15MiB at  3.80MiB/s ETA 00:00
+[download]   5.8% of 2.15MiB at  3.88MiB/s ETA 00:00
+[download]  11.6% of 2.15MiB at  4.84MiB/s ETA 00:00
+[download]  23.2% of 2.15MiB at  4.74MiB/s ETA 00:00
+[download]  46.4% of 2.15MiB at  4.86MiB/s ETA 00:00
+[download]  92.8% of 2.15MiB at  5.06MiB/s ETA 00:00
+[download] 100.0% of 2.15MiB at  5.05MiB/s ETA 00:00
+[download] 100% of 2.15MiB in 00:00
+[ffmpeg] Merging formats into "THE BATMAN Trailer (2021)--FZ-pPFAjYY.mkv"
+Deleting original file THE BATMAN Trailer (2021)--FZ-pPFAjYY.f399.mp4 (pass -k to keep)
+Deleting original file THE BATMAN Trailer (2021)--FZ-pPFAjYY.f251.webm (pass -k to keep)

@@ -6,42 +6,27 @@ namespace YoutubeDl\Entity;
 
 class Thumbnail extends AbstractEntity
 {
-    /**
-     * @return int
-     */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->get('id');
     }
 
-    /**
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->get('url');
     }
 
-    /**
-     * @return int
-     */
-    public function getPreference()
+    public function getPreference(): ?int
     {
         return $this->get('preference');
     }
 
-    /**
-     * @return int
-     */
-    public function getWidth()
+    public function getWidth(): ?int
     {
         return $this->get('width');
     }
 
-    /**
-     * @return int
-     */
-    public function getHeight()
+    public function getHeight(): ?int
     {
         return $this->get('height');
     }

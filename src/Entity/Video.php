@@ -4,403 +4,472 @@ declare(strict_types=1);
 
 namespace YoutubeDl\Entity;
 
+use DateTimeImmutable;
+use DateTimeInterface;
+use Exception;
+use SimpleXMLElement;
+use SplFileInfo;
+use function libxml_clear_errors;
+use function libxml_use_internal_errors;
+
 class Video extends AbstractEntity
 {
-    protected static $objectMap = [
-        'comments' => 'YoutubeDl\\Entity\\Comment',
-        'formats' => 'YoutubeDl\\Entity\\Format',
-        'requested_formats' => 'YoutubeDl\\Entity\\Format',
-        'requested_subtitles' => 'YoutubeDl\\Entity\Subtitles',
-        'subtitles' => 'YoutubeDl\\Entity\\Subtitles',
-        'thumbnails' => 'YoutubeDl\\Entity\Thumbnail',
+    protected static array $objectMap = [
+        'categories' => Category::class,
+        'comments' => Comment::class,
+        'formats' => Format::class,
+        'requested_formats' => Format::class,
+        'requested_subtitles' => Subtitles::class,
+        'subtitles' => Subtitles::class,
+        'thumbnails' => Thumbnail::class,
     ];
 
-    /**
-     * @return \DateTime
-     */
-    public function getUploadDate()
+    public function getError(): ?string
     {
-        return $this->get('upload_date');
+        return $this->get('error');
     }
 
-    /**
-     * @return string
-     */
-    public function getExtractor()
-    {
-        return $this->get('extractor');
-    }
-
-    /**
-     * @return string
-     */
-    public function getFormatNote()
-    {
-        return $this->get('format_note');
-    }
-
-    /**
-     * @return string
-     */
-    public function getVbr()
-    {
-        return $this->get('vbr');
-    }
-
-    /**
-     * @return string
-     */
-    public function getResolution()
-    {
-        return $this->get('resolution');
-    }
-
-    /**
-     * @return int
-     */
-    public function getHeight()
-    {
-        return $this->get('height');
-    }
-
-    /**
-     * @return int
-     */
-    public function getLikeCount()
-    {
-        return $this->get('like_count');
-    }
-
-    /**
-     * @return int
-     */
-    public function getDuration()
-    {
-        return $this->get('duration');
-    }
-
-    /**
-     * @return string
-     */
-    public function getFulltitle()
-    {
-        return $this->get('fulltitle');
-    }
-
-    /**
-     * @return string
-     */
-    public function getId()
+    public function getId(): ?string
     {
         return $this->get('id');
     }
 
-    /**
-     * @return int
-     */
-    public function getViewCount()
-    {
-        return $this->get('view_count');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlaylist()
-    {
-        return $this->get('playlist');
-    }
-
-    /**
-     * @return array
-     */
-    public function getHttpHeaders()
-    {
-        return $this->get('http_headers');
-    }
-
-    /**
-     * @return string
-     */
-    public function getContainer()
-    {
-        return $this->get('container');
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->get('title');
     }
 
-    /**
-     * @return string
-     */
-    public function getAltTitle()
+    public function getUrl(): ?string
+    {
+        return $this->get('url');
+    }
+
+    public function getExt(): ?string
+    {
+        return $this->get('ext');
+    }
+
+    public function getAltTitle(): ?string
     {
         return $this->get('alt_title');
     }
 
-    /**
-     * @return string
-     */
-    public function getFilename()
+    public function getDisplayId(): ?string
+    {
+        return $this->get('display_id');
+    }
+
+    public function getUploader(): ?string
+    {
+        return $this->get('uploader');
+    }
+
+    public function getLicense(): ?string
+    {
+        return $this->get('license');
+    }
+
+    public function getCreator(): ?string
+    {
+        return $this->get('creator');
+    }
+
+    public function getReleaseDate(): ?DateTimeInterface
+    {
+        return $this->get('release_date');
+    }
+
+    public function getTimestamp(): ?int
+    {
+        return $this->get('timestamp');
+    }
+
+    public function getUploadDate(): ?DateTimeInterface
+    {
+        return $this->get('upload_date');
+    }
+
+    public function getUploaderId(): ?string
+    {
+        return $this->get('uploader_id');
+    }
+
+    public function getChannel(): ?string
+    {
+        return $this->get('channel');
+    }
+
+    public function getChannelId(): ?string
+    {
+        return $this->get('channel_id');
+    }
+
+    public function getLocation(): ?string
+    {
+        return $this->get('location');
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->get('duration');
+    }
+
+    public function getViewCount(): ?int
+    {
+        return $this->get('view_count');
+    }
+
+    public function getLikeCount(): ?int
+    {
+        return $this->get('like_count');
+    }
+
+    public function getDislikeCount(): ?int
+    {
+        return $this->get('dislike_count');
+    }
+
+    public function getRepostCount(): ?int
+    {
+        return $this->get('repost_count');
+    }
+
+    public function getAverageRating(): ?float
+    {
+        return $this->get('average_rating');
+    }
+
+    public function getCommentCount(): ?int
+    {
+        return $this->get('comment_count');
+    }
+
+    public function getAgeLimit(): ?int
+    {
+        return $this->get('age_limit');
+    }
+
+    public function getIsLive(): bool
+    {
+        return $this->get('is_live', false);
+    }
+
+    public function getStartTime(): ?int
+    {
+        return $this->get('start_time');
+    }
+
+    public function getEndTime(): ?int
+    {
+        return $this->get('end_time');
+    }
+
+    public function getFormat(): ?string
+    {
+        return $this->get('format');
+    }
+
+    public function getFormatId(): ?string
+    {
+        return $this->get('format_id');
+    }
+
+    public function getFormatNote(): ?string
+    {
+        return $this->get('format_note');
+    }
+
+    public function getWidth(): ?int
+    {
+        return $this->get('width');
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->get('height');
+    }
+
+    public function getResolution(): ?string
+    {
+        return $this->get('resolution');
+    }
+
+    public function getTbr(): ?float
+    {
+        return $this->get('tbr');
+    }
+
+    public function getAbr(): ?int
+    {
+        return $this->get('abr');
+    }
+
+    public function getAcodec(): ?string
+    {
+        return $this->get('acodec');
+    }
+
+    public function getAsr(): ?int
+    {
+        return $this->get('asr');
+    }
+
+    public function getVbr(): ?string
+    {
+        return $this->get('vbr');
+    }
+
+    public function getFps(): ?float
+    {
+        return $this->get('fps');
+    }
+
+    public function getVcodec(): ?string
+    {
+        return $this->get('vcodec');
+    }
+
+    public function getContainer(): ?string
+    {
+        return $this->get('container');
+    }
+
+    public function getFilesize(): ?int
+    {
+        return $this->get('filesize');
+    }
+
+    public function getFilesizeApprox(): ?int
+    {
+        return $this->get('filesize_approx');
+    }
+
+    public function getProtocol(): ?string
+    {
+        return $this->get('protocol');
+    }
+
+    public function getExtractor(): ?string
+    {
+        return $this->get('extractor');
+    }
+
+    public function getExtractorKey(): ?string
+    {
+        return $this->get('extractor_key');
+    }
+
+    public function getEpoch(): ?int
+    {
+        return $this->get('epoch');
+    }
+
+    public function getAutoNumber(): ?int
+    {
+        return $this->get('autonumber');
+    }
+
+    public function getPlaylist(): ?string
+    {
+        return $this->get('playlist');
+    }
+
+    public function getPlaylistIndex(): ?int
+    {
+        return $this->get('playlist_index');
+    }
+
+    public function getPlaylistId(): ?string
+    {
+        return $this->get('playlist_id');
+    }
+
+    public function getPlaylistTitle(): ?string
+    {
+        return $this->get('playlist_title');
+    }
+
+    public function getPlaylistUploader(): ?string
+    {
+        return $this->get('playlist_uploader');
+    }
+
+    public function getPlaylistUploaderId(): ?string
+    {
+        return $this->get('playlist_uploader_id');
+    }
+
+    public function getChapter(): ?string
+    {
+        return $this->get('chapter');
+    }
+
+    public function getChapterNumber(): ?int
+    {
+        return $this->get('chapter_number');
+    }
+
+    public function getChapterId(): ?string
+    {
+        return $this->get('chapter_id');
+    }
+
+    public function getSeries(): ?string
+    {
+        return $this->get('series');
+    }
+
+    public function getSeason(): ?string
+    {
+        return $this->get('season');
+    }
+
+    public function getSeasonNumber(): ?int
+    {
+        return $this->get('season_number');
+    }
+
+    public function getSeasonId(): ?string
+    {
+        return $this->get('season_id');
+    }
+
+    public function getEpisode(): ?string
+    {
+        return $this->get('episode');
+    }
+
+    public function getEpisodeNumber(): ?int
+    {
+        return $this->get('episode_number');
+    }
+
+    public function getEpisodeId(): ?string
+    {
+        return $this->get('episode_id');
+    }
+
+    public function getTrack(): ?string
+    {
+        return $this->get('track');
+    }
+
+    public function getTrackNumber(): ?int
+    {
+        return $this->get('track_number');
+    }
+
+    public function getTrackId(): ?string
+    {
+        return $this->get('track_id');
+    }
+
+    public function getArtist(): ?string
+    {
+        return $this->get('artist');
+    }
+
+    public function getGenre(): ?string
+    {
+        return $this->get('track');
+    }
+
+    public function getAlbum(): ?string
+    {
+        return $this->get('album');
+    }
+
+    public function getAlbumType(): ?string
+    {
+        return $this->get('album_type');
+    }
+
+    public function getAlbumArtist(): ?string
+    {
+        return $this->get('track');
+    }
+
+    public function getDiscNumber(): ?int
+    {
+        return $this->get('disc_number');
+    }
+
+    public function getReleaseYear(): ?string
+    {
+        return $this->get('release_year');
+    }
+
+    public function getHttpHeaders(): array
+    {
+        return $this->get('http_headers', []);
+    }
+
+    public function getFilename(): ?string
     {
         return $this->get('_filename');
     }
 
     /**
-     * @return int
+     * @return Subtitles[]
      */
-    public function getPlaylistIndex()
+    public function getSubtitles(): array
     {
-        return $this->get('playlist_index');
-    }
-
-    /**
-     * @return int
-     */
-    public function getDislikeCount()
-    {
-        return $this->get('dislike_count');
-    }
-
-    /**
-     * @return float
-     */
-    public function getAverageRating()
-    {
-        return $this->get('average_rating');
-    }
-
-    /**
-     * @return int
-     */
-    public function getAbr()
-    {
-        return $this->get('abr');
+        return $this->get('subtitles', []);
     }
 
     /**
      * @return Subtitles[]
      */
-    public function getSubtitles()
+    public function getRequestedSubtitles(): array
     {
-        return $this->get('subtitles');
+        return $this->get('requested_subtitles', []);
     }
 
     /**
      * @return Subtitles[]
      */
-    public function getRequestedSubtitles()
+    public function getAutomaticCaptions(): array
     {
-        return $this->get('requested_subtitles');
+        return $this->get('automatic_captions', []);
     }
 
-    /**
-     * @return Subtitles[]
-     */
-    public function getAutomaticCaptions()
-    {
-        return $this->get('automatic_captions');
-    }
-
-    /**
-     * @return int
-     */
-    public function getFps()
-    {
-        return $this->get('fps');
-    }
-
-    /**
-     * @return int
-     */
-    public function getAgeLimit()
-    {
-        return $this->get('age_limit');
-    }
-
-    /**
-     * @return string
-     */
-    public function getWebpageUrlBasename()
+    public function getWebpageUrlBasename(): ?string
     {
         return $this->get('webpage_url_basename');
     }
 
-    /**
-     * @return int
-     */
-    public function getFilesize()
-    {
-        return $this->get('filesize');
-    }
-
-    /**
-     * @return string
-     */
-    public function getDisplayId()
-    {
-        return $this->get('display_id');
-    }
-
-    /**
-     * @return int
-     */
-    public function getAsr()
-    {
-        return $this->get('asr');
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->get('description');
     }
 
-    /**
-     * @return string
-     */
-    public function getFormat()
-    {
-        return $this->get('format');
-    }
-
-    /**
-     * @return int
-     */
-    public function getTbr()
-    {
-        return $this->get('tbr');
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlaylistId()
-    {
-        return $this->get('playlist_id');
-    }
-
-    /**
-     * @return string
-     */
-    public function getUploader()
-    {
-        return $this->get('uploader');
-    }
-
-    /**
-     * @return string
-     */
-    public function getFormatId()
-    {
-        return $this->get('format_id');
-    }
-
-    /**
-     * @return float
-     */
-    public function getStretchedRatio()
+    public function getStretchedRatio(): ?float
     {
         return $this->get('stretched_ratio');
     }
 
     /**
-     * @return string
+     * @return Category[]
      */
-    public function getUploaderId()
+    public function getCategories(): array
     {
-        return $this->get('uploader_id');
-    }
-
-    /**
-     * @return Category[]|string
-     */
-    public function getCategories()
-    {
-        $categories = [];
-
-        foreach ($this->get('categories') as $title) {
-            $categories[] = new Category(['title' => $title]); // BC
-        }
-
-        return $categories;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPlaylistTitle()
-    {
-        return $this->get('playlist_title');
-    }
-
-    /**
-     * @return string
-     */
-    public function getStitle()
-    {
-        return $this->get('stitle');
+        return $this->get('categories');
     }
 
     /**
      * @return Thumbnail[]
      */
-    public function getThumbnails()
+    public function getThumbnails(): array
     {
-        return $this->get('thumbnails');
+        return $this->get('thumbnails', []);
     }
 
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->get('url');
-    }
-
-    /**
-     * @return string
-     */
-    public function getExtractorKey()
-    {
-        return $this->get('extractor_key');
-    }
-
-    /**
-     * @return string
-     */
-    public function getVcodec()
-    {
-        return $this->get('vcodec');
-    }
-
-    /**
-     * @return \SimpleXMLElement
-     */
-    public function getAnnotations()
+    public function getAnnotations(): ?SimpleXMLElement
     {
         return $this->get('annotations');
     }
 
-    /**
-     * @return string
-     */
-    public function getExt()
-    {
-        return $this->get('ext');
-    }
-
-    /**
-     * @return string
-     */
-    public function getWebpageUrl()
+    public function getWebpageUrl(): ?string
     {
         return $this->get('webpage_url');
     }
@@ -408,153 +477,82 @@ class Video extends AbstractEntity
     /**
      * @return Format[]
      */
-    public function getFormats()
+    public function getFormats(): array
     {
-        return $this->get('formats');
+        return $this->get('formats', []);
     }
 
     /**
      * @return Format[]
      */
-    public function getRequestedFormats()
+    public function getRequestedFormats(): array
     {
-        return $this->get('requested_formats');
+        return $this->get('requested_formats', []);
     }
 
-    /**
-     * @return string
-     */
-    public function getAcodec()
-    {
-        return $this->get('acodec');
-    }
-
-    /**
-     * @return int
-     */
-    public function getWidth()
-    {
-        return $this->get('width');
-    }
-
-    /**
-     * @return int
-     */
-    public function getNEntries()
+    public function getNEntries(): ?int
     {
         return $this->get('n_entries');
     }
 
-    /**
-     * @return int
-     */
-    public function getPreference()
+    public function getPreference(): ?int
     {
         return $this->get('preference');
     }
 
-    /**
-     * @return \SplFileInfo
-     */
-    public function getFile()
+    public function getFile(): SplFileInfo
     {
         return $this->get('file');
     }
 
     /**
-     * @return int
+     * @return Comment[]
      */
-    public function getCommentCount()
+    public function getComments(): array
     {
-        return $this->get('comment_count');
+        return $this->get('comments', []);
     }
 
     /**
-     * @return array
+     * @return string[]
      */
-    public function getComments()
-    {
-        return $this->get('comments');
-    }
-
-    /**
-     * @return array
-     */
-    public function getTags()
+    public function getTags(): array
     {
         return $this->get('tags');
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIsLive()
-    {
-        return $this->get('is_live');
-    }
-
-    /**
-     * @return int
-     */
-    public function getStartTime()
-    {
-        return $this->get('start_time');
-    }
-
-    /**
-     * @return int
-     */
-    public function getEndTime()
-    {
-        return $this->get('end_time');
-    }
-
-    /**
-     * @return string
-     */
-    public function getLocation()
-    {
-        return $this->get('location');
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreator()
-    {
-        return $this->get('creator');
     }
 
     protected function convert(array $data): array
     {
         $data = parent::convert($data);
 
-        if (!empty($data['annotations'])) {
-            $data['annotations'] = $this->convertAnnotations($data['annotations']);
+        if (($data['release_date'] ?? null) !== null) {
+            $data['release_date'] = DateTimeImmutable::createFromFormat('Ymd', $data['release_date']);
         }
 
-        if (!empty($data['upload_date']) && $date = \DateTime::createFromFormat('Ymd', $data['upload_date'])) {
-            $data['upload_date'] = $date;
+        if (($data['upload_date'] ?? null) !== null) {
+            $data['upload_date'] = DateTimeImmutable::createFromFormat('Ymd', $data['upload_date']);
+        }
+
+        if (!empty($data['annotations'])) {
+            $data['annotations'] = $this->convertAnnotations($data['annotations']);
         }
 
         return $data;
     }
 
-    private function convertAnnotations($data)
+    private function convertAnnotations(string $data): ?SimpleXMLElement
     {
         try {
             libxml_use_internal_errors(true);
 
-            $obj = new \SimpleXMLElement($data);
+            $obj = new SimpleXMLElement($data);
             libxml_clear_errors();
 
-            if ($obj) {
-                return $obj;
-            }
-        } catch (\Exception $e) {
+            return $obj;
+        } catch (Exception $e) {
             // If for some reason annotations can't be mapped then just ignore this
         }
 
-        return;
+        return null;
     }
 }

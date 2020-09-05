@@ -1,0 +1,20 @@
+[youtube:playlist] PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG: Downloading webpage
+[download] Downloading playlist: ff
+[youtube:playlist] playlist ff: Downloading 2 videos
+[download] Downloading video 1 of 2
+[youtube] 2Hy4bT0ESfc: Downloading webpage
+[youtube] 2Hy4bT0ESfc: Downloading js player 86f77974
+[youtube] 2Hy4bT0ESfc: Downloading js player 86f77974
+WARNING: video doesn't have subtitles
+[youtube] 2Hy4bT0ESfc: Looking for automatic captions
+WARNING: Couldn't find automatic captions for 2Hy4bT0ESfc
+2Hy4bT0ESfc has no automatic captions
+2Hy4bT0ESfc has no subtitles
+[download] Downloading video 2 of 2
+[youtube] CX11yw6YL1w: Downloading webpage
+WARNING: video doesn't have subtitles
+[youtube] CX11yw6YL1w: Looking for automatic captions
+WARNING: Couldn't find automatic captions for CX11yw6YL1w
+CX11yw6YL1w has no automatic captions
+CX11yw6YL1w has no subtitles
+[download] Finished downloading playlist: ff

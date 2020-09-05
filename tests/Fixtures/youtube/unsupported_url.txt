@@ -1,0 +1,7 @@
+[generic] youtube: Requesting header
+[redirect] Following redirect to https://www.youtube.com/
+[generic] www.youtube: Requesting header
+WARNING: Falling back on generic information extractor.
+[generic] www.youtube: Downloading webpage
+[generic] www.youtube: Extracting information
+ERROR: Unsupported URL: https://www.youtube.com/

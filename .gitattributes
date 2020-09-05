@@ -1,0 +1,8 @@
+* text=auto
+
+/tests export-ignore
+/.php_cs.dist export-ignore
+/.scrutinizer.yml export-ignore
+/.styleci.yml export-ignore
+/.travis.yml
+/phpunit.xml.dist export-ignore

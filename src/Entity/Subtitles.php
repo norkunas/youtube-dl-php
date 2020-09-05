@@ -6,18 +6,12 @@ namespace YoutubeDl\Entity;
 
 class Subtitles extends AbstractEntity
 {
-    /**
-     * @return string
-     */
-    public function getUrl()
+    public function getUrl(): ?string
     {
         return $this->get('url');
     }
 
-    /**
-     * @return string
-     */
-    public function getExt()
+    public function getExt(): ?string
     {
         return $this->get('ext');
     }

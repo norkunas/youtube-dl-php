@@ -6,6 +6,6 @@ namespace YoutubeDl\Exception;
 
 use RuntimeException;
 
-class YoutubeDlException extends RuntimeException
+final class MsoNotParsableException extends RuntimeException
 {
 }

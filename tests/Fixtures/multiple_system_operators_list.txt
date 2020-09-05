@@ -1,0 +1,16 @@
+Supported TV Providers:
+mso               mso name
+ind060-ssc        Silver Star Communications
+jam030            NVC
+ada020            Adams Cable Service
+wcta              Winnebago Cooperative Telecom Association
+tri025            TriCounty Telecom
+hin020            Hinton CATV Co.
+fbcomm            Frankfort Plant Board
+wil015            Wilson Communications
+coo050            Coon Valley Telecommunications Inc
+gra060            GLW Broadband Inc.
+paulbunyan        Paul Bunyan Communications
+musfiber          MUS FiberNET
+alb020            Albany Mutual Telephone
+mtacomm           MTA Communications, LLC
