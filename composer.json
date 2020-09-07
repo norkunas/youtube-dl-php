@@ -21,7 +21,7 @@
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^5.1.5",
-        "mikey179/vfsstream": "^1.6",
+        "mikey179/vfsstream": "^1.6.7",
         "friendsofphp/php-cs-fixer": "^2.16"
     },
     "autoload": {
