@@ -14,9 +14,9 @@ final class StaticFileStoreTest extends TestCase
     public function testCreatePath(): void
     {
         vfsStreamWrapper::register();
-        vfsStreamWrapper::setRoot(new vfsStreamDirectory('yt-dl'));
+        vfsStreamWrapper::setRoot($root = new vfsStreamDirectory('yt-dl'));
 
-        $fileStore = new StaticFileStore(vfsStreamWrapper::getRoot()->url().'/yt-dl');
+        $fileStore = new StaticFileStore($root->url().'/yt-dl');
 
         static::assertDirectoryExists($fileStore->createPath());
     }
