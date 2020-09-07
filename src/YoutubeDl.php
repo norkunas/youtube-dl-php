@@ -19,7 +19,7 @@ use YoutubeDl\FileStore\SysRandomFileStore;
 use YoutubeDl\Metadata\DefaultMetadataReader;
 use YoutubeDl\Metadata\MetadataReaderInterface;
 use YoutubeDl\Process\ArgvBuilder;
-use YoutubeDl\Process\ProcessBuilder;
+use YoutubeDl\Process\DefaultProcessBuilder;
 use YoutubeDl\Process\ProcessBuilderInterface;
 use YoutubeDl\Process\TableParser;
 use function count;
@@ -54,7 +54,7 @@ class YoutubeDl
 
     public function __construct(ProcessBuilderInterface $processBuilder = null, MetadataReaderInterface $metadataReader = null, Filesystem $filesystem = null, FileStoreInterface $fileStore = null)
     {
-        $this->processBuilder = $processBuilder ?? new ProcessBuilder();
+        $this->processBuilder = $processBuilder ?? new DefaultProcessBuilder();
         $this->metadataReader = $metadataReader ?? new DefaultMetadataReader();
         $this->filesystem = $filesystem ?? new Filesystem();
         $this->fileStore = $fileStore ?? new SysRandomFileStore($this->filesystem);
@@ -81,9 +81,6 @@ class YoutubeDl
         return $this;
     }
 
-    /**
-     * @param callable $onProgress
-     */
     public function onProgress(callable $onProgress): self
     {
         $this->progress = $onProgress;
@@ -91,9 +88,6 @@ class YoutubeDl
         return $this;
     }
 
-    /**
-     * @param callable $debug
-     */
     public function debug(callable $debug): self
     {
         $this->debug = $debug;

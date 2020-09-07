@@ -8,13 +8,13 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
 use YoutubeDl\Exception\ExecutableNotFoundException;
-use YoutubeDl\Process\ProcessBuilder;
+use YoutubeDl\Process\DefaultProcessBuilder;
 
-final class ProcessBuilderTest extends TestCase
+final class DefaultProcessBuilderTest extends TestCase
 {
     public function testCustomBinPath(): void
     {
-        $processBuilder = new ProcessBuilder();
+        $processBuilder = new DefaultProcessBuilder();
 
         $process = $processBuilder->build('/home/norkunas/youtube-dl', null);
 
@@ -23,7 +23,7 @@ final class ProcessBuilderTest extends TestCase
 
     public function testCustomBinAndPythonPath(): void
     {
-        $processBuilder = new ProcessBuilder();
+        $processBuilder = new DefaultProcessBuilder();
 
         $process = $processBuilder->build('/home/norkunas/youtube-dl', '/usr/bin/python');
 
@@ -42,7 +42,7 @@ final class ProcessBuilderTest extends TestCase
             ->with('youtube-dl')
             ->willReturn(null);
 
-        $processBuilder = new ProcessBuilder($executableFinder);
+        $processBuilder = new DefaultProcessBuilder($executableFinder);
 
         $processBuilder->build(null, null);
     }

@@ -8,7 +8,7 @@ use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Exception\ExecutableNotFoundException;
 
-final class ProcessBuilder implements ProcessBuilderInterface
+final class DefaultProcessBuilder implements ProcessBuilderInterface
 {
     private ExecutableFinder $executableFinder;
 

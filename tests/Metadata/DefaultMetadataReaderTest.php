@@ -10,10 +10,7 @@ use YoutubeDl\Metadata\DefaultMetadataReader;
 
 final class DefaultMetadataReaderTest extends TestCase
 {
-    /**
-     * @var DefaultMetadataReader
-     */
-    private $reader;
+    private DefaultMetadataReader $reader;
 
     protected function setUp(): void
     {

@@ -41,7 +41,7 @@ class YoutubeDlTest extends TestCase
 
     protected function tearDown(): void
     {
-        vfsStreamWrapper::unregister();;
+        vfsStreamWrapper::unregister();
     }
 
     public function testDownloadWithoutUrl(): void
