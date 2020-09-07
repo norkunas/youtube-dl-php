@@ -13,14 +13,13 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: 7.4
-                  extensions: mbstring
-                  tools: cs2pr, phpstan
+                  tools: cs2pr
             - name: "Install dependencies with composer"
               run: |
                   composer install --prefer-dist --no-progress --no-suggest
                   vendor/bin/simple-phpunit --version
             - name: "Run PHPStan"
-              run: phpstan analyse --error-format=checkstyle | cs2pr
+              run: vendor/bin/phpstan analyse --error-format=checkstyle | cs2pr
     php-cs-fixer:
         name: PHP Coding Standards Fixer
         runs-on: ubuntu-latest
