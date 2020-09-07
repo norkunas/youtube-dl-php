@@ -31,7 +31,7 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: 7.4
-                  tools: cs2pr, php-cs-fixer
+                  tools: cs2pr, php-cs-fixer:2.16.4
             - name: "Install dependencies with composer"
               run: composer install --prefer-dist --no-progress --no-suggest
             - name: "Run PHP-CS-Fixer"
