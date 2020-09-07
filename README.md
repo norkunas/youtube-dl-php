@@ -7,14 +7,14 @@ A PHP wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl) tool.
 [![Build Status](https://travis-ci.org/norkunas/youtube-dl-php.svg?branch=master)](https://travis-ci.org/norkunas/youtube-dl-php)
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
-##### :warning: You are reading documentation for non released version yet. If you need to use stable branch please read documentation [v1 documentation](https://github.com/norkunas/youtube-dl-php/tree/1.x#youtube-dl-php)
+##### :warning: You are reading documentation for non released version yet. If you need to use stable branch please read [v1 documentation](https://github.com/norkunas/youtube-dl-php/tree/1.x#youtube-dl-php).
 
 ## Install
 First step is to download the [youtube-dl](https://ytdl-org.github.io/youtube-dl/download.html).
 
 Second step is to install the wrapper using [Composer](http://getcomposer.org/):
 ```
-composer require norkunas/youtube-dl-php
+composer require norkunas/youtube-dl-php:dev-master
 ```
 
 ## Download video
