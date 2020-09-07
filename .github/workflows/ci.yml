@@ -33,6 +33,8 @@ jobs:
                       symfony-version: 4.4.*
                     - php-version: 7.4
                       symfony-version: 5.1.*
+                    - php-version: 8.0
+                      symfony-version: 5.1.*
         steps:
             - name: "Checkout"
               uses: actions/checkout@v2.0.0
