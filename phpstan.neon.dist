@@ -3,7 +3,7 @@ includes:
 
 parameters:
 	bootstrapFiles:
-		- vendor/bin/.phpunit/phpunit-8.3-0/vendor/autoload.php
+		- vendor/bin/.phpunit/phpunit/vendor/autoload.php
 	paths:
 		- src/
 		- tests/
