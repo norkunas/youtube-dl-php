@@ -15,7 +15,7 @@ use YoutubeDl\Entity\VideoCollection;
 use YoutubeDl\Exception\MsoNotParsableException;
 use YoutubeDl\Exception\NoUrlProvidedException;
 use YoutubeDl\FileStore\FileStoreInterface;
-use YoutubeDl\FileStore\SysRandomFileStore;
+use YoutubeDl\FileStore\RandomFileStore;
 use YoutubeDl\Metadata\DefaultMetadataReader;
 use YoutubeDl\Metadata\MetadataReaderInterface;
 use YoutubeDl\Process\ArgvBuilder;
@@ -57,7 +57,7 @@ class YoutubeDl
         $this->processBuilder = $processBuilder ?? new DefaultProcessBuilder();
         $this->metadataReader = $metadataReader ?? new DefaultMetadataReader();
         $this->filesystem = $filesystem ?? new Filesystem();
-        $this->fileStore = $fileStore ?? new SysRandomFileStore($this->filesystem);
+        $this->fileStore = $fileStore ?? new RandomFileStore($this->filesystem);
         $this->progress = static function (string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {};
         $this->debug = static function (string $type, string $buffer): void {};
     }
