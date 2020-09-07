@@ -35,14 +35,10 @@ class StaticProcess extends Process
         $this->writeMetadata = $writeMetadata;
     }
 
-    public function run(callable $callback = null, array $env = []): int
+    public function start(callable $callback = null, array $env = []): void
     {
-        if (!is_callable($callback)) {
-            throw new RuntimeException(sprintf('`Callable` must be provided to "%s::%s".', __CLASS__, __METHOD__));
-        }
-
-        if ($this->outputFile === null) {
-            throw new RuntimeException(sprintf('Output file must be set for "%s::%s".', __CLASS__, __METHOD__));
+        if (!is_callable($callback) || $this->outputFile === null) {
+            return;
         }
 
         $output = file($this->outputFile);
@@ -51,7 +47,6 @@ class StaticProcess extends Process
             throw FileException::cannotRead($this->outputFile);
         }
 
-        assert(is_callable($callback));
         foreach ($output as $line) {
             $callback('', $line);
         }
@@ -61,13 +56,11 @@ class StaticProcess extends Process
                 copy($metadata['from'], $metadata['to']);
             }
         }
-
-        return 0;
     }
 
-    public function mustRun(callable $callback = null, array $env = []): Process
+    public function wait(callable $callback = null): int
     {
-        return $this;
+        return 0;
     }
 
     public function getOutput(): string

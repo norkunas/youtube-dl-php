@@ -181,8 +181,6 @@ class YoutubeDl
 
     public function listThumbnails(string $url): array
     {
-        $list = [];
-
         $process = $this->processBuilder->build($this->binPath, $this->pythonPath, ['--list-thumbnails', $url]);
         $process->mustRun();
 
