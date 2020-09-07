@@ -31,6 +31,9 @@ final class DefaultProcessBuilder implements ProcessBuilderInterface
             array_unshift($arguments, $pythonPath);
         }
 
-        return new Process($arguments);
+        $process = new Process($arguments);
+        $process->setTimeout(null);
+
+        return $process;
     }
 }
