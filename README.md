@@ -92,3 +92,42 @@ $yt->onProgress(static function (string $progressTarget, string $percentage, str
     }
 });
 ```
+
+## Custom Process Instantiation
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\YoutubeDl;
+
+use Symfony\Component\Process\Process;
+use YoutubeDl\Process\ProcessBuilderInterface;
+
+class ProcessBuilder implements ProcessBuilderInterface
+{
+    public function build(?string $binPath, ?string $pythonPath, array $arguments = []): Process
+    {
+        $process = new Process([$binPath, $pythonPath, ...$arguments]);
+        // Set custom timeout or customize other things..
+        $process->setTimeout(60);
+
+        return $process;
+    }
+}
+```
+
+```php
+<?php
+
+declare(strict_types=1);
+
+use App\YoutubeDl\ProcessBuilder;
+use YoutubeDl\YoutubeDl;
+
+$processBuilder = new ProcessBuilder();
+
+// Provide your custom process builder as the first argument.
+$yt = new YoutubeDl($processBuilder);
+```
