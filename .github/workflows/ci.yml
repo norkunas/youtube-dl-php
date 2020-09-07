@@ -21,7 +21,7 @@ jobs:
             - name: "Run PHPStan"
               run: vendor/bin/phpstan analyse --error-format=checkstyle | cs2pr
     php-cs-fixer:
-        name: PHP Coding Standards Fixer
+        name: PHP-CS-Fixer
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout"
