@@ -14,8 +14,6 @@ matrix:
           env: SYMFONY_VERSION=4.4.*
         - php: 7.4
           env: SYMFONY_VERSION=5.1.* COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
-        - php: nightly
-          env: SYMFONY_VERSION=5.1.*
 
 before_install:
     - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
