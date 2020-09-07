@@ -5,7 +5,6 @@ A PHP wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl) tool.
 [![Latest Unstable Version](https://poser.pugx.org/norkunas/youtube-dl-php/v/unstable.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 [![Total Downloads](https://poser.pugx.org/norkunas/youtube-dl-php/downloads)](https://packagist.org/packages/norkunas/youtube-dl-php)
 ![CI Status](https://github.com/norkunas/youtube-dl-php/workflows/CI/badge.svg?branch=master)
-[![Build Status](https://travis-ci.org/norkunas/youtube-dl-php.svg?branch=master)](https://travis-ci.org/norkunas/youtube-dl-php)
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
 ##### :warning: You are reading documentation for non released version yet. If you need to use stable branch please read [v1 documentation](https://github.com/norkunas/youtube-dl-php/tree/1.x#youtube-dl-php).
