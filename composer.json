@@ -16,6 +16,7 @@
         "phpstan/phpstan": "^0.12.42",
         "phpstan/phpstan-phpunit": "^0.12.16",
         "symfony/filesystem": "^4.4|^5.1",
+        "symfony/polyfill-php80": "^1.18",
         "symfony/process": "^4.4|^5.1"
     },
     "require-dev": {
