@@ -12,13 +12,13 @@ use function sys_get_temp_dir;
 
 final class RandomFileStore implements FileStoreInterface
 {
-    private Filesystem $filesystem;
     private string $tmpPath;
+    private Filesystem $filesystem;
 
-    public function __construct(Filesystem $filesystem, ?string $tmpPath = null)
+    public function __construct(?string $tmpPath = null, ?Filesystem $filesystem = null)
     {
-        $this->filesystem = $filesystem ?? new Filesystem();
         $this->tmpPath = $tmpPath ?? sys_get_temp_dir();
+        $this->filesystem = $filesystem ?? new Filesystem();
     }
 
     /**
