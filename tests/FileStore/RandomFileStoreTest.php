@@ -17,7 +17,7 @@ final class RandomFileStoreTest extends TestCase
         vfsStreamWrapper::register();
         vfsStreamWrapper::setRoot($root = new vfsStreamDirectory('yt-dl'));
 
-        $fileStore = new RandomFileStore(new Filesystem(), $root->url().'/yt-dl');
+        $fileStore = new RandomFileStore($root->url().'/yt-dl', new Filesystem());
 
         static::assertDirectoryExists($fileStore->createPath());
     }
