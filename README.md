@@ -36,8 +36,12 @@ $collection = $yt->download(
 );
 
 foreach ($collection->getVideos() as $video) {
-    echo $video->getTitle(); // Will return Phonebloks
-    // $video->getFile(); // \SplFileInfo instance of downloaded file
+    if ($video->getError() !== null) {
+        echo "Error downloading video: {$video->getError()}.";
+    } else {
+        echo $video->getTitle(); // Will return Phonebloks
+        // $video->getFile(); // \SplFileInfo instance of downloaded file
+    }
 }
 
 ```
@@ -64,7 +68,11 @@ $collection = $yt->download(
 );
 
 foreach ($collection->getVideos() as $video) {
-    $video->getFile(); // audio file
+    if ($video->getError() !== null) {
+        echo "Error downloading video: {$video->getError()}.";
+    } else {
+        $video->getFile(); // audio file
+    }
 }
 ```
 
