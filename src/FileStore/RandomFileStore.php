@@ -17,7 +17,7 @@ final class RandomFileStore implements FileStoreInterface
 
     public function __construct(?string $tmpPath = null, ?Filesystem $filesystem = null)
     {
-        $this->tmpPath = $tmpPath ?? sys_get_temp_dir();
+        $this->tmpPath = $tmpPath ?? sys_get_temp_dir().'/yt-dl';
         $this->filesystem = $filesystem ?? new Filesystem();
     }
 
