@@ -116,7 +116,7 @@ class Video extends AbstractEntity
      */
     public function getHttpHeaders()
     {
-        return $this->get('http_headers');
+        return $this->get('http_headers', []);
     }
 
     /**
@@ -474,7 +474,7 @@ class Video extends AbstractEntity
      */
     public function getComments()
     {
-        return $this->get('comments');
+        return $this->get('comments', []);
     }
 
     /**
@@ -482,7 +482,7 @@ class Video extends AbstractEntity
      */
     public function getTags()
     {
-        return $this->get('tags');
+        return $this->get('tags', []);
     }
 
     /**

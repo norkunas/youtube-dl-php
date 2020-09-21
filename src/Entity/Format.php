@@ -27,7 +27,7 @@ class Format extends AbstractEntity
      */
     public function getHttpHeaders()
     {
-        return $this->get('http_headers');
+        return $this->get('http_headers', []);
     }
 
     /**
