@@ -326,7 +326,7 @@ class Video extends AbstractEntity
     {
         $categories = [];
 
-        foreach ($this->get('categories') as $title) {
+        foreach ($this->get('categories', []) as $title) {
             $categories[] = new Category(['title' => $title]); // BC
         }
 
