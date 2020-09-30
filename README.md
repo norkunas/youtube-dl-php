@@ -7,12 +7,17 @@ A PHP wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl) tool.
 ![CI Status](https://github.com/norkunas/youtube-dl-php/workflows/CI/badge.svg?branch=master)
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
-##### :warning: You are reading documentation for non released version yet. If you need to use stable branch please read [v1 documentation](https://github.com/norkunas/youtube-dl-php/tree/1.x#youtube-dl-php).
+##### :warning: You are perusing documentation for non delivered form yet. In the event that you have to utilize stable branch please read [v1 documentation]
+Link: (https://github.com/norkunas/youtube-dl-php/tree/1.x#youtube-dl-php).
 
-## Install
-First step is to download the [youtube-dl](https://ytdl-org.github.io/youtube-dl/download.html).
+## Installation Steps
+Step 1:
+Download the [youtube-dl]
+Link:(https://ytdl-org.github.io/youtube-dl/download.html).
 
-Second step is to install the wrapper using [Composer](http://getcomposer.org/):
+Step 2:
+Install the wrapper using [Composer]
+Link: (http://getcomposer.org/):
 ```
 composer require norkunas/youtube-dl-php:dev-master
 ```
@@ -101,7 +106,7 @@ $yt->onProgress(static function (string $progressTarget, string $percentage, str
 });
 ```
 
-## Custom Process Instantiation
+## Custom Process of Instantiation
 
 ```php
 <?php
