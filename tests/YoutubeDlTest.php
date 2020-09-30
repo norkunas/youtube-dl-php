@@ -260,6 +260,28 @@ class YoutubeDlTest extends TestCase
     }
 
     /**
+     * @dataProvider provideUnreachableNetworkCases
+     */
+    public function testDownloadWhenNetworkIsUnreachable(string $url, string $outputFile, Video $expectedEntity): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile($outputFile);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            $url,
+        ]);
+
+        $yt = new YoutubeDl($processBuilder, null, null, new StaticFileStore($this->tmpDir));
+
+        $collection = new VideoCollection([$expectedEntity]);
+
+        self::assertEquals($collection, $yt->download(Options::create()->url($url)));
+    }
+
+    /**
      * @dataProvider provideListSubsCases
      */
     public function testListSubs(string $url, string $outputFile, array $expectedSubs): void
@@ -380,6 +402,15 @@ class YoutubeDlTest extends TestCase
             'url' => 'https://www.youtube.com/playlist?list=PLtPgu7CB4gbY9oDN3drwC3cMbJggS7dKl',
             'outputFile' => __DIR__.'/Fixtures/youtube/private_playlist.txt',
             'expectedEntity' => new Video(['error' => 'This playlist is private, use --username or --netrc to access it.', 'extractor' => 'youtube:playlist']),
+        ];
+    }
+
+    public function provideUnreachableNetworkCases(): iterable
+    {
+        yield 'youtube' => [
+            'url' => 'https://www.youtube.com/watch?v=-cRzcUxLxlM',
+            'outputFile' => __DIR__.'/Fixtures/youtube/network_unreachable.txt',
+            'expectedEntity' => new Video(['error' => 'unable to download video data: <urlopen error [Errno 101] Network is unreachable>', 'extractor' => 'youtube']),
         ];
     }
 
