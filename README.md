@@ -151,8 +151,7 @@ Currently there are two prepared FileStores:
 - `YoutubeDl\FileStore\RandomFileStore` - this store is used by default to
 download to random subdirectory of temporary dir which can be provided as a
 first argument, which defaults to `sys_get_tmp_dir()`.
-- `YoutubeDl\FileStore\StaticFileStore` - this store can be used to always
-download to a static directory. Also it is used fo tests.
+- `YoutubeDl\FileStore\StaticFileStore` - this store can be utilized to consistently download to a static registry. Likewise it is utilized fo tests.
 
 ### Custom FileStore
 
