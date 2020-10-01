@@ -134,10 +134,14 @@ class YoutubeDl
                 $currentVideo['fileName'] = $match[1];
             } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1) {
                 $progressTarget = $match[1];
-            } elseif (preg_match(static::PROGRESS_PATTERN, $buffer, $match) === 1) {
-                $progress = $this->progress;
+            } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches) !== false) {
+                if (count($matches) > 0) {
+                    $progress = $this->progress;
 
-                $progress($progressTarget, $match['percentage'], $match['size'], $match['speed'], $match['eta'], $match['totalTime'] ?? null);
+                    foreach ($matches as $match) {
+                        $progress($progressTarget, $match['percentage'], $match['size'], $match['speed'], $match['eta'], $match['totalTime'] ?? null);
+                    }
+                }
             }
 
             $debug = $this->debug;
