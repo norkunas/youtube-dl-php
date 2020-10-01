@@ -22,6 +22,7 @@ use YoutubeDl\Process\ArgvBuilder;
 use YoutubeDl\Process\DefaultProcessBuilder;
 use YoutubeDl\Process\ProcessBuilderInterface;
 use YoutubeDl\Process\TableParser;
+use const PREG_SET_ORDER;
 use function count;
 use function explode;
 use function in_array;
@@ -134,7 +135,7 @@ class YoutubeDl
                 $currentVideo['fileName'] = $match[1];
             } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1) {
                 $progressTarget = $match[1];
-            } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches) !== false) {
+            } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
                 if (count($matches) > 0) {
                     $progress = $this->progress;
 
