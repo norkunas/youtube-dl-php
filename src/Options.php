@@ -16,6 +16,9 @@ class Options
     public const SUBTITLE_FORMATS = ['srt', 'ass', 'vtt', 'lrc'];
     public const MERGE_OUTPUT_FORMATS = ['mkv', 'mp4', 'ogg', 'webm', 'flv'];
 
+    private string $downloadPath;
+    private bool $cleanupMetadata = true;
+
     // Network Options
     private ?string $proxy = null;
     private ?int $socketTimeout = null;
@@ -70,7 +73,7 @@ class Options
     // Filesystem Options
     private ?string $batchFile = null;
     private bool $id = false;
-    private ?string $output = null;
+    private string $output = '%(title)s-%(id)s.%(ext)s';
     private ?int $autoNumberStart = null;
     private bool $restrictFilenames = false;
     private bool $noOverwrites = false;
@@ -153,8 +156,29 @@ class Options
 
     private array $url = [];
 
-    private function __construct()
+    private function __construct(string $downloadPath)
     {
+        $this->downloadPath = rtrim($downloadPath, '\/');
+    }
+
+    /**
+     * Configure where to store downloads.
+     * Arguments from `output` template also are available.
+     */
+    public function downloadPath(string $downloadPath): self
+    {
+        $new = clone $this;
+        $new->downloadPath = rtrim($downloadPath, '\/');
+
+        return $new;
+    }
+
+    public function cleanupMetadata(bool $cleanup): self
+    {
+        $new = clone $this;
+        $new->cleanupMetadata = $cleanup;
+
+        return $new;
     }
 
     /**
@@ -701,8 +725,12 @@ class Options
      *
      * @see https://github.com/ytdl-org/youtube-dl#output-template
      */
-    public function output(?string $output): self
+    public function output(string $output): self
     {
+        if (strpos($output, '/') !== false || strpos($output, '\\')) {
+            throw new InvalidArgumentException('Providing download path via `output` option is prohibited. Set the download path when creating Options object or calling `downloadPath` method.');
+        }
+
         $new = clone $this;
         $new->output = $output;
 
@@ -1461,7 +1489,7 @@ class Options
             // Filesystem Options
             'batch-file' => $this->batchFile,
             'id' => $this->id,
-            'output' => $this->output,
+            'output' => $this->downloadPath.'/'.$this->output,
             'autonumber-start' => $this->autoNumberStart,
             'restrict-filenames' => $this->restrictFilenames,
             'no-overwrites' => $this->noOverwrites,
@@ -1536,8 +1564,8 @@ class Options
         ];
     }
 
-    public static function create(): self
+    public static function create(string $downloadPath): self
     {
-        return new self();
+        return new self($downloadPath);
     }
 }

@@ -13,7 +13,7 @@ final class ArgvBuilderTest extends TestCase
 {
     public function testFluentBuild(): void
     {
-        $options = Options::create()
+        $options = Options::create('/path/to/downloads')
             ->proxy('127.0.0.5')
             ->socketTimeout(5)
             ->headers([
@@ -36,6 +36,7 @@ final class ArgvBuilderTest extends TestCase
             '--datebefore=20200831',
             '--dateafter=20200801',
             '--yes-playlist',
+            '--output=/path/to/downloads/%(title)s-%(id)s.%(ext)s',
             '--add-header=Accept:text/html',
             '--add-header=User-Agent:youtube-downloader',
             'https://www.youtube.com/watch?v=-FZ-pPFAjYY',

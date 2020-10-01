@@ -3,9 +3,9 @@
 [youtube:playlist] playlist ff: Downloading 2 videos
 [download] Downloading video 1 of 2
 [youtube] 2Hy4bT0ESfc: Downloading webpage
-[info] Writing video description metadata as JSON to: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json
+[info] Writing video description metadata as JSON to: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json
 WARNING: Requested formats are incompatible for merge and will be merged into mkv.
-[download] Destination: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4
+[download] Destination: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4
 
 [download]   0.0% of 21.01MiB at 474.63KiB/s ETA 00:45
 [download]   0.0% of 21.01MiB at  1.24MiB/s ETA 00:17
@@ -47,7 +47,7 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  97.0% of 21.01MiB at  4.68MiB/s ETA 00:00
 [download] 100.0% of 21.01MiB at  4.99MiB/s ETA 00:00
 [download] 100% of 21.01MiB in 00:04
-[download] Destination: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm
+[download] Destination: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm
 
 [download]   0.0% of 3.52MiB at 317.05KiB/s ETA 00:11
 [download]   0.1% of 3.52MiB at 899.55KiB/s ETA 00:04
@@ -62,14 +62,14 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  56.9% of 3.52MiB at  4.52MiB/s ETA 00:00
 [download] 100.0% of 3.52MiB at  4.84MiB/s ETA 00:00
 [download] 100% of 3.52MiB in 00:00
-[ffmpeg] Merging formats into "Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.mkv"
-Deleting original file Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4 (pass -k to keep)
-Deleting original file Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm (pass -k to keep)
+[ffmpeg] Merging formats into "vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.mkv"
+Deleting original file vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4 (pass -k to keep)
+Deleting original file vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm (pass -k to keep)
 [download] Downloading video 2 of 2
 [youtube] CX11yw6YL1w: Downloading webpage
-[info] Writing video description metadata as JSON to: Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.info.json
+[info] Writing video description metadata as JSON to: vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.info.json
 WARNING: Requested formats are incompatible for merge and will be merged into mkv.
-[download] Destination: Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f137.mp4
+[download] Destination: vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f137.mp4
 
 [download]   0.0% of 40.67MiB at 495.25KiB/s ETA 01:25
 [download]   0.0% of 40.67MiB at  1.22MiB/s ETA 00:33
@@ -139,7 +139,7 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  97.6% of 40.67MiB at  5.06MiB/s ETA 00:00
 [download] 100.0% of 40.67MiB at  5.29MiB/s ETA 00:00
 [download] 100% of 40.67MiB in 00:07
-[download] Destination: Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f251.webm
+[download] Destination: vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f251.webm
 
 [download]   0.0% of 3.69MiB at 338.77KiB/s ETA 00:11
 [download]   0.1% of 3.69MiB at 969.33KiB/s ETA 00:03
@@ -154,7 +154,7 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  54.2% of 3.69MiB at  4.33MiB/s ETA 00:00
 [download] 100.0% of 3.69MiB at  4.74MiB/s ETA 00:00
 [download] 100% of 3.69MiB in 00:00
-[ffmpeg] Merging formats into "Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.mkv"
-Deleting original file Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f137.mp4 (pass -k to keep)
-Deleting original file Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f251.webm (pass -k to keep)
+[ffmpeg] Merging formats into "vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.mkv"
+Deleting original file vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f137.mp4 (pass -k to keep)
+Deleting original file vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f251.webm (pass -k to keep)
 [download] Finished downloading playlist: ff

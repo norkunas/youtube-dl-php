@@ -1,7 +1,7 @@
 [youtube] -FZ-pPFAjYY: Downloading webpage
-[info] Writing video description metadata as JSON to: THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json
+[info] Writing video description metadata as JSON to: vfs://yt-dl/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json
 WARNING: Requested formats are incompatible for merge and will be merged into mkv.
-[download] Destination: THE BATMAN Trailer (2021)--FZ-pPFAjYY.f399.mp4
+[download] Destination: vfs://yt-dl/THE BATMAN Trailer (2021)--FZ-pPFAjYY.f399.mp4
 
 [download]   0.0% of 16.57MiB at 331.46KiB/s ETA 00:51
 [download]   0.0% of 16.57MiB at 933.45KiB/s ETA 00:18
@@ -31,7 +31,7 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  84.2% of 16.57MiB at  4.82MiB/s ETA 00:00
 [download] 100.0% of 16.57MiB at  4.91MiB/s ETA 00:00
 [download] 100% of 16.57MiB in 00:03
-[download] Destination: THE BATMAN Trailer (2021)--FZ-pPFAjYY.f251.webm
+[download] Destination: vfs://yt-dl/THE BATMAN Trailer (2021)--FZ-pPFAjYY.f251.webm
 
 [download]   0.0% of 2.15MiB at 309.50KiB/s ETA 00:07
 [download]   0.1% of 2.15MiB at 874.60KiB/s ETA 00:02
@@ -46,6 +46,6 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  92.8% of 2.15MiB at  5.06MiB/s ETA 00:00
 [download] 100.0% of 2.15MiB at  5.05MiB/s ETA 00:00
 [download] 100% of 2.15MiB in 00:00
-[ffmpeg] Merging formats into "THE BATMAN Trailer (2021)--FZ-pPFAjYY.mkv"
-Deleting original file THE BATMAN Trailer (2021)--FZ-pPFAjYY.f399.mp4 (pass -k to keep)
-Deleting original file THE BATMAN Trailer (2021)--FZ-pPFAjYY.f251.webm (pass -k to keep)
+[ffmpeg] Merging formats into "vfs://yt-dl/THE BATMAN Trailer (2021)--FZ-pPFAjYY.mkv"
+Deleting original file vfs://yt-dl/THE BATMAN Trailer (2021)--FZ-pPFAjYY.f399.mp4 (pass -k to keep)
+Deleting original file vfs://yt-dl/THE BATMAN Trailer (2021)--FZ-pPFAjYY.f251.webm (pass -k to keep)

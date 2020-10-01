@@ -14,8 +14,6 @@ use YoutubeDl\Entity\Video;
 use YoutubeDl\Entity\VideoCollection;
 use YoutubeDl\Exception\MsoNotParsableException;
 use YoutubeDl\Exception\NoUrlProvidedException;
-use YoutubeDl\FileStore\FileStoreInterface;
-use YoutubeDl\FileStore\RandomFileStore;
 use YoutubeDl\Metadata\DefaultMetadataReader;
 use YoutubeDl\Metadata\MetadataReaderInterface;
 use YoutubeDl\Process\ArgvBuilder;
@@ -23,6 +21,7 @@ use YoutubeDl\Process\DefaultProcessBuilder;
 use YoutubeDl\Process\ProcessBuilderInterface;
 use YoutubeDl\Process\TableParser;
 use const PREG_SET_ORDER;
+use function basename;
 use function count;
 use function explode;
 use function in_array;
@@ -39,7 +38,6 @@ class YoutubeDl
     private ProcessBuilderInterface $processBuilder;
     private MetadataReaderInterface $metadataReader;
     private Filesystem $filesystem;
-    private FileStoreInterface $fileStore;
     private ?string $binPath = null;
     private ?string $pythonPath = null;
 
@@ -53,19 +51,13 @@ class YoutubeDl
      */
     private $debug;
 
-    public function __construct(ProcessBuilderInterface $processBuilder = null, MetadataReaderInterface $metadataReader = null, Filesystem $filesystem = null, FileStoreInterface $fileStore = null)
+    public function __construct(ProcessBuilderInterface $processBuilder = null, MetadataReaderInterface $metadataReader = null, Filesystem $filesystem = null)
     {
         $this->processBuilder = $processBuilder ?? new DefaultProcessBuilder();
         $this->metadataReader = $metadataReader ?? new DefaultMetadataReader();
         $this->filesystem = $filesystem ?? new Filesystem();
-        $this->fileStore = $fileStore ?? new RandomFileStore(null, $this->filesystem);
         $this->progress = static function (string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {};
         $this->debug = static function (string $type, string $buffer): void {};
-    }
-
-    public function setFileStore(FileStoreInterface $fileStore): void
-    {
-        $this->fileStore = $fileStore;
     }
 
     public function setBinPath(?string $binPath): self
@@ -116,7 +108,6 @@ class YoutubeDl
         $progressTarget = null;
 
         $process = $this->processBuilder->build($this->binPath, $this->pythonPath, $arguments);
-        $process->setWorkingDirectory($downloadTmpDir = $this->fileStore->createPath());
         $process->run(function (string $type, string $buffer) use (&$currentVideo, &$parsedData, &$progressTarget): void {
             if (preg_match('/\[(.+)]\s(.+):\sDownloading webpage/', $buffer, $match) === 1) {
                 if ($currentVideo !== null) {
@@ -134,7 +125,7 @@ class YoutubeDl
             } elseif (preg_match('/\[ffmpeg] Destination: (.+)/', $buffer, $match) === 1) {
                 $currentVideo['fileName'] = $match[1];
             } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1) {
-                $progressTarget = $match[1];
+                $progressTarget = basename($match[1]);
             } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
                 if (count($matches) > 0) {
                     $progress = $this->progress;
@@ -163,17 +154,14 @@ class YoutubeDl
                     'extractor' => $parsedRow['extractor'] ?? 'generic',
                 ]);
             } elseif (isset($parsedRow['metadataFile'])) {
-                $metadataFile = $downloadTmpDir.'/'.$parsedRow['metadataFile'];
+                $metadataFile = $parsedRow['metadataFile'];
                 $metadataFiles[] = $metadataFile;
                 $metadata = $this->metadataReader->read($metadataFile);
                 if (isset($parsedRow['fileName'])) {
                     $metadata['_filename'] = $parsedRow['fileName'];
                 }
-
-                $metadata['file'] = null;
-                if (!$options->getSkipDownload()) {
-                    $metadata['file'] = new SplFileInfo("$downloadTmpDir/{$metadata['_filename']}");
-                }
+                $metadata['file'] = new SplFileInfo($metadata['_filename']);
+                $metadata['metadataFile'] = new SplFileInfo($metadataFile);
 
                 $videos[] = new Video($metadata);
             }

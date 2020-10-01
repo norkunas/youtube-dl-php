@@ -1,7 +1,7 @@
 [youtube] 2Hy4bT0ESfc: Downloading webpage
-[info] Writing video description metadata as JSON to: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json
+[info] Writing video description metadata as JSON to: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json
 WARNING: Requested formats are incompatible for merge and will be merged into mkv.
-[download] Destination: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4
+[download] Destination: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4
 
 [download]   0.0% of 21.01MiB at 474.63KiB/s ETA 00:45
 [download]   0.0% of 21.01MiB at  1.24MiB/s ETA 00:17
@@ -43,7 +43,7 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  97.0% of 21.01MiB at  4.68MiB/s ETA 00:00
 [download] 100.0% of 21.01MiB at  4.99MiB/s ETA 00:00
 [download] 100% of 21.01MiB in 00:04
-[download] Destination: Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm
+[download] Destination: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm
 
 [download]   0.0% of 3.52MiB at 231.69KiB/s ETA 00:15
 [download]   0.1% of 3.52MiB at 643.50KiB/s ETA 00:05
@@ -58,6 +58,6 @@ WARNING: Requested formats are incompatible for merge and will be merged into mk
 [download]  56.9% of 3.52MiB at  5.22MiB/s ETA 00:00
 [download] 100.0% of 3.52MiB at  5.08MiB/s ETA 00:00
 [download] 100% of 3.52MiB in 00:00
-[ffmpeg] Merging formats into "Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.mkv"
-Deleting original file Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4 (pass -k to keep)
-Deleting original file Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm (pass -k to keep)
+[ffmpeg] Merging formats into "vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.mkv"
+Deleting original file vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4 (pass -k to keep)
+Deleting original file vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm (pass -k to keep)

@@ -7,6 +7,7 @@ namespace YoutubeDl\Entity;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Exception;
+use JsonException;
 use SimpleXMLElement;
 use SplFileInfo;
 use function libxml_clear_errors;
@@ -505,6 +506,11 @@ class Video extends AbstractEntity
         return $this->get('file');
     }
 
+    public function getMetadataFile(): SplFileInfo
+    {
+        return $this->get('metadataFile');
+    }
+
     /**
      * @return Comment[]
      */
@@ -519,6 +525,21 @@ class Video extends AbstractEntity
     public function getTags(): array
     {
         return $this->get('tags');
+    }
+
+    public function toJson(int $options = JSON_THROW_ON_ERROR): string
+    {
+        $data = $this->toArray();
+        unset($data['file']);
+        unset($data['metadataFile']);
+
+        $json = json_encode($data, $options);
+
+        if ($json === false) {
+            throw new JsonException(json_last_error_msg());
+        }
+
+        return $json;
     }
 
     protected function convert(array $data): array
