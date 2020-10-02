@@ -122,6 +122,48 @@ class YoutubeDlTest extends TestCase
         self::assertEquals(new VideoCollection($videos), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
+    /**
+     * @dataProvider provideDownloadPlaylistMatchTitleCases
+     */
+    public function testDownloadPlaylistMatchTitle(string $url, string $outputFile, VideoCollection $expectedCollection): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile($outputFile);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url,
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
+    }
+
+    /**
+     * @dataProvider provideDownloadPlaylistRejectTitleCases
+     */
+    public function testDownloadPlaylistRejectTitle(string $url, string $outputFile, VideoCollection $expectedCollection): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile($outputFile);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url,
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
+    }
+
     public function testOnProgress(): void
     {
         $process = new StaticProcess();
@@ -393,6 +435,24 @@ class YoutubeDlTest extends TestCase
                 __DIR__.'/Fixtures/youtube/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json',
                 __DIR__.'/Fixtures/youtube/Céline Dion - Ashes (from \'Deadpool 2\' Motion Picture Soundtrack)-CX11yw6YL1w.info.json',
             ],
+        ];
+    }
+
+    public function provideDownloadPlaylistMatchTitleCases(): iterable
+    {
+        yield 'youtube video playlist match title' => [
+            'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
+            'outputFile' => __DIR__.'/Fixtures/youtube/playlist_match_title_zero_results.txt',
+            'expectedCollection' => new VideoCollection([]),
+        ];
+    }
+
+    public function provideDownloadPlaylistRejectTitleCases(): iterable
+    {
+        yield 'youtube video playlist match title' => [
+            'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
+            'outputFile' => __DIR__.'/Fixtures/youtube/playlist_reject_title_zero_results.txt',
+            'expectedCollection' => new VideoCollection([]),
         ];
     }
 

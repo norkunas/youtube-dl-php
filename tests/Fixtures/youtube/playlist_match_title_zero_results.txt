@@ -1,0 +1,8 @@
+[youtube:playlist] PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG: Downloading webpage
+[download] Downloading playlist: ff
+[youtube:playlist] playlist ff: Downloading 2 videos
+[download] Downloading video 1 of 2
+[download] "Pet Shop Boys - Did you see me coming?" title did not match pattern "abc"
+[download] Downloading video 2 of 2
+[download] "Céline Dion - Ashes (from "Deadpool 2" Motion Picture Soundtrack)" title did not match pattern "abc"
+[download] Finished downloading playlist: ff
