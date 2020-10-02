@@ -13,6 +13,7 @@ use YoutubeDl\Entity\Thumbnail;
 use YoutubeDl\Entity\Video;
 use YoutubeDl\Entity\VideoCollection;
 use YoutubeDl\Exception\MsoNotParsableException;
+use YoutubeDl\Exception\NoDownloadPathProvidedException;
 use YoutubeDl\Exception\NoUrlProvidedException;
 use YoutubeDl\Metadata\DefaultMetadataReader;
 use YoutubeDl\Metadata\MetadataReaderInterface;
@@ -94,6 +95,10 @@ class YoutubeDl
 
         if (count($urls) === 0) {
             throw new NoUrlProvidedException('Missing configured URL to download.');
+        }
+
+        if ($options->getDownloadPath() === null) {
+            throw new NoDownloadPathProvidedException('Missing configured downloadPath option.');
         }
 
         $arguments = [

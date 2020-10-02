@@ -13,7 +13,8 @@ final class ArgvBuilderTest extends TestCase
 {
     public function testFluentBuild(): void
     {
-        $options = Options::create('/path/to/downloads')
+        $options = Options::create()
+            ->downloadPath('/path/to/downloads')
             ->proxy('127.0.0.5')
             ->socketTimeout(5)
             ->headers([

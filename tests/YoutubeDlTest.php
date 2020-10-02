@@ -17,6 +17,7 @@ use YoutubeDl\Entity\SubListItem;
 use YoutubeDl\Entity\Video;
 use YoutubeDl\Entity\VideoCollection;
 use YoutubeDl\Exception\FileException;
+use YoutubeDl\Exception\NoDownloadPathProvidedException;
 use YoutubeDl\Exception\NoUrlProvidedException;
 use YoutubeDl\Options;
 use YoutubeDl\Process\ProcessBuilderInterface;
@@ -49,7 +50,16 @@ class YoutubeDlTest extends TestCase
         $this->expectExceptionMessage('Missing configured URL to download.');
 
         $yt = new YoutubeDl();
-        $yt->download(Options::create($this->tmpDir));
+        $yt->download(Options::create()->downloadPath($this->tmpDir));
+    }
+
+    public function testDownloadWithoutDownloadPath(): void
+    {
+        $this->expectException(NoDownloadPathProvidedException::class);
+        $this->expectExceptionMessage('Missing configured downloadPath option.');
+
+        $yt = new YoutubeDl();
+        $yt->download(Options::create()->url('https://url'));
     }
 
     /**
@@ -77,7 +87,7 @@ class YoutubeDlTest extends TestCase
         $video['file'] = new SplFileInfo($this->tmpDir.'/'.basename($m['_filename']));
         $video['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
 
-        self::assertEquals(new VideoCollection([$video]), $yt->download(Options::create($this->tmpDir)->url($url)));
+        self::assertEquals(new VideoCollection([$video]), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
     /**
@@ -109,7 +119,7 @@ class YoutubeDlTest extends TestCase
             return $video;
         }, $metadataFiles);
 
-        self::assertEquals(new VideoCollection($videos), $yt->download(Options::create($this->tmpDir)->url($url)));
+        self::assertEquals(new VideoCollection($videos), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
     public function testOnProgress(): void
@@ -138,7 +148,7 @@ class YoutubeDlTest extends TestCase
             $calls[] = [$progressTarget, $percentage, $size, $speed, $eta, $totalTime];
         });
 
-        $yt->download(Options::create($this->tmpDir)->url($url));
+        $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url));
 
         static::assertSame([
             ['Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f136.mp4', '0.0%', '21.01MiB', '474.63KiB/s', '00:45', null],
@@ -217,7 +227,7 @@ class YoutubeDlTest extends TestCase
 
         $collection = new VideoCollection([$expectedEntity]);
 
-        self::assertEquals($collection, $yt->download(Options::create($this->tmpDir)->url($url)));
+        self::assertEquals($collection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
     /**
@@ -240,7 +250,7 @@ class YoutubeDlTest extends TestCase
 
         $collection = new VideoCollection([$expectedEntity]);
 
-        self::assertEquals($collection, $yt->download(Options::create($this->tmpDir)->url($url)));
+        self::assertEquals($collection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
     /**
@@ -263,7 +273,7 @@ class YoutubeDlTest extends TestCase
 
         $collection = new VideoCollection([$expectedEntity]);
 
-        self::assertEquals($collection, $yt->download(Options::create($this->tmpDir)->url($url)));
+        self::assertEquals($collection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
     /**
@@ -286,7 +296,7 @@ class YoutubeDlTest extends TestCase
 
         $collection = new VideoCollection([$expectedEntity]);
 
-        self::assertEquals($collection, $yt->download(Options::create($this->tmpDir)->url($url)));
+        self::assertEquals($collection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
     /**

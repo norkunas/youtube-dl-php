@@ -16,7 +16,7 @@ class Options
     public const SUBTITLE_FORMATS = ['srt', 'ass', 'vtt', 'lrc'];
     public const MERGE_OUTPUT_FORMATS = ['mkv', 'mp4', 'ogg', 'webm', 'flv'];
 
-    private string $downloadPath;
+    private ?string $downloadPath = null;
     private bool $cleanupMetadata = true;
 
     // Network Options
@@ -156,9 +156,8 @@ class Options
 
     private array $url = [];
 
-    private function __construct(string $downloadPath)
+    private function __construct()
     {
-        $this->downloadPath = rtrim($downloadPath, '\/');
     }
 
     /**
@@ -171,6 +170,11 @@ class Options
         $new->downloadPath = rtrim($downloadPath, '\/');
 
         return $new;
+    }
+
+    public function getDownloadPath(): ?string
+    {
+        return $this->downloadPath;
     }
 
     public function cleanupMetadata(bool $cleanup): self
@@ -1207,9 +1211,9 @@ class Options
         $new = clone $this;
         $new->username = $username;
         $new->password = $password;
-        if ($username !== null && $password === null) {
+        if (($username === null && $password !== null) || ($username !== null && $password === null)) {
             // Without a password `youtube-dl` would enter ineractive mode.
-            throw new InvalidArgumentException('Authentication password must be provided when configuring account details.');
+            throw new InvalidArgumentException('Authentication username and password must be provided when configuring account details.');
         }
 
         return $new;
@@ -1564,8 +1568,8 @@ class Options
         ];
     }
 
-    public static function create(string $downloadPath): self
+    public static function create(): self
     {
-        return new self($downloadPath);
+        return new self();
     }
 }
