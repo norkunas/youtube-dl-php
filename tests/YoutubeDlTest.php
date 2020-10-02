@@ -134,13 +134,14 @@ class YoutubeDlTest extends TestCase
             '--ignore-config',
             '--ignore-errors',
             '--write-info-json',
+            '--match-title=abc',
             '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
             $url,
         ]);
 
         $yt = new YoutubeDl($processBuilder);
 
-        self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
+        self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->matchTitle('abc')->url($url)));
     }
 
     /**
@@ -155,13 +156,14 @@ class YoutubeDlTest extends TestCase
             '--ignore-config',
             '--ignore-errors',
             '--write-info-json',
+            '--reject-title=sh',
             '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
             $url,
         ]);
 
         $yt = new YoutubeDl($processBuilder);
 
-        self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
+        self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->rejectTitle('sh')->url($url)));
     }
 
     public function testOnProgress(): void
