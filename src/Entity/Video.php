@@ -22,6 +22,7 @@ class Video extends AbstractEntity
         'requested_formats' => Format::class,
         'requested_subtitles' => Subtitles::class,
         'subtitles' => Subtitles::class,
+        'automatic_captions' => Subtitles::class,
         'thumbnails' => Thumbnail::class,
     ];
 

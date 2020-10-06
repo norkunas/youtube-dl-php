@@ -4,19 +4,15 @@ declare(strict_types=1);
 
 namespace YoutubeDl\Entity;
 
-use ArrayAccess;
-use ArrayIterator;
 use Countable;
-use IteratorAggregate;
 use JsonException;
 use const JSON_THROW_ON_ERROR;
-use function array_key_exists;
 use function count;
 use function is_array;
 use function json_encode;
 use function json_last_error_msg;
 
-abstract class AbstractEntity implements ArrayAccess, Countable, IteratorAggregate
+abstract class AbstractEntity implements Countable
 {
     protected static array $objectMap = [];
 
@@ -34,61 +30,29 @@ abstract class AbstractEntity implements ArrayAccess, Countable, IteratorAggrega
      */
     public function get(string $key, $default = null)
     {
-        return isset($this->elements[$key]) ? $this->elements[$key] : $default;
+        return $this->elements[$key] ?? $default;
     }
 
     public function toArray(): array
     {
-        return $this->elements;
+        $toArray = static function ($data) use (&$toArray): array {
+            foreach ($data as $k => $v) {
+                if (is_array($v)) {
+                    $data[$k] = $toArray($v);
+                } elseif ($v instanceof AbstractEntity) {
+                    $data[$k] = $v->toArray();
+                }
+            }
+
+            return $data;
+        };
+
+        return $toArray($this->elements);
     }
 
     public function count(): int
     {
         return count($this->elements);
-    }
-
-    public function getIterator(): ArrayIterator
-    {
-        return new ArrayIterator($this->elements);
-    }
-
-    /**
-     * @param mixed $key
-     */
-    public function offsetExists($key): bool
-    {
-        return array_key_exists($key, $this->elements);
-    }
-
-    /**
-     * @param mixed $key
-     *
-     * @return mixed
-     */
-    public function offsetGet($key)
-    {
-        return $this->elements[$key];
-    }
-
-    /**
-     * @param string|null $key
-     * @param mixed       $value
-     */
-    public function offsetSet($key, $value): void
-    {
-        if ($key !== null) {
-            $this->elements[$key] = $value;
-        } else {
-            $this->elements[] = $value;
-        }
-    }
-
-    /**
-     * @param string $key
-     */
-    public function offsetUnset($key): void
-    {
-        unset($this->elements[$key]);
     }
 
     public function toJson(int $options = JSON_THROW_ON_ERROR): string
@@ -114,12 +78,8 @@ abstract class AbstractEntity implements ArrayAccess, Countable, IteratorAggrega
                 continue;
             }
 
-            if (is_array($data[$key])) {
-                foreach ($data[$key] as $k2 => $v) {
-                    $data[$key][$k2] = new static::$objectMap[$key]($v);
-                }
-            } else {
-                $data[$key] = new static::$objectMap[$key]($item ?: []);
+            foreach ($data[$key] as $k2 => $v) {
+                $data[$key][$k2] = new static::$objectMap[$key]($v);
             }
         }
 

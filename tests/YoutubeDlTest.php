@@ -83,11 +83,11 @@ class YoutubeDlTest extends TestCase
 
         $yt = new YoutubeDl($processBuilder);
 
-        $video = new Video($m = $this->readJsonFile($metadataFile));
-        $video['file'] = new SplFileInfo($this->tmpDir.'/'.basename($m['_filename']));
-        $video['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
+        $metadata = $this->readJsonFile($metadataFile);
+        $metadata['file'] = new SplFileInfo($this->tmpDir.'/'.basename($metadata['_filename']));
+        $metadata['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
 
-        self::assertEquals(new VideoCollection([$video]), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
+        self::assertEquals(new VideoCollection([new Video($metadata)]), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
     /**
@@ -112,11 +112,11 @@ class YoutubeDlTest extends TestCase
         $yt = new YoutubeDl($processBuilder);
 
         $videos = array_map(function (string $metadataFile) {
-            $video = new Video($m = $this->readJsonFile($metadataFile));
-            $video['file'] = new SplFileInfo($this->tmpDir.'/'.basename($m['_filename']));
-            $video['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
+            $metadata = $this->readJsonFile($metadataFile);
+            $metadata['file'] = new SplFileInfo($this->tmpDir.'/'.basename($metadata['_filename']));
+            $metadata['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
 
-            return $video;
+            return new Video($metadata);
         }, $metadataFiles);
 
         self::assertEquals(new VideoCollection($videos), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));

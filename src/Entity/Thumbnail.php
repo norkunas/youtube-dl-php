@@ -6,7 +6,7 @@ namespace YoutubeDl\Entity;
 
 class Thumbnail extends AbstractEntity
 {
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->get('id');
     }
@@ -29,5 +29,10 @@ class Thumbnail extends AbstractEntity
     public function getHeight(): ?int
     {
         return $this->get('height');
+    }
+
+    public function getResolution(): ?string
+    {
+        return $this->get('resolution');
     }
 }
