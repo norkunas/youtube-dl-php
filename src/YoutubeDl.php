@@ -172,7 +172,9 @@ class YoutubeDl
             }
         }
 
-        $this->filesystem->remove($metadataFiles);
+        if ($options->getCleanupMetadata()) {
+            $this->filesystem->remove($metadataFiles);
+        }
 
         return new VideoCollection($videos);
     }

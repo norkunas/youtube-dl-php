@@ -185,6 +185,11 @@ class Options
         return $new;
     }
 
+    public function getCleanupMetadata(): bool
+    {
+        return $this->cleanupMetadata;
+    }
+
     /**
      * Use the specified HTTP/HTTPS/SOCKS proxy. To enable SOCKS proxy, specify
      * a proper scheme. For example socks5://127.0.0.1:1080/. Pass in an empty

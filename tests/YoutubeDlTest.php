@@ -343,6 +343,62 @@ class YoutubeDlTest extends TestCase
         self::assertEquals($collection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
+    public function testDownloadWithMetadataCleanup(): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile(__DIR__.'/Fixtures/youtube/batman_trailer_2021.txt');
+        $process->writeMetadata([
+            [
+                'from' => $metadataFile = __DIR__.'/Fixtures/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
+                'to' => $this->tmpDir.'/'.basename($metadataFile),
+            ],
+        ]);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url = 'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        $collection = $yt->download(Options::create()->cleanupMetadata(true)->downloadPath($this->tmpDir)->url($url));
+
+        foreach ($collection->getVideos() as $video) {
+            self::assertFileNotExists($video->getMetadataFile()->getPathname());
+        }
+    }
+
+    public function testDownloadWithoutMetadataCleanup(): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile(__DIR__.'/Fixtures/youtube/batman_trailer_2021.txt');
+        $process->writeMetadata([
+            [
+                'from' => $metadataFile = __DIR__.'/Fixtures/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
+                'to' => $this->tmpDir.'/'.basename($metadataFile),
+            ],
+        ]);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url = 'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        $collection = $yt->download(Options::create()->cleanupMetadata(false)->downloadPath($this->tmpDir)->url($url));
+
+        foreach ($collection->getVideos() as $video) {
+            self::assertFileExists($video->getMetadataFile()->getPathname());
+        }
+    }
+
     /**
      * @dataProvider provideListSubsCases
      */
