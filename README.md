@@ -31,7 +31,8 @@ use YoutubeDl\YoutubeDl;
 $yt = new YoutubeDl();
 
 $collection = $yt->download(
-    Options::create('/path/to/downloads')
+    Options::create()
+        ->downloadPath('/path/to/downloads')
         ->url('https://www.youtube.com/watch?v=oDAw7vW7H0c')
 );
 
@@ -59,7 +60,8 @@ use YoutubeDl\YoutubeDl;
 
 $yt = new YoutubeDl();
 $collection = $yt->download(
-    Options::create('/path/to/downloads')
+    Options::create()
+        ->downloadPath('/path/to/downloads')
         ->extractAudio(true)
         ->audioFormat('mp3')
         ->audioQuality(0) // best
