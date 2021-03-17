@@ -367,7 +367,7 @@ class YoutubeDlTest extends TestCase
         $collection = $yt->download(Options::create()->cleanupMetadata(true)->downloadPath($this->tmpDir)->url($url));
 
         foreach ($collection->getVideos() as $video) {
-            self::assertFileNotExists($video->getMetadataFile()->getPathname());
+            self::assertFileDoesNotExist($video->getMetadataFile()->getPathname());
         }
     }
 
