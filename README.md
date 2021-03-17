@@ -7,8 +7,6 @@ A PHP wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl) tool.
 ![CI Status](https://github.com/norkunas/youtube-dl-php/workflows/CI/badge.svg?branch=master)
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
-##### :warning: You are reading documentation for non released version yet. If you need to use stable branch please read [v1 documentation](https://github.com/norkunas/youtube-dl-php/tree/1.x#youtube-dl-php).
-
 ## Install
 First step is to download the [youtube-dl](https://ytdl-org.github.io/youtube-dl/download.html).
 
