@@ -18,7 +18,7 @@
         "symfony/process": "^4.4|^5.1"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^2.18",
         "mikey179/vfsstream": "^1.6.7",
         "phpstan/phpstan": "^0.12.42",
         "phpstan/phpstan-phpunit": "^0.12.16",
