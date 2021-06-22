@@ -34,7 +34,7 @@ jobs:
             - name: "Install dependencies with composer"
               run: composer install --prefer-dist --no-progress --no-suggest
             - name: "Run PHP-CS-Fixer"
-              run: vendor/bin/php-cs-fixer fix --dry-run --diff-format udiff --format=checkstyle | cs2pr
+              run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
     phpunit:
         name: PHPUnit
         runs-on: ubuntu-latest
