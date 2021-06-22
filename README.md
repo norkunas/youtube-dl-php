@@ -139,3 +139,12 @@ $processBuilder = new ProcessBuilder();
 // Provide your custom process builder as the first argument.
 $yt = new YoutubeDl($processBuilder);
 ```
+
+
+## Questions?
+
+If you have any questions please [open a discussion](https://github.com/norkunas/youtube-dl-php/discussions/new).
+
+## License
+
+This library is released under the MIT License. See the bundled [LICENSE](https://github.com/norkunas/youtube-dl-php/blob/master/LICENSE) file for details.
