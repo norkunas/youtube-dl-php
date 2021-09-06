@@ -91,6 +91,34 @@ class YoutubeDlTest extends TestCase
     }
 
     /**
+     * @dataProvider provideAlreadyDownloadedVideoCases
+     */
+    public function testAlreadyDownloadedVideos(string $url, string $outputFile, string $metadataFile): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile($outputFile);
+        $process->writeMetadata([
+            ['from' => $metadataFile, 'to' => $this->tmpDir.'/'.basename($metadataFile)]
+        ]);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url,
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        $metadata = $this->readJsonFile($metadataFile);
+        $metadata['file'] = new SplFileInfo($this->tmpDir.'/'.basename($metadata['_filename']));
+        $metadata['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
+
+        self::assertEquals(new VideoCollection([new Video($metadata)]), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
+    }
+
+    /**
      * @dataProvider provideDownloadPlaylistCases
      */
     public function testDownloadPlaylist(string $url, string $outputFile, array $metadataFiles): void
@@ -481,6 +509,15 @@ class YoutubeDlTest extends TestCase
             'url' => 'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
             'outputFile' => __DIR__.'/Fixtures/youtube/batman_trailer_2021.txt',
             'metadataFile' => __DIR__.'/Fixtures/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
+        ];
+    }
+
+    public function provideAlreadyDownloadedVideoCases(): iterable
+    {
+        yield 'youtube_phonebloks' => [
+            'url' => 'https://www.youtube.com/watch?v=oDAw7vW7H0c',
+            'outputFile' => __DIR__.'/Fixtures/youtube/phonebloks_already_downloaded.txt',
+            'metadataFile' => __DIR__.'/Fixtures/youtube/Phonebloks-oDAw7vW7H0c.info.json',
         ];
     }
 

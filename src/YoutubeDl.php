@@ -114,6 +114,8 @@ class YoutubeDl
 
         $process = $this->processBuilder->build($this->binPath, $this->pythonPath, $arguments);
         $process->run(function (string $type, string $buffer) use (&$currentVideo, &$parsedData, &$progressTarget): void {
+            ($this->debug)($type, $buffer);
+
             if (preg_match('/\[(.+)]\s(.+):\sDownloading webpage/', $buffer, $match) === 1) {
                 if ($currentVideo !== null) {
                     $parsedData[] = $currentVideo;
@@ -129,7 +131,7 @@ class YoutubeDl
                 $currentVideo['fileName'] = $match[1];
             } elseif (preg_match('/\[ffmpeg] Destination: (.+)/', $buffer, $match) === 1) {
                 $currentVideo['fileName'] = $match[1];
-            } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1) {
+            } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1 || preg_match('/\[download] (.+) has already been downloaded/', $buffer, $match) === 1) {
                 $progressTarget = basename($match[1]);
             } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
                 if (count($matches) > 0) {
@@ -140,9 +142,6 @@ class YoutubeDl
                     }
                 }
             }
-
-            $debug = $this->debug;
-            $debug($type, $buffer);
         });
 
         if ($currentVideo !== null && !in_array($currentVideo, $parsedData, true)) {

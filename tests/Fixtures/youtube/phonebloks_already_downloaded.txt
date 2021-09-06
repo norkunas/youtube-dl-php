@@ -1,0 +1,4 @@
+[youtube] oDAw7vW7H0c: Downloading webpage
+[info] Writing video description metadata as JSON to: vfs://yt-dl/Phonebloks-oDAw7vW7H0c.info.json
+[download] vfs://yt-dl/Phonebloks-oDAw7vW7H0c.f248.webm has already been downloaded
+[download] 100% of 7.01MiB
