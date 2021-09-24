@@ -57,7 +57,7 @@ class YoutubeDl
         $this->processBuilder = $processBuilder ?? new DefaultProcessBuilder();
         $this->metadataReader = $metadataReader ?? new DefaultMetadataReader();
         $this->filesystem = $filesystem ?? new Filesystem();
-        $this->progress = static function (string $progressTarget, string $percentage, string $size, ?string $speed, ?string $eta, ?string $totalTime): void {};
+        $this->progress = static function (?string $progressTarget, string $percentage, string $size, ?string $speed, ?string $eta, ?string $totalTime): void {};
         $this->debug = static function (string $type, string $buffer): void {};
     }
 
