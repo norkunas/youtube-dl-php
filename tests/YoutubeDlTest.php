@@ -503,6 +503,53 @@ class YoutubeDlTest extends TestCase
         ], $yt->getMultipleSystemOperatorsList());
     }
 
+    public function testMyviWithExternalDownloader(): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile(__DIR__.'/Fixtures/myvi/the_dawn.txt');
+        $process->writeMetadata([
+            [
+                'from' => $metadataFile = __DIR__.'/Fixtures/myvi/The_Dawn.info.json',
+                'to' => $this->tmpDir.'/'.basename($metadataFile),
+            ],
+        ]);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--geo-bypass',
+            '--external-downloader=aria2c',
+            '--external-downloader-args=-x 16 -s 16 -k 1M --file-allocation=none --async-dns=false',
+            '--output=vfs://yt-dl/%(title)s.%(ext)s',
+            '--restrict-filenames',
+            '--continue',
+            '--referer=https://www.myvi.ru/watch/The-Dawn_3ExVwylCh0SGP17uRsFiZw2',
+            '--format=best',
+            '--merge-output-format=mp4',
+            $url = 'https://www.myvi.ru/watch/The-Dawn_3ExVwylCh0SGP17uRsFiZw2',
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        $collection = $yt->download(
+            Options::create()
+                ->downloadPath($this->tmpDir)
+                ->format('best')
+                ->restrictFileNames(true)
+                ->geoByPass()
+                ->externalDownloader('aria2c')
+                ->externalDownloaderArgs('-x 16 -s 16 -k 1M --file-allocation=none --async-dns=false')
+                ->continue(true)
+                ->mergeOutputFormat('mp4')
+                ->output('%(title)s.%(ext)s')
+                ->referer($url)
+                ->url($url)
+        );
+
+        self::assertCount(1, $collection);
+    }
+
     public function provideSimpleVideoCases(): iterable
     {
         yield 'youtube_batman_trailer_2021' => [

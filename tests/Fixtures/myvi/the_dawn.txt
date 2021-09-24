@@ -1,0 +1,219 @@
+[Myvi] The-Dawn_3ExVwylCh0SGP17uRsFiZw2: Downloading JSON metadata
+[info] Writing video description metadata as JSON to: vfs://yt-dl/The_Dawn.info.json
+[download] Destination: vfs://yt-dl/The_Dawn.mp4
+
+09/24 12:23:49 [NOTICE] Downloading 1 item(s)
+
+09/24 12:23:49 [NOTICE] CUID#7 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475428
+
+09/24 12:23:49 [NOTICE] CUID#8 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#12 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#21 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#13 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#10 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#14 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#19 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#22 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#11 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#17 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:49 [NOTICE] CUID#15 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#16 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#9 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#20 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#18 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#19 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#11 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#15 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#21 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#10 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+[#cbd374 352KiB/23MiB(1%) CN:16 DL:823KiB ETA:28s]
+09/24 12:23:50 [NOTICE] CUID#13 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#20 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#9 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#16 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#7 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#8 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#15 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#12 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#9 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#19 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#11 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#10 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475429
+
+09/24 12:23:50 [NOTICE] CUID#13 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:50 [NOTICE] CUID#7 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:50 [NOTICE] CUID#20 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#12 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#8 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#15 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#9 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#19 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+[#cbd374 6.7MiB/23MiB(29%) CN:16 DL:4.6MiB ETA:3s]
+09/24 12:23:51 [NOTICE] CUID#10 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#19 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#8 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#13 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#17 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#7 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#20 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#12 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#18 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#9 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#15 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#13 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#14 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#11 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475430
+
+09/24 12:23:51 [NOTICE] CUID#10 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:51 [NOTICE] CUID#8 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:51 [NOTICE] CUID#19 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [NOTICE] CUID#16 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [NOTICE] CUID#7 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [NOTICE] CUID#20 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [ERROR] CUID#13 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [ERROR] CUID#15 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [ERROR] CUID#9 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [NOTICE] CUID#12 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [NOTICE] CUID#18 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [ERROR] CUID#10 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+[#cbd374 11MiB/23MiB(50%) CN:12 DL:4.7MiB ETA:2s]
+09/24 12:23:52 [NOTICE] CUID#21 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [NOTICE] CUID#14 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [ERROR] CUID#8 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [NOTICE] CUID#11 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [ERROR] CUID#19 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [ERROR] CUID#7 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [NOTICE] CUID#16 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [ERROR] CUID#20 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [NOTICE] CUID#22 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475431
+
+09/24 12:23:52 [ERROR] CUID#12 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [ERROR] CUID#11 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:52 [NOTICE] CUID#18 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:52 [NOTICE] CUID#21 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:52 [NOTICE] CUID#14 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:53 [NOTICE] CUID#16 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:53 [NOTICE] CUID#22 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+[#cbd374 13MiB/23MiB(60%) CN:6 DL:4.0MiB ETA:2s]
+09/24 12:23:53 [NOTICE] CUID#21 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:53 [NOTICE] CUID#18 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:53 [NOTICE] CUID#14 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:53 [NOTICE] CUID#17 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:53 [ERROR] CUID#16 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:53 [NOTICE] CUID#22 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475432
+
+09/24 12:23:53 [ERROR] CUID#18 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:53 [ERROR] CUID#14 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+
+09/24 12:23:54 [NOTICE] CUID#17 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475433
+[#cbd374 15MiB/23MiB(65%) CN:3 DL:3.3MiB ETA:2s]
+09/24 12:23:54 [NOTICE] CUID#22 - Redirecting to https://fs75.myvi.ru:8090/195/239/2868207.mp4?sig=274a1ea30989e55282ccd034ef4c0666&d=124&t=1632475433
+
+09/24 12:23:54 [ERROR] CUID#21 - Download aborted. URI=https://fs.myvi.ru/video/2868207.mp4?uid=&puid=&ref=&d=137&rnd=1114556178&sig=8a1ece5e8c4e5685a43bb3845ef016fc
+Exception: [DownloadCommand.cc:234] errorCode=1 Got EOF from the server.
+[#cbd374 22MiB/23MiB(99%) CN:1 DL:0.9MiB]
+09/24 12:24:02 [NOTICE] Download complete: vfs://yt-dl/The_Dawn.mp4.part
+
+Download Results:
+gid   |stat|avg speed  |path/URI
+======+====+===========+=======================================================
+cbd374|OK  |   1.7MiB/s|vfs://yt-dl/The_Dawn.mp4.part
+
+Status Legend:
+(OK):download completed.
+[aria2c] Downloaded 24165212 bytes
+[download] 100% of 23.05MiB in 00:13
