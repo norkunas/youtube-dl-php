@@ -130,7 +130,7 @@ class YoutubeDl
             } elseif (preg_match('/\[ffmpeg] Merging formats into "(.+)"/', $buffer, $match) === 1) {
                 $currentVideo['fileName'] = $match[1];
             } elseif (preg_match('/\[ffmpeg] Destination: (.+)/', $buffer, $match) === 1) {
-                $currentVideo['fileName'] = $match[1]; 
+                $currentVideo['fileName'] = $match[1];
             } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1 || preg_match('/\[download] (.+) has already been downloaded/', $buffer, $match) === 1) {
                 $progressTarget = basename($match[1]);
             } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
