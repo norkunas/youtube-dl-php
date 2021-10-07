@@ -35,6 +35,11 @@ $collection = $yt->download(
 );
 
 foreach ($collection->getVideos() as $video) {
+	if (!empty($video->getWarning())) {
+		foreach ($video->getWarning() as $warning) {
+			echo "Warning: {$warning}." . PHP_EOL;
+		}
+	}
     if ($video->getError() !== null) {
         echo "Error downloading video: {$video->getError()}.";
     } else {

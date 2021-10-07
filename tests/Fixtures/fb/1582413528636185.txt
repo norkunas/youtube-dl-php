@@ -1,0 +1,5 @@
+[facebook] Downloading login page
+[facebook] Logging in
+WARNING: unable to log in: bad username/password, or exceeded login rate limit (~3/min). Check credentials or wait.
+[facebook] 1582413528636185: Downloading webpage
+ERROR: This video is only available for registered users. Use --username and --password or --netrc to provide account credentials.

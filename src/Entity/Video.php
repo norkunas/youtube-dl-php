@@ -26,7 +26,7 @@ class Video extends AbstractEntity
         'thumbnails' => Thumbnail::class,
     ];
 
-    public function getWarning(): ?string
+    public function getWarning(): ?array
     {
         return $this->get('warning');
     }

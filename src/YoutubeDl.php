@@ -115,24 +115,22 @@ class YoutubeDl
         $process = $this->processBuilder->build($this->binPath, $this->pythonPath, $arguments);
         $process->run(function (string $type, string $buffer) use (&$currentVideo, &$parsedData, &$progressTarget): void {
             ($this->debug)($type, $buffer);
-
             if (preg_match('/\[(.+)]\s(.+):\sDownloading webpage/', $buffer, $match) === 1) {
                 if ($currentVideo !== null) {
                     $parsedData[] = $currentVideo;
                 }
-
                 $currentVideo['extractor'] = $match[1];
                 $currentVideo['id'] = $match[2];
             } elseif (str_starts_with($buffer, 'ERROR:')) {
                 $currentVideo['error'] = trim(substr($buffer, 6));
             } elseif (str_starts_with($buffer, 'WARNING:')) {
-                $currentVideo['warning'] = trim(substr($buffer, 8));
+                $currentVideo['warning'][] = trim(substr($buffer, 8));
             } elseif (preg_match('/Writing video description metadata as JSON to:\s(.+)/', $buffer, $match) === 1) {
                 $currentVideo['metadataFile'] = $match[1];
             } elseif (preg_match('/\[ffmpeg] Merging formats into "(.+)"/', $buffer, $match) === 1) {
                 $currentVideo['fileName'] = $match[1];
             } elseif (preg_match('/\[ffmpeg] Destination: (.+)/', $buffer, $match) === 1) {
-                $currentVideo['fileName'] = $match[1];
+                $currentVideo['fileName'] = $match[1]; 
             } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1 || preg_match('/\[download] (.+) has already been downloaded/', $buffer, $match) === 1) {
                 $progressTarget = basename($match[1]);
             } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
@@ -154,15 +152,12 @@ class YoutubeDl
         $metadataFiles = [];
 
         foreach ($parsedData as $parsedRow) {
-            if (isset($parsedRow['error'])) {
-                $params = [
+            if (isset($parsedRow['error']) || isset($parsedRow['warning'])) {
+                $videos[] = new Video([
+                    'error' => $parsedRow['error'] ?? null,
+                    'warning' => $parsedRow['warning'] ?? [],
                     'extractor' => $parsedRow['extractor'] ?? 'generic',
-                ];
-                if (isset($parsedRow['warning']))
-                   $params += ['warning' => $parsedRow['warning']];
-                if (isset($parsedRow['error']))
-                   $params += ['error' => $parsedRow['error']];
-                $videos[] = new Video($params);
+                    ]);
             } elseif (isset($parsedRow['metadataFile'])) {
                 $metadataFile = $parsedRow['metadataFile'];
                 $metadataFiles[] = $metadataFile;
