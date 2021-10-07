@@ -157,7 +157,7 @@ class YoutubeDl
                     'error' => $parsedRow['error'] ?? null,
                     'warning' => $parsedRow['warning'] ?? [],
                     'extractor' => $parsedRow['extractor'] ?? 'generic',
-                    ]);
+                ]);
             } elseif (isset($parsedRow['metadataFile'])) {
                 $metadataFile = $parsedRow['metadataFile'];
                 $metadataFiles[] = $metadataFile;
