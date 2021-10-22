@@ -1,5 +1,5 @@
 # Youtube-dl PHP
-A PHP wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl) tool.
+A PHP wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl) or [yt-dlp](https://github.com/yt-dlp/yt-dlp).
 
 [![Latest Stable Version](https://poser.pugx.org/norkunas/youtube-dl-php/v/stable.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 [![Latest Unstable Version](https://poser.pugx.org/norkunas/youtube-dl-php/v/unstable.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
@@ -8,7 +8,7 @@ A PHP wrapper for [youtube-dl](https://github.com/ytdl-org/youtube-dl) tool.
 [![License](https://poser.pugx.org/norkunas/youtube-dl-php/license.svg)](https://packagist.org/packages/norkunas/youtube-dl-php)
 
 ## Install
-First step is to download the [youtube-dl](https://ytdl-org.github.io/youtube-dl/download.html).
+First step is to download the [youtube-dl](https://ytdl-org.github.io/youtube-dl/download.html) or [yt-dlp](https://github.com/yt-dlp/yt-dlp#installation).
 
 Second step is to install the wrapper using [Composer](http://getcomposer.org/):
 ```
@@ -62,7 +62,7 @@ $collection = $yt->download(
         ->downloadPath('/path/to/downloads')
         ->extractAudio(true)
         ->audioFormat('mp3')
-        ->audioQuality(0) // best
+        ->audioQuality('0') // best
         ->output('%(title)s.%(ext)s')
         ->url('https://www.youtube.com/watch?v=oDAw7vW7H0c')
 );
