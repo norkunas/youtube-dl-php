@@ -194,6 +194,31 @@ class YoutubeDlTest extends TestCase
         self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->rejectTitle('sh')->url($url)));
     }
 
+    public function testDownloadWithYtDlp(): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile(__DIR__.'/Fixtures/yt-dlp/phonebloks.txt');
+        $process->writeMetadata([
+            ['from' => $metadataFile = __DIR__.'/Fixtures/yt-dlp/Phonebloks-oDAw7vW7H0c.info.json', 'to' => $this->tmpDir.'/Phonebloks-oDAw7vW7H0c.info.json']
+        ]);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url = 'https://www.youtube.com/watch?v=oDAw7vW7H0c',
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        $metadata = $this->readJsonFile($metadataFile);
+        $metadata['file'] = new SplFileInfo($this->tmpDir.'/'.basename($metadata['_filename']));
+        $metadata['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
+
+        self::assertEquals(new VideoCollection([new Video($metadata)]), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
+    }
+
     public function testOnProgress(): void
     {
         $process = new StaticProcess();

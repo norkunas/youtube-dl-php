@@ -1,0 +1,40 @@
+[youtube] oDAw7vW7H0c: Downloading webpage
+
+[youtube] oDAw7vW7H0c: Downloading android player API JSON
+
+[info] oDAw7vW7H0c: Downloading 1 format(s): 22
+
+[info] Writing video metadata as JSON to: vfs://yt-dl/Phonebloks-oDAw7vW7H0c.info.json
+
+[download] Destination: vfs://yt-dl/Phonebloks-oDAw7vW7H0c.mp4
+
+
+[download]   0.0% of 7.01MiB at Unknown speed ETA Unknown ETA
+
+[download]   0.0% of 7.01MiB at 327.17KiB/s ETA 00:21
+
+[download]   0.1% of 7.01MiB at 449.47KiB/s ETA 00:15
+
+[download]   0.2% of 7.01MiB at 735.73KiB/s ETA 00:09
+
+[download]   0.4% of 7.01MiB at  1.26MiB/s ETA 00:05
+
+[download]   0.9% of 7.01MiB at  2.12MiB/s ETA 00:03
+
+[download]   1.8% of 7.01MiB at  1.90MiB/s ETA 00:03
+
+[download]   3.6% of 7.01MiB at  3.23MiB/s ETA 00:02
+
+[download]   7.1% of 7.01MiB at  5.68MiB/s ETA 00:01
+
+[download]  14.2% of 7.01MiB at 10.13MiB/s ETA 00:00
+
+[download]  28.5% of 7.01MiB at 17.06MiB/s ETA 00:00
+
+[download]  57.0% of 7.01MiB at 21.93MiB/s ETA 00:00
+
+[download] 100.0% of 7.01MiB at 25.79MiB/s ETA 00:00
+
+[download] 100% of 7.01MiB in 00:00
+
+
