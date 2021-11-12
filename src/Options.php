@@ -11,7 +11,7 @@ use function in_array;
 class Options
 {
     public const EXTERNAL_DOWNLOADERS = ['aria2c', 'avconv', 'axel', 'curl', 'ffmpeg', 'httpie', 'wget'];
-    public const AUDIO_FORMATS = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
+    public const AUDIO_FORMATS = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav', 'flac'];
     public const RECODE_VIDEO_FORMATS = ['mp4', 'flv', 'ogg', 'webm', 'mkv', 'avi'];
     public const SUBTITLE_FORMATS = ['srt', 'ass', 'vtt', 'lrc'];
     public const MERGE_OUTPUT_FORMATS = ['mkv', 'mp4', 'ogg', 'webm', 'flv'];
