@@ -140,7 +140,7 @@ class Options
     private ?string $audioFormat = null;
     private ?string $audioQuality = null;
     private ?string $recodeVideo = null;
-    private ?string $postProcessorArgs = null; // find out what formats is expected
+    private ?string $postProcessorArgs = null;
     private bool $keepVideo = false;
     private bool $noPostOverwrites = false;
     private bool $embedSubs = false;
@@ -1557,6 +1557,7 @@ class Options
             'audio-format' => $this->audioFormat,
             'audio-quality' => $this->audioQuality,
             'recode-video' => $this->recodeVideo,
+            'postprocessor-args' => $this->postProcessorArgs,
             'keep-video' => $this->keepVideo,
             'no-post-overwrites' => $this->noPostOverwrites,
             'embed-subs' => $this->embedSubs,

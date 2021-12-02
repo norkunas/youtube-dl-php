@@ -43,14 +43,20 @@ jobs:
                 include:
                     - php-version: 7.4
                       composer-flags: --prefer-stable --prefer-lowest
-                    - php-version: 7.4
-                      symfony-version: 4.4.*
-                    - php-version: 7.4
-                      symfony-version: 5.3.*
                     - php-version: 8.0
-                      symfony-version: 5.3.*
+                      composer-flags: --prefer-stable --prefer-lowest
                     - php-version: 8.1
-                      symfony-version: 5.3.*
+                      composer-flags: --prefer-stable --prefer-lowest
+                    - php-version: 7.4
+                      symfony-version: 5.4.*
+                    - php-version: 8.0
+                      symfony-version: 5.4.*
+                    - php-version: 8.0
+                      symfony-version: 6.0.*
+                    - php-version: 8.1
+                      symfony-version: 5.4.*
+                    - php-version: 8.1
+                      symfony-version: 6.0.*
         steps:
             - name: "Checkout"
               uses: actions/checkout@v2
@@ -62,6 +68,7 @@ jobs:
             - name: "Install dependencies (fixed Symfony version) with composer"
               if: matrix.symfony-version
               run: |
+                  composer remove --dev friendsofphp/php-cs-fixer
                   composer require symfony/filesystem:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} --no-interaction --no-update
                   composer update --no-interaction --no-progress --no-suggest
             - name: "Install dependencies (lowest dependencies) with composer"
