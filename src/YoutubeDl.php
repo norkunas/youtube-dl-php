@@ -127,13 +127,13 @@ class YoutubeDl
                 $currentVideo['error'] = trim(substr($buffer, 6));
             } elseif (preg_match('/Writing video( description)? metadata as JSON to:\s(?<metadataFile>.+)/', $buffer, $match) === 1) {
                 $currentVideo['metadataFile'] = $match['metadataFile'];
-            } elseif (preg_match('/\[ffmpeg] Merging formats into "(.+)"/', $buffer, $match) === 1) {
-                $currentVideo['fileName'] = $match[1];
-            } elseif (preg_match('/\[ffmpeg] Destination: (.+)/', $buffer, $match) === 1) {
-                $currentVideo['fileName'] = $match[1];
-            } elseif (preg_match('/\[download] Destination: (.+)/', $buffer, $match) === 1 || preg_match('/\[download] (.+) has already been downloaded/', $buffer, $match) === 1) {
-                $currentVideo['fileName'] = $match[1];
-                $progressTarget = basename($match[1]);
+            } elseif (preg_match('/\[(ffmpeg|Merger)] Merging formats into "(?<file>.+)"/', $buffer, $match) === 1) {
+                $currentVideo['fileName'] = $match['file'];
+            } elseif (preg_match('/\[ffmpeg] Destination: (?<file>.+)/', $buffer, $match) === 1) {
+                $currentVideo['fileName'] = $match['file'];
+            } elseif (preg_match('/\[download] Destination: (?<file>.+)/', $buffer, $match) === 1 || preg_match('/\[download] (?<file>.+) has already been downloaded/', $buffer, $match) === 1) {
+                $currentVideo['fileName'] = $match['file'];
+                $progressTarget = basename($match['file']);
             } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
                 if (count($matches) > 0) {
                     $progress = $this->progress;
@@ -189,7 +189,7 @@ class YoutubeDl
         $header = '';
         $rows = [];
 
-        foreach ($data as $i => $line) {
+        foreach ($data as $line) {
             if ($line === '') {
                 continue;
             }
@@ -221,7 +221,7 @@ class YoutubeDl
         $autoCaptionRows = [];
         $subtitleRows = [];
 
-        foreach ($data as $i => $line) {
+        foreach ($data as $line) {
             if ($line === '') {
                 continue;
             }

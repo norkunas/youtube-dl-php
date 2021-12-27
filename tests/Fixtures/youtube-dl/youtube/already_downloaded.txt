@@ -1,0 +1,4 @@
+[youtube] sy_yQHN2K6g: Downloading webpage
+[info] Writing video description metadata as JSON to: vfs://yt-dl/Doc Ock Sings!-sy_yQHN2K6g.info.json
+[download] vfs://yt-dl/Doc Ock Sings!-sy_yQHN2K6g.mkv has already been downloaded and merged
+WARNING: Requested formats are incompatible for merge and will be merged into mkv.

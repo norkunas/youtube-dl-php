@@ -1,0 +1,293 @@
+[youtube:tab] PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG: Downloading webpage
+
+[youtube:tab] PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG: Downloading API JSON with unavailable videos
+
+[download] Downloading playlist: ff
+
+[info] Writing playlist metadata as JSON to: vfs://yt-dl/ff-PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG.info.json
+
+[youtube:tab] playlist ff: Downloading 2 videos
+[download] Downloading video 1 of 2
+
+[youtube] 2Hy4bT0ESfc: Downloading webpage
+
+[youtube] 2Hy4bT0ESfc: Downloading android player API JSON
+
+[info] 2Hy4bT0ESfc: Downloading 1 format(s): 247+251
+
+[info] Writing video metadata as JSON to: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json
+
+[download] Destination: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f247.webm
+
+
+[download]   0.0% of 19.55MiB at Unknown speed ETA Unknown ETA
+
+[download]   0.0% of 19.55MiB at 384.50KiB/s ETA 00:52
+
+[download]   0.0% of 19.55MiB at 511.46KiB/s ETA 00:39
+
+[download]   0.1% of 19.55MiB at 802.09KiB/s ETA 00:24
+
+[download]   0.2% of 19.55MiB at  1.40MiB/s ETA 00:13
+
+[download]   0.3% of 19.55MiB at  2.19MiB/s ETA 00:08
+
+[download]   0.6% of 19.55MiB at  3.69MiB/s ETA 00:05
+
+[download]   1.3% of 19.55MiB at  6.03MiB/s ETA 00:03
+
+[download]   2.6% of 19.55MiB at  9.46MiB/s ETA 00:02
+
+[download]   5.1% of 19.55MiB at 15.85MiB/s ETA 00:01
+
+[download]  10.2% of 19.55MiB at 23.75MiB/s ETA 00:00
+
+[download]  20.5% of 19.55MiB at 28.58MiB/s ETA 00:00
+
+[download]  40.9% of 19.55MiB at 33.35MiB/s ETA 00:00
+
+[download]  49.7% of 19.55MiB at 38.41MiB/s ETA 00:00
+
+[download]  49.7% of 19.55MiB at 324.41KiB/s ETA 00:31
+
+[download]  49.7% of 19.55MiB at 762.83KiB/s ETA 00:13
+
+[download]  49.7% of 19.55MiB at  1.45MiB/s ETA 00:06
+
+[download]  49.7% of 19.55MiB at  2.66MiB/s ETA 00:03
+
+[download]  49.8% of 19.55MiB at  3.94MiB/s ETA 00:02
+
+[download]  50.0% of 19.55MiB at  5.39MiB/s ETA 00:01
+
+[download]  50.3% of 19.55MiB at  7.67MiB/s ETA 00:01
+
+[download]  50.9% of 19.55MiB at  6.36MiB/s ETA 00:01
+
+[download]  52.2% of 19.55MiB at 10.04MiB/s ETA 00:00
+
+[download]  54.8% of 19.55MiB at 15.75MiB/s ETA 00:00
+
+[download]  59.9% of 19.55MiB at 24.10MiB/s ETA 00:00
+
+[download]  70.1% of 19.55MiB at 31.69MiB/s ETA 00:00
+
+[download]  90.6% of 19.55MiB at 38.55MiB/s ETA 00:00
+
+[download]  99.8% of 19.55MiB at 40.02MiB/s ETA 00:00
+
+[download]  99.8% of 19.55MiB at 958.92KiB/s ETA 00:00
+
+[download]  99.8% of 19.55MiB at  1.20MiB/s ETA 00:00
+
+[download]  99.8% of 19.55MiB at  1.79MiB/s ETA 00:00
+
+[download]  99.8% of 19.55MiB at  2.80MiB/s ETA 00:00
+
+[download]  99.9% of 19.55MiB at  3.08MiB/s ETA 00:00
+
+[download] 100.0% of 19.55MiB at  4.20MiB/s ETA 00:00
+
+[download] 100% of 19.55MiB in 00:00
+
+
+[download] Destination: vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm
+
+
+[download]   0.0% of 3.52MiB at 556.94KiB/s ETA 00:06
+
+[download]   0.1% of 3.52MiB at 915.19KiB/s ETA 00:03
+
+[download]   0.2% of 3.52MiB at  1.48MiB/s ETA 00:02
+
+[download]   0.4% of 3.52MiB at  2.46MiB/s ETA 00:01
+
+[download]   0.9% of 3.52MiB at  3.53MiB/s ETA 00:00
+
+[download]   1.8% of 3.52MiB at  4.42MiB/s ETA 00:00
+
+[download]   3.5% of 3.52MiB at  5.76MiB/s ETA 00:00
+
+[download]   7.1% of 3.52MiB at  7.77MiB/s ETA 00:00
+
+[download]  14.2% of 3.52MiB at 12.88MiB/s ETA 00:00
+
+[download]  28.4% of 3.52MiB at 18.95MiB/s ETA 00:00
+
+[download]  56.9% of 3.52MiB at 26.50MiB/s ETA 00:00
+
+[download] 100.0% of 3.52MiB at 23.40MiB/s ETA 00:00
+
+[download] 100% of 3.52MiB in 00:00
+
+
+[Merger] Merging formats into "vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.webm"
+
+Deleting original file vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f247.webm (pass -k to keep)
+
+Deleting original file vfs://yt-dl/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.f251.webm (pass -k to keep)
+
+[download] Downloading video 2 of 2
+
+[youtube] CX11yw6YL1w: Downloading webpage
+
+[youtube] CX11yw6YL1w: Downloading android player API JSON
+
+[info] CX11yw6YL1w: Downloading 1 format(s): 248+251
+
+[info] Writing video metadata as JSON to: vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.info.json
+
+[download] Destination: vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f248.webm
+
+
+[download]   0.0% of 33.92MiB at 726.79KiB/s ETA 00:49
+
+[download]   0.0% of 33.92MiB at 439.76KiB/s ETA 01:19
+
+[download]   0.0% of 33.92MiB at 630.19KiB/s ETA 00:55
+
+[download]   0.0% of 33.92MiB at 965.64KiB/s ETA 00:36
+
+[download]   0.1% of 33.92MiB at  1.46MiB/s ETA 00:23
+
+[download]   0.2% of 33.92MiB at  2.43MiB/s ETA 00:13
+
+[download]   0.4% of 33.92MiB at  4.07MiB/s ETA 00:08
+
+[download]   0.7% of 33.92MiB at  6.49MiB/s ETA 00:05
+
+[download]   1.5% of 33.92MiB at 10.41MiB/s ETA 00:03
+
+[download]   2.9% of 33.92MiB at 16.40MiB/s ETA 00:02
+
+[download]   5.9% of 33.92MiB at 24.37MiB/s ETA 00:01
+
+[download]  11.8% of 33.92MiB at 24.51MiB/s ETA 00:01
+
+[download]  23.6% of 33.92MiB at 28.43MiB/s ETA 00:00
+
+[download]  29.2% of 33.92MiB at 31.92MiB/s ETA 00:00
+
+[download]  29.2% of 33.92MiB at 923.86KiB/s ETA 00:27
+
+[download]  29.2% of 33.92MiB at 542.62KiB/s ETA 00:45
+
+[download]  29.2% of 33.92MiB at 675.80KiB/s ETA 00:36
+
+[download]  29.2% of 33.92MiB at  1.09MiB/s ETA 00:22
+
+[download]  29.3% of 33.92MiB at  1.85MiB/s ETA 00:13
+
+[download]  29.4% of 33.92MiB at  3.28MiB/s ETA 00:07
+
+[download]  29.6% of 33.92MiB at  2.96MiB/s ETA 00:08
+
+[download]  29.9% of 33.92MiB at  4.95MiB/s ETA 00:04
+
+[download]  30.7% of 33.92MiB at  8.34MiB/s ETA 00:02
+
+[download]  32.1% of 33.92MiB at 13.67MiB/s ETA 00:01
+
+[download]  35.1% of 33.92MiB at 21.38MiB/s ETA 00:01
+
+[download]  41.0% of 33.92MiB at 27.83MiB/s ETA 00:00
+
+[download]  52.8% of 33.92MiB at 30.89MiB/s ETA 00:00
+
+[download]  57.8% of 33.92MiB at 35.62MiB/s ETA 00:00
+
+[download]  57.8% of 33.92MiB at Unknown speed ETA Unknown ETA
+
+[download]  57.8% of 33.92MiB at  1.03MiB/s ETA 00:13
+
+[download]  57.8% of 33.92MiB at  1.50MiB/s ETA 00:09
+
+[download]  57.8% of 33.92MiB at  2.33MiB/s ETA 00:06
+
+[download]  57.9% of 33.92MiB at  3.51MiB/s ETA 00:04
+
+[download]  58.0% of 33.92MiB at  5.11MiB/s ETA 00:02
+
+[download]  58.2% of 33.92MiB at  6.53MiB/s ETA 00:02
+
+[download]  58.5% of 33.92MiB at  9.10MiB/s ETA 00:01
+
+[download]  59.3% of 33.92MiB at  7.93MiB/s ETA 00:01
+
+[download]  60.7% of 33.92MiB at 12.93MiB/s ETA 00:01
+
+[download]  63.7% of 33.92MiB at 20.50MiB/s ETA 00:00
+
+[download]  69.6% of 33.92MiB at 24.81MiB/s ETA 00:00
+
+[download]  81.4% of 33.92MiB at 32.88MiB/s ETA 00:00
+
+[download]  86.0% of 33.92MiB at 35.21MiB/s ETA 00:00
+
+[download]  86.0% of 33.92MiB at Unknown speed ETA Unknown ETA
+
+[download]  86.0% of 33.92MiB at 577.44KiB/s ETA 00:08
+
+[download]  86.0% of 33.92MiB at 727.58KiB/s ETA 00:06
+
+[download]  86.0% of 33.92MiB at  1.03MiB/s ETA 00:04
+
+[download]  86.1% of 33.92MiB at  1.61MiB/s ETA 00:02
+
+[download]  86.1% of 33.92MiB at  2.74MiB/s ETA 00:01
+
+[download]  86.3% of 33.92MiB at  3.82MiB/s ETA 00:01
+
+[download]  86.7% of 33.92MiB at  5.95MiB/s ETA 00:00
+
+[download]  87.4% of 33.92MiB at  9.32MiB/s ETA 00:00
+
+[download]  88.9% of 33.92MiB at 12.18MiB/s ETA 00:00
+
+[download]  91.9% of 33.92MiB at 19.28MiB/s ETA 00:00
+
+[download]  97.8% of 33.92MiB at 24.89MiB/s ETA 00:00
+
+[download] 100.0% of 33.92MiB at 27.83MiB/s ETA 00:00
+
+[download] 100% of 33.92MiB in 00:01
+
+
+[download] Destination: vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f251.webm
+
+
+[download]   0.0% of 3.69MiB at 922.43KiB/s ETA 00:04
+
+[download]   0.1% of 3.69MiB at 748.76KiB/s ETA 00:05
+
+[download]   0.2% of 3.69MiB at  1.01MiB/s ETA 00:03
+
+[download]   0.4% of 3.69MiB at  1.54MiB/s ETA 00:02
+
+[download]   0.8% of 3.69MiB at  2.47MiB/s ETA 00:01
+
+[download]   1.7% of 3.69MiB at  4.07MiB/s ETA 00:00
+
+[download]   3.4% of 3.69MiB at  5.67MiB/s ETA 00:00
+
+[download]   6.8% of 3.69MiB at  7.89MiB/s ETA 00:00
+
+[download]  13.5% of 3.69MiB at 12.05MiB/s ETA 00:00
+
+[download]  27.1% of 3.69MiB at 19.09MiB/s ETA 00:00
+
+[download]  54.2% of 3.69MiB at 27.18MiB/s ETA 00:00
+
+[download] 100.0% of 3.69MiB at 17.57MiB/s ETA 00:00
+
+[download] 100% of 3.69MiB in 00:00
+
+
+[Merger] Merging formats into "vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.webm"
+
+Deleting original file vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f251.webm (pass -k to keep)
+
+Deleting original file vfs://yt-dl/Céline Dion - Ashes (from 'Deadpool 2' Motion Picture Soundtrack)-CX11yw6YL1w.f248.webm (pass -k to keep)
+
+[download] Finished downloading playlist: ff
+
