@@ -10,11 +10,61 @@ use function in_array;
 
 class Options
 {
+    // @deprecated
     public const EXTERNAL_DOWNLOADERS = ['aria2c', 'avconv', 'axel', 'curl', 'ffmpeg', 'httpie', 'wget'];
-    public const AUDIO_FORMATS = ['best', 'aac', 'vorbis', 'mp3', 'm4a', 'opus', 'wav'];
+
+    public const AUDIO_FORMAT_BEST = 'best';
+    public const AUDIO_FORMAT_AAC = 'aac';
+    public const AUDIO_FORMAT_FLAC = 'flac';
+    public const AUDIO_FORMAT_MP3 = 'mp3';
+    public const AUDIO_FORMAT_M4A = 'm4a';
+    public const AUDIO_FORMAT_OPUS = 'opus';
+    public const AUDIO_FORMAT_VORBIS = 'vorbis';
+    public const AUDIO_FORMAT_WAV = 'wav';
+    public const AUDIO_FORMAT_ALAC = 'alac';
+
+    // @deprecated
+    public const AUDIO_FORMATS = [
+        self::AUDIO_FORMAT_BEST,
+        self::AUDIO_FORMAT_AAC,
+        self::AUDIO_FORMAT_FLAC,
+        self::AUDIO_FORMAT_MP3,
+        self::AUDIO_FORMAT_M4A,
+        self::AUDIO_FORMAT_OPUS,
+        self::AUDIO_FORMAT_VORBIS,
+        self::AUDIO_FORMAT_WAV,
+        self::AUDIO_FORMAT_ALAC,
+    ];
+
     public const RECODE_VIDEO_FORMATS = ['mp4', 'flv', 'ogg', 'webm', 'mkv', 'avi'];
-    public const SUBTITLE_FORMATS = ['srt', 'ass', 'vtt', 'lrc'];
-    public const MERGE_OUTPUT_FORMATS = ['mkv', 'mp4', 'ogg', 'webm', 'flv'];
+
+    public const SUBTITLE_FORMAT_SRT = 'srt';
+    public const SUBTITLE_FORMAT_VTT = 'vtt';
+    public const SUBTITLE_FORMAT_ASS = 'ass';
+    public const SUBTITLE_FORMAT_LRC = 'lrc';
+
+    // @deprecated
+    public const SUBTITLE_FORMATS = [
+        self::SUBTITLE_FORMAT_SRT,
+        self::SUBTITLE_FORMAT_VTT,
+        self::SUBTITLE_FORMAT_ASS,
+        self::SUBTITLE_FORMAT_LRC,
+    ];
+
+    public const MERGE_OUTPUT_FORMAT_MKV = 'mkv';
+    public const MERGE_OUTPUT_FORMAT_MP4 = 'mp4';
+    public const MERGE_OUTPUT_FORMAT_OGG = 'ogg';
+    public const MERGE_OUTPUT_FORMAT_WEBM = 'webm';
+    public const MERGE_OUTPUT_FORMAT_FLV = 'flv';
+
+    // @deprecated
+    public const MERGE_OUTPUT_FORMATS = [
+        self::MERGE_OUTPUT_FORMAT_MKV,
+        self::MERGE_OUTPUT_FORMAT_MP4,
+        self::MERGE_OUTPUT_FORMAT_OGG,
+        self::MERGE_OUTPUT_FORMAT_WEBM,
+        self::MERGE_OUTPUT_FORMAT_FLV,
+    ];
 
     private ?string $downloadPath = null;
     private bool $cleanupMetadata = true;
@@ -139,6 +189,7 @@ class Options
     private bool $extractAudio = false;
     private ?string $audioFormat = null;
     private ?string $audioQuality = null;
+    private ?string $remuxVideo = null;
     private ?string $recodeVideo = null;
     private ?string $postProcessorArgs = null;
     private bool $keepVideo = false;
@@ -683,12 +734,8 @@ class Options
      * Use the specified external downloader.
      * Currently supports: aria2c, avconv, axel, curl, ffmpeg, httpie, wget.
      */
-    public function externalDownloader(string $externalDownloader): self
+    public function externalDownloader(?string $externalDownloader): self
     {
-        if ($externalDownloader !== null && !in_array($externalDownloader, static::EXTERNAL_DOWNLOADERS, true)) {
-            throw new InvalidArgumentException(sprintf('Option `externalDownloader` expected one of: %s. Got: %s.', implode(', ', array_map(static fn ($v) => '"'.$v.'"', static::EXTERNAL_DOWNLOADERS)), '"'.$externalDownloader.'"'));
-        }
-
         $new = clone $this;
         $new->externalDownloader = $externalDownloader;
 
@@ -1138,6 +1185,8 @@ class Options
      * If a merge is required (e.g. bestvideo+bestaudio), output to given
      * container format. One of mkv, mp4, ogg, webm, flv.
      * Ignored if no merge is required.
+     *
+     * @phpstasn-param self::MERGE_OUTPUT_FORMAT_*|null $mergeOutputFormat
      */
     public function mergeOutputFormat(?string $mergeOutputFormat): self
     {
@@ -1300,6 +1349,9 @@ class Options
         return $this->extractAudio;
     }
 
+    /**
+     * @phpstan-param self::AUDIO_FORMAT_*|null $audioFormat
+     */
     public function audioFormat(?string $audioFormat): self
     {
         if ($audioFormat !== null && !in_array($audioFormat, static::AUDIO_FORMATS, true)) {
@@ -1316,6 +1368,21 @@ class Options
     {
         $new = clone $this;
         $new->audioQuality = $audioQuality;
+
+        return $new;
+    }
+
+    /**
+     * Remux the video into another container if necessary (currently supported:
+     * mp4|mkv|flv|webm|mov|avi|mp3|mka|m4a|ogg|opus). If target container does
+     * not support the video/audio codec, remuxing will fail. You can specify
+     * multiple rules; Eg. "aac>m4a/mov>mp4/mkv" will remux aac to * m4a,
+     * mov to mp4 and anything else to mkv.
+     */
+    public function remuxVideo(?string $remuxVideo): self
+    {
+        $new = clone $this;
+        $new->remuxVideo = $remuxVideo;
 
         return $new;
     }
@@ -1420,6 +1487,9 @@ class Options
         return $new;
     }
 
+    /**
+     * @phpstan-param self::SUBTITLE_FORMAT_*|null $subsFormat
+     */
     public function convertSubsFormat(?string $subsFormat): self
     {
         if ($subsFormat !== null && !in_array($subsFormat, static::SUBTITLE_FORMATS, true)) {

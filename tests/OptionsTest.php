@@ -21,9 +21,9 @@ final class OptionsTest extends TestCase
     public function testInvalidAudioFormatThrows(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Option `audioFormat` expected one of: "best", "aac", "vorbis", "mp3", "m4a", "opus", "wav". Got: "mp3000".');
+        $this->expectExceptionMessage('Option `audioFormat` expected one of: "best", "aac", "flac", "mp3", "m4a", "opus", "vorbis", "wav", "alac". Got: "mp3000".');
 
-        Options::create()->audioFormat('mp3000');
+        Options::create()->audioFormat('mp3000'); // @phpstan-ignore-line
     }
 
     public function testInvalidRecodeVideoThrows(): void
@@ -37,9 +37,9 @@ final class OptionsTest extends TestCase
     public function testInvalidConvertSubsFormatThrows(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Option `convertSubsFormat` expected one of: "srt", "ass", "vtt", "lrc". Got: "usf".');
+        $this->expectExceptionMessage('Option `convertSubsFormat` expected one of: "srt", "vtt", "ass", "lrc". Got: "usf".');
 
-        Options::create()->convertSubsFormat('usf');
+        Options::create()->convertSubsFormat('usf'); // @phpstan-ignore-line
     }
 
     public function testAuthenticateThrowsWithoutUsername(): void
