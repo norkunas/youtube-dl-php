@@ -12,7 +12,7 @@ jobs:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: 8.0
+                  php-version: 8.1
                   tools: cs2pr
             - name: "Install dependencies with composer"
               run: |
@@ -29,7 +29,7 @@ jobs:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: 8.0
+                  php-version: 8.1
                   tools: cs2pr
             - name: "Install dependencies with composer"
               run: composer install --prefer-dist --no-progress --no-suggest
@@ -41,14 +41,10 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php-version: 7.4
-                      composer-flags: --prefer-stable --prefer-lowest
                     - php-version: 8.0
                       composer-flags: --prefer-stable --prefer-lowest
                     - php-version: 8.1
                       composer-flags: --prefer-stable --prefer-lowest
-                    - php-version: 7.4
-                      symfony-version: 5.4.*
                     - php-version: 8.0
                       symfony-version: 5.4.*
                     - php-version: 8.0
@@ -85,8 +81,8 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php-version: 8.0
-                      symfony-version: 5.3.*
+                    - php-version: 8.1
+                      symfony-version: 6.0.*
         steps:
             - name: "Checkout"
               uses: actions/checkout@v2
