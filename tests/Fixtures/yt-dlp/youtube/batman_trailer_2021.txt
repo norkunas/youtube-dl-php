@@ -1,0 +1,18 @@
+[youtube] -FZ-pPFAjYY: Downloading webpage
+[youtube] -FZ-pPFAjYY: Downloading android player API JSON
+[youtube] -FZ-pPFAjYY: Downloading player 8da38e9a
+[info] -FZ-pPFAjYY: Downloading 1 format(s): 315+251
+[info] Writing video metadata as JSON to: vfs://yt-dl/THE BATMAN Trailer (2022)--FZ-pPFAjYY.info.json
+[download] Destination: vfs://yt-dl/THE BATMAN Trailer (2022)--FZ-pPFAjYY.f315.webm
+[download]   0.0% of 122.25MiB at Unknown speed ETA Unknown ETA
+[download]  51.2% of 122.25MiB at 31.23MiB/s ETA 00:01
+[download]  99.0% of 122.25MiB at 39.02MiB/s ETA 00:00
+[download] 100.0% of 122.25MiB at 40.71MiB/s ETA 00:00
+[download] 100% of 122.25MiB in 00:03
+[download] Destination: vfs://yt-dl/THE BATMAN Trailer (2022)--FZ-pPFAjYY.f251.webm
+[download]   0.0% of 2.32MiB at 891.27KiB/s ETA 00:02
+[download] 100.0% of 2.32MiB at 25.44MiB/s ETA 00:00
+[download] 100% of 2.32MiB in 00:00
+[Merger] Merging formats into "vfs://yt-dl/THE BATMAN Trailer (2022)--FZ-pPFAjYY.webm"
+Deleting original file vfs://yt-dl/THE BATMAN Trailer (2022)--FZ-pPFAjYY.f251.webm (pass -k to keep)
+Deleting original file vfs://yt-dl/THE BATMAN Trailer (2022)--FZ-pPFAjYY.f315.webm (pass -k to keep)

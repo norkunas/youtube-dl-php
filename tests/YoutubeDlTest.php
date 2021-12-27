@@ -194,38 +194,13 @@ class YoutubeDlTest extends TestCase
         self::assertEquals($expectedCollection, $yt->download(Options::create()->downloadPath($this->tmpDir)->rejectTitle('sh')->url($url)));
     }
 
-    public function testDownloadWithYtDlp(): void
-    {
-        $process = new StaticProcess();
-        $process->setOutputFile(__DIR__.'/Fixtures/yt-dlp/phonebloks.txt');
-        $process->writeMetadata([
-            ['from' => $metadataFile = __DIR__.'/Fixtures/yt-dlp/Phonebloks-oDAw7vW7H0c.info.json', 'to' => $this->tmpDir.'/Phonebloks-oDAw7vW7H0c.info.json']
-        ]);
-
-        $processBuilder = $this->createProcessBuilderMock($process, [
-            '--ignore-config',
-            '--ignore-errors',
-            '--write-info-json',
-            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
-            $url = 'https://www.youtube.com/watch?v=oDAw7vW7H0c',
-        ]);
-
-        $yt = new YoutubeDl($processBuilder);
-
-        $metadata = $this->readJsonFile($metadataFile);
-        $metadata['file'] = new SplFileInfo($this->tmpDir.'/'.basename($metadata['_filename']));
-        $metadata['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
-
-        self::assertEquals(new VideoCollection([new Video($metadata)]), $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
-    }
-
     public function testOnProgress(): void
     {
         $process = new StaticProcess();
         $process->setOutputFile(__DIR__.'/Fixtures/progress.txt');
         $process->writeMetadata([
             [
-                'from' => $metadataFile = __DIR__.'/Fixtures/youtube/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json',
+                'from' => $metadataFile = __DIR__.'/Fixtures/youtube-dl/youtube/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json',
                 'to' => $this->tmpDir.'/'.basename($metadataFile),
             ],
         ]);
@@ -399,10 +374,10 @@ class YoutubeDlTest extends TestCase
     public function testDownloadWithMetadataCleanup(): void
     {
         $process = new StaticProcess();
-        $process->setOutputFile(__DIR__.'/Fixtures/youtube/batman_trailer_2021.txt');
+        $process->setOutputFile(__DIR__.'/Fixtures/youtube-dl/youtube/batman_trailer_2021.txt');
         $process->writeMetadata([
             [
-                'from' => $metadataFile = __DIR__.'/Fixtures/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
+                'from' => $metadataFile = __DIR__.'/Fixtures/youtube-dl/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
                 'to' => $this->tmpDir.'/'.basename($metadataFile),
             ],
         ]);
@@ -427,10 +402,10 @@ class YoutubeDlTest extends TestCase
     public function testDownloadWithoutMetadataCleanup(): void
     {
         $process = new StaticProcess();
-        $process->setOutputFile(__DIR__.'/Fixtures/youtube/batman_trailer_2021.txt');
+        $process->setOutputFile(__DIR__.'/Fixtures/youtube-dl/youtube/batman_trailer_2021.txt');
         $process->writeMetadata([
             [
-                'from' => $metadataFile = __DIR__.'/Fixtures/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
+                'from' => $metadataFile = __DIR__.'/Fixtures/youtube-dl/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
                 'to' => $this->tmpDir.'/'.basename($metadataFile),
             ],
         ]);
@@ -530,99 +505,114 @@ class YoutubeDlTest extends TestCase
 
     public function provideSimpleVideoCases(): iterable
     {
-        yield 'youtube_batman_trailer_2021' => [
+        yield 'youtube-dl: youtube_batman_trailer_2021' => [
             'url' => 'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
-            'outputFile' => __DIR__.'/Fixtures/youtube/batman_trailer_2021.txt',
-            'metadataFile' => __DIR__.'/Fixtures/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/batman_trailer_2021.txt',
+            'metadataFile' => __DIR__.'/Fixtures/youtube-dl/youtube/THE BATMAN Trailer (2021)--FZ-pPFAjYY.info.json',
+        ];
+
+        yield 'yt_dlp: youtube_batman_trailer_2021' => [
+            'url' => 'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
+            'outputFile' => __DIR__.'/Fixtures/yt-dlp/youtube/batman_trailer_2021.txt',
+            'metadataFile' => __DIR__.'/Fixtures/yt-dlp/youtube/THE BATMAN Trailer (2022)--FZ-pPFAjYY.info.json',
         ];
     }
 
     public function provideAlreadyDownloadedVideoCases(): iterable
     {
-        yield 'youtube_phonebloks' => [
+        yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/watch?v=oDAw7vW7H0c',
-            'outputFile' => __DIR__.'/Fixtures/youtube/phonebloks_already_downloaded.txt',
-            'metadataFile' => __DIR__.'/Fixtures/youtube/Phonebloks-oDAw7vW7H0c.info.json',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/already_downloaded.txt',
+            'metadataFile' => __DIR__.'/Fixtures/youtube-dl/youtube/Doc Ock Sings!-sy_yQHN2K6g.info.json',
         ];
     }
 
     public function provideDownloadPlaylistCases(): iterable
     {
-        yield 'youtube two video playlist' => [
+        yield 'youtube-dl: youtube two video playlist' => [
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
-            'outputFile' => __DIR__.'/Fixtures/youtube/two_video_playlist.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/two_video_playlist.txt',
             'metadataFiles' => [
-                __DIR__.'/Fixtures/youtube/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json',
-                __DIR__.'/Fixtures/youtube/Céline Dion - Ashes (from \'Deadpool 2\' Motion Picture Soundtrack)-CX11yw6YL1w.info.json',
+                __DIR__.'/Fixtures/youtube-dl/youtube/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json',
+                __DIR__.'/Fixtures/youtube-dl/youtube/Céline Dion - Ashes (from \'Deadpool 2\' Motion Picture Soundtrack)-CX11yw6YL1w.info.json',
+            ],
+        ];
+
+        yield 'yt-dlp: youtube two video playlist' => [
+            'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
+            'outputFile' => __DIR__.'/Fixtures/yt-dlp/youtube/two_video_playlist.txt',
+            'metadataFiles' => [
+                __DIR__.'/Fixtures/yt-dlp/youtube/Pet Shop Boys - Did you see me coming-2Hy4bT0ESfc.info.json',
+                __DIR__.'/Fixtures/yt-dlp/youtube/Céline Dion - Ashes (from \'Deadpool 2\' Motion Picture Soundtrack)-CX11yw6YL1w.info.json',
             ],
         ];
     }
 
     public function provideDownloadPlaylistMatchTitleCases(): iterable
     {
-        yield 'youtube video playlist match title' => [
+        yield 'youtube-dl: youtube video playlist match title' => [
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
-            'outputFile' => __DIR__.'/Fixtures/youtube/playlist_match_title_zero_results.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/playlist_match_title_zero_results.txt',
             'expectedCollection' => new VideoCollection([]),
         ];
     }
 
     public function provideDownloadPlaylistRejectTitleCases(): iterable
     {
-        yield 'youtube video playlist match title' => [
+        yield 'youtube-dl: youtube video playlist match title' => [
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
-            'outputFile' => __DIR__.'/Fixtures/youtube/playlist_reject_title_zero_results.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/playlist_reject_title_zero_results.txt',
             'expectedCollection' => new VideoCollection([]),
         ];
     }
 
     public function provideUnsupportedUrlCases(): iterable
     {
-        yield 'youtube' => [
+        yield 'youtube-dl: youtube' => [
             'url' => 'https://youtube.com',
-            'outputFile' => __DIR__.'/Fixtures/youtube/unsupported_url.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/unsupported_url.txt',
             'expectedEntity' => new Video(['error' => 'Unsupported URL: https://www.youtube.com/', 'extractor' => 'generic']),
         ];
     }
 
     public function provideIncompleteUrlCases(): iterable
     {
-        yield 'youtube' => [
+        yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/watch?v=X0lRjbrH-L',
-            'outputFile' => __DIR__.'/Fixtures/youtube/incomplete_url.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/incomplete_url.txt',
             'expectedEntity' => new Video(['error' => 'Incomplete YouTube ID X0lRjbrH-L. URL https://www.youtube.com/watch?v=X0lRjbrH-L looks truncated.', 'extractor' => 'generic']),
         ];
     }
 
     public function providePrivatePlaylistCases(): iterable
     {
-        yield 'youtube' => [
+        yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/playlist?list=PLtPgu7CB4gbY9oDN3drwC3cMbJggS7dKl',
-            'outputFile' => __DIR__.'/Fixtures/youtube/private_playlist.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/private_playlist.txt',
             'expectedEntity' => new Video(['error' => 'This playlist is private, use --username or --netrc to access it.', 'extractor' => 'youtube:playlist']),
         ];
     }
 
     public function provideUnreachableNetworkCases(): iterable
     {
-        yield 'youtube' => [
+        yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/watch?v=-cRzcUxLxlM',
-            'outputFile' => __DIR__.'/Fixtures/youtube/network_unreachable.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/network_unreachable.txt',
             'expectedEntity' => new Video(['error' => 'unable to download video data: <urlopen error [Errno 101] Network is unreachable>', 'extractor' => 'youtube']),
         ];
     }
 
     public function provideListSubsCases(): iterable
     {
-        yield 'youtube no subtitles' => [
+        yield 'youtube-dl: youtube no subtitles' => [
             'url' => 'https://www.youtube.com/watch?v=t3Ww9Z0Kt78',
-            'outputFile' => __DIR__.'/Fixtures/youtube/no_subtitles.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/no_subtitles.txt',
             'expectedSubs' => [],
         ];
 
-        yield 'youtube auto captions' => [
+        yield 'youtube-dl: youtube auto captions' => [
             'url' => 'https://www.youtube.com/watch?v=N26PICDnOAM',
-            'outputFile' => __DIR__.'/Fixtures/youtube/auto_captions.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/auto_captions.txt',
             'expectedSubs' => [
                 new SubListItem(['language' => 'gu', 'formats' => ['vtt', 'ttml', 'srv3', 'srv2', 'srv1'], 'auto_caption' => true]),
                 new SubListItem(['language' => 'zh-Hans', 'formats' => ['vtt', 'ttml', 'srv3', 'srv2', 'srv1'], 'auto_caption' => true]),
@@ -636,9 +626,9 @@ class YoutubeDlTest extends TestCase
             ],
         ];
 
-        yield 'youtube full subtitles' => [
+        yield 'youtube-dl: youtube full subtitles' => [
             'url' => 'https://www.youtube.com/watch?v=X0lRjbrH-L8',
-            'outputFile' => __DIR__.'/Fixtures/youtube/full_subtitles.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/full_subtitles.txt',
             'expectedSubs' => [
                 new SubListItem(['language' => 'gu', 'formats' => ['vtt', 'ttml', 'srv3', 'srv2', 'srv1'], 'auto_caption' => true]),
                 new SubListItem(['language' => 'zh-Hans', 'formats' => ['vtt', 'ttml', 'srv3', 'srv2', 'srv1'], 'auto_caption' => true]),
@@ -654,9 +644,9 @@ class YoutubeDlTest extends TestCase
             ],
         ];
 
-        yield 'youtube playlist no subtitles' => [
+        yield 'youtube-dl: youtube playlist no subtitles' => [
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
-            'outputFile' => __DIR__.'/Fixtures/youtube/playlist_without_subtitles.txt',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/playlist_without_subtitles.txt',
             'expectedSubs' => [],
         ];
     }

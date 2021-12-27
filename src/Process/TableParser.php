@@ -38,7 +38,7 @@ final class TableParser
     }
 
     /**
-     * @return array<int, array{column:string, width:?int}>
+     * @return array<int, array{column: string, width: ?int}>
      */
     private static function collectColumnsAndWidths(string $header): array
     {
