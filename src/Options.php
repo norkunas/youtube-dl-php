@@ -1626,6 +1626,7 @@ class Options
             'extract-audio' => $this->extractAudio,
             'audio-format' => $this->audioFormat,
             'audio-quality' => $this->audioQuality,
+            'remux-video' => $this->remuxVideo,
             'recode-video' => $this->recodeVideo,
             'postprocessor-args' => $this->postProcessorArgs,
             'keep-video' => $this->keepVideo,
