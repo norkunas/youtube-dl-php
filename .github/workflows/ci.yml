@@ -14,6 +14,15 @@ jobs:
               with:
                   php-version: 8.1
                   tools: cs2pr
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                  restore-keys: ${{ runner.os }}-composer-
             - name: "Install dependencies with composer"
               run: |
                   composer install --prefer-dist --no-progress --no-suggest
@@ -31,6 +40,15 @@ jobs:
               with:
                   php-version: 8.1
                   tools: cs2pr
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                  restore-keys: ${{ runner.os }}-composer-
             - name: "Install dependencies with composer"
               run: composer install --prefer-dist --no-progress --no-suggest
             - name: "Run PHP-CS-Fixer"
@@ -41,10 +59,6 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php-version: 8.0
-                      composer-flags: --prefer-stable --prefer-lowest
-                    - php-version: 8.1
-                      composer-flags: --prefer-stable --prefer-lowest
                     - php-version: 8.0
                       symfony-version: 5.4.*
                     - php-version: 8.0
@@ -61,16 +75,20 @@ jobs:
               with:
                   coverage: none
                   php-version: ${{ matrix.php-version }}
-            - name: "Install dependencies (fixed Symfony version) with composer"
-              if: matrix.symfony-version
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                  restore-keys: ${{ runner.os }}-composer-
+            - name: "Install dependencies with composer"
               run: |
                   composer remove --dev friendsofphp/php-cs-fixer
                   composer require symfony/filesystem:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} --no-interaction --no-update
                   composer update --no-interaction --no-progress --no-suggest
-            - name: "Install dependencies (lowest dependencies) with composer"
-              if: matrix.composer-flags
-              run: |
-                  composer update ${{ matrix.composer-flags }} --no-interaction --no-progress --no-suggest
             - name: "Run tests with phpunit/phpunit"
               env:
                   SYMFONY_DEPRECATIONS_HELPER: 'max[self]=2'
@@ -91,6 +109,15 @@ jobs:
               with:
                   coverage: xdebug
                   php-version: ${{ matrix.php-version }}
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                  restore-keys: ${{ runner.os }}-composer-
             - name: "Install dependencies with composer"
               run: |
                   composer require symfony/filesystem:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} --no-interaction --no-update
