@@ -122,7 +122,8 @@ class YoutubeDl
                     $currentVideo = null;
                 }
 
-                $currentVideo['extractor'] = $match[1];
+                $currentVideo['extractor'] = $match['extractor'];
+                $currentVideo['id'] = $match['id'];
                 $currentVideo['id'] = $match[2];
             } elseif (str_starts_with($buffer, 'ERROR:')) {
                 $currentVideo['error'] = trim(substr($buffer, 6));
