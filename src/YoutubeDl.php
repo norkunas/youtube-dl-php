@@ -116,9 +116,7 @@ class YoutubeDl
         $process->run(function (string $type, string $buffer) use (&$currentVideo, &$parsedData, &$progressTarget): void {
             ($this->debug)($type, $buffer);
 
-            if (preg_match('/\[(.+)]\s(.+):\sDownloading webpage/', $buffer, $match) === 1
-                || preg_match('/\[(.+)]\s(.+):\sDownloading pc webpage/', $buffer, $match) === 1
-            ) {
+            if (preg_match('/\[(?<extractor>.+)]\s(?<id>.+):\sDownloading( pc )?webpage/', $buffer, $match) === 1) {
                 if ($currentVideo !== null) {
                     $parsedData[] = $currentVideo;
                     $currentVideo = null;
