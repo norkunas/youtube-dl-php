@@ -1,0 +1,64 @@
+[youtube] oDAw7vW7H0c: Downloading webpage
+[info] Writing video description metadata as JSON to: vfs://yt-dl/Phonebloks-oDAw7vW7H0c_mp3.info.json
+[download] Destination: vfs://yt-dl/Phonebloks-oDAw7vW7H0c.webm
+
+[download]   0.0% of 2.69MiB at  6.18KiB/s ETA 07:25
+[download]   0.1% of 2.69MiB at 18.54KiB/s ETA 02:28
+[download]   0.3% of 2.69MiB at 43.25KiB/s ETA 01:03
+[download]   0.5% of 2.69MiB at 92.65KiB/s ETA 00:29
+[download]   1.1% of 2.69MiB at 63.93KiB/s ETA 00:42
+[download]   2.3% of 2.69MiB at 58.48KiB/s ETA 00:46
+[download]   4.2% of 2.69MiB at 51.05KiB/s ETA 00:51
+[download]   5.9% of 2.69MiB at 50.36KiB/s ETA 00:51
+[download]   7.6% of 2.69MiB at 50.97KiB/s ETA 00:49
+[download]   9.5% of 2.69MiB at 52.24KiB/s ETA 00:47
+[download]  11.6% of 2.69MiB at 51.36KiB/s ETA 00:47
+[download]  13.4% of 2.69MiB at 51.45KiB/s ETA 00:46
+[download]  15.3% of 2.69MiB at 52.06KiB/s ETA 00:44
+[download]  17.3% of 2.69MiB at 53.07KiB/s ETA 00:42
+[download]  19.6% of 2.69MiB at 52.85KiB/s ETA 00:41
+[download]  21.4% of 2.69MiB at 53.09KiB/s ETA 00:40
+[download]  23.4% of 2.69MiB at 52.37KiB/s ETA 00:40
+[download]  25.1% of 2.69MiB at 52.22KiB/s ETA 00:39
+[download]  26.9% of 2.69MiB at 52.25KiB/s ETA 00:38
+[download]  28.8% of 2.69MiB at 52.57KiB/s ETA 00:37
+[download]  30.9% of 2.69MiB at 52.18KiB/s ETA 00:36
+[download]  32.6% of 2.69MiB at 52.15KiB/s ETA 00:35
+[download]  34.5% of 2.69MiB at 52.37KiB/s ETA 00:34
+[download]  36.6% of 2.69MiB at 52.00KiB/s ETA 00:33
+[download]  38.2% of 2.69MiB at 52.57KiB/s ETA 00:32
+[download]  40.7% of 2.69MiB at 52.14KiB/s ETA 00:31
+[download]  42.4% of 2.69MiB at 52.08KiB/s ETA 00:30
+[download]  44.3% of 2.69MiB at 52.21KiB/s ETA 00:29
+[download]  46.3% of 2.69MiB at 52.51KiB/s ETA 00:28
+[download]  48.4% of 2.69MiB at 52.38KiB/s ETA 00:27
+[download]  50.2% of 2.69MiB at 52.45KiB/s ETA 00:26
+[download]  52.2% of 2.69MiB at 52.11KiB/s ETA 00:25
+[download]  53.8% of 2.69MiB at 52.55KiB/s ETA 00:24
+[download]  56.5% of 2.69MiB at 52.31KiB/s ETA 00:22
+[download]  58.2% of 2.69MiB at 52.30KiB/s ETA 00:22
+[download]  60.1% of 2.69MiB at 52.44KiB/s ETA 00:20
+[download]  62.1% of 2.69MiB at 52.24KiB/s ETA 00:19
+[download]  63.8% of 2.69MiB at 52.21KiB/s ETA 00:19
+[download]  65.7% of 2.69MiB at 52.31KiB/s ETA 00:18
+[download]  67.7% of 2.69MiB at 52.54KiB/s ETA 00:16
+[download]  69.9% of 2.69MiB at 52.46KiB/s ETA 00:15
+[download]  71.8% of 2.69MiB at 52.52KiB/s ETA 00:14
+[download]  73.8% of 2.69MiB at 52.29KiB/s ETA 00:13
+[download]  75.4% of 2.69MiB at 52.62KiB/s ETA 00:12
+[download]  78.1% of 2.69MiB at 52.46KiB/s ETA 00:11
+[download]  79.8% of 2.69MiB at 52.47KiB/s ETA 00:10
+[download]  81.7% of 2.69MiB at 52.59KiB/s ETA 00:09
+[download]  83.8% of 2.69MiB at 52.45KiB/s ETA 00:08
+[download]  85.5% of 2.69MiB at 52.43KiB/s ETA 00:07
+[download]  87.4% of 2.69MiB at 52.51KiB/s ETA 00:06
+[download]  89.5% of 2.69MiB at 52.36KiB/s ETA 00:05
+[download]  91.2% of 2.69MiB at 52.33KiB/s ETA 00:04
+[download]  93.0% of 2.69MiB at 52.34KiB/s ETA 00:03
+[download]  94.9% of 2.69MiB at 52.45KiB/s ETA 00:02
+[download]  97.0% of 2.69MiB at 52.34KiB/s ETA 00:01
+[download]  98.8% of 2.69MiB at 52.34KiB/s ETA 00:00
+[download] 100.0% of 2.69MiB at 52.56KiB/s ETA 00:00
+[download] 100% of 2.69MiB in 00:52
+[ffmpeg] Destination: vfs://yt-dl/Phonebloks-oDAw7vW7H0c.mp3
+Deleting original file vfs://yt-dl/Phonebloks-oDAw7vW7H0c.webm (pass -k to keep)

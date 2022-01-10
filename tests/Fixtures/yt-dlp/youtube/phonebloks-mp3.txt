@@ -1,0 +1,21 @@
+[youtube] oDAw7vW7H0c: Downloading webpage
+[youtube] oDAw7vW7H0c: Downloading android player API JSON
+[info] oDAw7vW7H0c: Downloading 1 format(s): 251
+[info] Writing video metadata as JSON to: vfs://yt-dl/Phonebloks-oDAw7vW7H0c_mp3.info.json
+[download] Destination: vfs://yt-dl/Phonebloks-oDAw7vW7H0c.webm
+
+[download]   0.0% of 2.69MiB at 134.78KiB/s ETA 00:20
+[download]   0.1% of 2.69MiB at 385.78KiB/s ETA 00:07
+[download]   0.3% of 2.69MiB at 881.66KiB/s ETA 00:03
+[download]   0.5% of 2.69MiB at  1.80MiB/s ETA 00:01
+[download]   1.1% of 2.69MiB at 806.37KiB/s ETA 00:03
+[download]   2.3% of 2.69MiB at 1016.86KiB/s ETA 00:02
+[download]   4.6% of 2.69MiB at  1.32MiB/s ETA 00:01
+[download]   9.2% of 2.69MiB at  2.01MiB/s ETA 00:01
+[download]  18.5% of 2.69MiB at  2.68MiB/s ETA 00:00
+[download]  37.1% of 2.69MiB at  2.33MiB/s ETA 00:00
+[download]  74.2% of 2.69MiB at  3.90MiB/s ETA 00:00
+[download] 100% of 2.69MiB at  4.05MiB/s ETA 00:00
+[download] 100% of 2.69MiB in 00:00
+[ExtractAudio] Destination: vfs://yt-dl/Phonebloks-oDAw7vW7H0c.mp3
+Deleting original file vfs://yt-dl/Phonebloks-oDAw7vW7H0c.webm (pass -k to keep)
