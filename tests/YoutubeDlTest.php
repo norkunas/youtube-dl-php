@@ -371,6 +371,47 @@ class YoutubeDlTest extends TestCase
         self::assertEquals($collection, $yt->download(Options::create()->downloadPath($this->tmpDir)->url($url)));
     }
 
+    /**
+     * @dataProvider provideMp3VideoFile
+     */
+    public function testDownloadMp3(string $url, string $outputFile, string $metadataFile): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile($outputFile);
+        $process->writeMetadata([
+            ['from' => $metadataFile, 'to' => $this->tmpDir.'/'.basename($metadataFile)]
+        ]);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            '--extract-audio',
+            '--audio-format=mp3',
+            '--audio-quality=0',
+            $url,
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        $metadata = $this->readJsonFile($metadataFile);
+        $metadata['file'] = new SplFileInfo($this->tmpDir.'/'.basename($metadata['_filename']));
+        $metadata['metadataFile'] = new SplFileInfo($this->tmpDir.'/'.basename($metadataFile));
+
+        self::assertEquals(
+            new VideoCollection([new Video($metadata)]),
+            $yt->download(
+                Options::create()
+                    ->downloadPath($this->tmpDir)
+                    ->extractAudio(true)
+                    ->audioFormat('mp3')
+                    ->audioQuality('0')
+                    ->url($url)
+            )
+        );
+    }
+
     public function testDownloadWithMetadataCleanup(): void
     {
         $process = new StaticProcess();
@@ -648,6 +689,21 @@ class YoutubeDlTest extends TestCase
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
             'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/playlist_without_subtitles.txt',
             'expectedSubs' => [],
+        ];
+    }
+
+    public function provideMp3VideoFile(): iterable
+    {
+        yield 'youtube-dl: phonebloks' => [
+            'url' => 'https://www.youtube.com/watch?v=oDAw7vW7H0c',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/phonebloks-mp3.txt',
+            'metadataFile' => __DIR__.'/Fixtures/youtube-dl/youtube/Phonebloks-oDAw7vW7H0c_mp3.info.json',
+        ];
+
+        yield 'yt-dlp: phonebloks' => [
+            'url' => 'https://www.youtube.com/watch?v=oDAw7vW7H0c',
+            'outputFile' => __DIR__.'/Fixtures/yt-dlp/youtube/phonebloks-mp3.txt',
+            'metadataFile' => __DIR__.'/Fixtures/yt-dlp/youtube/Phonebloks-oDAw7vW7H0c_mp3.info.json',
         ];
     }
 
