@@ -18,10 +18,10 @@
         "symfony/process": "^4.4|^5.1|^6.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.0",
-        "mikey179/vfsstream": "^1.6.7",
-        "phpstan/phpstan": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "mikey179/vfsstream": "^1.6.10",
+        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-phpunit": "^1.1",
         "symfony/phpunit-bridge": "^5.1.5|^6.0"
     },
     "autoload": {

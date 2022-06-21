@@ -152,7 +152,7 @@ class YoutubeDl
         $metadataFiles = [];
 
         foreach ($parsedData as $parsedRow) {
-            if (isset($parsedRow['error'])) { // @phpstan-ignore-line
+            if (isset($parsedRow['error'])) {
                 $videos[] = new Video([
                     'error' => $parsedRow['error'],
                     'extractor' => $parsedRow['extractor'] ?? 'generic',
