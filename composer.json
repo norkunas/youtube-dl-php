@@ -1,7 +1,7 @@
 {
     "name": "norkunas/youtube-dl-php",
     "type": "library",
-    "description": "youtube-dl wrapper for php",
+    "description": "youtube-dl / yt-dlp wrapper for php",
     "keywords": ["youtube", "youtube-dl"],
     "license": "MIT",
     "authors": [
