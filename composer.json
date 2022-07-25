@@ -14,15 +14,15 @@
         "php": ">=7.4.0",
         "ext-json": "*",
         "symfony/filesystem": "^4.4|^5.1|^6.0",
-        "symfony/polyfill-php80": "^1.18",
+        "symfony/polyfill-php80": "^1.26",
         "symfony/process": "^4.4|^5.1|^6.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.8",
+        "friendsofphp/php-cs-fixer": "^3.9",
         "mikey179/vfsstream": "^1.6.10",
-        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan": "^1.8",
         "phpstan/phpstan-phpunit": "^1.1",
-        "symfony/phpunit-bridge": "^5.1.5|^6.0"
+        "symfony/phpunit-bridge": "^6.1"
     },
     "autoload": {
         "psr-4": { "YoutubeDl\\": "src/" }

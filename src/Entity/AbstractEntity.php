@@ -6,7 +6,9 @@ namespace YoutubeDl\Entity;
 
 use Countable;
 use JsonException;
+
 use const JSON_THROW_ON_ERROR;
+
 use function count;
 use function is_array;
 use function json_encode;

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace YoutubeDl\Metadata;
 
 use YoutubeDl\Exception\FileException;
+
 use const JSON_THROW_ON_ERROR;
+
 use function file_get_contents;
 use function json_decode;
 

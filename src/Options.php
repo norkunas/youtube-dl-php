@@ -6,6 +6,7 @@ namespace YoutubeDl;
 
 use DateTimeInterface;
 use YoutubeDl\Exception\InvalidArgumentException;
+
 use function in_array;
 
 class Options

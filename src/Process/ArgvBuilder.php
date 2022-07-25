@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace YoutubeDl\Process;
 
 use YoutubeDl\Options;
+
 use function count;
 use function is_array;
 use function is_bool;
