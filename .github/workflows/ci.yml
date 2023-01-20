@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+    pull_request:
+    push:
+        branches:
+            - "master"
 
 jobs:
     phpstan:
@@ -8,120 +12,100 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
+
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
-                  php-version: 8.1
-                  tools: cs2pr
-            - name: Get composer cache directory
-              id: composer-cache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            - name: Cache dependencies
-              uses: actions/cache@v2
-              with:
-                  path: ${{ steps.composer-cache.outputs.dir }}
-                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-                  restore-keys: ${{ runner.os }}-composer-
-            - name: "Install dependencies with composer"
-              run: |
-                  composer install --prefer-dist --no-progress --no-suggest
-                  vendor/bin/simple-phpunit --version
+                  php-version: 8.2
+
+            - name: "Install Dependencies with Composer"
+              uses: ramsey/composer-install@v2
+
             - name: "Run PHPStan"
-              run: vendor/bin/phpstan analyse --error-format=checkstyle | cs2pr
+              run: |
+                  vendor/bin/simple-phpunit --version
+                  vendor/bin/phpstan analyse --error-format=github
+
     php-cs-fixer:
         name: PHP-CS-Fixer
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
+
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
                   php-version: 8.1
                   tools: cs2pr
-            - name: Get composer cache directory
-              id: composer-cache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            - name: Cache dependencies
-              uses: actions/cache@v2
-              with:
-                  path: ${{ steps.composer-cache.outputs.dir }}
-                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-                  restore-keys: ${{ runner.os }}-composer-
-            - name: "Install dependencies with composer"
-              run: composer install --prefer-dist --no-progress --no-suggest
+
+            - name: "Install Dependencies with Composer"
+              uses: ramsey/composer-install@v2
+
             - name: "Run PHP-CS-Fixer"
               run: vendor/bin/php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
+
     phpunit:
-        name: PHPUnit
+        name: "PHPUnit (PHP ${{ matrix.php-version }}) (Symfony ${{ matrix.symfony-version }})"
         runs-on: ubuntu-latest
         strategy:
             matrix:
                 include:
-                    - php-version: 8.0
+                    - php-version: 7.4
                       symfony-version: 5.4.*
                     - php-version: 8.0
                       symfony-version: 6.0.*
                     - php-version: 8.1
-                      symfony-version: 5.4.*
-                    - php-version: 8.1
-                      symfony-version: 6.0.*
+                      symfony-version: 6.1.*
+                    - php-version: 8.2
+                      symfony-version: 6.2.*
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
+
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
                   coverage: none
                   php-version: ${{ matrix.php-version }}
-            - name: Get composer cache directory
+
+            - name: "Get composer cache directory"
               id: composer-cache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            - name: Cache dependencies
-              uses: actions/cache@v2
+              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+            - name: "Cache dependencies"
+              uses: actions/cache@v3
               with:
                   path: ${{ steps.composer-cache.outputs.dir }}
-                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
                   restore-keys: ${{ runner.os }}-composer-
+
             - name: "Install dependencies with composer"
               run: |
-                  composer remove --dev friendsofphp/php-cs-fixer
                   composer require symfony/filesystem:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} --no-interaction --no-update
                   composer update --no-interaction --no-progress --no-suggest
-            - name: "Run tests with phpunit/phpunit"
+
+            - name: "Run tests with PHPUnit"
               env:
                   SYMFONY_DEPRECATIONS_HELPER: 'max[self]=2'
               run: vendor/bin/simple-phpunit
+
     codecov:
         name: "Code coverage"
         runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                include:
-                    - php-version: 8.1
-                      symfony-version: 6.0.*
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
+
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
-                  coverage: xdebug
-                  php-version: ${{ matrix.php-version }}
-            - name: Get composer cache directory
-              id: composer-cache
-              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            - name: Cache dependencies
-              uses: actions/cache@v2
-              with:
-                  path: ${{ steps.composer-cache.outputs.dir }}
-                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-                  restore-keys: ${{ runner.os }}-composer-
-            - name: "Install dependencies with composer"
-              run: |
-                  composer require symfony/filesystem:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} --no-interaction --no-update
-                  composer update --no-interaction --no-progress --no-suggest
-            - name: "Run tests with phpunit/phpunit"
-              run: |
-                  vendor/bin/simple-phpunit --coverage-text
+                  coverage: pcov
+                  php-version: 8.2
+
+            - name: "Install Dependencies with Composer"
+              uses: ramsey/composer-install@v2
+
+            - name: "Run tests with PHPUnit and collect coverage"
+              run: php -dpcov.enabled=1 -dpcov.directory=. -dpcov.exclude="~vendor~" vendor/bin/simple-phpunit --colors=always --coverage-text -vvv
