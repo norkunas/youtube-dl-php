@@ -17,6 +17,7 @@ jobs:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
+                  coverage: none
                   php-version: 8.2
 
             - name: "Install Dependencies with Composer"
@@ -37,6 +38,7 @@ jobs:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
+                  coverage: none
                   php-version: 8.1
                   tools: cs2pr
 
