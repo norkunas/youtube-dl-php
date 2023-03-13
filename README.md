@@ -87,7 +87,7 @@ require __DIR__ . '/vendor/autoload.php';
 use YoutubeDl\YoutubeDl;
 
 $yt = new YoutubeDl();
-$yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, string $speed, string $eta, ?string $totalTime): void {
+$yt->onProgress(static function (?string $progressTarget, string $percentage, string $size, ?string $speed, ?string $eta, ?string $totalTime): void {
     echo "Download file: $progressTarget; Percentage: $percentage; Size: $size";
     if ($speed) {
         echo "; Speed: $speed";
