@@ -29,7 +29,7 @@ final class OptionsTest extends TestCase
     public function testInvalidRecodeVideoThrows(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Option `recodeVideo` expected one of: "mp4", "flv", "ogg", "webm", "mkv", "avi". Got: "mp4000".');
+        $this->expectExceptionMessage('Option `recodeVideo` expected one of: "avi", "flv", "gif", "mkv", "mov", "mp4", "webm", "aac", "aiff", "alac", "flac", "m4a", "mka", "mp3", "ogg", "opus", "vorbis", "wav". Got: "mp4000".');
 
         Options::create()->recodeVideo('mp4000');
     }
