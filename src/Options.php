@@ -37,7 +37,7 @@ class Options
         self::AUDIO_FORMAT_ALAC,
     ];
 
-    public const RECODE_VIDEO_FORMATS = ['mp4', 'flv', 'ogg', 'webm', 'mkv', 'avi'];
+    public const RECODE_VIDEO_FORMATS = ['avi', 'flv', 'gif', 'mkv', 'mov', 'mp4', 'webm', 'aac', 'aiff', 'alac', 'flac', 'm4a', 'mka', 'mp3', 'ogg', 'opus', 'vorbis', 'wav'];
 
     public const SUBTITLE_FORMAT_SRT = 'srt';
     public const SUBTITLE_FORMAT_VTT = 'vtt';
@@ -1375,10 +1375,10 @@ class Options
 
     /**
      * Remux the video into another container if necessary (currently supported:
-     * mp4|mkv|flv|webm|mov|avi|mp3|mka|m4a|ogg|opus). If target container does
-     * not support the video/audio codec, remuxing will fail. You can specify
-     * multiple rules; Eg. "aac>m4a/mov>mp4/mkv" will remux aac to * m4a,
-     * mov to mp4 and anything else to mkv.
+     * avi, flv, gif, mkv, mov, mp4, webm, aac, aiff, alac, flac, m4a, mka, mp3, ogg,
+     * opus, vorbis, wav). If target container does not support the video/audio codec,
+     * remuxing will fail. You can specify multiple rules; e.g. "aac>m4a/mov>mp4/mkv"
+     * will remux aac to m4a, mov to mp4 and anything else to mkv.
      */
     public function remuxVideo(?string $remuxVideo): self
     {
