@@ -37,7 +37,7 @@ class Options
         self::AUDIO_FORMAT_ALAC,
     ];
 
-    public const RECODE_VIDEO_FORMATS = ['mp4', 'flv', 'ogg', 'webm', 'mkv', 'avi'];
+    public const RECODE_VIDEO_FORMATS = ['avi', 'flv', 'gif', 'mkv', 'mov', 'mp4', 'webm', 'aac', 'aiff', 'alac', 'flac', 'm4a', 'mka', 'mp3', 'ogg', 'opus', 'vorbis', 'wav'];
 
     public const SUBTITLE_FORMAT_SRT = 'srt';
     public const SUBTITLE_FORMAT_VTT = 'vtt';
