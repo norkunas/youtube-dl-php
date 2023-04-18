@@ -1399,14 +1399,14 @@ class Options
 
         return $new;
     }
-	
-	public function postProcessorArgs(?string $postProcessorArgs): self
-	{
-		$new = clone $this;
-		$new->postProcessorArgs = $postProcessorArgs;
 
-		return $new;
-	}
+    public function postProcessorArgs(?string $postProcessorArgs): self
+    {
+        $new = clone $this;
+        $new->postProcessorArgs = $postProcessorArgs;
+
+        return $new;
+    }
 
     public function keepVideo(bool $keepVideo): self
     {
