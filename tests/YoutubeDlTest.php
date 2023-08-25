@@ -544,7 +544,7 @@ class YoutubeDlTest extends TestCase
         ], $yt->getMultipleSystemOperatorsList());
     }
 
-    public function provideSimpleVideoCases(): iterable
+    public static function provideSimpleVideoCases(): iterable
     {
         yield 'youtube-dl: youtube_batman_trailer_2021' => [
             'url' => 'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
@@ -559,7 +559,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideAlreadyDownloadedVideoCases(): iterable
+    public static function provideAlreadyDownloadedVideoCases(): iterable
     {
         yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/watch?v=oDAw7vW7H0c',
@@ -568,7 +568,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideDownloadPlaylistCases(): iterable
+    public static function provideDownloadPlaylistCases(): iterable
     {
         yield 'youtube-dl: youtube two video playlist' => [
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
@@ -589,7 +589,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideDownloadPlaylistMatchTitleCases(): iterable
+    public static function provideDownloadPlaylistMatchTitleCases(): iterable
     {
         yield 'youtube-dl: youtube video playlist match title' => [
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
@@ -598,7 +598,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideDownloadPlaylistRejectTitleCases(): iterable
+    public static function provideDownloadPlaylistRejectTitleCases(): iterable
     {
         yield 'youtube-dl: youtube video playlist match title' => [
             'url' => 'https://www.youtube.com/playlist?list=PLiLPuNqqf8RT_0RsCdJ7uw0WHwvYiZ2hG',
@@ -607,7 +607,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideUnsupportedUrlCases(): iterable
+    public static function provideUnsupportedUrlCases(): iterable
     {
         yield 'youtube-dl: youtube' => [
             'url' => 'https://youtube.com',
@@ -616,7 +616,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideIncompleteUrlCases(): iterable
+    public static function provideIncompleteUrlCases(): iterable
     {
         yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/watch?v=X0lRjbrH-L',
@@ -625,7 +625,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function providePrivatePlaylistCases(): iterable
+    public static function providePrivatePlaylistCases(): iterable
     {
         yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/playlist?list=PLtPgu7CB4gbY9oDN3drwC3cMbJggS7dKl',
@@ -634,7 +634,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideUnreachableNetworkCases(): iterable
+    public static function provideUnreachableNetworkCases(): iterable
     {
         yield 'youtube-dl: youtube' => [
             'url' => 'https://www.youtube.com/watch?v=-cRzcUxLxlM',
@@ -643,7 +643,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideListSubsCases(): iterable
+    public static function provideListSubsCases(): iterable
     {
         yield 'youtube-dl: youtube no subtitles' => [
             'url' => 'https://www.youtube.com/watch?v=t3Ww9Z0Kt78',
@@ -692,7 +692,7 @@ class YoutubeDlTest extends TestCase
         ];
     }
 
-    public function provideMp3VideoFile(): iterable
+    public static function provideMp3VideoFile(): iterable
     {
         yield 'youtube-dl: phonebloks' => [
             'url' => 'https://www.youtube.com/watch?v=oDAw7vW7H0c',

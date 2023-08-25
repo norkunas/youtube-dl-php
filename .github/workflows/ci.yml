@@ -62,6 +62,8 @@ jobs:
                       symfony-version: 6.1.*
                     - php-version: 8.2
                       symfony-version: 6.2.*
+                    - php-version: 8.2
+                      symfony-version: 6.3.*
         steps:
             - name: "Checkout"
               uses: actions/checkout@v3
