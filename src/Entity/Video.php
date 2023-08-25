@@ -456,7 +456,7 @@ class Video extends AbstractEntity
      */
     public function getCategories(): array
     {
-        return $this->get('categories');
+        return $this->get('categories', []);
     }
 
     /**
