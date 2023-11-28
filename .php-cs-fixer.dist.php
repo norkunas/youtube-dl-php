@@ -2,7 +2,6 @@
 
 $finder = (new PhpCsFixer\Finder())
     ->files()
-    ->name('*.php')
     ->in(__DIR__ . '/src');
 
 return (new PhpCsFixer\Config())
@@ -26,5 +25,6 @@ return (new PhpCsFixer\Config())
         'static_lambda' => true,
         'align_multiline_comment' => true,
         'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+        'no_superfluous_phpdoc_tags' => false,
     ])
     ->setFinder($finder);

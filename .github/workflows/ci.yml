@@ -6,13 +6,20 @@ on:
         branches:
             - "master"
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
+env:
+    fail-fast: true
+
 jobs:
     phpstan:
         name: PHPStan
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -33,7 +40,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -64,31 +71,34 @@ jobs:
                       symfony-version: 6.2.*
                     - php-version: 8.2
                       symfony-version: 6.3.*
+                    - php-version: 8.2
+                      symfony-version: 6.4.*
+                    - php-version: 8.2
+                      symfony-version: 7.0.*
+                    - php-version: 8.3
+                      symfony-version: 7.0.*
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
-                  coverage: none
                   php-version: ${{ matrix.php-version }}
+                  tools: flex
 
-            - name: "Get composer cache directory"
-              id: composer-cache
-              run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-            - name: "Cache dependencies"
-              uses: actions/cache@v3
-              with:
-                  path: ${{ steps.composer-cache.outputs.dir }}
-                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-                  restore-keys: ${{ runner.os }}-composer-
-
-            - name: "Install dependencies with composer"
+            - name: "Change stability"
+              if: matrix.symfony-version == '6.4.*' || matrix.symfony-version == '7.0.*'
               run: |
-                  composer require symfony/filesystem:${{ matrix.symfony-version }} symfony/process:${{ matrix.symfony-version }} --no-interaction --no-update
-                  composer update --no-interaction --no-progress --no-suggest
+                  composer config minimum-stability "dev"
+                  composer config prefer-stable false
+
+            - name: "Install Dependencies with Composer"
+              uses: "ramsey/composer-install@v2"
+              env:
+                  SYMFONY_REQUIRE: ${{ matrix.symfony-version }}
+              with:
+                  composer-options: "--optimize-autoloader"
 
             - name: "Run tests with PHPUnit"
               env:
@@ -100,7 +110,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout"
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
