@@ -112,7 +112,7 @@ class Video extends AbstractEntity
         return $this->get('location');
     }
 
-    public function getDuration(): ?int
+    public function getDuration(): ?float
     {
         return $this->get('duration');
     }
