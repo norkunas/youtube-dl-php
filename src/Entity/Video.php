@@ -526,7 +526,7 @@ class Video extends AbstractEntity
      */
     public function getTags(): array
     {
-        return $this->get('tags');
+        return $this->get('tags', []);
     }
 
     public function toJson(int $options = JSON_THROW_ON_ERROR): string
