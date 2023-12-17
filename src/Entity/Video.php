@@ -374,7 +374,7 @@ class Video extends AbstractEntity
 
     public function getGenre(): ?string
     {
-        return $this->get('track');
+        return $this->get('genre');
     }
 
     public function getAlbum(): ?string
@@ -389,7 +389,7 @@ class Video extends AbstractEntity
 
     public function getAlbumArtist(): ?string
     {
-        return $this->get('track');
+        return $this->get('album_artist');
     }
 
     public function getDiscNumber(): ?int
