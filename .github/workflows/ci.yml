@@ -87,12 +87,6 @@ jobs:
                   php-version: ${{ matrix.php-version }}
                   tools: flex
 
-            - name: "Change stability"
-              if: matrix.symfony-version == '6.4.*' || matrix.symfony-version == '7.0.*'
-              run: |
-                  composer config minimum-stability "dev"
-                  composer config prefer-stable false
-
             - name: "Install Dependencies with Composer"
               uses: "ramsey/composer-install@v2"
               env:
