@@ -127,6 +127,7 @@ class Options
     private string $output = '%(title)s-%(id)s.%(ext)s';
     private ?int $autoNumberStart = null;
     private bool $restrictFilenames = false;
+    private bool $windowsFilenames = false;
     private bool $noOverwrites = false;
     private bool $continue = false;
     private bool $noContinue = false;
@@ -813,6 +814,17 @@ class Options
     {
         $new = clone $this;
         $new->restrictFilenames = $restrictFilenames;
+
+        return $new;
+    }
+
+    /**
+     * Force filenames to be Windows-compatible.
+     */
+    public function windowsFilenames(bool $windowsFilenames): self
+    {
+        $new = clone $this;
+        $new->windowsFilenames = $windowsFilenames;
 
         return $new;
     }
@@ -1580,6 +1592,7 @@ class Options
             'output' => $this->downloadPath.'/'.$this->output,
             'autonumber-start' => $this->autoNumberStart,
             'restrict-filenames' => $this->restrictFilenames,
+            'windows-filenames' => $this->windowsFilenames,
             'no-overwrites' => $this->noOverwrites,
             'continue' => $this->continue,
             'no-continue' => $this->noContinue,

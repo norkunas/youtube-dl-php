@@ -10,6 +10,13 @@ use YoutubeDl\Options;
 
 final class OptionsTest extends TestCase
 {
+    public function testWithWindowsFilenames(): void
+    {
+        $options = Options::create()->windowsFilenames(true)->toArray();
+
+        self::assertArrayHasKey('windows-filenames', $options);
+    }
+
     public function testInvalidMergeOutputFormatThrows(): void
     {
         $this->expectException(InvalidArgumentException::class);
