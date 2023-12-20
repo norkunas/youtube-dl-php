@@ -17,6 +17,24 @@ final class OptionsTest extends TestCase
         self::assertArrayHasKey('windows-filenames', $options);
     }
 
+    /**
+     * @testWith [1]
+     *           [10]
+     *           [255]
+     */
+    public function testTrimFilenames(int $length): void
+    {
+        $options = Options::create()->trimFilenames($length);
+
+        self::assertArrayHasKey('trim-filenames', $optionsArray = $options->toArray());
+        self::assertSame($length, $optionsArray['trim-filenames']);
+
+        $options = $options->trimFilenames(null);
+
+        self::assertArrayHasKey('trim-filenames', $optionsArray = $options->toArray());
+        self::assertNull($optionsArray['trim-filenames']);
+    }
+
     public function testInvalidMergeOutputFormatThrows(): void
     {
         $this->expectException(InvalidArgumentException::class);

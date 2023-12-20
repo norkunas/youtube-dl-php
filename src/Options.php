@@ -128,6 +128,7 @@ class Options
     private ?int $autoNumberStart = null;
     private bool $restrictFilenames = false;
     private bool $windowsFilenames = false;
+    private ?int $trimFilenames = null;
     private bool $noOverwrites = false;
     private bool $continue = false;
     private bool $noContinue = false;
@@ -825,6 +826,20 @@ class Options
     {
         $new = clone $this;
         $new->windowsFilenames = $windowsFilenames;
+
+        return $new;
+    }
+
+    /**
+     * Limit the filename length (excluding extension) to the specified number
+     * of characters.
+     *
+     * @param int<1, max>|null $length
+     */
+    public function trimFilenames(?int $length): self
+    {
+        $new = clone $this;
+        $new->trimFilenames = $length;
 
         return $new;
     }
@@ -1593,6 +1608,7 @@ class Options
             'autonumber-start' => $this->autoNumberStart,
             'restrict-filenames' => $this->restrictFilenames,
             'windows-filenames' => $this->windowsFilenames,
+            'trim-filenames' => $this->trimFilenames,
             'no-overwrites' => $this->noOverwrites,
             'continue' => $this->continue,
             'no-continue' => $this->noContinue,
