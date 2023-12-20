@@ -549,11 +549,11 @@ class Video extends AbstractEntity
         $data = parent::convert($data);
 
         if (($data['release_date'] ?? null) !== null) {
-            $data['release_date'] = DateTimeImmutable::createFromFormat('Ymd', $data['release_date']);
+            $data['release_date'] = DateTimeImmutable::createFromFormat('!Ymd', $data['release_date']);
         }
 
         if (($data['upload_date'] ?? null) !== null) {
-            $data['upload_date'] = DateTimeImmutable::createFromFormat('Ymd', $data['upload_date']);
+            $data['upload_date'] = DateTimeImmutable::createFromFormat('!Ymd', $data['upload_date']);
         }
 
         if (!empty($data['annotations'])) {
