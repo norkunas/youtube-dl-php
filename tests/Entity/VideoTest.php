@@ -65,6 +65,7 @@ final class VideoTest extends TestCase
                     'ext' => 'vtt',
                 ],
             ],
+            'tags' => ['music', 'clip'],
         ]);
 
         $category1 = new Category(['title' => 'Entertainment']);
@@ -98,5 +99,22 @@ final class VideoTest extends TestCase
         self::assertEquals([$subtitles], $video->getSubtitles());
         self::assertEquals([$subtitles], $video->getRequestedSubtitles());
         self::assertEquals([$subtitles], $video->getAutomaticCaptions());
+        self::assertSame(['music', 'clip'], $video->getTags());
+    }
+
+    public function testGettersThatReturnsEmptyArrays(): void
+    {
+        $video = new Video();
+
+        self::assertSame([], $video->getHttpHeaders());
+        self::assertSame([], $video->getSubtitles());
+        self::assertSame([], $video->getRequestedSubtitles());
+        self::assertSame([], $video->getAutomaticCaptions());
+        self::assertSame([], $video->getCategories());
+        self::assertSame([], $video->getThumbnails());
+        self::assertSame([], $video->getFormats());
+        self::assertSame([], $video->getRequestedFormats());
+        self::assertSame([], $video->getComments());
+        self::assertSame([], $video->getTags());
     }
 }
