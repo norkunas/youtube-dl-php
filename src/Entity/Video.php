@@ -67,6 +67,11 @@ class Video extends AbstractEntity
         return $this->get('uploader');
     }
 
+    public function getUploaderUrl(): ?string
+    {
+        return $this->get('uploader_url');
+    }
+
     public function getLicense(): ?string
     {
         return $this->get('license');
