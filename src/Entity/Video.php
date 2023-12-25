@@ -112,6 +112,11 @@ class Video extends AbstractEntity
         return $this->get('channel_id');
     }
 
+    public function getChannelUrl(): ?string
+    {
+        return $this->get('channel_url');
+    }
+
     public function getLocation(): ?string
     {
         return $this->get('location');
