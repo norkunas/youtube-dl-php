@@ -121,7 +121,7 @@ class Video extends AbstractEntity
     {
         return $this->get('channel_follower_count');
     }
-    
+
     public function getLocation(): ?string
     {
         return $this->get('location');
