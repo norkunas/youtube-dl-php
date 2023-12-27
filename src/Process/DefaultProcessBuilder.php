@@ -8,6 +8,8 @@ use Symfony\Component\Process\ExecutableFinder;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Exception\ExecutableNotFoundException;
 
+use function array_unshift;
+
 final class DefaultProcessBuilder implements ProcessBuilderInterface
 {
     private ExecutableFinder $executableFinder;
@@ -19,10 +21,16 @@ final class DefaultProcessBuilder implements ProcessBuilderInterface
 
     public function build(?string $binPath, ?string $pythonPath, array $arguments = []): Process
     {
-        $binPath = $binPath ?: $this->executableFinder->find('youtube-dl');
+        if ($binPath === null) {
+            $binPath = $this->executableFinder->find('yt-dlp');
+        }
 
         if ($binPath === null) {
-            throw new ExecutableNotFoundException('"youtube-dl" executable was not found. Did you forgot to configure it\'s binary path? ex.: $yt->setBinPath(\'/usr/bin/youtube-dl\') ?.');
+            $binPath = $this->executableFinder->find('youtube-dl');
+        }
+
+        if ($binPath === null) {
+            throw new ExecutableNotFoundException('"yt-dlp" or "youtube-dl" executable was not found. Did you forgot to configure it\'s binary path? ex.: $yt->setBinPath(\'/usr/bin/yt-dlp\') ?.');
         }
 
         array_unshift($arguments, $binPath);

@@ -10,7 +10,9 @@ use YoutubeDl\Exception\ExecutableNotFoundException;
 interface ProcessBuilderInterface
 {
     /**
-     * @param array<string> $arguments
+     * @param non-empty-string|null $binPath
+     * @param non-empty-string|null $pythonPath
+     * @param array<string>         $arguments
      *
      * @throws ExecutableNotFoundException if `youtube-dl` binary could not be located
      */

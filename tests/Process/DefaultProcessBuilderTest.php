@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace YoutubeDl\Tests\Process;
 
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\ExecutableFinder;
 use YoutubeDl\Exception\ExecutableNotFoundException;
@@ -30,19 +29,44 @@ final class DefaultProcessBuilderTest extends TestCase
         self::assertSame('\'/usr/bin/python\' \'/home/norkunas/youtube-dl\'', $process->getCommandLine());
     }
 
-    public function testThrowsWhenYoutubeDlNotFound(): void
+    public function testReturnsYtDlp(): void
     {
-        $this->expectException(ExecutableNotFoundException::class);
-        $this->expectExceptionMessage('"youtube-dl" executable was not found. Did you forgot to configure it\'s binary path? ex.: $yt->setBinPath(\'/usr/bin/youtube-dl\')');
-
-        /** @var ExecutableFinder|MockObject $executableFinder */
         $executableFinder = $this->createMock(ExecutableFinder::class);
         $executableFinder->expects(self::once())
             ->method('find')
-            ->with('youtube-dl')
-            ->willReturn(null);
+            ->with('yt-dlp')
+            ->willReturn('/usr/bin/yt-dlp');
 
         $processBuilder = new DefaultProcessBuilder($executableFinder);
+
+        self::assertSame("'/usr/bin/yt-dlp'", $processBuilder->build(null, null)->getCommandLine());
+    }
+
+    public function testReturnsYoutubeDl(): void
+    {
+        $executableFinder = $this->createMock(ExecutableFinder::class);
+        $executableFinder->expects(self::exactly(2))
+            ->method('find')
+            ->withConsecutive(['yt-dlp'], ['youtube-dl'])
+            ->willReturn(null, '/usr/bin/youtube-dl');
+
+        $processBuilder = new DefaultProcessBuilder($executableFinder);
+
+        self::assertSame("'/usr/bin/youtube-dl'", $processBuilder->build(null, null)->getCommandLine());
+    }
+
+    public function testThrowsWhenYtDlpAndYoutubeDlNotFound(): void
+    {
+        $executableFinder = $this->createMock(ExecutableFinder::class);
+        $executableFinder->expects(self::exactly(2))
+            ->method('find')
+            ->withConsecutive(['yt-dlp'], ['youtube-dl'])
+            ->willReturn(null, null);
+
+        $processBuilder = new DefaultProcessBuilder($executableFinder);
+
+        $this->expectException(ExecutableNotFoundException::class);
+        $this->expectExceptionMessage('"yt-dlp" or "youtube-dl" executable was not found. Did you forgot to configure it\'s binary path? ex.: $yt->setBinPath(\'/usr/bin/yt-dlp\')');
 
         $processBuilder->build(null, null);
     }

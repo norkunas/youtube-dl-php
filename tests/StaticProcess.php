@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace YoutubeDl\Tests;
 
 use RuntimeException;
-use Stringable;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Exception\FileException;
 

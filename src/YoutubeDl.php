@@ -41,7 +41,15 @@ class YoutubeDl
     private ProcessBuilderInterface $processBuilder;
     private MetadataReaderInterface $metadataReader;
     private Filesystem $filesystem;
+
+    /**
+     * @var non-empty-string|null
+     */
     private ?string $binPath = null;
+
+    /**
+     * @var non-empty-string|null
+     */
     private ?string $pythonPath = null;
 
     /**
@@ -63,6 +71,9 @@ class YoutubeDl
         $this->debug = static function (string $type, string $buffer): void {};
     }
 
+    /**
+     * @param non-empty-string|null $binPath
+     */
     public function setBinPath(?string $binPath): self
     {
         $this->binPath = $binPath;
@@ -70,6 +81,9 @@ class YoutubeDl
         return $this;
     }
 
+    /**
+     * @param non-empty-string|null $pythonPath
+     */
     public function setPythonPath(?string $pythonPath): self
     {
         $this->pythonPath = $pythonPath;
