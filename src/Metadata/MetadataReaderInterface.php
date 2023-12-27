@@ -6,5 +6,8 @@ namespace YoutubeDl\Metadata;
 
 interface MetadataReaderInterface
 {
+    /**
+     * @return array<mixed>
+     */
     public function read(string $file): array;
 }

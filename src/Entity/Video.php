@@ -417,6 +417,9 @@ class Video extends AbstractEntity
         return $this->get('release_year');
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getHttpHeaders(): array
     {
         return $this->get('http_headers', []);
@@ -428,7 +431,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Subtitles[]
+     * @return list<Subtitles>
      */
     public function getSubtitles(): array
     {
@@ -436,7 +439,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Subtitles[]
+     * @return list<Subtitles>
      */
     public function getRequestedSubtitles(): array
     {
@@ -444,7 +447,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Subtitles[]
+     * @return list<Subtitles>
      */
     public function getAutomaticCaptions(): array
     {
@@ -467,7 +470,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Category[]
+     * @return list<Category>
      */
     public function getCategories(): array
     {
@@ -475,7 +478,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Thumbnail[]
+     * @return list<Thumbnail>
      */
     public function getThumbnails(): array
     {
@@ -493,7 +496,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Format[]
+     * @return list<Format>
      */
     public function getFormats(): array
     {
@@ -501,7 +504,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Format[]
+     * @return list<Format>
      */
     public function getRequestedFormats(): array
     {
@@ -529,7 +532,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return Comment[]
+     * @return list<Comment>
      */
     public function getComments(): array
     {
@@ -537,7 +540,7 @@ class Video extends AbstractEntity
     }
 
     /**
-     * @return string[]
+     * @return list<string>
      */
     public function getTags(): array
     {

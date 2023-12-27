@@ -11,6 +11,9 @@ class SubListItem extends AbstractEntity
         return $this->get('language');
     }
 
+    /**
+     * @return list<non-empty-string>
+     */
     public function getFormats(): array
     {
         return $this->get('formats');

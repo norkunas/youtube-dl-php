@@ -12,6 +12,9 @@ use function is_bool;
 
 class ArgvBuilder
 {
+    /**
+     * @return list<non-empty-string>
+     */
     public static function build(Options $options): array
     {
         $cmd = [];

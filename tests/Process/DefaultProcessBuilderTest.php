@@ -37,7 +37,7 @@ final class DefaultProcessBuilderTest extends TestCase
 
         /** @var ExecutableFinder|MockObject $executableFinder */
         $executableFinder = $this->createMock(ExecutableFinder::class);
-        $executableFinder->expects(static::once())
+        $executableFinder->expects(self::once())
             ->method('find')
             ->with('youtube-dl')
             ->willReturn(null);

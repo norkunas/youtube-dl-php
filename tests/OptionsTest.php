@@ -64,4 +64,12 @@ final class OptionsTest extends TestCase
 
         Options::create()->authenticate('username', null);
     }
+
+    public function testOutputThrowsWithDirectorySeparator(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Providing download path via `output` option is prohibited. Set the download path when creating Options object or calling `downloadPath` method.');
+
+        Options::create()->output('/var/downloads');
+    }
 }

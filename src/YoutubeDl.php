@@ -139,8 +139,8 @@ class YoutubeDl
                 if (count($matches) > 0) {
                     $progress = $this->progress;
 
-                    foreach ($matches as $match) {
-                        $progress($progressTarget, $match['percentage'], $match['size'], $match['speed'] ?? null, $match['eta'] ?? null, $match['totalTime'] ?? null);
+                    foreach ($matches as $progressMatch) {
+                        $progress($progressTarget, $progressMatch['percentage'], $progressMatch['size'], $progressMatch['speed'] ?? null, $progressMatch['eta'] ?? null, $progressMatch['totalTime'] ?? null);
                     }
                 }
             }
@@ -180,6 +180,11 @@ class YoutubeDl
         return new VideoCollection($videos);
     }
 
+    /**
+     * @param non-empty-string $url
+     *
+     * @return list<Thumbnail>
+     */
     public function listThumbnails(string $url): array
     {
         $process = $this->processBuilder->build($this->binPath, $this->pythonPath, ['--list-thumbnails', $url]);
@@ -238,7 +243,7 @@ class YoutubeDl
             } elseif ($parsing !== null) {
                 if ($parsing === 'auto_caption') {
                     $autoCaptionRows[] = $line;
-                } elseif ($parsing === 'subtitles') {
+                } else {
                     $subtitleRows[] = $line;
                 }
             }

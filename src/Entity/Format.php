@@ -16,6 +16,9 @@ class Format extends AbstractEntity
         return $this->get('url');
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getHttpHeaders(): array
     {
         return $this->get('http_headers', []);

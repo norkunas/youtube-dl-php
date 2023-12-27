@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace YoutubeDl\Tests;
 
 use RuntimeException;
+use Stringable;
 use Symfony\Component\Process\Process;
 use YoutubeDl\Exception\FileException;
+
 use function copy;
 use function file;
 use function file_get_contents;
@@ -15,6 +17,10 @@ use function is_callable;
 class StaticProcess extends Process
 {
     private ?string $outputFile = null;
+
+    /**
+     * @var list<array{from: non-empty-string, to: non-empty-string}>|null
+     */
     private ?array $writeMetadata = null;
 
     public function __construct()
@@ -28,13 +34,16 @@ class StaticProcess extends Process
     }
 
     /**
-     * @param array<int, array{from:string, to:string}> $writeMetadata
+     * @param list<array{from: non-empty-string, to: non-empty-string}> $writeMetadata
      */
     public function writeMetadata(array $writeMetadata): void
     {
         $this->writeMetadata = $writeMetadata;
     }
 
+    /**
+     * @param array<mixed> $env
+     */
     public function start(callable $callback = null, array $env = []): void
     {
         if (!is_callable($callback) || $this->outputFile === null) {

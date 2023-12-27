@@ -1,5 +1,7 @@
 includes:
 	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+	- phpstan-baseline.php
 
 parameters:
 	bootstrapFiles:
@@ -10,6 +12,8 @@ parameters:
 	tmpDir: %currentWorkingDirectory%/.phpstan
 	level: 8
 	inferPrivatePropertyTypeFromConstructor: true
-	checkMissingIterableValueType: false
-	checkGenericClassInNonGenericObjectType: false
+	checkMissingIterableValueType: true
+	checkGenericClassInNonGenericObjectType: true
 	checkUninitializedProperties: true
+	checkBenevolentUnionTypes: true
+	reportAlwaysTrueInLastCondition: true

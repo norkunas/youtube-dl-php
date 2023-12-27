@@ -7,7 +7,9 @@ namespace YoutubeDl;
 use DateTimeInterface;
 use YoutubeDl\Exception\InvalidArgumentException;
 
+use function array_values;
 use function in_array;
+use function str_contains;
 
 class Options
 {
@@ -87,6 +89,9 @@ class Options
     // Video Selection
     private ?int $playlistStart = null;
     private ?int $playlistEnd = null;
+    /**
+     * @var list<int|string>
+     */
     private array $playlistItems = [];
     private ?string $matchTitle = null;
     private ?string $rejectTitle = null;
@@ -159,6 +164,9 @@ class Options
     private bool $preferInsecure = false;
     private ?string $userAgent = null;
     private ?string $referer = null;
+    /**
+     * @var array<non-empty-string, string>
+     */
     private array $headers = [];
     private ?int $sleepInterval = null;
     private ?int $maxSleepInterval = null;
@@ -173,6 +181,9 @@ class Options
     private ?bool $writeAutoSub = false;
     private ?bool $allSubs = false;
     private ?string $subFormat = null;
+    /**
+     * @var list<non-empty-string>
+     */
     private array $subLang = [];
 
     // Authentication Options
@@ -207,6 +218,9 @@ class Options
     private ?string $exec = null;
     private ?string $convertSubsFormat = null;
 
+    /**
+     * @var list<non-empty-string>
+     */
     private array $url = [];
 
     private function __construct()
@@ -389,6 +403,8 @@ class Options
      * playlist like: [1, 2, 5, 8]. If you want to download videos indexed 1, 2,
      * 5, 8 in the playlist. You can specify range: ['1-3', '7', '10-13'], it
      * will download the videos at index 1, 2, 3, 7, 10, 11, 12 and 13.
+     *
+     * @param list<int|string> $playlistItems
      */
     public function playlistItems(array $playlistItems): self
     {
@@ -785,7 +801,7 @@ class Options
      */
     public function output(string $output): self
     {
-        if (strpos($output, '/') !== false || strpos($output, '\\')) {
+        if (str_contains($output, '/') || str_contains($output, '\\')) {
             throw new InvalidArgumentException('Providing download path via `output` option is prohibited. Set the download path when creating Options object or calling `downloadPath` method.');
         }
 
@@ -1129,6 +1145,9 @@ class Options
         return $new;
     }
 
+    /**
+     * @param non-empty-string $header
+     */
     public function header(string $header, string $value): self
     {
         $new = clone $this;
@@ -1138,7 +1157,7 @@ class Options
     }
 
     /**
-     * @param array<string, string> $headers
+     * @param array<non-empty-string, string> $headers
      */
     public function headers(array $headers): self
     {
@@ -1261,6 +1280,8 @@ class Options
     /**
      * Languages of the subtitles to download (optional).
      * Use `YoutubeDl::listSubs($url)` to get available language tags.
+     *
+     * @param list<non-empty-string> $subLang
      */
     public function subLang(array $subLang): self
     {
@@ -1523,19 +1544,29 @@ class Options
         return $new;
     }
 
+    /**
+     * @param non-empty-string $url
+     * @param non-empty-string ...$urls
+     */
     public function url(string $url, string ...$urls): self
     {
         $new = clone $this;
-        $new->url = [$url, ...$urls];
+        $new->url = array_values([$url, ...$urls]);
 
         return $new;
     }
 
+    /**
+     * @return list<non-empty-string>
+     */
     public function getUrl(): array
     {
         return $this->url;
     }
 
+    /**
+     * @return array<non-empty-string, mixed>
+     */
     public function toArray(): array
     {
         return [

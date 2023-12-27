@@ -9,7 +9,7 @@ use function is_array;
 class Category extends AbstractEntity
 {
     /**
-     * @param string|array{title:string} $category
+     * @param string|array{title: string} $category
      */
     public function __construct($category)
     {

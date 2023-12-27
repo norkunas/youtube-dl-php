@@ -10,6 +10,11 @@ use function trim;
 
 final class TableParser
 {
+    /**
+     * @param list<string> $rows
+     *
+     * @return list<array<string, string>>
+     */
     public static function parse(string $header, array $rows): array
     {
         $columns = self::collectColumnsAndWidths($header);
@@ -60,7 +65,7 @@ final class TableParser
                 }
                 $column .= strtolower($r);
                 ++$columnWidth;
-            } elseif ($r === ' ') {
+            } else {
                 ++$columnWidth;
             }
         }
