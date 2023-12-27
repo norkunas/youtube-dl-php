@@ -67,6 +67,11 @@ class Video extends AbstractEntity
         return $this->get('uploader');
     }
 
+    public function getUploaderUrl(): ?string
+    {
+        return $this->get('uploader_url');
+    }
+
     public function getLicense(): ?string
     {
         return $this->get('license');
@@ -107,6 +112,16 @@ class Video extends AbstractEntity
         return $this->get('channel_id');
     }
 
+    public function getChannelUrl(): ?string
+    {
+        return $this->get('channel_url');
+    }
+
+    public function getChannelFollowerCount(): ?int
+    {
+        return $this->get('channel_follower_count');
+    }
+    
     public function getLocation(): ?string
     {
         return $this->get('location');
