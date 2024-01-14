@@ -252,7 +252,7 @@ class YoutubeDl
                 $parsing = 'subtitles';
             } elseif (str_contains($line, 'has no automatic captions') || str_contains($line, 'has no subtitles')) {
                 $parsing = null;
-            } elseif (str_contains($line, 'Language formats')) {
+            } elseif (str_contains($line, 'Language')) {
                 $header = $line;
             } elseif ($parsing !== null) {
                 if ($parsing === 'auto_caption') {
