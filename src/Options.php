@@ -173,6 +173,16 @@ class Options
 
     // Video Format Options
     private ?string $format = null;
+    /**
+     * @var list<non-empty-string>
+     */
+    private array $formatSort = [];
+    private ?bool $formatSortForce = null;
+    private ?bool $videoMultistreams = null;
+    private ?bool $audioMultistreams = null;
+    private ?bool $preferFreeFormats = null;
+    private ?bool $checkFormats = null;
+    private ?bool $checkAllFormats = null;
     private bool $youtubeSkipDashManifest = false;
     private ?string $mergeOutputFormat = null;
 
@@ -1203,6 +1213,92 @@ class Options
     }
 
     /**
+     * Sort the formats by the fields given.
+     *
+     * @see https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#sorting-formats
+     *
+     * @param list<non-empty-string> $formatSort
+     */
+    public function formatSort(array $formatSort): self
+    {
+        $new = clone $this;
+        $new->formatSort = $formatSort;
+
+        return $new;
+    }
+
+    /**
+     * Force user specified sort order to have precedence over all fields.
+     *
+     * @see https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#sorting-formats
+     */
+    public function formatSortForce(?bool $formatSortForce): self
+    {
+        $new = clone $this;
+        $new->formatSortForce = $formatSortForce;
+
+        return $new;
+    }
+
+    /**
+     * Allow multiple video streams to be merged into a single file.
+     */
+    public function videoMultistreams(?bool $videoMultistreams): self
+    {
+        $new = clone $this;
+        $new->videoMultistreams = $videoMultistreams;
+
+        return $new;
+    }
+
+    /**
+     * Allow multiple audio streams to be merged into a single file.
+     */
+    public function audioMultistreams(?bool $audioMultistreams): self
+    {
+        $new = clone $this;
+        $new->audioMultistreams = $audioMultistreams;
+
+        return $new;
+    }
+
+    /**
+     * Prefer video formats with free containers over non-free ones of same
+     * quality. Use with `Options::formatSort('ext')` option to strictly prefer
+     * free containers irrespective of quality.
+     */
+    public function preferFreeFormats(?bool $preferFreeFormats): self
+    {
+        $new = clone $this;
+        $new->preferFreeFormats = $preferFreeFormats;
+
+        return $new;
+    }
+
+    /**
+     * Make sure formats are selected only from those that are actually
+     * downloadable.
+     */
+    public function checkFormats(?bool $checkFormats): self
+    {
+        $new = clone $this;
+        $new->checkFormats = $checkFormats;
+
+        return $new;
+    }
+
+    /**
+     * Check all formats for whether they are actually downloadable.
+     */
+    public function checkAllFormats(?bool $checkAllFormats): self
+    {
+        $new = clone $this;
+        $new->checkAllFormats = $checkAllFormats;
+
+        return $new;
+    }
+
+    /**
      * Do not download the DASH manifests and related data on YouTube videos.
      */
     public function youtubeSkipDashManifest(bool $youtubeSkipDashManifest): self
@@ -1657,6 +1753,13 @@ class Options
             'max-sleep-interval' => $this->maxSleepInterval,
             // Video Format Options
             'format' => $this->format,
+            'format-sort' => $this->formatSort,
+            'format-sort-force' => $this->formatSortForce,
+            'video-multistreams' => $this->videoMultistreams,
+            'audio-multistreams' => $this->audioMultistreams,
+            'prefer-free-formats' => $this->preferFreeFormats,
+            'check-formats' => $this->checkFormats,
+            'check-all-formats' => $this->checkAllFormats,
             'youtube-skip-dash-manifest' => $this->youtubeSkipDashManifest,
             'merge-output-format' => $this->mergeOutputFormat,
             // Subtitle Options
