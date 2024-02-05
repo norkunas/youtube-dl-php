@@ -43,7 +43,7 @@ class StaticProcess extends Process
     /**
      * @param array<mixed> $env
      */
-    public function start(callable $callback = null, array $env = []): void
+    public function start(?callable $callback = null, array $env = []): void
     {
         if (!is_callable($callback) || $this->outputFile === null) {
             return;
@@ -66,7 +66,7 @@ class StaticProcess extends Process
         }
     }
 
-    public function wait(callable $callback = null): int
+    public function wait(?callable $callback = null): int
     {
         return 0;
     }

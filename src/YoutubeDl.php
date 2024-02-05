@@ -62,7 +62,7 @@ class YoutubeDl
      */
     private $debug;
 
-    public function __construct(ProcessBuilderInterface $processBuilder = null, MetadataReaderInterface $metadataReader = null, Filesystem $filesystem = null)
+    public function __construct(?ProcessBuilderInterface $processBuilder = null, ?MetadataReaderInterface $metadataReader = null, ?Filesystem $filesystem = null)
     {
         $this->processBuilder = $processBuilder ?? new DefaultProcessBuilder();
         $this->metadataReader = $metadataReader ?? new DefaultMetadataReader();

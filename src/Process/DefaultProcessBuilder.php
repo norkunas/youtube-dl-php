@@ -14,7 +14,7 @@ final class DefaultProcessBuilder implements ProcessBuilderInterface
 {
     private ExecutableFinder $executableFinder;
 
-    public function __construct(ExecutableFinder $executableFinder = null)
+    public function __construct(?ExecutableFinder $executableFinder = null)
     {
         $this->executableFinder = $executableFinder ?? new ExecutableFinder();
     }

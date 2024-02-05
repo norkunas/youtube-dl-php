@@ -29,7 +29,7 @@ class ArgvBuilder
                     foreach ($value as $url) {
                         $cmd[] = $url;
                     }
-                } elseif ($option === 'playlist-items' || $option === 'sub-lang') {
+                } elseif ($option === 'playlist-items' || $option === 'sub-lang' || $option === 'format-sort') {
                     if (count($value) > 0) {
                         $cmd[] = sprintf('--%s=%s', $option, implode(',', $value));
                     }
