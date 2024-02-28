@@ -157,6 +157,78 @@ class YoutubeDlTest extends TestCase
     }
 
     /**
+     * @param non-empty-string $url
+     *
+     * @dataProvider provideDownloadTooLargeFileCases
+     */
+    public function testDownloadTooLargeFileCases(string $url, string $outputFile, Video $expectedEntity): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile($outputFile);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--max-filesize=1m',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url,
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        self::assertEquals(new VideoCollection([$expectedEntity]), $yt->download(Options::create()->downloadPath($this->tmpDir)->maxFileSize('1m')->url($url)));
+    }
+
+    /**
+     * @return iterable<array{url: non-empty-string, outputFile: non-empty-string, expectedEntity: Video}>
+     */
+    public static function provideDownloadTooLargeFileCases(): iterable
+    {
+        yield [
+            'url' => 'https://www.youtube.com/watch?v=7x5lqqji9ww',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/larger_than_max_filesize.txt',
+            'expectedEntity' => new Video(['error' => 'File is larger than max-filesize (2960699 bytes > 1048576 bytes). Aborting.', 'extractor' => 'youtube']),
+        ];
+    }
+
+    /**
+     * @param non-empty-string $url
+     *
+     * @dataProvider provideDownloadTooSmallFileCases
+     */
+    public function testDownloadTooSmallFileCases(string $url, string $outputFile, Video $expectedEntity): void
+    {
+        $process = new StaticProcess();
+        $process->setOutputFile($outputFile);
+
+        $processBuilder = $this->createProcessBuilderMock($process, [
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
+            '--min-filesize=20m',
+            '--output=vfs://yt-dl/%(title)s-%(id)s.%(ext)s',
+            $url,
+        ]);
+
+        $yt = new YoutubeDl($processBuilder);
+
+        self::assertEquals(new VideoCollection([$expectedEntity]), $yt->download(Options::create()->downloadPath($this->tmpDir)->minFileSize('20m')->url($url)));
+    }
+
+    /**
+     * @return iterable<array{url: non-empty-string, outputFile: non-empty-string, expectedEntity: Video}>
+     */
+    public static function provideDownloadTooSmallFileCases(): iterable
+    {
+        yield [
+            'url' => 'https://www.youtube.com/watch?v=7x5lqqji9ww',
+            'outputFile' => __DIR__.'/Fixtures/youtube-dl/youtube/smaller_than_min_filesize.txt',
+            'expectedEntity' => new Video(['error' => 'File is smaller than min-filesize (2960699 bytes < 20971520 bytes). Aborting.', 'extractor' => 'youtube']),
+        ];
+    }
+
+    /**
      * @param non-empty-string       $url
      * @param list<non-empty-string> $metadataFiles
      *

@@ -140,6 +140,8 @@ class YoutubeDl
 
                 $currentVideo['extractor'] = $match['extractor'];
                 $currentVideo['id'] = $match['id'];
+            } elseif (preg_match('/\[download] File is (larger|smaller) than (min|max)-filesize/', $buffer, $match) === 1) {
+                $currentVideo['error'] = trim(substr($buffer, 11));
             } elseif (str_starts_with($buffer, 'ERROR:')) {
                 $currentVideo['error'] = trim(substr($buffer, 6));
             } elseif (preg_match('/Writing video( description)? metadata as JSON to:\s(?<metadataFile>.+)/', $buffer, $match) === 1) {
