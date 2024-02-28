@@ -1,0 +1,7 @@
+[youtube] Extracting URL: https://www.youtube.com/watch?v=7x5lqqji9ww
+[youtube] 7x5lqqji9ww: Downloading webpage
+[youtube] 7x5lqqji9ww: Downloading ios player API JSON
+[youtube] 7x5lqqji9ww: Downloading android player API JSON
+[youtube] 7x5lqqji9ww: Downloading m3u8 information
+[info] 7x5lqqji9ww: Downloading 1 format(s): 251
+[download] File is smaller than min-filesize (2960699 bytes < 20971520 bytes). Aborting.
