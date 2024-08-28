@@ -125,6 +125,7 @@ class Options
     private bool $hlsUseMpegts = false;
     private ?string $externalDownloader = null;
     private ?string $externalDownloaderArgs = null;
+    private ?string $downloadSections = null;
 
     // Filesystem Options
     private ?string $batchFile = null;
@@ -227,6 +228,7 @@ class Options
     private ?string $ffmpegLocation = null;
     private ?string $exec = null;
     private ?string $convertSubsFormat = null;
+    private bool $forceKeyframesAtCuts = false;
 
     /**
      * @var list<non-empty-string>
@@ -1503,6 +1505,30 @@ class Options
     }
 
     /**
+     * Download only chapters that match the regular expression.
+     */
+    public function downloadSections(?string $downloadSections): self
+    {
+        $new = clone $this;
+        $new->downloadSections = $downloadSections;
+
+        return $new;
+    }
+
+    /**
+     * Force keyframes at cuts when downloading/splitting/removing sections.
+     * This is slow due to needing a re-encode, but the resulting video
+     * may have fewer artifacts around the cuts.
+     */
+    public function forceKeyframesAtCuts(bool $forceKeyframesAtCuts): self
+    {
+        $new = clone $this;
+        $new->forceKeyframesAtCuts = $forceKeyframesAtCuts;
+
+        return $new;
+    }
+
+    /**
      * Remux the video into another container if necessary (currently supported:
      * avi, flv, gif, mkv, mov, mp4, webm, aac, aiff, alac, flac, m4a, mka, mp3, ogg,
      * opus, vorbis, wav). If target container does not support the video/audio codec,
@@ -1713,6 +1739,7 @@ class Options
             'hls-use-mpegts' => $this->hlsUseMpegts,
             'external-downloader' => $this->externalDownloader,
             'external-downloader-args' => $this->externalDownloaderArgs,
+            'download-sections' => $this->downloadSections,
             // Filesystem Options
             'batch-file' => $this->batchFile,
             'id' => $this->id,
@@ -1797,6 +1824,7 @@ class Options
             'ffmpeg-location' => $this->ffmpegLocation,
             'exec' => $this->exec,
             'convert-subs-format' => $this->convertSubsFormat,
+            'force-keyframes-at-cuts' => $this->forceKeyframesAtCuts,
             'url' => $this->url,
         ];
     }
