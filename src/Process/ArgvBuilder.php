@@ -33,9 +33,9 @@ class ArgvBuilder
                     if (count($value) > 0) {
                         $cmd[] = sprintf('--%s=%s', $option, implode(',', $value));
                     }
-                } elseif ($option === 'add-header') {
-                    foreach ($value as $header => $headerValue) {
-                        $cmd[] = sprintf('--%s=%s:%s', $option, $header, $headerValue);
+                } elseif ($option === 'add-header' || $option === 'extractor-args') {
+                    foreach ($value as $key => $v) {
+                        $cmd[] = sprintf('--%s=%s:%s', $option, $key, $v);
                     }
                 } else {
                     foreach ($value as $v) {
