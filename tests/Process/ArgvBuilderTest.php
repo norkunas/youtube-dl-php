@@ -20,11 +20,15 @@ final class ArgvBuilderTest extends TestCase
             ->headers([
                 'Accept' => 'text/html',
             ])
-            ->header('User-Agent', 'youtube-downloader')
+            ->header('User-Agent', 'yt-dlp')
             ->yesPlaylist()
             ->playlistItems(['1-3', '7', '10-13'])
             ->dateBefore(new DateTimeImmutable('2020-08-31'))
             ->dateAfter(new DateTimeImmutable('2020-08-01'))
+            ->extractorsArgs([
+                'youtube' => 'player-client=mediaconnect,web;formats=incomplete',
+            ])
+            ->extractorArgs('funimation', 'version=uncut')
             ->url(
                 'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
                 'https://www.youtube.com/watch?v=Q-g_YNZ90tI',
@@ -39,7 +43,9 @@ final class ArgvBuilderTest extends TestCase
             '--yes-playlist',
             '--output=/path/to/downloads/%(title)s-%(id)s.%(ext)s',
             '--add-header=Accept:text/html',
-            '--add-header=User-Agent:youtube-downloader',
+            '--add-header=User-Agent:yt-dlp',
+            '--extractor-args=youtube:player-client=mediaconnect,web;formats=incomplete',
+            '--extractor-args=funimation:version=uncut',
             'https://www.youtube.com/watch?v=-FZ-pPFAjYY',
             'https://www.youtube.com/watch?v=Q-g_YNZ90tI',
         ], ArgvBuilder::build($options));

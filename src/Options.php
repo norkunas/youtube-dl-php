@@ -230,6 +230,18 @@ class Options
     private ?string $convertSubsFormat = null;
     private bool $forceKeyframesAtCuts = false;
 
+    // Extractor Options
+    /**
+     * @var int|'infinite'|null
+     */
+    private $extractorRetries;
+    private bool $allowDynamicMpd = false;
+    private bool $hlsSplitDiscontinuity = false;
+    /**
+     * @var array<non-empty-string, string>
+     */
+    private array $extractorArgs = [];
+
     /**
      * @var list<non-empty-string>
      */
@@ -1667,6 +1679,69 @@ class Options
     }
 
     /**
+     * @param int|'infinite'|null $retries
+     */
+    public function extractorRetries($retries): self
+    {
+        $new = clone $this;
+        $new->extractorRetries = $retries;
+
+        return $new;
+    }
+
+    /**
+     * Process dynamic DASH manifests.
+     */
+    public function allowDynamicMpd(bool $allowDynamicMpd): self
+    {
+        $new = clone $this;
+        $new->allowDynamicMpd = $allowDynamicMpd;
+
+        return $new;
+    }
+
+    /**
+     * Split HLS playlists to different formats at discontinuities such as ad breaks.
+     */
+    public function hlsSplitDiscontinuity(bool $hlsSplitDiscontinuity): self
+    {
+        $new = clone $this;
+        $new->hlsSplitDiscontinuity = $hlsSplitDiscontinuity;
+
+        return $new;
+    }
+
+    /**
+     * Pass args for a single extractor.
+     *
+     * @see https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#extractor-arguments
+     *
+     * @param non-empty-string $extractor
+     */
+    public function extractorArgs(string $extractor, string $args): self
+    {
+        $new = clone $this;
+        $new->extractorArgs[$extractor] = $args;
+
+        return $new;
+    }
+
+    /**
+     * Pass args for all extractors.
+     *
+     * @see https://github.com/yt-dlp/yt-dlp?tab=readme-ov-file#extractor-arguments
+     *
+     * @param array<non-empty-string, string> $extractorArgs
+     */
+    public function extractorsArgs(array $extractorArgs): self
+    {
+        $new = clone $this;
+        $new->extractorArgs = $extractorArgs;
+
+        return $new;
+    }
+
+    /**
      * @param non-empty-string $url
      * @param non-empty-string ...$urls
      */
@@ -1825,6 +1900,12 @@ class Options
             'exec' => $this->exec,
             'convert-subs-format' => $this->convertSubsFormat,
             'force-keyframes-at-cuts' => $this->forceKeyframesAtCuts,
+            // Extractor Options
+            'extractor-retries' => $this->extractorRetries,
+            'allow-dynamic-mpd' => $this->allowDynamicMpd,
+            'hls-split-discontinuity' => $this->hlsSplitDiscontinuity,
+            'extractor-args' => $this->extractorArgs,
+
             'url' => $this->url,
         ];
     }
