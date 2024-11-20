@@ -140,18 +140,26 @@ class YoutubeDl
 
                 $currentVideo['extractor'] = $match['extractor'];
                 $currentVideo['id'] = $match['id'];
-            } elseif (preg_match('/\[download] File is (larger|smaller) than (min|max)-filesize/', $buffer, $match) === 1) {
+            }
+
+            if (preg_match('/\[download] File is (larger|smaller) than (min|max)-filesize/', $buffer, $match) === 1) {
                 $currentVideo['error'] = trim(substr($buffer, 11));
             } elseif (str_starts_with($buffer, 'ERROR:')) {
                 $currentVideo['error'] = trim(substr($buffer, 6));
-            } elseif (preg_match('/Writing video( description)? metadata as JSON to:\s(?<metadataFile>.+)/', $buffer, $match) === 1) {
+            }
+
+            if (preg_match('/Writing video( description)? metadata as JSON to:\s(?<metadataFile>.+)/', $buffer, $match) === 1) {
                 $currentVideo['metadataFile'] = $match['metadataFile'];
-            } elseif (preg_match('/\[(ffmpeg|Merger)] Merging formats into "(?<file>.+)"/', $buffer, $match) === 1) {
+            }
+
+            if (preg_match('/\[(ffmpeg|Merger)] Merging formats into "(?<file>.+)"/', $buffer, $match) === 1) {
                 $currentVideo['fileName'] = $match['file'];
             } elseif (preg_match('/\[(download|ffmpeg|ExtractAudio)] Destination: (?<file>.+)/', $buffer, $match) === 1 || preg_match('/\[download] (?<file>.+) has already been downloaded/', $buffer, $match) === 1) {
                 $currentVideo['fileName'] = $match['file'];
                 $progressTarget = basename($match['file']);
-            } elseif (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
+            }
+
+            if (preg_match_all(static::PROGRESS_PATTERN, $buffer, $matches, PREG_SET_ORDER) !== false) {
                 if (count($matches) > 0) {
                     $progress = $this->progress;
 
