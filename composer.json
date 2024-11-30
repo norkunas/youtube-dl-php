@@ -13,9 +13,9 @@
     "require": {
         "php": ">=7.4.0",
         "ext-json": "*",
-        "symfony/filesystem": "^4.4|^5.1|^6.0|^7.0",
+        "symfony/filesystem": "^5.1|^6.0|^7.0",
         "symfony/polyfill-php80": "^1.28",
-        "symfony/process": "^4.4|^5.1|^6.0|^7.0"
+        "symfony/process": "^5.1|^6.0|^7.0"
     },
     "require-dev": {
         "mikey179/vfsstream": "^1.6.11",
