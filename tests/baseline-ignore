@@ -1,0 +1,16 @@
+%Symfony\\Component\\Process\\ExecutableFinder::find\(\): Implicitly marking parameter \$default as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::__construct\(\): Implicitly marking parameter \$cwd as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::__construct\(\): Implicitly marking parameter \$env as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::fromShellCommandline\(\): Implicitly marking parameter \$cwd as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::fromShellCommandline\(\): Implicitly marking parameter \$env as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::run\(\): Implicitly marking parameter \$callback as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::mustRun\(\): Implicitly marking parameter \$callback as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::start\(\): Implicitly marking parameter \$callback as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::start\(\): Implicitly marking parameter \$callback as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::wait\(\): Implicitly marking parameter \$callback as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::stop\(\): Implicitly marking parameter \$signal as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::buildCallback\(\): Implicitly marking parameter \$callback as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Filesystem\\Filesystem::touch\(\): Implicitly marking parameter \$time as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Filesystem\\Filesystem::touch\(\): Implicitly marking parameter \$atime as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Filesystem\\Filesystem::mirror\(\): Implicitly marking parameter \$iterator as nullable is deprecated, the explicit nullable type must be used instead%
+%Symfony\\Component\\Process\\Process::restart\(\): Implicitly marking parameter \$callback as nullable is deprecated, the explicit nullable type must be used instead%
