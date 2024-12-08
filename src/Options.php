@@ -150,7 +150,7 @@ class Options
     // Thumbnail Images Options
     private bool $writeThumbnail = false;
     private bool $writeAllThumbnails = false;
-    private string $convertThumbnail = null ;
+    private ?string $convertThumbnail = null;
 
 
     // Verbosity / Simulation Options
@@ -1029,7 +1029,7 @@ class Options
      * Convert thumbnail to another format.
      * supported: jpg, png, webp
      */
-    public function convertThumbnail(string $format): self
+    public function convertThumbnail(?string $format): self
     {
         $new = clone $this;
         $new->convertThumbnail = $format;
