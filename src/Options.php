@@ -149,8 +149,9 @@ class Options
 
     // Thumbnail Images Options
     private bool $writeThumbnail = false;
-    private string $convertThumbnail = 'jpg';
     private bool $writeAllThumbnails = false;
+    private string $convertThumbnail = 'jpg';
+
 
     // Verbosity / Simulation Options
     private bool $skipDownload = false;
@@ -1848,8 +1849,9 @@ class Options
             'rm-cache-dir' => $this->rmCacheDir,
             // Thumbnail Images Options
             'write-thumbnail' => $this->writeThumbnail,
-            'convert-thumbnail' => $this->convertThumbnail,
             'write-all-thumbnails' => $this->writeAllThumbnails,
+            'convert-thumbnail' => $this->convertThumbnail,
+
             // Verbosity / Simulation Options
             'skip-download' => $this->skipDownload,
             'verbose' => $this->verbose,
