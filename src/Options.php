@@ -149,6 +149,7 @@ class Options
 
     // Thumbnail Images Options
     private bool $writeThumbnail = false;
+    private string $convertThumbnail = 'jpg';
     private bool $writeAllThumbnails = false;
 
     // Verbosity / Simulation Options
@@ -1024,6 +1025,17 @@ class Options
     }
 
     /**
+     * Convert thumbnail to another format.
+     */
+    public function convertThumbnail(string $format): self
+    {
+        $new = clone $this;
+        $new->convertThumbnail = $format;
+
+        return $new;
+    }
+
+    /**
      * Write all thumbnail image formats to disk.
      */
     public function writeAllThumbnails(bool $writeAllThumbnails): self
@@ -1836,6 +1848,7 @@ class Options
             'rm-cache-dir' => $this->rmCacheDir,
             // Thumbnail Images Options
             'write-thumbnail' => $this->writeThumbnail,
+            'convert-thumbnail' => $this->convertThumbnail,
             'write-all-thumbnails' => $this->writeAllThumbnails,
             // Verbosity / Simulation Options
             'skip-download' => $this->skipDownload,
