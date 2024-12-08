@@ -1027,7 +1027,7 @@ class Options
 
     /**
      * Convert thumbnail to another format.
-     * supported: jpg, png, webp
+     * @param 'jpg'|'png'|'webp'|null $format
      */
     public function convertThumbnail(?string $format): self
     {
