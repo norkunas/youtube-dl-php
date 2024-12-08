@@ -150,7 +150,7 @@ class Options
     // Thumbnail Images Options
     private bool $writeThumbnail = false;
     private bool $writeAllThumbnails = false;
-    private string $convertThumbnail = 'jpg';
+    private string $convertThumbnail ;
 
 
     // Verbosity / Simulation Options
