@@ -152,7 +152,6 @@ class Options
     private bool $writeAllThumbnails = false;
     private ?string $convertThumbnail = null;
 
-
     // Verbosity / Simulation Options
     private bool $skipDownload = false;
     private bool $verbose = false;
@@ -1027,6 +1026,7 @@ class Options
 
     /**
      * Convert thumbnail to another format.
+     *
      * @param 'jpg'|'png'|'webp'|null $format
      */
     public function convertThumbnail(?string $format): self
