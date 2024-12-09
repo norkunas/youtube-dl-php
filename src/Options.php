@@ -150,6 +150,8 @@ class Options
     // Thumbnail Images Options
     private bool $writeThumbnail = false;
     private bool $writeAllThumbnails = false;
+    private ?string $convertThumbnail = null;
+
 
     // Verbosity / Simulation Options
     private bool $skipDownload = false;
@@ -1024,6 +1026,18 @@ class Options
     }
 
     /**
+     * Convert thumbnail to another format.
+     * @param 'jpg'|'png'|'webp'|null $format
+     */
+    public function convertThumbnail(?string $format): self
+    {
+        $new = clone $this;
+        $new->convertThumbnail = $format;
+
+        return $new;
+    }
+
+    /**
      * Write all thumbnail image formats to disk.
      */
     public function writeAllThumbnails(bool $writeAllThumbnails): self
@@ -1837,6 +1851,8 @@ class Options
             // Thumbnail Images Options
             'write-thumbnail' => $this->writeThumbnail,
             'write-all-thumbnails' => $this->writeAllThumbnails,
+            'convert-thumbnail' => $this->convertThumbnail,
+
             // Verbosity / Simulation Options
             'skip-download' => $this->skipDownload,
             'verbose' => $this->verbose,
