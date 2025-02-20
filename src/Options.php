@@ -126,6 +126,7 @@ class Options
     private ?string $externalDownloader = null;
     private ?string $externalDownloaderArgs = null;
     private ?string $downloadSections = null;
+    private ?int $concurrentFragments = null;
 
     // Filesystem Options
     private ?string $batchFile = null;
@@ -1542,6 +1543,18 @@ class Options
     }
 
     /**
+     * Number of fragments of a dash/hlsnative
+     * video that should be downloaded concurrently (default is 1).
+     */
+    public function concurrentFragments(?int $concurrentFragments): self
+    {
+        $new = clone $this;
+        $new->concurrentFragments = $concurrentFragments;
+
+        return $new;
+    }
+
+    /**
      * Force keyframes at cuts when downloading/splitting/removing sections.
      * This is slow due to needing a re-encode, but the resulting video
      * may have fewer artifacts around the cuts.
@@ -1829,6 +1842,7 @@ class Options
             'external-downloader' => $this->externalDownloader,
             'external-downloader-args' => $this->externalDownloaderArgs,
             'download-sections' => $this->downloadSections,
+            'concurrent-fragments' => $this->concurrentFragments,
             // Filesystem Options
             'batch-file' => $this->batchFile,
             'id' => $this->id,
