@@ -123,6 +123,7 @@ class Options
     private bool $hlsPreferNative = false;
     private bool $hlsPreferFFmpeg = false;
     private bool $hlsUseMpegts = false;
+    private bool $noHlsUseMpegts = false;
     private ?string $externalDownloader = null;
     private ?string $externalDownloaderArgs = null;
     private ?string $downloadSections = null;
@@ -770,6 +771,21 @@ class Options
     {
         $new = clone $this;
         $new->hlsUseMpegts = $hlsUseMpegts;
+
+        return $new;
+    }
+
+    /**
+     * Do not use the mpegts container for HLS videos.
+     * With this option, in the case of recording a live stream,
+     * the download will be written directly to an mp4 file.
+     * But without this option, the download will be written to a mpegts file
+     * and convert to mp4 file after the download is complete with +movflags +faststart.
+     */
+    public function noHlsUseMpegts(bool $noHlsUseMpegts): self
+    {
+        $new = clone $this;
+        $new->noHlsUseMpegts = $noHlsUseMpegts;
 
         return $new;
     }
@@ -1839,6 +1855,7 @@ class Options
             'hls-prefer-native' => $this->hlsPreferNative,
             'hls-prefer-ffmpeg' => $this->hlsPreferFFmpeg,
             'hls-use-mpegts' => $this->hlsUseMpegts,
+            'no-hls-use-mpegts' => $this->noHlsUseMpegts,
             'external-downloader' => $this->externalDownloader,
             'external-downloader-args' => $this->externalDownloaderArgs,
             'download-sections' => $this->downloadSections,
