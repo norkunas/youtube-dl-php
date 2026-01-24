@@ -72,6 +72,7 @@ class Options
 
     private ?string $downloadPath = null;
     private bool $cleanupMetadata = true;
+    private bool $ignoreConfig = true;
 
     // Network Options
     private ?string $proxy = null;
@@ -283,6 +284,19 @@ class Options
     public function getCleanupMetadata(): bool
     {
         return $this->cleanupMetadata;
+    }
+
+    public function ignoreConfig(bool $ignore): self
+    {
+        $new = clone $this;
+        $new->ignoreConfig = $ignore;
+
+        return $new;
+    }
+
+    public function getIgnoreConfig(): bool
+    {
+        return $this->ignoreConfig;
     }
 
     /**
@@ -1811,6 +1825,8 @@ class Options
     public function toArray(): array
     {
         return [
+            // General Options
+            'ignore-config' => $this->ignoreConfig,
             // Network Options
             'proxy' => $this->proxy,
             'socket-timeout' => $this->socketTimeout,
