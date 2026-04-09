@@ -50,4 +50,42 @@ final class ArgvBuilderTest extends TestCase
             'https://www.youtube.com/watch?v=Q-g_YNZ90tI',
         ], ArgvBuilder::build($options));
     }
+
+    public function testJsRuntimesArgument(): void
+    {
+        $options = Options::create()
+            ->downloadPath('/tmp')
+            ->jsRuntimes('deno,phantomjs')
+            ->url('https://example.com');
+
+        $argv = ArgvBuilder::build($options);
+
+        self::assertContains('--js-runtimes=deno,phantomjs', $argv);
+    }
+
+    public function testRemoteComponentsArgument(): void
+    {
+        $options = Options::create()
+            ->downloadPath('/tmp')
+            ->remoteComponents('default')
+            ->url('https://example.com');
+
+        $argv = ArgvBuilder::build($options);
+
+        self::assertContains('--remote-components=default', $argv);
+    }
+
+    public function testJsRuntimesAndRemoteComponentsNotPresentWhenNull(): void
+    {
+        $options = Options::create()
+            ->downloadPath('/tmp')
+            ->url('https://example.com');
+
+        $argv = ArgvBuilder::build($options);
+
+        foreach ($argv as $arg) {
+            self::assertStringNotContainsString('js-runtimes', $arg);
+            self::assertStringNotContainsString('remote-components', $arg);
+        }
+    }
 }
