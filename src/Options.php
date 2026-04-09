@@ -1843,6 +1843,9 @@ class Options
     public function toArray(): array
     {
         return [
+            'ignore-config' => $this->ignoreConfig,
+            'ignore-errors' => true,
+            'write-info-json' => true,
             // Network Options
             'proxy' => $this->proxy,
             'socket-timeout' => $this->socketTimeout,
@@ -1987,7 +1990,6 @@ class Options
             'extractor-args' => $this->extractorArgs,
             'js-runtimes' => $this->jsRuntimes,
             'remote-components' => $this->remoteComponents,
-            'ignore-config' => $this->ignoreConfig,
 
             'url' => $this->url,
         ];

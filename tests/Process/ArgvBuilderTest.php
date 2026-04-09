@@ -35,6 +35,9 @@ final class ArgvBuilderTest extends TestCase
             );
 
         self::assertSame([
+            '--ignore-config',
+            '--ignore-errors',
+            '--write-info-json',
             '--proxy=127.0.0.5',
             '--socket-timeout=5',
             '--playlist-items=1-3,7,10-13',
