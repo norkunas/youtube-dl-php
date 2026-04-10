@@ -117,12 +117,7 @@ class YoutubeDl
             throw new NoDownloadPathProvidedException('Missing configured downloadPath option.');
         }
 
-        $arguments = [
-            '--ignore-config',
-            '--ignore-errors',
-            '--write-info-json',
-            ...ArgvBuilder::build($options),
-        ];
+        $arguments = ArgvBuilder::build($options);
 
         $parsedData = [];
         $currentVideo = null;

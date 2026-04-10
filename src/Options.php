@@ -72,6 +72,9 @@ class Options
 
     private ?string $downloadPath = null;
     private bool $cleanupMetadata = true;
+    private bool $ignoreConfig = true;
+    private ?string $jsRuntimes = null;
+    private ?string $remoteComponents = null;
 
     // Network Options
     private ?string $proxy = null;
@@ -283,6 +286,19 @@ class Options
     public function getCleanupMetadata(): bool
     {
         return $this->cleanupMetadata;
+    }
+
+    public function ignoreConfig(bool $ignore): self
+    {
+        $new = clone $this;
+        $new->ignoreConfig = $ignore;
+
+        return $new;
+    }
+
+    public function getIgnoreConfig(): bool
+    {
+        return $this->ignoreConfig;
     }
 
     /**
@@ -1785,6 +1801,22 @@ class Options
         return $new;
     }
 
+    public function jsRuntimes(string $jsRuntimes): self
+    {
+        $new = clone $this;
+        $new->jsRuntimes = $jsRuntimes;
+
+        return $new;
+    }
+
+    public function remoteComponents(?string $remoteComponents): self
+    {
+        $new = clone $this;
+        $new->remoteComponents = $remoteComponents;
+
+        return $new;
+    }
+
     /**
      * @param non-empty-string $url
      * @param non-empty-string ...$urls
@@ -1811,6 +1843,9 @@ class Options
     public function toArray(): array
     {
         return [
+            'ignore-config' => $this->ignoreConfig,
+            'ignore-errors' => true,
+            'write-info-json' => true,
             // Network Options
             'proxy' => $this->proxy,
             'socket-timeout' => $this->socketTimeout,
@@ -1953,6 +1988,8 @@ class Options
             'allow-dynamic-mpd' => $this->allowDynamicMpd,
             'hls-split-discontinuity' => $this->hlsSplitDiscontinuity,
             'extractor-args' => $this->extractorArgs,
+            'js-runtimes' => $this->jsRuntimes,
+            'remote-components' => $this->remoteComponents,
 
             'url' => $this->url,
         ];
