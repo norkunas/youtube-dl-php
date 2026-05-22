@@ -217,7 +217,7 @@ class YoutubeDl
                 continue;
             }
 
-            if (str_starts_with($line, '[info] Thumbnails for')) {
+            if (str_starts_with($line, '[info] Available thumbnails for')) {
                 $parsing = 'table_header';
             } elseif ($parsing === 'table_header') {
                 $header = $line;
